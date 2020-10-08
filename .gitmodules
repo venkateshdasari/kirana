@@ -1,3 +1,0 @@
-[submodule "opencart-docker"]
-	path = opencart-docker
-	url = https://github.com/DockerIt/opencart-docker.git
