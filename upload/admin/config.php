@@ -1,17 +1,17 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/admin/');
-define('HTTP_CATALOG', 'http://localhost/');
+define('HTTP_SERVER', 'http://' . getenv('HTTP_SERVER_HOST') . '/admin/');
+define('HTTP_CATALOG', 'http://' . getenv('HTTP_SERVER_HOST') . '/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/admin/');
-define('HTTPS_CATALOG', 'http://localhost/');
+define('HTTPS_SERVER', 'http://' . getenv('HTTP_SERVER_HOST') . '/admin/');
+define('HTTPS_CATALOG', 'http://' . getenv('HTTP_SERVER_HOST') . '/');
 
 // DIR
 define('DIR_APPLICATION', '/var/www/upload/admin/');
 define('DIR_SYSTEM', '/var/www/upload/system/');
 define('DIR_IMAGE', '/var/www/upload/image/');
-define('DIR_STORAGE', '/var/www/public_html/storage/');
+define('DIR_STORAGE', '/var/www/storage/');
 define('DIR_CATALOG', '/var/www/upload/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
@@ -25,11 +25,11 @@ define('DIR_UPLOAD', DIR_STORAGE . 'upload/');
 
 // DB
 define('DB_DRIVER', 'mpdo');
-define('DB_HOSTNAME', 'mysql');
-define('DB_USERNAME', 'opencart');
-define('DB_PASSWORD', 'password');
-define('DB_DATABASE', 'opencart');
-define('DB_PORT', '3306');
+define('DB_HOSTNAME', getenv('DB_HOSTNAME'));
+define('DB_USERNAME', getenv('DB_USERNAME'));
+define('DB_PASSWORD', getenv('DB_PASSWORD'));
+define('DB_DATABASE', getenv('DB_NAME'));
+define('DB_PORT', getenv('DB_PORT'));
 define('DB_PREFIX', 'oc_');
 
 // OpenCart API

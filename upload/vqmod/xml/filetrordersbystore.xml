@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<modification
+                xmlns="https://github.com/vqmod/vqmod"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://github.com/vqmod/vqmod https://raw.githubusercontent.com/vqmod/vqmod/master/vqmod.xsd">
+                >
+		<id>Filter and sort orders by store name</id>
+		<version>1.0</version>
+		<vqmver>2.X</vqmver>
+		<author>https://www.nykla.fi/</author>
+		<!-- Replaces to file admin/controller/sale/order.php -->
+		<file name="admin/controller/sale/order.php">
+			<operation info="Filter store name">
+				<search position="before" index="2"><![CDATA[
+						if (isset($this->request->get['filter_customer'])) {
+				]]></search>
+				<add><![CDATA[
+						if (isset($this->request->get['filter_store_name'])) {
+			$filter_store_name = $this->request->get['filter_store_name'];
+		} else {
+			$filter_store_name = '';
+		}
+				]]></add>
+			</operation>
+			<operation info="Filter">
+				<search position="before" index="1,3,4,5,6,7"><![CDATA[
+						if (isset($this->request->get['filter_customer'])) {
+				]]></search>
+				<add><![CDATA[							
+				if (isset($this->request->get['filter_store_name'])) {
+			$url .= '&filter_store_name=' . urlencode(html_entity_decode($this->request->get['filter_store_name'], ENT_QUOTES, 'UTF-8'));
+		}
+				]]></add>
+			</operation>
+			<operation info="Filter store name">
+				<search position="before"><![CDATA[
+						'filter_customer'	     => $filter_customer,
+				]]></search>
+				<add><![CDATA[							
+				'filter_store_name'	     => $filter_store_name,
+				
+				]]></add>
+			</operation>
+			<operation info="Filter store name">
+				<search position="before"><![CDATA[
+						'customer'      => $result['customer'],
+				]]></search>
+				<add><![CDATA[							
+				'store_name'	=> $result['store_name'],
+				
+				]]></add>
+			</operation>
+			<operation info="Filter store name">
+				<search position="before"><![CDATA[
+						$data['sort_customer'] = $this->url->link('sale/order', 'user_token=' . $this->session->data['user_token'] . '&sort=customer' . $url, true);
+				]]></search>
+				<add><![CDATA[							
+				$data['sort_store_name'] = $this->url->link('sale/order', 'user_token=' . $this->session->data['user_token'] . '&sort=store_name' . $url, true);
+				
+				]]></add>
+			</operation>
+			<operation info="Filter store name">
+				<search position="before"><![CDATA[
+						$data['filter_customer'] = $filter_customer;
+				]]></search>
+				<add><![CDATA[							
+				$data['filter_store_name'] = $filter_store_name;
+				
+				]]></add>
+			</operation>
+			<operation info="Filter store name">
+				<search position="after"><![CDATA[
+						$data['order'] = $order;
+				]]></search>
+				<add><![CDATA[							
+						$data['store_names'] = array();
+			
+		$this->load->model('setting/store');
+			
+		$stores = $this->model_setting_store->getStores();
+
+		foreach ($stores as $store) {
+			$data['stores'][] = array(
+				'store_id' => $store['store_id'],
+				'name'     => $store['name']
+			);
+		}		
+				]]></add>
+			</operation>
+		</file>
+		<!-- Replaces to file admin/model/sale/order.php -->
+		<file name="admin/model/sale/order.php">
+			<operation info="SQL query">
+				<search position="replace"><![CDATA[
+				CONCAT(o.firstname, ' ', o.lastname) AS customer,
+				]]></search>
+				<add><![CDATA[
+				o.store_name, CONCAT(o.firstname, ' ', o.lastname) AS customer,
+				]]></add>
+			</operation>
+			<operation info="Sort data">
+				<search position="before"><![CDATA[
+				'customer',
+				]]></search>
+				<add><![CDATA[
+				'o.store_name',
+				]]></add>
+			</operation>
+			<operation info="SQL filter">
+				<search position="before" index="1"><![CDATA[
+				if (!empty($data['filter_customer'])) {
+				]]></search>
+				<add><![CDATA[
+						if (!empty($data['filter_store_name'])) {
+			$sql .= " AND store_id = '" . (int)($data['filter_store_name']) . "'";
+		}
+		elseif ((isset($data['filter_store_name'])) && ($data['filter_store_name'] == "0")) { 
+			$sql .= " AND store_id = '" . (int)($data['filter_store_name']) . "'";
+			}
+				]]></add>
+			</operation>
+		</file>
+		<!-- Replaces to file admin/view/template/sale/order_list.twig -->
+		<file name="admin/view/template/sale/order_list.twig">
+			<operation info="Table column for store name">
+				<search position="before"><![CDATA[
+				<td class="text-left">{% if sort == 'customer' %}
+				]]></search>
+				<add><![CDATA[
+				<td class="text-left">{% if sort == 'store_name' %} <a href="{{ sort_store_name }}" class="{{ order|lower }}">{{ column_store_name }}</a> {% else %} <a href="{{ sort_store_name }}">{{ column_store_name }}</a> {% endif %}</td>
+				]]></add>
+			</operation>
+			<operation info="">
+				<search position="before"><![CDATA[
+				<td class="text-left">{{ order.customer }}</td>
+				]]></search>
+				<add><![CDATA[
+				<td class="text-left">{{ order.store_name }}</td>
+				]]></add>
+			</operation>
+			<operation info="">
+				<search position="before" index="2"><![CDATA[
+				<div class="form-group">
+				]]></search>
+				<add><![CDATA[
+				<div class="form-group">
+            <label class="control-label" for="input-order-status">{{ entry_store }}</label>
+            <select name="filter_store_name" id="input-store-name" class="form-control">
+              
+            <option value=""></option>
+			{% if filter_store_name == '0' %}
+              
+              <option value="0" selected="selected">{{ deafult_store }}</option>
+              
+              {% else %}
+              
+              <option value="0">{{ deafult_store }}</option>
+              
+              {% endif %}
+              {% for store in stores %}
+              {% if store.store_id == filter_store_name %}
+              
+              <option value="{{ store.store_id }}" selected="selected">{{ store.name }}</option>
+              
+              {% else %}
+              
+              <option value="{{ store.store_id }}">{{ store.name }}</option>
+              
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+				]]></add>
+			</operation>
+			<operation info="Javascript">
+				<search position="before"><![CDATA[ var filter_customer = $('input[name=\'filter_customer\']').val(); ]]></search>
+				<add><![CDATA[ var filter_store_name = $('select[name=\'filter_store_name\']').val(); if (filter_store_name !== '') { url += '&filter_store_name=' + encodeURIComponent(filter_store_name); } ]]></add>
+			</operation>
+		</file>
+		<!-- Replaces to admin language file -->
+		<file name="admin/language/*/sale/order.php">
+			<operation info="Create translation">
+				<search position="before"><![CDATA[
+				$_['column_customer']
+				]]></search>
+				<add><![CDATA[
+				$_['column_store_name']          = 'Store Name';
+				$_['deafult_store']          = 'Default Store';
+				]]></add>
+			</operation>
+
+		</file>
+	</modification>

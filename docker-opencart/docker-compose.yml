@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+  php-fpm:
+    build: ./php-fpm
+    volumes:
+      - ../:/var/www
+    expose:
+      - "9000"
+    environment:
+      DB_HOSTNAME: ${DB_HOSTNAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      HTTP_SERVER_HOST: ${HTTP_SERVER_HOST}
+
+  apache:
+    build: ./apache
+    volumes:
+      - ./logs/apache:/var/log/apache2
+      - ./apache/sites:/etc/apache2/sites-available
+      - ../:/var/www
+    ports:
+      - "8000:80"
+    depends_on:
+      - php-fpm
