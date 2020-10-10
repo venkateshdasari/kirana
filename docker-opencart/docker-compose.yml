@@ -27,3 +27,15 @@ services:
       - "8200:80"
     depends_on:
       - php-fpm
+      
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3307:${DB_PORT}"
+    volumes:
+      - ./database/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
