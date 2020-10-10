@@ -18,11 +18,12 @@ services:
 
   apache:
     build: ./apache
+    restart: always
     volumes:
       - ./logs/apache:/var/log/apache2
       - ./apache/sites:/etc/apache2/sites-available
       - ../:/var/www
     ports:
-      - "8000:80"
+      - "8200:80"
     depends_on:
       - php-fpm
