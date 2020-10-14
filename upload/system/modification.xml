@@ -28,5 +28,5 @@
             } elseif (is_file($file)) {]]>
       </add>
     </operation>
-  </file> 
+  </file>
 </modification>
