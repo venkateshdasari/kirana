@@ -1,0 +1,37 @@
+version: '2'
+services:
+  mariadb:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_opencart
+      - MARIADB_DATABASE=bitnami_opencart
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  opencart:
+    image: 'docker.io/bitnami/opencart:3-debian-10'
+    ports:
+      - '8001:8080'
+      - '443:8443'
+    environment:
+      - OPENCART_HOST=localhost:8001
+      - OPENCART_DATABASE_HOST=mariadb
+      - OPENCART_DATABASE_PORT_NUMBER=3306
+      - OPENCART_DATABASE_USER=bn_opencart
+      - OPENCART_DATABASE_NAME=bitnami_opencart
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - './opencart_override:/bitnami/opencart'
+      # - './opencart_override/admin:/bitnami/opencart/admin'
+      # - './opencart_override/catalog:/bitnami/opencart/catalog'
+      # - './opencart_override/image:/bitnami/opencart/image'
+      - './opencart_storage:/bitnami/opencart_storage/'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  opencart_data:
+    driver: local
+  opencart_storage_data:
+    driver: local
