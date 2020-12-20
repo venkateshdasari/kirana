@@ -21,7 +21,8 @@ services:
       - OPENCART_DATABASE_NAME=bitnami_opencart
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - './opencart_override:/bitnami/opencart'
+      -  './opencart_data:/bitnami/opencart'
+      - './opencart_codebase:/opt/bitnami/opencart'
       # - './opencart_override/admin:/bitnami/opencart/admin'
       # - './opencart_override/catalog:/bitnami/opencart/catalog'
       # - './opencart_override/image:/bitnami/opencart/image'
@@ -31,7 +32,7 @@ services:
 volumes:
   mariadb_data:
     driver: local
-  opencart_data:
-    driver: local
-  opencart_storage_data:
-    driver: local
+#  opencart_data:
+#    driver: local
+#  opencart_storage_data:
+#    driver: local

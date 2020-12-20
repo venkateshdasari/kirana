@@ -1,0 +1,16 @@
+2020-12-20 11:18:09 - PHP Warning:  fopen(/bitnami/opencart_storage/cache/cache.catalog.language.1608466689): failed to open stream: No such file or directory in /opt/bitnami/opencart/system/library/cache/file.php on line 49
+2020-12-20 11:18:09 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 51
+2020-12-20 11:18:09 - PHP Warning:  fwrite() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 53
+2020-12-20 11:18:09 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
+2020-12-20 11:18:09 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
+2020-12-20 11:18:09 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
+2020-12-20 11:18:09 - PHP Warning:  fopen(/bitnami/opencart_storage/cache/cache.currency.1608466689): failed to open stream: No such file or directory in /opt/bitnami/opencart/system/library/cache/file.php on line 49
+2020-12-20 11:18:09 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 51
+2020-12-20 11:18:09 - PHP Warning:  fwrite() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 53
+2020-12-20 11:18:09 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
+2020-12-20 11:18:09 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
+2020-12-20 11:18:09 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
+2020-12-20 11:39:35 - PHP Notice:  Undefined index:  in /opt/bitnami/opencart/catalog/controller/startup/startup.php on line 109
+2020-12-20 11:39:35 - PHP Warning:  fopen(/bitnami/opencart_storage/logs/): failed to open stream: Is a directory in /opt/bitnami/opencart/system/library/log.php on line 22
+2020-12-20 11:42:16 - PHP Notice:  Undefined index:  in /opt/bitnami/opencart/catalog/controller/startup/startup.php on line 109
+2020-12-20 11:42:16 - PHP Warning:  fopen(/bitnami/opencart_storage/logs/): failed to open stream: Is a directory in /opt/bitnami/opencart/system/library/log.php on line 22

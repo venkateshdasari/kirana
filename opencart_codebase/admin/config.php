@@ -1,0 +1,1 @@
+/bitnami/opencart/admin/config.php
