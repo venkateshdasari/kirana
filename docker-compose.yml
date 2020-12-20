@@ -12,7 +12,7 @@ services:
     image: 'docker.io/bitnami/opencart:3-debian-10'
     ports:
       - '8001:8080'
-      - '443:8443'
+#      - '443:8443'
     environment:
       - OPENCART_HOST=localhost:8001
       - OPENCART_DATABASE_HOST=mariadb
