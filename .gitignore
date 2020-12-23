@@ -9,12 +9,12 @@ opencart_codebase/system/cache/
 opencart_codebase/system/logs/
 
 opencart_codebase/system/storage/
-opencart_storage/cache/
-opencart_storage/download/
-opencart_storage/logs/
-opencart_storage/session/
+opencart_storage/cache/*
+opencart_storage/download/*
+opencart_storage/logs/*
+opencart_storage/session/*
 opencart_storage/modification/system/
-opencart_storage/upload/
+opencart_storage/upload/*
 ./storage/
 # vQmod log files
 vqmod/logs/*
