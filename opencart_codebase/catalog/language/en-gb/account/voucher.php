@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']    = 'Purchase a Gift Certificate';
+$_['cheading_title']    = 'Purchase a Gift Certificate';
 
 // Text
 $_['text_account']     = 'Account';

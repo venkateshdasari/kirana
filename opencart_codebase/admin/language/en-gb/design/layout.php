@@ -34,3 +34,9 @@ $_['error_store']         = 'Warning: This layout cannot be deleted as it is cur
 $_['error_product']       = 'Warning: This layout cannot be deleted as it is currently assigned to %s products!';
 $_['error_category']      = 'Warning: This layout cannot be deleted as it is currently assigned to %s categories!';
 $_['error_information']   = 'Warning: This layout cannot be deleted as it is currently assigned to %s information pages!';
+
+// custom
+$_['text_ftop_full']    = 'Footer Top Full';
+$_['text_fbottom_full'] = 'Footer Bottom Full';
+$_['text_footer_left']    = 'Footer Left';
+$_['text_footer_right']   = 'Footer Right';

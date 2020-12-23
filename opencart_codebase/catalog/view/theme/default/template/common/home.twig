@@ -1,5 +1,12 @@
-{{ header }}
-<div id="common-home" class="container">
+<div class="index-head">{{ header }}</div>
+<div id="page-preloader" class="visible">
+      <div class="preloader">
+          <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+          </div>
+      </div>
+</div>
+<div id="common-home" class="container-fluid">
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
@@ -9,6 +16,7 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}{{ content_bottom }}</div>
-    {{ column_right }}</div>
+    {{ column_right }}
+  </div>
 </div>
 {{ footer }}

@@ -1,0 +1,36 @@
+<?php 
+$_['text_selleroption']   = 'Satıcı Seçenekleri';
+$_['text_dashboard']     = 'Özet';
+$_['text_dashboard_icon'] = 'Dashboard';
+$_['text_sellerstore']   = 'Mağaza Bilgileri';
+$_['text_sellerproduct']   = 'Ürünler';
+$_['text_seller_template_product']   = 'Ürün Şablonları';
+$_['text_sellerprofile']   = 'Satıcı Profili';
+$_['text_sellerorder']   = 'Siparişler';
+$_['text_sellercommission']   = 'Komisyon';
+$_['text_removeseller']   = 'Satıcı olarak kaldır';
+$_['text_becomeseller']   = 'Satıcı Ol';
+$_['text_sellerview']   = 'Mağazayı Görüntüle';
+$_['text_approval']   = '<b>Satıcı onayı bekleniyor</b>';
+$_['text_sellerpayment']   = 'Ödemeler';
+$_['text_sellerreview']   = 'Yorumlarım';
+$_['text_sellerenquiry']   = 'Müşteri Soruları';
+$_['text_downloads']   = 'İndirmeler';
+$_['text_bulkproductupload']     = 'Toplu Ürün Yükleme';
+$_['text_shipping']              = 'Kargo Ücretleri';
+$_['text_subscription']              = 'Abonelik Planı';
+$_['text_subscriptions']              = 'Abonelik Faturası';
+$_['text_blog_post']             	     = 'Blog';
+$_['text_blog_comment']              	 = ' Blog Yorumları';
+$_['text_commissioninvoice']    = 			'Komisyon Faturaları';
+$_['text_password']   = 			'Şifre';
+$_['text_logout']               = 			'Çıkış';
+$_['text_seller_enquiries']               = 			'Yönetici Mesajları';
+$_['text_sellercoupons']               = 			'Satıcı Kuponları';
+$_['text_seller_returns']               = 			'İadeler';
+$_['text_attribute']               = 			'Ürün Özellikleri';
+$_['text_attribute_groups']               =  'Ürün Özellik Grupları';
+$_['text_options']               = 			'Ürün Seçenekleri';
+$_['text_catalog']               = 			'Katalog';
+$_['text_sales']               = 			'Satış';
+?>

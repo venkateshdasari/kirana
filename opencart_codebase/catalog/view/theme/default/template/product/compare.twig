@@ -21,6 +21,7 @@
     <div id="content" class="{{ class }}">{{ content_top }}
       <h1>{{ heading_title }}</h1>
       {% if products %}
+    <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -74,9 +75,9 @@
           {% endfor %} </tr>
         {% endif %}
         <tr>
-          <td>{{ text_summary }}</td>
+          <td class="comsummary">{{ text_summary }}</td>
           {% for product in products %}
-          <td class="description">{{ product.description }}</td>
+          <td class="description comdescription">{{ product.description }}</td>
           {% endfor %} </tr>
         <tr>
           <td>{{ text_weight }}</td>
@@ -114,10 +115,11 @@
         <tr>
           <td></td>
           {% for product in products %}
-          <td><input type="button" value="{{ button_cart }}" class="btn btn-primary btn-block" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" />
-            <a href="{{ product.remove }}" class="btn btn-danger btn-block">{{ button_remove }}</a></td>
+          <td class="text-center"><input type="button" value="{{ button_cart }}" class="btn btn-primary" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" />
+            <a href="{{ product.remove }}" class="btn btn-danger">{{ button_remove }}</a></td>
           {% endfor %} </tr>
-      </table>
+      </table>.
+    </div>
       {% else %}
       <p>{{ text_empty }}</p>
       <div class="buttons">

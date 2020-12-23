@@ -7,14 +7,14 @@
   </ul>
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
+    {% set class = 'col-md-6 col-sm-8 col-xs-12' %}
     {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
+    {% set class = 'col-md-9 col-sm-8 col-xs-12' %}
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
+      <h1 class="heading">{{ cheading_title }}</h1>
       <p>{{ text_description }}</p>
       <form class="form-horizontal">
         <div class="form-group">

@@ -1,0 +1,48 @@
+{{ header }}
+<div id="content">
+  <div class="container-fluid">
+  <br>
+    <br>
+    <div class="row">
+				<div class="{{ setdivclass }} col-sm-offset-4 col-sm-4">
+				  {% if success %}
+	<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+	{% endif %}
+	{% if error_warning %}
+	<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+	{% endif %} 
+					<div class="pts-well seller-login-form" style="">
+						<h2 class="text-center">{{ text_seller_login }}</h2>
+						<form action="{{ action }}" method="post" id="regForm" enctype="multipart/form-data">
+							<div class="pts-form-group">
+								<label class="pts-control-label col-form-label" for="seller-email">{{ entry_email }}</label>
+								<input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="seller-email" class="pts-form-control" />
+							</div>
+							<div class="pts-form-group ">
+								<label class="pts-control-label col-form-label" for="seller-password">{{ entry_password }}</label>
+								<input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="seller-password" class="pts-form-control" />
+							</div>
+							<a href="{{ forgotten }}">{{ text_forgotten }}</a>
+							<div class="pts-row">
+								<div class="pts-col-sm-5 pts-pull-left-1  pts-mt-3">
+									<input id="seller-login-button" type="submit" value="{{ button_login }}" class="pts-btn pts-btn-primary" />
+								</div>
+								<div class="pts-pr-3 text-center pts-pull-right-1 pts-mt-3">
+									<p class="new-seller-register-here"><span class="login-seller" ><i class="fa fa-user-o fa-users"></i> {{ text_new_seller }}  </span><a href="{{ sellerregister }}" style="font-size:11px" id="pts-reg-seller"> {{ text_register_new }} </a></p>
+									</div>
+								</div>
+								{% if redirect %}
+								<input type="hidden" name="redirect" value="{{ redirect }}" />
+								{% endif %}
+							</form>
+						</div>
+					</div>
+				</div>
+		</div>
+</div>
+<style>
+#button-menu {
+	display: none;
+}
+</style>
+{{ footer }}      

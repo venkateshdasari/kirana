@@ -1,0 +1,191 @@
+{{ header }}
+<div class="pts-container container">
+<div class="pts-row d-flex row">{{ column_left }}
+		<div id="content" class="pts-col-sm-9 col-sm-9 pts-col-md-9 col-md-9 pts-col-lg-10 col-lg-10 pts-col-xs-12 col-xs-12"> 
+			<div class="page-header">
+		<div class="successdiv">
+		{% if success %}
+		<div class="alert pts-alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+		{% endif %}
+	</div>
+	<div class="errordiv">
+		{% if error_warning %}
+		<div class="alert pts-alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+		{% endif %}
+	</div>
+    <div class="container-fluid">
+     <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+	  {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+              </ul>
+    </div>
+  </div>
+			<div class="pts-row">
+				<div class="pts-col-md-6">
+					<div class="pts-panel pts-panel-default">
+					<div class="pts-panel-heading">
+							<h3 class="pts-panel-title"><i class="fa fa-shopping-cart"></i>  {{ text_order }}</h3>
+						</div>
+						<table class="pts-table">
+							<tbody>
+								<tr>              
+									<th class="col-sm-4">{{ entry_order_id }}</th>
+									<td>#{{ order_id }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4" >{{ entry_date_ordered }}</th>
+									<td>{{ date_ordered }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_customer }} </th>
+									<td>{{ customer }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_email }}</th>
+									<td>{{ email }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_telephone }}</th>
+									<td>{{ telephone }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="pts-col-md-6">
+					<div class="pts-panel pts-panel-default">
+						<div class="pts-panel-heading">
+							<h3 class="pts-panel-title"><i class="fa fa-cubes"></i> {{ text_product }}</h3>
+						</div>
+						<table class="pts-table">
+							<tbody>
+								<tr>              
+									<th class="col-sm-4">{{ entry_product }}</th>
+									<td>{{ product }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4" >{{ entry_model }}</th>
+									<td>{{ model }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_quantity }}</th>
+									<td>{{ quantity }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_return_reason }}</th>
+									<td>{{ return_statuses_name }}</td>
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_opened }}</th>
+									{% if opened %}
+									<td>{{ text_opened }}</td>                 
+									{% else %}
+									<td>{{ text_unopened }}</td>                    
+									{% endif %}
+								</tr>
+								<tr>
+									<th class="col-sm-4">{{ entry_comment }}</th>
+									<td>{{ comment }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="pts-panel pts-panel-default">
+				<div class="pts-panel-body">
+					<div class="pts-tab-content">   	  
+						{% if return_id %}
+						<div class="pts-tab-pane active " id="tab-history">
+							<fieldset>
+								<legend><i class="fa fa-comment-o"></i> {{ text_history }}</legend>
+								<div id="history"></div>
+							</fieldset>
+							<br />
+							<fieldset>
+								<legend><i class="fa fa-pencil fas fa-pen"></i> {{ text_history_add }}</legend>
+								<form class="pts-form-horizontal">
+									<div class="pts-form-group">
+										<label class="pts-col-sm-2 pts-control-label" for="input-return-status">{{ entry_return_status }}</label>
+										<div class="pts-col-sm-10">
+											<select name="return_status_id" id="input-return-status" class="pts-form-control">
+												{% for return_status in return_statuses %}
+												{% if return_status.return_status_id == return_status_id %}
+												<option value="{{ return_status.return_status_id }}" selected="selected">{{ return_status.name }}</option>
+												{% else %}
+												<option value="{{ return_status.return_status_id }}">{{ return_status.name }}</option>
+												{% endif %}
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="pts-form-group">
+										<label class="pts-col-sm-2 pts-control-label" for="input-notify">{{ entry_notify }}</label>
+										<div class="col-sm-10">
+											<input type="checkbox" name="notify" value="1" id="input-notify" />
+										</div>
+									</div>
+									<div class="pts-form-group">
+										<label class="pts-col-sm-2 pts-control-label" for="input-history-comment">{{ entry_comment }}</label>
+										<div class="col-sm-10">
+											<textarea name="comment" rows="8" id="input-history-comment" class="pts-form-control"></textarea>
+										</div>
+									</div>
+									<div class="pts-text-right">
+										<button id="button-history" data-loading-text="{{ text_loading }}" class="pts-btn pts-btn-primary"><i class="fa fa-plus-circle"></i> {{ text_history_add }}</button>
+									</div>
+								</form>
+							</fieldset>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{{ content_bottom }}</div>
+	{{ column_right }}</div>
+</div> 
+<script type="text/javascript"><!--
+	$('#history').delegate('.pagination a', 'click', function(e) {
+		e.preventDefault();
+		
+		$('#history').load(this.href);
+	});			
+	
+	$('#history').load('index.php?route=extension/account/purpletree_multivendor/product_returns/history&return_id={{ return_id }}');
+	
+	$('#button-history').on('click', function(e) {
+		e.preventDefault();
+		
+		$.ajax({
+			url: 'index.php?route=extension/account/purpletree_multivendor/product_returns/addhistory&return_id={{ return_id }}',
+			type: 'post',
+			dataType: 'json',
+			data: 'return_status_id=' + encodeURIComponent($('#tab-history select[name=\'return_status_id\']').val()) + '&notify=' + ($('input[name=\'notify\']').prop('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('#tab-history textarea[name=\'comment\']').val()),
+			beforeSend: function() {
+				$('#button-history').button('loading');	
+			},
+			complete: function() {
+				$('#button-history').button('reset');	
+			},
+			success: function(json) {
+				$('.alert-dismissible').remove();
+				
+				if (json['error']) {
+					$('#tab-history').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+				
+				if (json['success']) {
+					$('#history').load('index.php?route=extension/account/purpletree_multivendor/product_returns/history&return_id={{ return_id }}');
+					
+					$('#tab-history').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					
+					$('#tab-history textarea[name=\'comment\']').val('');
+				}
+			}
+		});
+	});
+//--></script> 
+
+{{ footer }}

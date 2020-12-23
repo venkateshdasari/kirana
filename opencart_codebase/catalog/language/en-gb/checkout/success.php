@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']        = 'Your order has been placed!';
+$_['cheading_title']        = 'Your order has been placed!';
 
 // Text
 $_['text_basket']          = 'Shopping Cart';

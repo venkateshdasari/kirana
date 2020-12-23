@@ -7,6 +7,10 @@ class ControllerExtensionModuleLatest extends Controller {
 
 		$this->load->model('tool/image');
 
+		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/owl.carousel.css');
+		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/owl.theme.css');
+		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/owl.carousel.min.js');
+
 		$data['products'] = array();
 
 		$filter_data = array(
@@ -50,15 +54,47 @@ class ControllerExtensionModuleLatest extends Controller {
 					$rating = false;
 				}
 
+				/* inspire Images Start */
+
+				$insp_data['insp_images'] = array();
+				$insp_results = $this->model_catalog_product->getProductImages($result['product_id']);
+
+				
+
+				foreach ($insp_results as $insp_result) {
+					$insp_data['insp_images'][] = array('popup' => $this->model_tool_image->resize($insp_result['image'],$setting['width'], $setting['height']));
+				}
+				
+
+				/* End */
+
+				if($result['special'] > 0 AND $result['special'] != NULL ){
+				$tag_per = ($result['special']*100)/$result['price'];
+				$tag_per = round($tag_per);
+				if($tag_per == 0){
+				$tag_per = 1;
+				}else{
+				$tag_per = 100-$tag_per;
+				}
+				$tag = $result['price'] - $result['special'];
+				}else{
+				$tag = 0;
+				$tag_per = 0;
+				}
+
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
+					'tag_per'     => $tag_per,
 					'name'        => $result['name'],
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,
 					'rating'      => $rating,
+					 // Add images Data 
+					'insp_images' => $insp_data['insp_images'],
+					//End
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
 				);
 			}

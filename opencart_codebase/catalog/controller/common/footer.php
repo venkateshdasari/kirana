@@ -7,6 +7,11 @@ class ControllerCommonFooter extends Controller {
 
 		$data['informations'] = array();
 
+		$data['footer_left'] = $this->load->controller('common/footer_left');
+		$data['footer_right'] = $this->load->controller('common/footer_right');
+		$data['ftop_full'] = $this->load->controller('common/ftop_full');
+		$data['fbottom_full'] = $this->load->controller('common/fbottom_full');
+
 		foreach ($this->model_catalog_information->getInformations() as $result) {
 			if ($result['bottom']) {
 				$data['informations'][] = array(

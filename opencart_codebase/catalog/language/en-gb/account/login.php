@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                = 'Account Login';
+$_['cheading_title']                = 'Account Login';
 
 // Text
 $_['text_account']                 = 'Account';

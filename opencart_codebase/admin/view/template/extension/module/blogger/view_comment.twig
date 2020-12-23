@@ -1,0 +1,68 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a href="{{ return }}" data-toggle="tooltip" title="{{ button_back }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label text-right">{{ text_author }}</label>
+                            <div class="col-sm-8">{{ author }}</div>  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label text-right">{{ text_email }}</label>
+                            <div class="col-sm-8">{{ email }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label text-right">{{ text_date_added }}</label>
+                        <div class="col-sm-8">{{ date_added }}</div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <ul class="nav nav-tabs" id="language">
+                        {% for language in languages %}
+                            <li>
+                                <a href="#language{{ language.language_id }}" data-toggle="tab">
+                                    <img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" />
+                                    {{ language.name }}
+                                </a>
+                            </li> 
+                        {% endfor %}
+                    </ul>
+            <div class="tab-content">
+                {% for language in languages %}
+                <div class="tab-pane" id="language{{ language.language_id }}">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-right">{{ text_comment }}</label>
+                        <div class="col-sm-10">
+                            {{ comment_descriptions[language.language_id] ? comment_descriptions[language.language_id].comment }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#language a:first').tab('show');
+//--></script>
+{{ footer }}

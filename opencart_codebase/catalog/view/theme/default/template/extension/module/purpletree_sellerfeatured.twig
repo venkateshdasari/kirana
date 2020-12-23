@@ -1,0 +1,92 @@
+<h3 class="pts-h3">{{ heading_title }}</h3>
+<div class="row">
+	<div id="carousel_seller_featured" class="owl-carousel">
+		{% for product in products %}
+		<div class="item text-center">
+			<div class="pts-product-layout" style="margin:6px;">
+				<div class="pts-product-thumb transition">
+					<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+					<div class="pts-caption" style="min-height:auto !important">
+						<h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+						<p>{{ product.description }}</p>
+						{% if product.rating %}
+						<div class="rating">
+							{% for i in 5 %}
+							{% if product.rating < i %}
+							<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+							{{ else }}
+							<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+							{% endif %}
+							{% endfor %}
+						</div>
+						{% endif %}
+						{% if multivendor_status %}
+							{% if show_seller_name %}
+								{% if product.seller_name %}
+								<p><a href="{{ product.seller_link }}">{{ text_seller_label }}&nbsp{{ product.seller_name }}</a></p>
+								{% endif %}
+							{% endif %}
+							{% if show_seller_address %}		  
+								{% if product.store_address %}		  
+								  {% if product.google_map %}	
+									<a href="{{ product.google_map }}"><p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp{{ product.store_address }}</p></a>
+									{% else %}
+									<p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp{{ product.store_address }}</p>
+								{% endif %}
+								{% endif %}
+							{% endif %}
+						{% endif %}
+						{% if product.price %}
+						<p class="price">
+							{% if not product.special %}
+							{{ product.price }}
+							{% else %}
+							<span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+							{% endif %}
+							{% if product.tax %}
+							<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+							{% endif %}
+						</p>
+						{% endif %}
+					</div>
+					<div class="pts-button-group">
+					     {% if product.pts_quick_status %}
+						  <button  type="button" style="width: 100%;"><a href="{{ product.quick_order }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_deliver }}</span></a></button>
+						  {% else %}
+						<button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs1 hidden-sm1 hidden-md1">{{ button_cart }}</span></button>
+						<button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+						<button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+						{% endif %}	
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+<script type="text/javascript"><!--
+	$(document).ready(function(){
+		$("#carousel_seller_featured").owlCarousel({
+			items:4,
+			margin:10,
+			autoPlay: 3000,
+			navigation: true,
+			navigationText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
+			pagination: true,
+			responsiveClass:true,
+			responsive:{
+				0:{
+					items:1,
+				},
+				768:{
+					items:3,
+					margin:20,
+				},
+				1024:{
+					items:4,
+					margin:20,
+				}
+			},
+		});
+	});
+--></script>

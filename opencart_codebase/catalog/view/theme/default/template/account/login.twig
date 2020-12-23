@@ -13,24 +13,24 @@
   {% endif %}
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
+    {% set class = 'col-md-6 col-sm-8 col-xs-12' %}
     {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
+    {% set class = 'col-md-9 col-sm-8 col-xs-12' %}
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6 col-xs-12">
           <div class="well">
-            <h2>{{ text_new_customer }}</h2>
+            <h2 class="heading">{{ text_new_customer }}</h2>
             <p><strong>{{ text_register }}</strong></p>
             <p>{{ text_register_account }}</p>
             <a href="{{ register }}" class="btn btn-primary">{{ button_continue }}</a></div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-md-6 col-xs-12">
           <div class="well">
-            <h2>{{ text_returning_customer }}</h2>
+            <h2 class="heading">{{ text_returning_customer }}</h2>
             <p><strong>{{ text_i_am_returning_customer }}</strong></p>
             <form action="{{ action }}" method="post" enctype="multipart/form-data">
               <div class="form-group">
@@ -39,7 +39,7 @@
               </div>
               <div class="form-group">
                 <label class="control-label" for="input-password">{{ entry_password }}</label>
-                <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
+                <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" /><br>
                 <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
               <input type="submit" value="{{ button_login }}" class="btn btn-primary" />
               {% if redirect %}

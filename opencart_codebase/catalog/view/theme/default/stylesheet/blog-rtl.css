@@ -1,0 +1,14 @@
+/* blog */
+.blog-date {
+    float: right;
+}
+.blog_comment {
+    float: right;
+}
+.blog_links .fa {
+    margin-left: 5px;
+    margin-right: auto;
+}
+.blog-right{
+    text-align: right;
+}

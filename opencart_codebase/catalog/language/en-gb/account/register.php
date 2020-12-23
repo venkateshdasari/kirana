@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']        = 'Register Account';
+$_['cheading_title']        = 'Register Account';
 
 // Text
 $_['text_account']         = 'Account';

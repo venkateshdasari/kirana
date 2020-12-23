@@ -13,14 +13,14 @@
   {% endif %}
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
+    {% set class = 'col-md-6 col-sm-8 col-xs-12' %}
     {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
+    {% set class = 'col-md-9 col-sm-8 col-xs-12' %}
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h2>{{ text_address_book }}</h2>
+      <h2 class="heading">{{ text_address_book }}</h2>
       {% if addresses %}
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -33,7 +33,7 @@
         </table>
       </div>
       {% else %}
-      <p>{{ text_empty }}</p>
+      <p>{{ ctext_empty }}</p>
       {% endif %}
       <div class="buttons clearfix">
         <div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>

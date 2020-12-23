@@ -1,0 +1,539 @@
+
+/* blog */
+.blog-heading{
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 12px 0 15px 0;
+}
+/* BLOG START  */
+.blog_inspire{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.blog-date{
+    float: left;
+}
+#content .box-product .blog-items {
+    display: inline-block;
+    float: left;
+}
+.blog-left {
+    margin-bottom: 10px;
+}
+.date-blog-hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.the_dated{
+    font-size: 40px;
+}
+.view-blog {
+    float: left;
+    width: 100%;
+    text-align: left;
+    margin: 0 0 10px;
+}
+.read-more {
+    float: left;
+}
+.author {
+    color: #808080;
+    margin-bottom: 15px;
+}
+.blog-right .author .fa.fa-user {
+    color: #9c9c9c;
+    margin-right: 3px;
+}
+.blog-desc {
+    margin: 20px 0;
+    color: #797979;
+    text-transform: capitalize;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+.blog-img {
+    padding: 10px 0 0;
+}
+.date-time, .write-comment > a {
+    color: #797979;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.date-time{
+    margin-left: 5px;
+}
+#content #blog-carousel, #content #blog-grid {
+    padding: 0px 0;
+    border: none;
+    overflow: visible;
+}
+#content #blog-carousel .blog-item {
+    float: left;
+}
+#content #blog .product-block, #content #blog .product-block {
+    margin: 5px 0px;
+    overflow: hidden;
+}
+#content #blog-carousel .product-block:hover, #content #blog-grid .product-block:hover {
+    box-shadow: none;
+}
+.blog-right h4 a {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #212121;
+}
+.blog-right h4{
+    margin-top: 30px;
+}
+.product-block .blog-right h4 a:hover {
+    color: #00b9f7;
+}
+.blog_comment {
+    font-size: 16px;
+    margin: 0 25px;
+    float: left;
+}
+.blog-right .read_link > a {
+    text-decoration: underline;
+}
+.read_link{
+    margin-top: 15px;
+}
+.read_link .fa.fa-book {
+    margin-right: 5px;
+}
+.inspire-single-blog .blog-desc {
+    color: #797979;
+    text-align: justify;
+    margin-top: 15px;
+}
+.inspire-single-blog .block-title h3 {
+    padding: 10px 0;
+    color: #222;
+}
+.panel {
+    box-shadow: none;
+}
+.blog-comment{
+    font-size: 16px;
+    color: #00b9f7;
+    margin-top: 20px;
+}
+.inspire-single-blog .view-comment .panel-default {
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
+    border-left: medium none;
+    border-right: medium none;
+    box-shadow: none;
+    padding: 20px 0;
+}
+.view-comment .name {
+    color: #161b1e;
+    font-weight: 700;
+}
+.view-comment .date {
+    color: #bbb;
+    font-size: 12px;
+}
+.inspire-blog-image {
+    position: relative;
+    transition: all 600ms ease-in-out 0s;
+-webkit-transition: all 600ms ease-in-out 0s;
+-moz-transition: all 600ms ease-in-out 0s;
+-o-transition: all 600ms ease-in-out 0s;
+-ms-transition: all 600ms ease-in-out 0s;
+}
+/*.inspire-blog-image:hover{
+    background-color: #000;
+    transition: all 600ms ease-in-out 0s;
+-webkit-transition: all 600ms ease-in-out 0s;
+-moz-transition: all 600ms ease-in-out 0s;
+-o-transition: all 600ms ease-in-out 0s;
+-ms-transition: all 600ms ease-in-out 0s;
+}
+.inspire-blog-image:hover img{
+    opacity: 0.5;   
+
+}*/
+.img-thumbnail{
+    border: none;
+}
+.headingpage{
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #212121;
+}
+/* .inspire-post-author{
+    text-align: center;
+} */
+.product-block .blog-left .inspire-post-author {
+    bottom: -20px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    left: 20px;
+    position: absolute;
+    text-transform: capitalize;
+    transition: all 300ms ease 0s;
+    -moz-transition: all 300ms ease 0s;
+    -webkit-transition: all 300ms ease 0s;
+    -ms-transition: all 300ms ease 0s;
+    -o-transition: all 300ms ease 0s;
+    z-index: 9999;
+    text-align: center;
+}
+.product-block:hover .blog-left .inspire-post-author {
+    bottom: 23px;
+}
+
+.write-comment > a:hover, .product-block .blog-right a:hover {
+    color: #00b9f7;
+}
+.product-block .blog-left .inspire-post-author::before {
+    border-bottom: 1px solid #fff;
+    bottom: -7px;
+    content: "";
+    display: block;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    width: 30px;
+}
+.inspire_blog_page .panel-body {
+    border: medium none;
+    padding: 0px;
+}
+.inspire_blog_page .inspire-blog-image {
+    background-position: center center;
+    float: left;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.inspire_blog_page .panel.panel-default {
+    border: medium none;
+}
+.inspire_blog_data_left .blog-date {
+    color: #00b9f7;
+    font-size: 14px;
+}
+.inspire_blog_page .panel-body h5 {
+    color: #222;
+    display: inline;
+    font-size: 24px;
+    text-transform: capitalize;
+}
+.blog_links .blog_autor {
+    float: left;
+    font-size: 12px;
+    position: relative;
+}
+.blog_links .write-comment {
+    font-size: 16px;
+}
+.blog_links .fa {
+    margin-right: 5px;
+}
+.blog_links {
+    margin: 20px 0px;
+}
+.inspire_blog_page .panel-body a {
+    color: #2b2b2b;
+}
+.inspire_blog_page .panel-body a:hover, .inspire_blog_page .panel-body a:focus {
+    color: #00b9f7;
+}
+.inspire_blog_page .read-more {
+    float: left;
+    text-align: left;
+    margin: 20px 0 0;
+}
+.inspire_blog_page .read-more a {
+    background: #222;
+    border: 1px solid #222;
+    color: #fff;
+    display: inline-block;
+    padding: 6px 10px;
+    transition: all 300ms ease 0s;
+    text-transform: capitalize;
+}
+.inspire_blog_page .read-more a:hover {
+    background: #00b9f7;
+    border: 1px solid #00b9f7;
+    color: #fff;
+    transition: all 300ms ease 0s;
+}
+.inspire_blog_page .inspire-blog-image .blog-post-image-hover {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: scale(0);
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transition: all 0.3s linear 0s;
+    -moz-transition: all 0.3s linear 0s;
+    -webkit-transition: all 0.3s linear 0s;
+    -ms-transition: all 0.3s linear 0s;
+    -o-transition: all 0.3s linear 0s;
+    visibility: hidden;
+    width: 100%;
+}
+.inspire_blog_page .inspire-blog-image .inspire_post_hover .icon.zoom {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -khtml-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    margin-right: 10px;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    -ms-opacity: 0;
+    -khtml-opacity: 0;
+    padding: 10px 14px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    z-index: 10;
+}
+.inspire_blog_page .inspire-blog-image .inspire_post_hover .icon.zoom .fa, .inspire_blog_page .inspire-blog-image .inspire_post_hover .icon.readmore_link .fa {
+    color: #fff;
+    font-size: 40px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+.inspire_blog_page .inspire-blog-image .inspire_post_hover .icon.readmore_link {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -khtml-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    -ms-opacity: 0;
+    -khtml-opacity: 0;
+    padding: 10px 14px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    z-index: 10;
+}
+.inspire_blog_page .inspire-blog-image:hover .blog-post-image-hover {
+    opacity: 0.3;
+    -moz-opacity: 0.3;
+    -webkit-opacity: 0.3;
+    -ms-opacity: 0.3;
+    -khtml-opacity: 0.3;
+    transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    visibility: visible;
+}
+.inspire_blog_page .inspire-blog-image:hover .inspire_post_hover, .inspire_blog_page .inspire-blog-image:hover .inspire_post_hover .icon.readmore_link, .inspire_blog_page .inspire-blog-image:hover .inspire_post_hover .icon.zoom {
+    opacity: 1;
+    -moz-opacity: 1;
+    -webkit-opacity: 1;
+    -ms-opacity: 1;
+    -khtml-opacity: 1;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+.inspire_blog_page .inspire-blog-image .inspire_post_hover .icon.readmore_link:hover, .inspire_blog_page .inspire-blog-image .inspire_post_hover .icon.zoom:hover {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+.inspire_blog_page .inspire-blog-image:hover .inspire_post_hover .icon.zoom .fa, .inspire_blog_page .inspire-blog-image:hover .inspire_post_hover .icon.readmore_link .fa {
+    font-size: 14px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+
+.inspire-single-blog .blog-img {
+    padding: 0;
+}
+#add-comment-blog.panel-default {
+    border: medium none;
+}
+#content.inspire-single-blog > h4 {
+    font-weight: 700;
+    font-size: 17px;
+}
+.inspire-single-blog .view-comment .name, .inspire-single-blog .view-comment .date, .inspire-single-blog .view-comment .col-sm-8, .inspire-single-blog .view-comment .col-sm-3 {
+    width: 100%;
+}
+.user_icon {
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    float: left;
+    margin: 2px 15px 15px 0;
+    padding: 7px 13px;
+}
+.user_icon .fa {
+    color: #d50000;
+    font-size: 20px;
+    margin-top: 3px;
+}
+#add-comment-blog .col-sm-10 {
+    width: 66.6667%;
+}
+#add-comment-blog .col-sm-2 {
+    width: 25%;
+    display: none;
+}
+.blog_inspire .heading{
+    margin-left: 15px;
+}
+@media(min-width: 980px) and (max-width: 991px){
+.product-block .blog-left .inspire-post-author{
+      display: none;
+}
+}
+@media(min-width: 992px) and (max-width: 1199px){
+.product-block .blog-left .inspire-post-author{
+      bottom: -50px;
+}
+}
+@media(min-width: 320px) and (max-width: 767px){
+    .blog-right {
+        margin-top: 25px;
+    }
+}
+@media(min-width: 320px) and (max-width: 360px){
+    .blog_links .write-comment {
+        font-size: 13px;
+    }
+    .blog_comment {
+        font-size: 14px;
+        margin: 0 10px;
+    }
+}
+/* inspire MAGNIFIC POPUP CSS */
+.inspire-blog-image .inspire_post_hover {
+    left: 0;
+    margin: 0 auto;
+    opacity: 0;
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 46%;
+}
+.inspire_blog_page .inspire-blog-image .inspire_post_hover {
+    top: 45%;
+}
+.product-block:hover .blog-left .inspire_post_hover, .product-block:hover .blog-left .zoom, .product-block:hover .blog-left .readmore_link {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    -kkhtml-opacity: 1;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+.product-block:hover .blog-post-image-hover {
+    opacity: 1;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    -kkhtml-opacity: 1;
+}
+.product-block .inspire-blog-image .inspire_post_hover .zoom, .product-block .inspire-blog-image .inspire_post_hover .readmore_link {
+    display: inline-block;
+    float: none;
+    color: transparent;
+    position: relative;
+    width: 40px;
+}
+.product-block .inspire-blog-image .inspire_post_hover .readmore_link {
+    margin-left: 10px;
+}
+.inspire-blog-image .inspire_post_hover .zoom::before, .inspire-blog-image .inspire_post_hover .readmore_link::before {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -khtml-border-radius: 50%;
+    bottom: 0;
+    box-sizing: border-box;
+    color: #fff;
+    content: "\f00e";
+    font-family: "FontAwesome";
+    font-size: 14px;
+    height: 40px;
+    left: 0;
+    margin: auto;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    -ms-opacity: 0;
+    -khtml-opacity: 0;
+    padding: 8px 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -webkit-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    width: 40px;
+}
+.inspire-blog-image .inspire_post_hover .readmore_link::before {
+    content: "\f0c1";
+}
+.product-block:hover .inspire-blog-image .inspire_post_hover .readmore_link::before, .product-block:hover .inspire-blog-image .inspire_post_hover .zoom::before {
+    opacity: 1;
+    -moz-opacity: 1;
+    -webkit-opacity: 1;
+    -ms-opacity: 1;
+    -khtml-opacity: 1;
+    transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+}
+.blog-left .inspire-blog-image .zoom:hover::before, .blog-left .inspire-blog-image .readmore_link:hover::before {
+    background-color: #00b9f7;
+    border-color: #00b9f7;
+}
+/* BLOG End*/

@@ -77,6 +77,10 @@ class ControllerCommonHeader extends Controller {
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');
 
+		$data['special'] = $this->url->link('product/special');
+		$data['sitemap'] = $this->url->link('information/sitemap');
+		$data['brand'] = $this->url->link('product/manufacturer');
+
 		return $this->load->view('common/header', $data);
 	}
 }

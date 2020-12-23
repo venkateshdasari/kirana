@@ -1,5 +1,5 @@
 {{ header }}
-<div id="product-manufacturer" class="container">
+<div id="product-manufacturer" class="container common-shed">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
@@ -14,11 +14,12 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
+      <h1 class="heading">{{ heading_titleco }}</h1>
       {% if categories %}
       <p><strong>{{ text_index }}</strong> {% for category in categories %}
         &nbsp;&nbsp;&nbsp;<a href="index.php?route=product/manufacturer#{{ category.name }}">{{ category.name }}</a> {% endfor %} </p>
       {% for category in categories %}
+    <div class="catename">
       <h2 id="{{ category.name }}">{{ category.name }}</h2>
       {% if category.manufacturer %}
       {% for manufacturers in category.manufacturer|batch(4) %}
@@ -27,6 +28,7 @@
         {% endfor %} </div>
       {% endfor %}
       {% endif %}
+    </div>
       {% endfor %}
       {% else %}
       <p>{{ text_empty }}</p>

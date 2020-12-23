@@ -1,0 +1,42 @@
+{% if products|length == 0 %}
+    <p class="ajax-result-msg">{{ text_empty }}</p>
+{% else %}
+    <ul class="ajax-result-list">
+        {% set i = 0 %}
+        {% for product in products %}
+            {% set i = i + 1 %}
+            <li class="ajax-result-item">
+                <div class="product-info col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    {% if product_img_enabled == 1 %}
+                        <a class="product-image col-lg-4 col-sm-3 col-xs-4" href="{{ product.href }}">
+                            <div class="product-image">
+                                <img src="{{ product.thumb }}" alt="{{ product.name }}" class="img-responsive center-block" />
+                            </div>
+                        </a>
+                    {% endif %}
+                    <div class="detail col-lg-8 col-sm-9 col-xs-8">
+                        <h2 class="product-name">
+                            <a href="{{ product.href }}">{{ product.name }}</a>
+                        </h2>
+                        <p class="list-des">{{ product.description }}</p>
+                        {% if product_price_enabled == 1 %}
+                            {% if product.price %}
+                            <div class="price-box">
+                                {% if product.special %}
+                                    <span class="sprice">{{ product.price }}</span>
+                                {% else %}
+                                    <p class="old-price"><span class="sprice">{{ product.price }}</span></p>
+                                    <p class="special-price"><span class="sprice">{{ product.special }}</span></p>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% if i % 2 == 0 %}
+            <div style="clear:both"></div>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}

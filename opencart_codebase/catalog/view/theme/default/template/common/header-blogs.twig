@@ -1,0 +1,36 @@
+<link href="catalog/view/theme/default/stylesheet/blog.css" rel="stylesheet">
+<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+{% for link in links %}
+<!-- Sb Theme Custom javascript Start -->
+<script src="catalog/view/javascript/sb-theme/sb-theme-custom.js" type="text/javascript"></script>
+<!-- Sb Theme Custom javascript End -->
+<!-- animation javascript Start -->
+<script src="catalog/view/javascript/animation/custom.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/animation/animate.min.css" rel="stylesheet">
+<!-- animation javascript End -->
+ <!--RTL start -->
+     {% if direction == 'rtl' %}
+     <link href="catalog/view/theme/default/stylesheet/rtl.css" rel="stylesheet">
+     {% endif %}
+      {% if direction == 'rtl' %}
+     <link href="catalog/view/theme/default/stylesheet/blog-rtl.css" rel="stylesheet">
+     {% endif %}
+        <!-- RTL END-->
+<!--lightbox -->
+       <script src="catalog/view/javascript/blog/lightbox-2.6.min.js" type="text/javascript"></script>
+       <link href="catalog/view/javascript/blog/lightbox.css" rel="stylesheet" type="text/css" />
+<!--lightbox End-->
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+

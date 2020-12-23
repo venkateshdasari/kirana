@@ -1,4 +1,10 @@
 <?php
+//tab 
+$_['cattab_head']              = 'All Proudcts';
+$_['tab_head']                 = 'Treding products';
+$_['tab_fea']                  = 'Featured';
+$_['tab_best']                 = 'BestSeller';
+$_['tab_latest']               = 'Latest';
 // Locale
 $_['code']                  = 'en';
 $_['direction']             = 'ltr';
@@ -28,6 +34,7 @@ $_['button_cart']           = 'Add to Cart';
 $_['button_cancel']         = 'Cancel';
 $_['button_compare']        = 'Compare this Product';
 $_['button_wishlist']       = 'Add to Wish List';
+$_['button_quickview']       = 'Quick View';
 $_['button_checkout']       = 'Checkout';
 $_['button_confirm']        = 'Confirm Order';
 $_['button_coupon']         = 'Apply Coupon';
@@ -57,6 +64,14 @@ $_['button_quote']          = 'Get Quotes';
 $_['button_list']           = 'List';
 $_['button_grid']           = 'Grid';
 $_['button_map']            = 'View Google Map';
+
+// custom
+$_['text_home']            = 'Home';
+$_['text_specials']        = 'Specials';
+$_['text_blog']            = 'Blogs';
+$_['text_brand']           = 'Brand';
+
+$_['entry_qty']           = 'qty';
 
 // Error
 $_['error_exception']       = 'Error Code(%s): %s in %s on line %s';

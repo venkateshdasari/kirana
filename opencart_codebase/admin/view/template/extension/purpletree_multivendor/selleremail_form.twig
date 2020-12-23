@@ -1,0 +1,106 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right float-right">
+			   <button type="button" form="form-emailreset" data-toggle="tooltip" id = "email_temp_reset" title="{{ button_reset }}" class="btn btn-primary">{{ button_reset }}</button>
+			   
+				<button type="submit" form="form-subscription" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+			<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default btn-light"><i class="fa fa-reply"></i></a></div>
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{% if error_warning %}
+		<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		<div class="panel panel-default card">
+			<div class="panel-heading">
+				<h3 class="panel-title card-header"><i class="fa fa-pencil fas fa-edit"></i> {{ text_form }}</h3>
+			</div>
+			<div class="panel-body card-body">
+			   <form action="{{ action1 }}" method="post" enctype="multipart/form-data" id="form-emailreset">			   
+			   </form>
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-subscription" class="form-horizontal">
+					<div class="tab-content">
+							<ul class="nav nav-tabs" id="language">
+								{% for language in languages %}
+								<li class="nav-item"><a class="nav-link" href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+								{% endfor %}
+							</ul>
+							<div class="tab-content">
+								{% for language in languages %}
+								<div class="tab-pane" id="language{{ language.language_id }}">
+									<div class="form-group row required">
+										<label class="col-sm-2 control-label col-form-label" for="input-name{{ language.language_id }}">{{ entry_name }}</label>
+										<div class="col-sm-10">
+											<input type="text" name="email[{{ language.language_id }}][new_subject]" placeholder="{{ entry_name }}" value="{{ email[language.language_id] ? email[language.language_id].new_subject }}"  id="input-name{{ language.language_id }}" class="form-control" />
+											{% if email[language.language_id].note_subject %}
+											<span> {{ text_available_variables }} {{  email[language.language_id].note_subject }}</span>
+											{% endif %}
+											{% if error_name[language.language_id] %}
+											<div class="text-danger">{{ error_name[language.language_id] }}</div>
+											{% endif %}
+											<input id = "email_tem_lcode" type="hidden" name="email[{{ language.language_id }}][language_code]" value="{{ email[language.language_id].language_code }} " />
+											<input id = "email_tem_id" type="hidden" name="email[{{ language.language_id }}][id]" value="{{ email[language.language_id].id }} " />
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 control-label col-form-label" for="input-description{{ language.language_id }}">{{ entry_description }}</label>
+										<div class="col-sm-10">
+											<textarea name="email[{{ language.language_id }}][new_message]" placeholder="{{ entry_description }}" id="input-description{{ language.language_id }}" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ email[language.language_id] ? email[language.language_id].new_message }}</textarea>
+											{% if email[language.language_id].note %}
+											<span> {{ text_available_variables }}  {{ email[language.language_id].note }} </span>
+												{% endif %}
+										</div>
+									</div>								
+									
+								</div>
+								{% endfor %}
+							</div>			
+				
+			</div>
+			
+		</div>
+	</form>
+</div>
+</div>
+</div>
+<link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet" />
+<link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet" />
+<script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script> 
+<script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script> 
+<script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script> 
+
+{% if ver=='3.1.0.0_b' %}
+<script type="text/javascript"><!--
+	$('textarea[data-toggle=\'summernote\']').ckeditor();
+//--></script>
+{% else %}
+{% if module_purpletree_multivendor_status %}
+<script type="text/javascript" src="view/javascript/purpletreejs/summernote.js"></script>
+{% else %}
+<script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+{% endif %}
+<link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script> 
+<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script> 
+{% endif %} 
+<script type="text/javascript"><!--
+ $(document).ready(function () {
+ $('#email_temp_reset').on("click", function() {
+ confirm("{{ reset_warning }}") ? $('#form-emailreset').submit() : false;
+  });
+}); 
+//--></script>
+<script type="text/javascript"><!--
+	$('#language a:first').tab('show');
+//--></script>
+{{ footer }}

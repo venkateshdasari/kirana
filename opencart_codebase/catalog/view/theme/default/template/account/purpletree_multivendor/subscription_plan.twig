@@ -1,0 +1,383 @@
+{{ header }}
+<div class="pts-container container">
+<div class="pts-row d-flex row">{{ column_left }}
+		<div id="content" class="pts-col-sm-9 col-sm-9 pts-col-md-9 col-md-9 pts-col-lg-10 col-lg-10 pts-col-xs-12 col-xs-12"> 
+			<div class="page-header">
+	{% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+    {% endif %}
+    {% if success %}
+    <div class="alert pts-alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+    {% endif %}
+    <div class="container-fluid">
+     <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+	  {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+              </ul>
+    </div>
+  </div>
+			<div class="pts-col-sm-12 pts-col-xs-12 ">
+				{% if not multiple_subscription_plan %}
+				{% if sellerplan %}
+				<div class="pts-col-sm-12 pts-col-xs-12  pts-welll" style="margin-top: 21px;">
+					<div class="pts-col-sm-12  pts-col-xs-12 pts-current-plan p-0" style="">
+						<h4>
+							<b> 
+								<label class="pts-text-blue">{{ heading_current_plan }}
+								</label> 
+							</b>
+						</h4>
+					</div>
+					<div class="pts-col-sm-12 pts-col-xs-12  p-0">
+						<div class="pts-col-sm-3 pts-col-xs-6">
+							<p>
+								<b>{{ column_sellected_plan }}: 
+								</b>
+							</p>
+						</div>
+						<div class="pts-col-sm-9 pts-col-xs-6 pts-text-left"> {{ sellerplan.plan_name }}
+						</div>
+					</div>
+					<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+						<div class="pts-col-sm-12 pts-col-xs-12  p-0">    
+							<div class="pts-col-sm-6 pts-col-xs-6">
+								<p>
+									<b>{{ column_start_date }}: 
+									</b>
+								</p>
+							</div>
+							<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ sellerplan.start_date }}
+							</div>
+						</div>
+						<div class="pts-col-sm-12 pts-col-xs-12 p-0">
+							<div class="pts-col-sm-6 pts-col-xs-6">
+								<p>
+									<b>{{ column_end_date }}: 
+									</b>
+								</p>
+							</div>
+							<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ sellerplan.end_date }}
+							</div>
+						</div>    
+					</div>
+					<div class="pts-col-sm-6 pts-col-xs-12 p-0">    
+						<div class="pts-col-sm-12 pts-col-xs-12 p-0">
+							<div class="pts-col-sm-6 pts-col-xs-6">
+								<p>
+									<b>{{ column_allowed_products }}: 
+									</b>
+								</div>
+								<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left"> {{ sellerplan.no_of_product }}
+								</div>
+							</div>    
+							<div class="pts-col-sm-12 pts-col-xs-12 p-0">
+								<div class="pts-col-sm-6 pts-col-xs-6">
+									<p>
+										<b>{{ column_used_products }}: 
+										</b>
+									</div>
+									<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ seller_used_product }}
+									</div>
+								</div>
+							</div>
+							<div class="pts-col-sm-12 pts-col-xs-12 p-0">    
+								<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+									<div class="pts-col-sm-6 pts-col-xs-6">
+										<p>
+											<b>{{ text_subscription_status }}: 
+											</b>
+										</div>
+										<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left"> {{ sellerplan.subscription_status }}
+										</div>
+									</div>    
+									<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+										<div class="pts-col-sm-6 pts-col-xs-6">
+											<p>
+												<b>{{ text_invoive_status }}: 
+												</b>
+											</div>
+											<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ sellerplan.invoice_status }}
+											</div>
+										</div>
+									</div>
+<div class="pts-col-sm-12 pts-col-xs-12 p-0">    
+	<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+		<div class="pts-col-sm-6 pts-col-xs-6">
+			<p>
+				<b>{{ text_featured_products }} 
+				</b>
+			</div>
+			<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ sellerplan.total_featured_product }}/{{ sellerplan.featured_product }}
+			</div>
+		</div>    
+		<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+			<div class="pts-col-sm-6 pts-col-xs-6">
+				<p>
+					<b>{{ text_featured_store }}
+					</b>
+				</div>
+				<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ sellerplan.featured_store }}
+				</div>
+			</div>
+		</div>
+		<div class="pts-col-sm-12 pts-col-xs-12 p-0">    
+			<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+				<div class="pts-col-sm-6 pts-col-xs-6">
+					<p>
+						<b>{{ text_category_featured_products }} 
+						</b>
+					</div>
+					<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">{{ sellerplan.total_category_featured_prodcut }}/{{ sellerplan.category_featured_prodcut }}
+					</div>
+				</div>    
+				<div class="pts-col-sm-6 pts-col-xs-12 p-0">
+					<div class="pts-col-sm-6 pts-col-xs-6">
+						<p>
+							<b>
+							</b>
+						</div>
+						<div class="pts-col-sm-6 pts-col-xs-6 pts-text-left">
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% endif %}
+			<div class="pts-clearfix">
+			</div>
+			<h1 class="pts-subscription-plan pts-col-sm-12"> {{ title_subscription_plans }}
+				<div class="hidden-xs pts-pull-right">
+					<div class="pts-btn-group pts-btn-group-sm">
+						<button type="button" id="sub-list-view" class="pts-btn pts-btn-default" data-toggle="tooltip" title="" data-original-title="{{ text_list }}">
+							<i class="fa fa-th-list">
+							</i>
+						</button>
+						<button type="button" id="sub-grid-view" class="pts-btn pts-btn-default active" data-toggle="tooltip" title="" data-original-title="{{ text_gide }}">
+							<i class="fa fa-th">
+							</i>
+						</button>
+					</div>
+				</div>
+			</h1>
+			<div class="sub-grid">     
+				{% if subscriptions %}
+				{% for subscription in subscriptions %}
+				{% if subscription.status %}
+				<div class="subsgridd  pts-col-sm-6 pts-col-xs-12 pts-col-md-6 pts-col-lg-4" >
+					<div class=" pts-col-sm-12 plan deactive_plan plan1 pts-col-xs-12  {{ subscription.active_plan }} pts-text-left " style="overflow:hidden; position:relative;">
+						<div class="pts-col-sm-12  pts-col-xs-12 plan-name" style="text-transform:uppercase">
+							<h4 class=" ribbon active-plan-text active-plans-text {% if subscription.active == 'Inactive' %} ribbondanger pts-btn-dangerrr text-inactive{% endif %}"> {{ subscription.active }}
+							</h4>
+							<h3 class = "pts-text-center">
+								<b style=" font-size: 20px !important;">  {{ subscription.plan_name }}
+								</b>
+							</h3>                
+						</div>
+						<div class="pts-col-sm-12 plan-list pts-col-xs-12 pts-text-left p-0">
+							<div class="pts-col-sm-12  pts-col-xs-12 pts-text-left">
+								<ul>
+									<li>{{ column_no_of_products }}: 
+										<span class = "pts-pull-right">{{ subscription.no_of_product }} {{ column_products }}
+										</span>
+									</li>
+									<li>{{ column_joining_fees }}: 
+										<span class = "pts-pull-right">{{ subscription.joining_fee }}
+										</span>
+									</li>
+									<li>{{ column_subscription_fees }}: 
+										<span class = "pts-pull-right">{{ subscription.subscription_price }}
+										</span>
+									</li>
+									<li>{{ column_validity }}: 
+										<span class = "pts-pull-right">{{ subscription.validity }} {{ column_days }}
+										</span>
+									</li>
+									<li>{{ text_featured_products }}
+										<span class = "pts-pull-right">{{ subscription.featured_products }}
+										</span>
+									</li>
+									<li>{{ text_category_featured_products }}
+										<span class = "pts-pull-right">{{ subscription.category_featured_prodcuts }}
+										</li>
+										<li>{{ text_featured_store }}
+											<span class = "pts-pull-right">{{ subscription.featured_store }}
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="pts-col-sm-12" style="margin-top: 7px;">
+								<div class="pts-row">        
+									<div class="pts-col-sm-12">    
+										{% if subscription.active %}
+										<div class="pts-pull-left">
+											<a href=" {{ subscription.subscribe }}" class="pts-btn pts-btn-primary invoices-btn posrel" >  {{ button_renew }}
+											</a>
+										</div>
+										{% endif %}
+										{% if subscription.active %}
+										<div class="pts-pull-right">
+											<a  href=" {{ subscription.invoice }}" class="pts-btn pts-btn-primary invoices-btn posrel" > {{ text_invoices }}
+											</a>    
+										</div>
+										{% else %}
+										<div class="pts-pull-right">
+											<a href=" {{ subscription.subscribe }}" class="pts-btn pts-btn-primary invoices-btn posrel" >  {{ button_subscribe }}
+											</a>
+										</div>
+										{% endif %}
+										{% endif %}
+									</div>
+								</div>
+								<div class="pts-col-sm-12 pts-text-center">
+									<a class="" title=" {{ button_view_all }}" href="#" class="viewmore" data-toggle="modal" data-target="#myModala{{ subscription.plan_id }}"> {{ button_view_all }}
+									</a>
+								</div>                        
+							</div>
+						</div>
+						<!-- Modal plan a -->
+				<div class="modal" id="myModala{{ subscription.plan_id }}" role="dialog">
+					<div class="modal-dialog popup-model">
+						<!-- Modal content-->
+						<div class="modal-content hieght-fixed">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;
+								</button>
+								<h4 class="modal-title">{{ column_description }}
+								</h4>
+							</div>
+							<div class="modal-body">
+								<p>{{ subscription.plan_description }} 
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+		<div class="sub-list">
+			{% if subscriptions %}
+			{% for subscription in subscriptions %}
+			{% if subscription.status %}
+			<div class="pts-col-sm-12 deactive_plan  plan pts-col-xs-12 {{ subscription.active_plan }}">
+				<div class="pts-col-sm-12 plan1 pts-col-xs-12 pts-text-left ">
+					<div class="pts-col-sm-12  pts-col-xs-12 plan-name" style="text-transform:uppercase">
+						<h4>
+							<b>  {{ subscription.plan_name }}  
+								<label class="pts-pull-right active-plan-text   {% if subscription.active == 'Inactive' %} pts-btn-dangerrr {% endif %}" style="margin-top: 1%;">
+									<strong>{{ subscription.active }}
+									</strong>
+								</label>
+							</b>
+						</h4>
+					</div> 
+				</div>
+				<div class="pts-col-sm-5 plan-list pts-col-xs-12 text-left p-0">
+					<div class="pts-col-sm-12  pts-col-xs-12 pts-text-left">
+						<ul>                                
+							<li>{{ column_no_of_products }}: 
+								<span class = "pts-pull-right">{{ subscription.no_of_product }} {{ column_products }}
+								</span>
+							</li>
+							<li>{{ column_joining_fees }}: 
+								<span class = "pts-pull-right">{{ subscription.joining_fee }}
+								</span>
+							</li>
+							<li>{{ column_subscription_fees }}: 
+								<span class = "pts-pull-right">{{ subscription.subscription_price }}
+								</span>
+							</li>
+							<li>{{ column_validity }}: 
+								<span class = "pts-pull-right">{{ subscription.validity }} {{ column_days }}
+								</span>
+							</li>
+							<li>{{ text_featured_products }}:
+								<span class = "pts-pull-right">:{{ subscription.featured_products }}
+								</span>
+							</li>
+							<li>{{ text_category_featured_products }}:
+								<span class = "pts-pull-right">{{ subscription.category_featured_prodcuts }}
+								</li>
+								<li>{{ text_featured_store }}:
+									<span class = "pts-pull-right">{{ subscription.featured_store }}
+									</span>
+								</li>
+							</ul>
+						</div>                        
+					</div>
+					<form action="{{ subscribe }}" method="post" enctype="multipart/form-data" class="pts-form-horizontal">    
+						<div class="pts-col-sm-7 pts-col-xs-12 pts-text-left">
+							<p style="padding:10px 5px"> {{ subscription.plan_short_description }} 
+								<a href="#" class="viewmore" data-toggle="modal" data-target="#myModala1{{subscription.plan_id }}">{{ button_view_all }}
+								</a>
+								<p>
+									<div class="pts-text-right pts-form-group">
+										<div class="pts-row">    
+											{% if not subscription.active %}
+											<div class="pts-col-sm-3 pts-col-sm-offset-8">
+												<a href="{{ subscription.subscribe }}" class="btn btn-primary" > {{ button_subscribe }} 
+												</a>
+											</div>
+											{% else %}
+											<div class="pts-col-sm-3 pts-col-sm-offset-3">
+												<a href="{{ subscription.subscribe }}" class="pts-btn pts-btn-primary" >{{ button_renew }}
+												</a>
+											</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								{% if subscription.active %}
+								<a href="{{ subscription.invoice }}" class="pts-btn pts-btn-primary-sm invoices-btn" >{{ text_invoices }}
+								</a>    
+								{% endif %}
+							</form>
+						</div>
+						<!-- Modal plan a -->
+						<div class="modal" id="myModala1{{subscription.plan_id }}" role="dialog">
+							<div class="modal-dialog popup-model">
+								<!-- Modal content-->
+								<div class="modal-content hieght-fixed">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;
+										</button>
+										<h4 class="modal-title">{{ column_description }}
+										</h4>
+									</div>
+									<div class="modal-body">
+										<p>{{ subscription.plan_description }} 
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+						{% endfor %}
+						{% endif %}
+					</div>
+				</div>
+				<!----------------end subscription plan ------------------------->
+			</div>
+		</div>
+	</div>
+	<script>
+		$( document ).ready(function() {
+			
+			$("#sub-grid-view").on("click", function() {
+				$(".sub-grid").show();
+				$(".sub-list").hide();
+			});
+			$("#sub-list-view").on("click", function() {
+				$(".sub-list").show();
+				$(".sub-grid").hide();
+			});
+		}); 
+		window.onload = (event) => {
+			$(".sub-list").hide();
+		};
+	</script>
+{{ footer }}											

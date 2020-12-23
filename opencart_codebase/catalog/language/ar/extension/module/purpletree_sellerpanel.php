@@ -1,0 +1,36 @@
+<?php 
+$_['text_selleroption']   = 'خيارات البائع';
+$_['text_dashboard']     = 'ملخص';
+$_['text_dashboard_icon']     = 'لوحة تحكم البائع';
+$_['text_sellerstore']   = 'معلومات المتجر';
+$_['text_sellerproduct']   = 'إدارة المنتجات';
+$_['text_sellerprofile']   = 'ملف البائع';
+$_['text_sellerorder']   = 'الطلبات';
+$_['text_sellercommission']   = 'عمولة';
+$_['text_removeseller']   = 'قم بإزالة البائع';
+$_['text_becomeseller']   = 'كن بائعًا';
+$_['text_sellerview']   = 'عرض المتجر';
+$_['text_approval']   = '<b>في انتظار موافقة البائع</b>';
+$_['text_sellerpayment']   = 'المدفوعات';
+$_['text_sellerreview']   = 'التقيمات';
+$_['text_sellerenquiry']   = 'استفسارات العملاء';
+$_['text_downloads']   = "إدارة التنزيلات";
+$_['text_bulkproductupload']     = "تحميل المنتج بالجملة";
+$_['text_shipping']              = "اسعار الشحن";
+$_['text_subscription']              = 'خطة الاشتراك';
+$_['text_subscriptions']              = 'فاتورة الاشتراك';
+$_['text_blog_post']             	     = 'المدونة';
+$_['text_blog_comment']              	 = 'تعليقات المدونة';
+$_['text_commissioninvoice']   = 'فواتير العمولة';
+$_['text_password']   = 			'تغيير كلمة المرور';
+$_['text_logout']               = 			'تسجيل الخروج';
+$_['text_seller_enquiries']   = 'رسائل الإدارة';
+$_['text_seller_template_product'] = 'قوالب المنتج';
+$_['text_sellercoupons']               = 			'كوبونات البائع';
+$_['text_seller_returns']               = 			'عائدات';
+$_['text_attribute']               = 			"سمات المنتج";
+$_['text_attribute_groups']               =  "مجموعات سمات المنتج";
+$_['text_options']               = 			"خيارات المنتج";
+$_['text_catalog']               = 			'فهرس';
+$_['text_sales']               = 			'مبيعات';
+?>

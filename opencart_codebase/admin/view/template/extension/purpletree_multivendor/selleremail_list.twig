@@ -1,0 +1,67 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">			
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{% if error_warning %}
+		<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		{% if success %}
+		<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		<div class="panel panel-default card">
+			<div class="panel-heading">
+				<h3 class="panel-title card-header"><i class="fa fa-list"></i> {{ text_list }}</h3>
+			</div>
+			<div class="panel-body card-body">
+				<form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-category">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>									
+									<td class="text-left">{{ column_name }}</td>
+									<td class="text-center">{{ column_email_type }}</td>
+									<td class="text-center">{{ column_email_subject }}</td>
+									<td class="text-right">{{ column_action }}</td>
+								</tr>    
+							</thead>
+							<tbody>
+								{% if selleremails %}
+								{% for selleremail in selleremails %}
+								<tr>									
+									<td class="text-left">{{ selleremail.title }}</td>
+									<td class="text-center">{{ selleremail.type }}</td>
+									<td class="text-center">{{ selleremail.subject }}</td>
+									<td class="text-right"><a href="{{ selleremail.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil fas fa-edit"></i></a></td>
+								</tr>
+								{% endfor %}
+								{% else %}
+								<tr>
+									<td class="text-center" colspan="100%">{{ text_no_results }}</td>
+								</tr>
+								{% endif %}
+							</tbody>
+						</table>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col-sm-6 text-left">{{ pagination }}</div>
+					<div class="col-sm-6 text-right">{{ results }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{ footer }}

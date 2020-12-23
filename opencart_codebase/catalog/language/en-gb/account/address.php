@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']      = 'Address Book';
+$_['cheading_title']      = 'Address Book';
 
 // Text
 $_['text_account']       = 'Account';
@@ -10,7 +11,7 @@ $_['text_address_edit']  = 'Edit Address';
 $_['text_add']           = 'Your address has been successfully added';
 $_['text_edit']          = 'Your address has been successfully updated';
 $_['text_delete']        = 'Your address has been successfully deleted';
-$_['text_empty']         = 'You have no addresses in your account.';
+$_['ctext_empty']         = 'You have no addresses in your account.';
 
 // Entry
 $_['entry_firstname']    = 'First Name';

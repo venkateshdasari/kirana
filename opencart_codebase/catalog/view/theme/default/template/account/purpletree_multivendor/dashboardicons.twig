@@ -1,0 +1,252 @@
+{{ header }}
+
+<div class="pts-container container">
+	<div class="pts-row d-flex row">{{ column_left }}
+		<div id="content" class="pts-col-sm-9 col-sm-9 pts-col-md-9 col-md-9 pts-col-lg-10 col-lg-10 pts-col-xs-12 col-xs-12"> 
+			<div class="page-header">
+			 {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+	</div>
+    {% endif %}
+    <div class="container-fluid">
+     <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+	  {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+              </ul>
+      </div>
+  </div>
+		
+			<div class="">
+				<div class="pts-col-md-12 pts-col-xs-12 ">
+					<div class="pts-col-md-12 pts-col-xs-12">
+						<div class="pts-col-md-4 pts-col-xs-12">
+							<h4 class="{% if direction =='rtl' %}pts-text-right {%  else %} pts-text-left {% endif %}"> {{ text_Seller_Account }}</h4>
+							<hr class="heading-bar">
+                        
+							<a href="{{ sellerorder }}" >
+							{% if orders_icons %}
+							<img src="image/catalog/dashboardicon/shipping-icon-0.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+
+                             {% endif %}
+							  <div class="icons-text"> {{ text_Orders }}</div>
+								{% if not totalorders==0 %}
+								<span class="{% if orders_icons %} pts-counting-1 {% else %} pts-counting-2 {% endif %}">{{ totalorders }}</span>
+								{% endif %}
+							</a><br>
+                       
+							
+						
+							<a href="{{ sellerenquiries }}">
+                            {% if messages_icons %}
+							<img src="image/catalog/dashboardicon/Adminmessages.png" class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+                             {% endif %}
+							<div class="icons-text">{{ text_sellerenquiries }}</div>
+								{% if not totaladminmessages==0 %}
+								<span class="{% if messages_icons %} pts-counting-1 {% else %} pts-counting-2 {% endif %}">{{ totaladminmessages }}</span>
+								{% endif %}
+							</a><br>
+                       
+
+						
+					 		<a href="{{ sellerenquiry }}">
+                            {% if enquiries_icons %}
+					 		<img src="image/catalog/dashboardicon/enquiry.png" class="sellerAccountImg"/>
+					 		{% else %}
+                             <div class="sellerAccountImg"></div>
+					 		{% endif %}
+
+					 	<div class="icons-text">{{ text_Customer_Enquiries }}</div>
+								{% if not totalenqures==0 %}
+								<span class=" {% if enquiries_icons %} pts-counting-1 {% else %} pts-counting-2 {% endif %}">{{ totalenqures }}</span>
+								{% endif %}
+							</a><br>
+
+							<a href="{{ subscriptionplan }}">
+                            {% if plan_icons %}
+							<img src="image/catalog/dashboardicon/subscription.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+                           {% endif %}
+							<div class="icons-text">{{ text_Subscription_plan }}</div></a><br>
+
+							<a href="{{ sellerreview }}">
+                            {% if reviews_icons %}
+							<img src="image/catalog/dashboardicon/review-icon-2.png" class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+                            {% endif %}
+							<div class="icons-text">{{ text_reviews }}</div></a><br>
+					
+							<a href="{{ downloadsitems }}">
+							{% if downloads_icons %}	
+							<img src="image/catalog/dashboardicon/manage-downloads.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							 <div class="icons-text">{{ text_Manage_Downloads }}</div></a><br>
+
+						</div> 
+
+						<div class="pts-col-md-4 pts-col-xs-12">
+							<h4 class="{% if direction =='rtl' %}pts-text-right {%  else %} pts-text-left {% endif %}"> {{ text_Seller_Store}} </h4>
+							<hr class="heading-bar">
+							
+							<a href="{{ sellerview }}">
+							
+							{% if view_store_icons %}
+							
+							<img src="image/catalog/dashboardicon/view1.png" class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text" >{{ text_View_Store }}</div></a> <br>
+
+							<a href="{{ sellerstore }}">
+							{% if store_information_icons %}						   <img src="image/catalog/dashboardicon/shop.png" class="sellerAccountImg" />
+							{% else %}
+                            <div class="sellerAccountImg"></div>
+							 {% endif %}
+							<div class="icons-text" >{{ text_Store_information }}</div></a><br>
+                       
+							
+							
+							<a href="{{ sellerproduct }}">
+							
+							{% if products_icons %}
+							<img src="image/catalog/dashboardicon/myfinacle1.png" class="sellerAccountImg"/>
+							{% else %}
+                            <div class="sellerAccountImg"></div>
+							 {% endif %}
+							<div class="icons-text" >{{ text_Manage_products }}</div></a><br>
+                         
+													
+						{% if seller_blog_status %} 
+					    	
+							<a href="{{ sellerblogpost }}" >
+                            {% if blog_icons %}
+							<img src="image/catalog/dashboardicon/blog.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text" >{{  text_blog_post }}</div></a><br>
+                        
+							
+							
+							<a href="{{ sellerblogcomment }}">
+                            {% if blog_comments_icons %}
+							<img src="image/catalog/dashboardicon/blog-comment.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+                            {% endif %}	
+							<div class="icons-text" >{{ text_blog_comment }}</div></a><br>
+                        
+						{% endif %}
+
+							{% if module_purpletree_multivendor_seller_product_template == 1 %}
+							<a href="{{ seller_template_product }}">
+                            {% if product_temp_icons %}
+							<img src="image/catalog/dashboardicon/producttem.png" class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text" >{{ text_seller_template_product }}</div></a><br>
+							{% endif %}
+							
+							<a href="{{ bulkproductupload }}">
+							{% if upload_icons %}
+							<img src="image/catalog/dashboardicon/icon-prepaid.png" class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_Bulk_product_upload}}</div></a><br>
+
+                            
+							
+						</div>
+						<div class="pts-col-md-4 pts-col-xs-12">
+						 <h4 class="{% if direction =='rtl' %}pts-text-right {%  else %} pts-text-left {% endif %}"> {{ text_Seller_Payments }}</h4>
+							<hr class="heading-bar">
+							
+							<a href="{{ sellerpayment }}">
+							{% if payments_icons %}
+							<img src="image/catalog/dashboardicon/payment.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_Payments }}</div></a><br>
+
+							<a href="{{ sellercommission }}">
+							{% if commissions_icons %}
+							<img src="image/catalog/dashboardicon/commission.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_Commisions }}</div></a><br>
+                        
+
+							<a href="{{ commissioninvoice }}">
+							{% if comm_invoices_icons %}
+							<img src="image/catalog/dashboardicon/Stocks-3_7-512.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_commissioninvoice }}</div></a><br>
+                        
+
+							<a href="{{ shipping }}">
+							{% if shipping_rates_icons %}
+							<img src="image/catalog/dashboardicon/shipping.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_shiiping_rate }}</div></a><br>
+
+							<a href="{{ seller_product_returns }}">
+							{% if returns_icons %}
+							<img src="image/catalog/dashboardicon/return.png"  class="sellerAccountImg"/>
+							{% else %}
+                             <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_seller_returns }}</div></a><br>
+                        
+							
+						{% if subscriptionplan %}						
+							
+							<a href="{{ subscriptions }}">
+							{% if sub_invoice_icons %}
+							<img src="image/catalog/dashboardicon/shipping-icon-0.png" class="sellerAccountImg"/>
+							{% else %}
+                            <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_Subscription_Invoice }}</div></a><br>
+
+                        
+                        {% endif %}
+
+                        
+							<a href="{{ sellercoupons }}">
+							{% if seller_coupons_icons %}
+							<img src="image/catalog/dashboardicon/coupons.png"  class="sellerAccountImg"/>
+							{% else %}
+                            <div class="sellerAccountImg"></div>
+							{% endif %}
+							<div class="icons-text">{{ text_sellercoupons }}</div></a><br>
+
+                        
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+{{ footer }}

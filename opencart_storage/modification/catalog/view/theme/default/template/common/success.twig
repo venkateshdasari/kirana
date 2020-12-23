@@ -1,0 +1,42 @@
+{{ header }}
+<div id="common-success" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h1 class="heading">{{ heading_title }}</h1>
+      {% if seller_info_on_order_sucess %}
+	  {{ pts_text_message }}
+	  {% for product in products %}
+		{% if product.seller_id %}
+		 <a href="{{ product.seller_link }}">{{ product.seller_store_name }}</a>
+			{% if product.google_map %} 
+				<a href="{{ product.google_map }}"><p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp {{ product.store_address }}</p></a>
+			{% else %}
+				<p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp {{ product.store_address }}</p>
+			{% endif %}
+		{% else %}
+		 {{ pts_text_store_owner }}
+		{% endif %}		
+	  {% endfor %}
+	  {{ pts_text_thanks }}
+	  {% else %}
+		 {{ text_message }}
+		{% endif %}
+      <div class="buttons">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}

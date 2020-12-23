@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']   = 'Forgot Your Password?';
+$_['cheading_title']   = 'Forgot Your Password?';
 
 // Text
 $_['text_account']    = 'Account';

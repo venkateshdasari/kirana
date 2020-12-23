@@ -12,14 +12,14 @@
   {% endif %}
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
+    {% set class = 'col-md-6 col-sm-8 col-xs-12' %}
     {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
+    {% set class = 'col-md-9 col-sm-8 col-xs-12' %}
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h2>{{ heading_title }}</h2>
+      <h1 class="heading">{{ cheading_title }}</h1>
       {% if products %}
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -55,7 +55,7 @@
         </table>
       </div>
       {% else %}
-      <p>{{ text_empty }}</p>
+      <p>{{ ctext_empty }}</p>
       {% endif %}
       <div class="buttons clearfix">
         <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>

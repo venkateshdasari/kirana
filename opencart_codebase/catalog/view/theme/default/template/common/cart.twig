@@ -1,5 +1,7 @@
-<div id="cart" class="btn-group btn-block">
-  <button type="button" data-toggle="dropdown" data-loading-text="{{ text_loading }}" class="btn btn-inverse btn-block btn-lg dropdown-toggle"><i class="fa fa-shopping-cart"></i> <span id="cart-total">{{ text_items }}</span></button>
+<div id="cart" class="btn-group">
+  <button data-toggle="dropdown" data-loading-text="{{ text_loading }}" class="dropdown-toggle">
+    <img src="image/catalog/carti.png"/><div class="cartco"><span>My cart</span><br><span id="cart-total">{{ text_items }}</span></div>
+  </button>
   <ul class="dropdown-menu pull-right">
     {% if products or vouchers %}
     <li>
@@ -34,12 +36,12 @@
         <table class="table table-bordered">
           {% for total in totals %}
           <tr>
-            <td class="text-right"><strong>{{ total.title }}</strong></td>
+            <td class="text-right">{{ total.title }}</td>
             <td class="text-right">{{ total.text }}</td>
           </tr>
           {% endfor %}
         </table>
-        <p class="text-right"><a href="{{ cart }}"><strong><i class="fa fa-shopping-cart"></i> {{ text_cart }}</strong></a>&nbsp;&nbsp;&nbsp;<a href="{{ checkout }}"><strong><i class="fa fa-share"></i> {{ text_checkout }}</strong></a></p>
+        <p class="text-right"><a href="{{ cart }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> {{ text_cart }}</a>&nbsp;&nbsp;&nbsp;<a href="{{ checkout }}" class="btn btn-primary"><i class="fa fa-share"></i> {{ text_checkout }}</a></p>
       </div>
     </li>
     {% else %}
