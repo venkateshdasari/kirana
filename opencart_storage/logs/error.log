@@ -114,3 +114,27 @@
 2020-12-23 6:28:55 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
 2020-12-23 6:28:55 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
 2020-12-23 6:28:55 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
+2020-12-24 12:26:52 - PHP Warning:  fopen(/bitnami/opencart_storage/cache/cache.catalog.language.1608816412): failed to open stream: No such file or directory in /opt/bitnami/opencart/system/library/cache/file.php on line 49
+2020-12-24 12:26:52 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 51
+2020-12-24 12:26:52 - PHP Warning:  fwrite() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 53
+2020-12-24 12:26:52 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
+2020-12-24 12:26:52 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
+2020-12-24 12:26:52 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
+2020-12-24 12:26:52 - PHP Warning:  fopen(/bitnami/opencart_storage/cache/cache.currency.1608816412): failed to open stream: No such file or directory in /opt/bitnami/opencart/system/library/cache/file.php on line 49
+2020-12-24 12:26:52 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 51
+2020-12-24 12:26:52 - PHP Warning:  fwrite() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 53
+2020-12-24 12:26:52 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
+2020-12-24 12:26:52 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
+2020-12-24 12:26:52 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
+2020-12-24 12:27:53 - PHP Warning:  fopen(/bitnami/opencart_storage/cache/cache.catalog.language.1608816473): failed to open stream: No such file or directory in /opt/bitnami/opencart/system/library/cache/file.php on line 49
+2020-12-24 12:27:53 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 51
+2020-12-24 12:27:53 - PHP Warning:  fwrite() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 53
+2020-12-24 12:27:53 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
+2020-12-24 12:27:53 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
+2020-12-24 12:27:53 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
+2020-12-24 12:27:54 - PHP Warning:  fopen(/bitnami/opencart_storage/cache/cache.currency.1608816474): failed to open stream: No such file or directory in /opt/bitnami/opencart/system/library/cache/file.php on line 49
+2020-12-24 12:27:54 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 51
+2020-12-24 12:27:54 - PHP Warning:  fwrite() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 53
+2020-12-24 12:27:54 - PHP Warning:  fflush() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 55
+2020-12-24 12:27:54 - PHP Warning:  flock() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 57
+2020-12-24 12:27:54 - PHP Warning:  fclose() expects parameter 1 to be resource, bool given in /opt/bitnami/opencart/system/library/cache/file.php on line 59
