@@ -25,3 +25,6 @@ vqmod/mods.cache
 .idea
 .DS_Store
 .vscode
+/opencart_data/admin/config.php
+/opencart_data/config.php
+/docker-compose.yml
