@@ -1,5 +1,5 @@
 <?php
-//tab 
+//tab
 $_['cattab_head']              = 'All Proudcts';
 $_['tab_head']                 = 'Treding products';
 $_['tab_fea']                  = 'Featured';
@@ -67,7 +67,7 @@ $_['button_map']            = 'View Google Map';
 
 // custom
 $_['text_home']            = 'Home';
-$_['text_specials']        = 'Specials';
+$_['text_specials']        = 'Promotions';
 $_['text_blog']            = 'Blogs';
 $_['text_brand']           = 'Brand';
 

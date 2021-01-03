@@ -6,7 +6,6 @@
         {% endfor %}
       </ul>
   <div class="row">
-
     {{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
@@ -16,9 +15,9 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      
+
       {% if thumb or description %}
-      <div class="inspdes"> 
+      <div class="inspdes">
          <h2>{{ heading_title }}</h2>
          {% if description %}
           {{ description }}
@@ -79,19 +78,19 @@
             </select>
           </div>
         </div>
-      </div>   
+      </div>
 		<div class="pts-row row">
 			{% for product in store_categories %}
 				{% if product.subscription_status %}
 					<div class="product-layout product-list col-xs-12">
 						<div class="product-thumb">
-							<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>	
+							<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
 							<div>
 								<div class="caption">
 									<h4><a href="{{ product.href }}">{{ product.store_name }}</a></h4>
 									<p>{{ product.store_address }}</p>
 									<p>{{ product.description }}</p>
-									<p class="price"> 
+									<p class="price">
 										<a href="{{ product.seller_id }}">{{ text_seller_contact }}</a>
 									</p>
 								</div>
@@ -100,13 +99,13 @@
 					</div>
 				{% endif %}
 			{% endfor %}
-		</div>	
+		</div>
 		<div class="pts-row">
 			<div class="col-sm-6 text-left">{{ pagination }}</div>
 			<div class="col-sm-6 text-right">{{ results }}</div>
-		</div>			
+		</div>
 	{% endif %}
-			
+
       {% if products %}
       <div class="row cate-border">
             <div class="col-md-2 col-sm-3 col-xs-3 catebt">
@@ -155,7 +154,7 @@
         <div class="product-layout product-list col-xs-12">
           <div class="product-thumb transition">
       <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive center-block" /></a>
-               
+
                         {% set t = 0 %}
                           {% for insp_image in product.insp_images %}
                           {% if t == 0 %}
@@ -181,9 +180,9 @@
 			<p><a href="{{ product.seller_link }}">{{ text_seller_label }}&nbsp{{ product.seller_name }}</a></p>
 			{% endif %}
 		{% endif %}
-		{% if show_seller_address %}		  
-			{% if product.store_address %}		  
-			  {% if product.google_map %}	
+		{% if show_seller_address %}
+			{% if product.store_address %}
+			  {% if product.google_map %}
 			<a href="{{ product.google_map }}"><p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp{{ product.store_address }}</p></a>
 			{% else %}
 			<p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp{{ product.store_address }}</p>
@@ -196,8 +195,8 @@
           {{ product.price }}
           {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
           {# {% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #} </p>
-        {% endif %} 
-      
+        {% endif %}
+
       <!-- quantity option -->
               <div class="input-group col-xs-12 col-sm-12 qop">
               <label class="control-label col-sm-2 col-xs-2 qlable" for="input-quantity">{{ entry_qty }}</label>
@@ -211,7 +210,7 @@
               alert('Invalid quantity');
               }
               else{
-              cart.add({{ product.product_id }},aqty);  
+              cart.add({{ product.product_id }},aqty);
               }" class="btn btn-primary btn-lg btn-block col-sm-4 pull-right"><i class="fa fa-shopping-basket" aria-hidden="true"></i>
              </button>
              </div>
@@ -222,7 +221,7 @@
         <div class="bquickv" data-toggle="tooltip" title="{{ button_quickview }}"></div>
       </div>
     </div>
-     
+
     </div>
         </div>
         {% endfor %} </div>
@@ -240,4 +239,4 @@
       {{ content_bottom }}</div>
     {{ column_right }}</div>
 </div>
-{{ footer }} 
+{{ footer }}
