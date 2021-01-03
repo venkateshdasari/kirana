@@ -29,4 +29,4 @@ vqmod/mods.cache
 /opencart_data/admin/config.php
 /opencart_data/config.php
 /docker-compose.yml
-./cloudsql-credentials.json
+cloudsql-credentials.json
