@@ -1,7 +1,7 @@
 <?php
 //tab
-$_['cattab_head']              = 'All Proudcts';
-$_['tab_head']                 = 'Treding products';
+$_['cattab_head']              = 'All Products';
+$_['tab_head']                 = 'Trending products';
 $_['tab_fea']                  = 'Featured';
 $_['tab_best']                 = 'BestSeller';
 $_['tab_latest']               = 'Latest';
