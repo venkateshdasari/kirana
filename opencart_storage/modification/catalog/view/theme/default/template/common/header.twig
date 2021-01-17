@@ -309,6 +309,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-5 col-xs-7 header-social">
+
                 <div class="header-social">
                     <div class="socials-block">
 {#                       TODO might need to add few links later #}
@@ -326,11 +327,36 @@
                 </div>
             </div>
             <div id="top-links" class="col-sm-7 col-xs-5 text-right">
+                <ul class="list-inline pull-left visible-xs">
+                    <li>
+                        <a href="{{ contact }}" class="">
+                            <img src="image/catalog/icon-call.png" height="16"/>
+                            <div class="cartco"><span id="cart-total">{{ telephone }}</span></div>
+                        </a>
+                    </li>
+                </ul>
+
                 <ul class="list-inline pull-right">
+
+			{% if (module_purpletree_multivendor_status) and (module_purpletree_multivendor_seller_login) %}
+			{% if sellerlogged %}
+			<li style="float:left;list-style:none;" class="hidden"><span><a class="headadd" href="{{ seller_panel_link }}"><i class="fa fa-user fas fa user-o" aria-hidden="true"></i> <span class="hidden-xs">{{ text_seller_panel }}</span>
+			{% if not totalnotification==0 %}
+				<span style="background: #5bad26;color: #fff;padding: 2px 6px;border-radius: 50%;font-size: 11px;position: relative;font-weight: 600;top: -7px;" class="pts-counting-seller-pannel">{{ totalnotification }}</span>
+			{% endif %}
+			</a></span></li>
+			{% else %}
+			<li style="float:left;list-style:none;" class="hidden"> <span><a class="headadd" id="pts-login-seller" href="{{ seller_register_link }}"><i class="fa fa-user fas fa user-o" aria-hidden="true"></i> <span class="hidden-xs"> {{ text_seller_register }}</span></a></span></li>
+			{% endif %}
+			{% endif %}
+			{% if module_purpletree_multivendor_browse_sellers %}
+			<li style="float:left;list-style:none;padding-left:10px;" class="hidden"> <span><a class="headadd" href="{{ browse_seller_link }}"><i class="fa fa-users" aria-hidden="true"></i> <span class="hidden-xs" >{{ text_browse_sellers }}</span></a></span></li>
+			{% endif %}
+
                     <li class="hidden-sm hidden-xs hidden">
                         <b>COUPON :</b> GROCERY10OFF
                     </li>
-                    <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user hidden-md hidden-lg hidden-sm"></i><span class="hidden-xs">{{ text_account }}</span>&nbsp;<i class="fa fa-angle-down"></i></a>
+                    <li class="dropdown hidden-sm hidden-md hidden-lg"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user hidden-md hidden-lg hidden-sm"></i><span class="hidden-xs">{{ text_account }}</span>&nbsp;<i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right userdown">
                             {% if logged %}
                                 <li><a href="{{ account }}"> <i class="fa fa-address-book-o"></i> {{ text_account }}</a></li>
@@ -370,6 +396,22 @@
                     <div class="cartco"><span>Call us:</span><br><span id="cart-total">{{ telephone }}</span></div>
                 </a>
                 {{ cart }}
+                <span class="dropdown hidden-xs user-link-sm-plus"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;<i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-right userdown">
+                        {% if logged %}
+                            <li><a href="{{ account }}"> <i class="fa fa-address-book-o"></i> {{ text_account }}</a></li>
+                            <li><a href="{{ order }}"> <i class="fa fa-history"></i> {{ text_order }}</a></li>
+                            <li><a href="{{ transaction }}"> <i class="fa fa-retweet"></i> {{ text_transaction }}</a></li>
+                            <li><a href="{{ download }}"> <i class="fa fa-download"></i> {{ text_download }}</a></li>
+                            <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span>{{ text_wishlist }}</span></a></li>
+                            <li><a href="{{ logout }}"> <i class="fa fa-sign-out"></i> {{ text_logout }}</a></li>
+                        {% else %}
+                            <li><a href="{{ register }}"> <i class="fa fa-address-book-o"></i> {{ text_register }}</a></li>
+                            <li><a href="{{ login }}"> <i class="fa fa-sign-in"></i> {{ text_login }}</a></li>
+                            <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"> <i class="fa fa-heart"></i> <span>{{ text_wishlist }}</span></a></li>
+                        {% endif %}
+                    </ul>
+                </span>
             </div>
         </div>
     </div>

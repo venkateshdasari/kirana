@@ -10,13 +10,13 @@ class ControllerAccountOrder extends Controller {
 		$this->load->language('account/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		
+
 		$url = '';
 
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
-		
+
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -28,7 +28,7 @@ class ControllerAccountOrder extends Controller {
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
 		);
-		
+
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/order', $url, true)
@@ -54,10 +54,10 @@ class ControllerAccountOrder extends Controller {
 
 			$data['orders'][] = array(
 				'order_id'   => $result['order_id'],
-				
+
 			'name'       => $result['firstname'] . ' ' . $result['lastname'],
 			'status'     => $this->model_account_order->getUniqueSeller($result['order_id']),
-			
+
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
@@ -96,12 +96,12 @@ class ControllerAccountOrder extends Controller {
 			$direction = $this->language->get('direction');
 		 if ($direction=='rtl'){
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min-a.css');
-			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom-a.css'); 
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom-a.css');
 			}else{
-			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
-			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
+			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css');
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css');
 			}
-			
+
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -294,8 +294,8 @@ $orderd_pro_seller_id = "";
 					$seller_datile['store_id'] = '';
 				}
 				$delivery_address ='';
-				$delivery_address_lat ='';
-				$delivery_address_lon ='';
+				$deliveraddresslon ='';
+				$deliveraddresslat ='';
 				if (defined('QUICK_ORDER') && QUICK_ORDER == 1 ){
 			     $data['quick_order_check'] = QUICK_ORDER;
 				}
@@ -317,7 +317,7 @@ $orderd_pro_seller_id = "";
 														 'admin_order_status_id'    => $pts_order_info['admin_order_status_id'],
 				'seller_order_status' => (!empty($seller_datile['store_name'])?$this->model_account_order->getLatestsellerstatus($this->request->get['order_id'], $orderd_pro_seller_id):'')
 															);
-				
+
 
 				if ($product_info) {
 					$reorder = $this->url->link('account/order/reorder', 'order_id=' . $order_id . '&order_product_id=' . $product['order_product_id'], true);
@@ -366,11 +366,11 @@ $orderd_pro_seller_id = "";
 if($total['title'] == 'Refunded'){
 					$ids = array();
 					$return_seller_store_name = "";
-					$ids = explode('_',$total['code']);						
+					$ids = explode('_',$total['code']);
 					$seller_idd = $ids[1];
 					$sellerdd = $this->model_account_order->getsellerInfofororder($seller_idd);
-						$return_seller_store_name  = $sellerdd['store_name'];					
-					$final_title = $total['title']." "."(".($return_seller_store_name).")";		
+						$return_seller_store_name  = $sellerdd['store_name'];
+					$final_title = $total['title']." "."(".($return_seller_store_name).")";
 				}else{
 					$final_title = $total['title'];
 				}
@@ -389,7 +389,7 @@ if($total['title'] == 'Refunded'){
 
 			$data['storesstatus'] = $storesstatus;
 				$data['column_updated_by'] = "Updated By";
-			$resultssellers = 
+			$resultssellers =
 			$this->model_account_order->getSellerOrderHistories($this->request->get['order_id']);
 			foreach ($resultssellers as $result1) {
 			$data['histories'][] = array(
@@ -400,16 +400,16 @@ if($total['title'] == 'Refunded'){
 					'updated_by' => $this->model_account_order->getStoreName($result1['seller_id'])
 				);
 			}
-			
+
 
 			foreach ($results as $result) {
-				
-			$product22[0]['product_name'] = "All"; 
+
+			$product22[0]['product_name'] = "All";
 			$data['histories'][] = array(
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'product_name' => $product22,
 					'updated_by' => "Admin",
-			
+
 					'status'     => $result['status'],
 					'comment'    => $result['notify'] ? nl2br($result['comment']) : ''
 				);
@@ -419,7 +419,7 @@ if($total['title'] == 'Refunded'){
 			 usort($data['histories'], function($a, $b) {
 			  return ($a['date_added'] < $b['date_added']) ? -1 : 1;
 			});
-			
+
 			$data['continue'] = $this->url->link('account/order', '', true);
 /////quick order ////////
 			$data['customer_manage_order'] = $this->config->get('module_purpletree_multivendor_customer_manage_order');
@@ -441,23 +441,23 @@ if($total['title'] == 'Refunded'){
 				$allow_order_statuse1[$value]='selected';
 			}
 			}
-			
+
 			foreach($data['order_statuses1'] as $key => $value){
 			    $allow_order_statuse4 ='';
 				if(isset($allow_order_statuse1[$value['order_status_id']])){
 				   $allow_order_statuse4= 'selected';
-					}	
-				if($allow_order_statuse4 == 'selected'){	
+					}
+				if($allow_order_statuse4 == 'selected'){
 			    $data['order_statuses'][] = array(
 				'order_status_id' => $value['order_status_id'],
 				'name' => $value['name']
 				);
-				
+
 				}
-			}	
-			$data['button_change_status'] = $this->language->get('button_change_status');	
-			$data['text_change_order_status'] = $this->language->get('text_change_order_status');	
-		
+			}
+			$data['button_change_status'] = $this->language->get('button_change_status');
+			$data['text_change_order_status'] = $this->language->get('text_change_order_status');
+
 			//// end quick order ////
 
 			$data['column_left'] = $this->load->controller('common/column_left');
@@ -476,13 +476,13 @@ if($total['title'] == 'Refunded'){
 	///quick order///
     public function changeStatus() {
 			$this->load->language('purpletree_multivendor/sellerorder');
-			
+
 			$this->load->model('extension/purpletree_multivendor/dashboard');
-			
+
 			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
-			
+
 			$json = array();
-			
+
 			/* if (!isset($this->session->data['api_id'])) {
 				$json['error'] = $this->language->get('error_permission');
 			} else { */
@@ -493,15 +493,15 @@ if($total['title'] == 'Refunded'){
 			'override',
 			'comment'
 			);
-			
+
 			foreach ($keys as $key) {
 				if (!isset($this->request->post[$key])) {
 					$this->request->post[$key] = '';
 				}
 			}
-			
+
 			$this->load->model('extension/purpletree_multivendor/sellerorder');
-			
+
 			if (isset($this->request->get['order_id'])) {
 				$order_id = $this->request->get['order_id'];
 				} else {
@@ -509,25 +509,25 @@ if($total['title'] == 'Refunded'){
 			}
 			if (isset($this->request->post['seller_id'])) {
 				$seller_id = $this->request->post['seller_id'];
-				} 
+				}
 			$order_info = $this->model_extension_purpletree_multivendor_sellerorder->getOrder($order_id,$seller_id);
-			
+
 			if ($order_info) {
 				$this->model_extension_purpletree_multivendor_sellerorder->addOrderHistory($order_id,$seller_id, $this->request->post['order_status_id'], $this->request->post['comment'], $this->request->post['notify'], $this->request->post['override']);
-				
+
 				$json['success'] = $this->language->get('text_success');
 				} else {
 				$json['error'] = $this->language->get('error_not_found');
 			}
 			//}
-			
+
 			if (isset($this->request->server['HTTP_ORIGIN'])) {
 				$this->response->addHeader('Access-Control-Allow-Origin: ' . $this->request->server['HTTP_ORIGIN']);
 				$this->response->addHeader('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 				$this->response->addHeader('Access-Control-Max-Age: 1000');
 				$this->response->addHeader('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 			}
-			
+
 			$this->response->addHeader('Content-Type: application/json');
 			$this->response->setOutput(json_encode($json));
 		}

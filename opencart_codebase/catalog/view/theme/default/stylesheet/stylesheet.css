@@ -343,6 +343,11 @@ header{
 	color: #ffffff;
 	background-color: #229ac8;
 }
+header .user-link-sm-plus .fa-user{
+	font-size: 25px;
+	vertical-align: middle;
+	margin-left: 5px;
+}
 @media (min-width: 768px) {
 	#menu .dropdown:hover .dropdown-menu {
 		display: block;
@@ -887,7 +892,6 @@ h2.price {
     display: inline-block;
     vertical-align: middle;
     text-align: left;
-    margin-left: 7px;
 }
 /* Search-category */
 .sblock{
@@ -973,7 +977,7 @@ h2.price {
 	color: #fff;
 	border: 1px solid #2a3746;
 }
-#text-search { 
+#text-search {
 	width: 100%;
 	border: 1px solid #eee;
 	height: 40px;
@@ -1549,7 +1553,7 @@ span.cartcount {
 	min-width: 47px;
     margin: 0 5px;
     padding: 5px 5px 5px;
-    background: #f2f2f2;    
+    background: #f2f2f2;
     border:1px solid #ddd;
     display: inline-block;
     border-radius:0px;
@@ -2318,10 +2322,10 @@ footer .footcontact .f-left li i {
     color: #fff;
 }
 .logo-slider {
-    margin-top: 45px;    
+    margin-top: 45px;
     border: 1px solid #eee;
     border-radius: 2px;
-    padding: 10px 0;    
+    padding: 10px 0;
 }
 #carousel0.owl-carousel{
 	background-color: transparent !important;
@@ -3072,7 +3076,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{
 	}
 	#menu .dropdown-inner a {
     	min-width: 173px;
-	}	
+	}
 }
 @media(max-width: 767px){
 	.col-md-3.block-cat-wr.col-xs-12 {
@@ -3276,7 +3280,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{
 	}
 	.foot-app img {
     	margin: 12px 0 8px 0px;
-	}	
+	}
 	/* sidenav */
 	body.active {
 	    overflow: hidden;
@@ -3361,7 +3365,14 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{
 	}
 	#menu{
 	    position: absolute;
-    	top: -137px;	
+    	top: -50px;
+	}
+	#menu .fa-bars {
+		font-size: 40px;
+		font-weight: bold;
+	}
+	#search {
+		margin-left: 50px;
 	}
 	.allmenu {
     	background-color: transparent;
@@ -3458,7 +3469,7 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{
     .banner-effect {
         position: relative;
         overflow: hidden;
-    } 
+    }
 }
 /* banner effect */
 /*loader start */
@@ -3577,14 +3588,14 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover{
 		margin-top: 14px;
 	}
 	#top-links .dropdown-menu,#cart .dropdown-menu{
-	right:-0px;		
+	right:-0px;
 	}
 	#top-links .open .dropdown-menu, #cart.open .dropdown-menu{
 		margin-top: 0 !important;
 	}
 	.service li{
 		display: inline-block;
-	}	
+	}
 	.service ul{
 		padding: 6px 0px;
 	}
