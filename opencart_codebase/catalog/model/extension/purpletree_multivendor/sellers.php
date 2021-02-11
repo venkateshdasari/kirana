@@ -1,7 +1,8 @@
 <?php
 class ModelExtensionPurpletreeMultivendorSellers extends Model{
 		public function getSellerstotal($data= array()){
-			$sql = "SELECT pvs.*,(SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = pvs.seller_id) AS seller,(SELECT co.name FROM " . DB_PREFIX . "country co WHERE co.country_id = pvs.store_country) AS seller_country FROM " . DB_PREFIX . "purpletree_vendor_stores pvs RIGHT JOIN " . DB_PREFIX . "customer c  ON (pvs.seller_id = c.customer_id) WHERE pvs.multi_store_id='".(int)$this->config->get('config_store_id') ."' AND pvs.store_status='1'";
+			$store_id=(int)$this->config->get('config_store_id');
+			$sql = "SELECT pvs.*,(SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = pvs.seller_id) AS seller,(SELECT co.name FROM " . DB_PREFIX . "country co WHERE co.country_id = pvs.store_country) AS seller_country FROM " . DB_PREFIX . "purpletree_vendor_stores pvs RIGHT JOIN " . DB_PREFIX . "customer c  ON (pvs.seller_id = c.customer_id) WHERE FIND_IN_SET('".$store_id."',pvs.multi_store_id) AND pvs.store_status='1'";
 			if(!empty($data['filter'])){
 				$sql .=" HAVING pvs.store_name LIKE '%" . $this->db->escape($data['filter']) . "%'";
 			}
@@ -12,10 +13,12 @@ class ModelExtensionPurpletreeMultivendorSellers extends Model{
 			if($this->config->get('module_purpletree_multivendor_hyperlocal_status')){
 			if((isset($this->session->data['seller_area'])&& ($this->session->data['seller_area'] > 0))){
 					$current_area = $this->session->data['seller_area'];
-					foreach($query ->rows as $key =>$value){
+					foreach($query->rows as $key =>$value){
+						 $assign_area = array();
 					if($value['store_area'] != ''){
 						 $assign_area = unserialize($value['store_area']);	
-						 if(in_array($current_area,$assign_area)){
+					}
+						 if(empty($assign_area) || in_array($current_area,$assign_area)){
 						     $area_seller[$key]=array(
 						   'id' => $value['id'],
 						   'seller_id' => $value['seller_id'],
@@ -61,7 +64,7 @@ class ModelExtensionPurpletreeMultivendorSellers extends Model{
 						   'seller_country' => $value['seller_country']
 						   );
 						 }
-					    }
+					    
 						 }
 						}else{ 
 						$area_seller = $query->rows;
@@ -77,10 +80,11 @@ class ModelExtensionPurpletreeMultivendorSellers extends Model{
 			$sort_data = array(
 			'seller'
 			); 
+			$store_id=(int)$this->config->get('config_store_id');
 			if($this->config->get('module_purpletree_multivendor_subscription_plans')){
-			$sql = "SELECT pvs.*,(SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = pvs.seller_id) AS seller,(SELECT co.name FROM " . DB_PREFIX . "country co WHERE co.country_id = pvs.store_country) AS seller_country FROM " . DB_PREFIX . "purpletree_vendor_stores pvs RIGHT JOIN " . DB_PREFIX . "customer c  ON (pvs.seller_id = c.customer_id) RIGHT JOIN " . DB_PREFIX . "purpletree_vendor_seller_plan pvsp  ON (pvs.seller_id = pvsp.seller_id AND pvsp.status=1 ) LEFT JOIN " . DB_PREFIX . "purpletree_vendor_plan_invoice pvpi ON (pvpi.invoice_id = pvsp.invoice_id) WHERE pvs.multi_store_id='".(int)$this->config->get('config_store_id') ."' AND pvs.store_status='1'";
+			$sql = "SELECT pvs.*,(SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = pvs.seller_id) AS seller,(SELECT co.name FROM " . DB_PREFIX . "country co WHERE co.country_id = pvs.store_country) AS seller_country FROM " . DB_PREFIX . "purpletree_vendor_stores pvs RIGHT JOIN " . DB_PREFIX . "customer c  ON (pvs.seller_id = c.customer_id) RIGHT JOIN " . DB_PREFIX . "purpletree_vendor_seller_plan pvsp  ON (pvs.seller_id = pvsp.seller_id AND pvsp.status=1 ) LEFT JOIN " . DB_PREFIX . "purpletree_vendor_plan_invoice pvpi ON (pvpi.invoice_id = pvsp.invoice_id) WHERE FIND_IN_SET('".$store_id."',pvs.multi_store_id) AND pvs.store_status='1'";
 			}else{
-			$sql = "SELECT pvs.*,(SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = pvs.seller_id) AS seller,(SELECT co.name FROM " . DB_PREFIX . "country co WHERE co.country_id = pvs.store_country) AS seller_country FROM " . DB_PREFIX . "purpletree_vendor_stores pvs RIGHT JOIN " . DB_PREFIX . "customer c  ON (pvs.seller_id = c.customer_id) WHERE pvs.multi_store_id='".(int)$this->config->get('config_store_id') ."' AND pvs.store_status='1'";
+			$sql = "SELECT pvs.*,(SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = pvs.seller_id) AS seller,(SELECT co.name FROM " . DB_PREFIX . "country co WHERE co.country_id = pvs.store_country) AS seller_country FROM " . DB_PREFIX . "purpletree_vendor_stores pvs RIGHT JOIN " . DB_PREFIX . "customer c  ON (pvs.seller_id = c.customer_id) WHERE FIND_IN_SET('".$store_id."',pvs.multi_store_id) AND pvs.store_status='1'";
 			}
 			if(!empty($data['filter'])){
 				$sql .=" HAVING pvs.store_name LIKE '%" . $this->db->escape($data['filter']) . "%'";
@@ -118,9 +122,11 @@ class ModelExtensionPurpletreeMultivendorSellers extends Model{
 			        $assign_area = array();
 					$current_area = $this->session->data['seller_area'];
 					foreach($query ->rows as $key =>$value){
+						$assign_area = array();
 					    if($value['store_area'] != ''){
 						 $assign_area = unserialize($value['store_area']);	
-						 if(in_array($current_area,$assign_area)){
+						}
+						 if(empty($assign_area) || in_array($current_area,$assign_area)){
 						   $area_seller[$key]=array(
 						   'id' => $value['id'],
 						   'seller_id' => $value['seller_id'],
@@ -166,7 +172,7 @@ class ModelExtensionPurpletreeMultivendorSellers extends Model{
 						   'seller_country' => $value['seller_country']
 						   );
 						 }
-						}
+						
 						 }
 						}else{ 
 						$area_seller = $query->rows;
@@ -239,10 +245,36 @@ class ModelExtensionPurpletreeMultivendorSellers extends Model{
 		
 		public function getProducts($data= array()){
 			
-			$sql = "SELECT p.image, p.product_id FROM " . DB_PREFIX . "purpletree_vendor_products pvp JOIN " . DB_PREFIX . "product p ON(p.product_id=pvp.product_id) WHERE pvp.is_approved='1' AND p.date_available <= NOW() AND p.status ='1'";
+			$sql = "SELECT p.image, p.product_id FROM " . DB_PREFIX . "purpletree_vendor_products pvp JOIN " . DB_PREFIX . "product p ON(p.product_id=pvp.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND pvp.is_approved='1' AND p.date_available <= NOW() AND p.status ='1'";
 			
 			if(!empty($data['seller_id'])){
 				$sql .= " AND pvp.seller_id ='".(int)$data['seller_id']."'";
+			}
+			
+			if (isset($data['start']) || isset($data['limit'])) {
+				if ($data['start'] < 0) {
+					$data['start'] = 0;
+				}
+				
+				if ($data['limit'] < 1) {
+					$data['limit'] = 20;
+				}
+				
+				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+			}
+			
+			
+			$query = $this->db->query($sql);
+			
+			return $query->rows;
+		}
+		
+	public function getTemplateProducts($data= array()){
+			
+			$sql = "SELECT p.image, p.product_id FROM " . DB_PREFIX . "purpletree_vendor_template_products pvtp LEFT JOIN " . DB_PREFIX . "purpletree_vendor_template pvt ON(pvtp.template_id=pvt.id) LEFT JOIN " . DB_PREFIX . "product p ON(pvt.product_id=p.product_id) WHERE pvtp.status='1' AND pvt.status= '1' AND p.status ='1'";
+			
+			if(!empty($data['seller_id'])){
+				$sql .= " AND pvtp.seller_id ='".(int)$data['seller_id']."'";
 			}
 			
 			if (isset($data['start']) || isset($data['limit'])) {

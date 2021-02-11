@@ -27,3 +27,8 @@ $_['text_contact_message'] 	=	"Запрос со страницы";
 //button
 $_['button_view_all'] ='посмотреть все';
 $_['button_submit'] ='Отправить';
+
+$_['text_files'] ='Файлы';
+$_['text_attach_file'] ='Прикрепить файл';
+$_['text_upload_file'] ='Загрузить файл';
+$_['text_action'] ='Действие';

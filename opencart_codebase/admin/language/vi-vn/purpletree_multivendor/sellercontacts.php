@@ -29,3 +29,4 @@ $_['text_delete_success'] 	=	"Yêu cầu đã được xoá thành công.";
 //button		
 		
 $_['button_continue'] 	=	"Tiếp tục";
+$_['text_files'] ='Các tập tin';

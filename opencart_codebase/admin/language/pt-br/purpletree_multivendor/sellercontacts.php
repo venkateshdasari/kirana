@@ -29,3 +29,4 @@ $_['text_delete_success'] 	=	"O inquérito foi eliminado com êxito.";
 //button		
 
 $_['button_continue'] 	=	"Continuar";
+$_['text_files'] ='arquivos';

@@ -46,10 +46,10 @@ $_['text_seller_label_status'] = "Status:";
 $_['button_deliver'] = "Bezorgen";
 $_['button_change_status'] = "Verander status";
 $_['text_change_order_status'] = "Wijzig orderstatus";
-$_['pts_text_customer'] = "<p> Uw bestelling is succesvol verwerkt! </p> <p> U kunt uw bestelgeschiedenis bekijken door naar de <a href="%s"> mijn account </ a > pagina en door op <a href="%s"> geschiedenis </a> te klikken. </p> <p> Als uw aankoop een bijbehorende download heeft, kunt u naar het account gaan <a href = "%s" > downloads </a> om ze te bekijken. </p> <p> Stel alle vragen die u heeft aan de ";
+$_['pts_text_customer'] = '<p> Uw bestelling is succesvol verwerkt! </p> <p> U kunt uw bestelgeschiedenis bekijken door naar de <a href="%s"> mijn account </ a > pagina en door op <a href="%s"> geschiedenis </a> te klikken. </p> <p> Als uw aankoop een bijbehorende download heeft, kunt u naar het account gaan <a href = "%s" > downloads </a> om ze te bekijken. </p> <p> Stel alle vragen die u heeft aan de ';
 $_['pts_text_guest'] = "<p> Uw bestelling is succesvol verwerkt! </p> <p> Stel al uw vragen aan de";
 $_['pts_text_thanks'] = "</p> <p> Bedankt voor het online winkelen bij ons! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> winkeleigenaar </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> winkeleigenaar </a>.';
 $_['column_delivery_address'] = "Afleveradres";
 //// snel_bestelling beëindigen ////
 

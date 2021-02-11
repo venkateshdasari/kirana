@@ -19,4 +19,5 @@ $_['error_permission'] = 'Amaran: Anda tidak mempunyai kebenaran untuk memodifik
 $_['error_name']       = 'Nama Modul mestilah antara 3 dan 128 aksara!';
 $_['error_width']      = 'Lebar diperlukan!';
 $_['error_height']     = 'Ketinggian diperlukan!';
+$_['error_limit']     = 'Had diperlukan!';
 ?>

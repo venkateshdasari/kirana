@@ -26,3 +26,8 @@ $_['text_contact_message'] = 'Vraag is verstuurd';
 //button
 $_['button_view_all'] ='Bekijk alles';
 $_['button_submit'] ='voorleggen';
+
+$_['text_files'] ='Bestanden';
+$_['text_attach_file'] ='Bijlage';
+$_['text_upload_file'] ='Upload bestand';
+$_['text_action'] ='Actie';

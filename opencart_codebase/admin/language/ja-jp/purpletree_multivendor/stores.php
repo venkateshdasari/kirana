@@ -197,3 +197,6 @@ $_['entry_sellerarea'] = "セラーエリア";
 $_['help_sellerarea'] = "（オートコンプリート）";
 $_['text_all_sellerarea'] = "すべて";
 $_['text_selected_sellerarea'] = "選択済み";
+
+$_['entry_multi_store']     = 'Opencartストア';
+$_['entry_assign_stores']    = 'Opencartストアを割り当てる';

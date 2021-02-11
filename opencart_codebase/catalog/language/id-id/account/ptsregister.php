@@ -46,10 +46,10 @@ $_['text_seller_label_status'] = "Status:";
 $_['button_deliver'] = "Kirim";
 $_['button_change_status'] = "Ubah Status";
 $_['text_change_order_status'] = "Ubah status pesanan";
-$_['pts_text_customer'] = "<p> Pesanan Anda telah berhasil diproses! </p> <p> Anda dapat melihat riwayat pesanan Anda dengan membuka <a href="%s"> akun saya </ a > halaman dan dengan mengklik <a href="%s"> histori </a>. </p> <p> Jika pembelian Anda memiliki download terkait, Anda dapat membuka akun <a href = "% s" > unduhan </a> untuk melihatnya. </p> <p> Harap arahkan pertanyaan apa pun yang Anda miliki ke ";
+$_['pts_text_customer'] = '<p> Pesanan Anda telah berhasil diproses! </p> <p> Anda dapat melihat riwayat pesanan Anda dengan membuka <a href="%s"> akun saya </ a > halaman dan dengan mengklik <a href="%s"> histori </a>. </p> <p> Jika pembelian Anda memiliki download terkait, Anda dapat membuka akun <a href = "% s" > unduhan </a> untuk melihatnya. </p> <p> Harap arahkan pertanyaan apa pun yang Anda miliki ke ';
 $_['pts_text_guest'] = "<p> Pesanan Anda telah berhasil diproses! </p> <p> Harap ajukan pertanyaan yang Anda miliki ke";
 $_['pts_text_thanks'] = "</p> <p> Terima kasih telah berbelanja dengan kami secara online! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> pemilik toko </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> pemilik toko </a>.';
 $_['column_delivery_address'] = "Alamat Pengiriman";
 //// end_quick_order ////
 

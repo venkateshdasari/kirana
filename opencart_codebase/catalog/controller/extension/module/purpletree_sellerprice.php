@@ -1,10 +1,6 @@
 <?php
 class ControllerExtensionModulePurpletreeSellerprice extends Controller {
 		public function index() {
-		    $this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
-		    $this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom-a.css'); 
-		    $this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min-a.css');
-		    $this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
 			if($this->config->get('module_purpletree_multivendor_seller_product_template')){
 				if (strpos($this->config->get('config_template'), 'journal2') === 0){
 					$data['journal2'] = 1;
@@ -61,6 +57,7 @@ class ControllerExtensionModulePurpletreeSellerprice extends Controller {
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
 			}
+			$this->document->addStyle('catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css');
 							return $this->load->view('extension/module/purpletree_sellerprice', $data);
 						}
 						

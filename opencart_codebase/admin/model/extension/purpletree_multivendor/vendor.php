@@ -192,7 +192,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 		}
 		
 		public function addSeller($customer_id,$store_name,$filename = ''){
-			$this->db->query("INSERT into " . DB_PREFIX . "purpletree_vendor_stores SET seller_id ='".(int)$customer_id."', store_name='".$this->db->escape($store_name)."', store_status='1',store_created_at= NOW(), store_updated_at= NOW()");
+			$this->db->query("INSERT into " . DB_PREFIX . "purpletree_vendor_stores SET seller_id ='".(int)$customer_id."', store_name='".$this->db->escape($store_name)."', store_status='1', multi_store_id='".(int)($this->config->get('config_store_id'))."',store_created_at= NOW(), store_updated_at= NOW()");
 		}
 		
 		public function editSeller($customer_id,$store_name,$become_seller,$filename = ''){
@@ -207,7 +207,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 				$this->db->query("UPDATE " . DB_PREFIX . "purpletree_vendor_stores SET store_name='".$this->db->escape($store_name)."', store_status='".(int)$seller_status."', is_removed='".(int)$is_removed."', store_updated_at= NOW() WHERE seller_id='".(int)$customer_id."'");
 				} else {
 				if($become_seller=="1"){
-					$this->db->query("INSERT into " . DB_PREFIX . "purpletree_vendor_stores SET seller_id ='".(int)$customer_id."', store_name='".$this->db->escape($store_name)."', store_status='1',store_created_at= NOW(), store_updated_at= NOW()");
+					$this->db->query("INSERT into " . DB_PREFIX . "purpletree_vendor_stores SET seller_id ='".(int)$customer_id."', store_name='".$this->db->escape($store_name)."', multi_store_id='".(int)($this->config->get('config_store_id'))."',store_status='1',store_created_at= NOW(), store_updated_at= NOW()");
 				}
 			}
 		}

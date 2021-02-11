@@ -24,3 +24,4 @@ $_['text_delete_success'] 	=	"  تم حذف الاستفسار بنجاح.";
 
 //button	
 $_['button_continue'] 	=	"  استمر";
+$_['text_files'] ='الملفات';

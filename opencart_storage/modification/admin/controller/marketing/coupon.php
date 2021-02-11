@@ -349,7 +349,7 @@ class ControllerMarketingCoupon extends Controller {
 						if (isset($this->request->post['seller_name'])) {
 			$data['seller_name'] = $this->request->post['seller_name'];
 		} elseif (!empty($coupon_info)) {
-			$data['seller_name'] = $coupon_info['seller_name'];
+			$data['seller_name'] = $coupon_info['store_name'];
 		} else {
 			$data['seller_name'] = '';
 		}	

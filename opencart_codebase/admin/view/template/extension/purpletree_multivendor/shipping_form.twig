@@ -124,7 +124,7 @@
 		$('input[name=\'filter_name\']').autocomplete({
 			'source': function(request, response) {
 				$.ajax({
-					url: 'index.php?route=extension/purpletree_multivendor/shipping/autocompleteseller&user_token={{ user_token }}',
+					url: 'index.php?route=extension/purpletree_multivendor/shipping/autocompleteseller&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
 					dataType: 'json',	
 					success: function(json) {
 						response($.map(json, function(item) {
@@ -146,12 +146,5 @@
 		
 		
 	//--></script> 
-	<style>
-		.catdivdrop ul{
-		overflow: auto;
-		max-height: 100px;
-		width: 30%;
-		}
-	</style>
 </div>
 {{ footer }} 

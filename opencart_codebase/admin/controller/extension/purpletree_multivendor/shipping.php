@@ -123,6 +123,7 @@ class ControllerExtensionPurpletreeMultivendorShipping extends Controller {
 		
 		
 		protected function getList() {
+		    $this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
 				} else {
@@ -413,6 +414,7 @@ class ControllerExtensionPurpletreeMultivendorShipping extends Controller {
 		}
 		
 		protected function getForm() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (!isset($this->request->get['shipping_id'])) {
 			$data['text_form'] = $this->language->get('text_add');
 			}else{
@@ -674,11 +676,21 @@ class ControllerExtensionPurpletreeMultivendorShipping extends Controller {
 		
 		
 		public function autocompleteseller() {
+			if (isset($this->request->get['filter_name'])) {
+					$filter_name = $this->request->get['filter_name'];
+					} else {
+					$filter_name = '';
+				}				
+				$filter_data = array(
+				'filter_name'  => $filter_name
+				//'limit'        => 5
+				);
 			$this->load->language('purpletree_multivendor/shipping');
 			$this->load->language('purpletree_multivendor/stores');
 			$text_n_a = $this->language->get('text_n_a');
 			$text_all = $this->language->get('text_all');
 			$json = array();
+			if (!isset($this->request->get['filter_name']) || $this->request->get['filter_name'] == '') {
 			$json1[] = array(
 			'vendor_id'       => -1,
 			'name'              => $text_all,
@@ -688,8 +700,9 @@ class ControllerExtensionPurpletreeMultivendorShipping extends Controller {
 			'name'              => $text_n_a
 			);
 			$json = array_merge($json1,$json2);
+			}
 			$this->load->model('extension/purpletree_multivendor/shipping');
-			$results = $this->model_extension_purpletree_multivendor_shipping->getSellers();
+			$results = $this->model_extension_purpletree_multivendor_shipping->getSellers($filter_data);
 			foreach ($results as $result) {
 				$json[] = array(
 				'vendor_id'       => $result['seller_id'],

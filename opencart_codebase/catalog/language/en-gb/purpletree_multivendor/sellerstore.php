@@ -64,7 +64,7 @@ $_['entry_order_wise']      = 'Order-wise';
 $_['entry_storeshipping']      = 'Store Shipping Charge';
 $_['entry_storeseo']      = 'SEO URL For Store';
 $_['entry_allow_live_chat']  = 'Allow Tawk.to Live Chat';
-$_['entry_live_chat_code']  = 'Tawk.to Chat ID'; 
+$_['entry_live_chat_code']  = 'Tawk.to Widget Code'; 
 $_['entry_seller_paypal_id']      = 'PayPal E-Mail ID';//PayPal
 
 //tab

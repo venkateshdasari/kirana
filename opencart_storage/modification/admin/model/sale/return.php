@@ -39,9 +39,9 @@ if ($this->config->get('module_purpletree_multivendor_status')) {
 				if($query2->num_rows){
 					$order_total = $query2->row['order_total_id'];
 					
-					$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET order_id = '" . (int)$data['order_id'] . "', seller_id = '" . (int)$seller_id_returnn . "', code = 'refunded_".$product_id."', title  = 'Refunded', value = '" . (int)$product_price . "', sort_order = 8 WHERE order_total_id='".(int)$order_total ."'");
+					$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET order_id = '" . (int)$data['order_id'] . "', seller_id = '" . (int)$seller_id_returnn . "', code = 'refunded_".$product_id."', title  = 'Refunded', value = '" . (float)$product_price . "', sort_order = 8 WHERE order_total_id='".(int)$order_total ."'");
 				} else {
-					$this->db->query("INSERT INTO `" . DB_PREFIX . "purpletree_order_total` SET order_id = '" . (int)$data['order_id'] . "', seller_id = '" . (int)$seller_id_returnn . "', code = 'refunded_".$product_id."', title  = 'Refunded', value = '" . (int)$product_price . "', sort_order = 8");
+					$this->db->query("INSERT INTO `" . DB_PREFIX . "purpletree_order_total` SET order_id = '" . (int)$data['order_id'] . "', seller_id = '" . (int)$seller_id_returnn . "', code = 'refunded_".$product_id."', title  = 'Refunded', value = '" . (float)$product_price . "', sort_order = 8");
 				}
 				  
 					// order_total
@@ -64,9 +64,9 @@ if ($this->config->get('module_purpletree_multivendor_status')) {
 						$id_codes = implode('_',$id_code);
                 
 						if($seller_id_returnn == $seller_idd && $product_id == $data['product_id']) { 
-						  $this->db->query("UPDATE `" . DB_PREFIX . "order_total` SET order_id = '" . (int)$data['order_id'] . "', code = '" . (int)$ids . "', title  = 'Refunded', value = '" . (int)$product_price . "', sort_order = 8 WHERE order_total_id='".(int)$order_total ."'");
+						  $this->db->query("UPDATE `" . DB_PREFIX . "order_total` SET order_id = '" . (int)$data['order_id'] . "', code = '" . (int)$ids . "', title  = 'Refunded', value = '" . (float)$product_price . "', sort_order = 8 WHERE order_total_id='".(int)$order_total ."'");
 						} else {
-							$this->db->query("INSERT INTO `" . DB_PREFIX . "order_total` SET order_id = '" . (int)$data['order_id'] . "', code = '" . $this->db->escape($id_codes). "', title  = 'Refunded', value = '" . (int)$product_price . "', sort_order = 8");
+							$this->db->query("INSERT INTO `" . DB_PREFIX . "order_total` SET order_id = '" . (int)$data['order_id'] . "', code = '" . $this->db->escape($id_codes). "', title  = 'Refunded', value = '" . (float)$product_price . "', sort_order = 8");
 							
 						}
 					} else {
@@ -77,7 +77,7 @@ if ($this->config->get('module_purpletree_multivendor_status')) {
 							'2' => $data['product_id']						
 						);
 						$id_codes = implode('_',$id_code);
-						$this->db->query("INSERT INTO `" . DB_PREFIX . "order_total` SET order_id = '" . (int)$data['order_id'] . "', code = '" . $this->db->escape($id_codes). "', title  = 'Refunded', value = '" . (int)$product_price . "', sort_order = 8");
+						$this->db->query("INSERT INTO `" . DB_PREFIX . "order_total` SET order_id = '" . (int)$data['order_id'] . "', code = '" . $this->db->escape($id_codes). "', title  = 'Refunded', value = '" . (float)$product_price . "', sort_order = 8");
 					}
 					// order_total
 			}
@@ -130,7 +130,7 @@ if ($this->config->get('module_purpletree_multivendor_status')) {
 						
 			    $total_after_refund = $total_value + $total_refund;	
 			 
-				$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET value = '" . (int)$total_after_refund . "' WHERE order_total_id='". (int)$order_total_id ."'");
+				$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET value = '" . (float)$total_after_refund . "' WHERE order_total_id='". (int)$order_total_id ."'");
 				
 				$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_vendor_orders` SET  	total_price  = '" . (int)$total_after_refund . "' WHERE order_id = '" . (int)$data['order_id'] . "' AND seller_id = '".(int)$seller_id_return."' AND product_id = '" . (int)$data['product_id'] . "'");
 				
@@ -151,7 +151,7 @@ if ($this->config->get('module_purpletree_multivendor_status')) {
 	
 				$total_after_refundd = $total_valuee + $total_refundd;				
 				
-				$this->db->query("UPDATE `" . DB_PREFIX . "order_total` SET value = '" . (int)$total_after_refundd . "' WHERE order_total_id='". (int)$order_total_idd ."'");	
+				$this->db->query("UPDATE `" . DB_PREFIX . "order_total` SET value = '" . (float)$total_after_refundd . "' WHERE order_total_id='". (int)$order_total_idd ."'");	
                 			
 			    $this->db->query("UPDATE `" . DB_PREFIX . "purpletree_vendor_products_return` SET status = 2, modified_date = NOW() WHERE return_id = '" . (int)$return_id . "'");
 		}

@@ -168,7 +168,7 @@ $_['entry_allow_live_chat']  = 'Allow Tawk.to Live Chat';
 $_['entry_vacation']  = 'Vacation Mode';
 $_['entry_yes']  = 'Yes';
 $_['entry_no']  = 'No';
-$_['entry_live_chat_code']  = 'Tawk.to Chat ID';
+$_['entry_live_chat_code']  = 'Tawk.to Widget Code';
 
 //social
 $_['entry_facebook']  = 'Facebook Link';
@@ -191,3 +191,6 @@ $_['entry_sellerarea']       = 'Seller Areas';
 $_['help_sellerarea']       = '(Autocomplete)';
 $_['text_all_sellerarea']       = 'All';
 $_['text_selected_sellerarea']       = 'Selected';
+
+$_['entry_multi_store']     = 'Opencart Stores';
+$_['entry_assign_stores']    = 'Assign Opencart Stores';

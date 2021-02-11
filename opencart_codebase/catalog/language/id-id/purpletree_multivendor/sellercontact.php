@@ -26,3 +26,8 @@ $_['text_contact_message'] 	=	"Permintaan diajukan dari halaman";
 //button
 $_['button_view_all'] ='Lihat semua';
 $_['button_submit'] ='Menyerahkan';
+
+$_['text_files'] ='File';
+$_['text_attach_file'] ='Lampirkan file';
+$_['text_upload_file'] ='Unggah data';
+$_['text_action'] ='Tindakan';

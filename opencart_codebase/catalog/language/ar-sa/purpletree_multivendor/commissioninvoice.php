@@ -4,7 +4,7 @@ $_['heading_title']		= 'فاتورة عمولة';
 //text
 $_['text_action']		= 'عمل';
 $_['text_commission']		= 'فاتورة عمولة';
-$_['text_invoice_id']		= 'هوية صوتية';
+$_['text_invoice_id']		= 'رقم تعريف الفاتورة';
 $_['text_created_at']		= 'تاريخ الإنشاء';
 $_['text_list']		= 'قائمة فاتورة العمولة';
 $_['text_empty']		= 'ليس لديك أي عمولة فاتورة!';

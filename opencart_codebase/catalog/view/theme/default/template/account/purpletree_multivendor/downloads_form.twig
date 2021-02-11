@@ -36,7 +36,7 @@
 					<div class="pts-form-group required">
 						<label class="pts-col-sm-2 pts-control-label" for="input-filename"><span data-toggle="tooltip" title="{{ help_filename }}">{{ entry_filename }}</span></label>
 						<div class="pts-col-sm-10">
-							<div class="pts-input-group d-flex" style="display:flex">
+							<div class="pts-input-group d-flex ptsc-commison-display">
 								<input type="text" name="filename" value="{{ filename }}" placeholder="{{ entry_filename }}" id="input-filename" class="pts-form-control" />
 								<span class="pts-input-group-pts-btn">
 									<button type="button" id="button-upload" data-loading-text="{{ text_loading }}" class="pts-btn pts-btn-primary"><i class="fa fa-upload"></i> {{ button_upload }}</button>
@@ -71,7 +71,7 @@
 	$('#button-upload').on('click', function() {
 		$('#form-upload').remove();
 		
-		$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+		$('body').prepend('<form enctype="multipart/form-data" id="form-upload" class="ptsc-productl-nodisplay"><input type="file" name="file" /></form>');
 		
 		$('#form-upload input[name=\'file\']').trigger('click');
 		

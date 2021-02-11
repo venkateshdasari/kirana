@@ -24,3 +24,4 @@ $_['text_delete_success'] = 'Enquiry has been successfully deleted.';
 
 //button
 $_['button_continue'] = 'Continue';
+$_['text_files'] = 'Files';

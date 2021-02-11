@@ -163,3 +163,6 @@ $_['entry_seller_areaheading'] = "Hiperlocal";
 $_['entry_header_popup'] = "Encabezado en ventana emergente para HyperLlocal";
 $_['entry_area_selection'] = "Selección de área obligatoria";
 $_['entry_seller_area_link'] = "Ir al área de vendedores";
+$_['text_multiple_store']="Utilice tiendas de dominios inteligentes"; 
+$_['text_fix_commission']="Comisión fija";
+$_['text_hyper_delivering'] = "Entregando a";

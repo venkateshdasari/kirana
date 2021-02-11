@@ -24,3 +24,4 @@ $_['text_delete_success'] = 'Soru başarıyla silindi.';
 
 //button
 $_['button_continue'] = 'Devam et';
+$_['text_files'] ='Dosyalar';

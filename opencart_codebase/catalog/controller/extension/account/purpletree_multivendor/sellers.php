@@ -153,18 +153,42 @@ class ControllerExtensionAccountPurpletreeMultivendorSellers extends Controller 
 				$product_total = $product_total+$template_product_total;
 				
 				$results = $this->model_extension_purpletree_multivendor_sellers->getProducts($filter_data);
-				
-				foreach ($results as $result) {
-					if (is_file(DIR_IMAGE . $result['image'])) {
-						$image = $this->model_tool_image->resize($result['image'], 60, 60);
-						} else {
-						$image = $this->model_tool_image->resize('placeholder.png', 60, 60);
+				$resultsTemplate = $this->model_extension_purpletree_multivendor_sellers->getTemplateProducts($filter_data);
+				if(!empty($results)){
+					foreach ($results as $result) {
+						if (is_file(DIR_IMAGE . $result['image'])) {
+							$image = $this->model_tool_image->resize($result['image'], 60, 60);
+							} else {
+							$image = $this->model_tool_image->resize('placeholder.png', 60, 60);
+						}
+						
+						$data['products'][] = array(
+						'thumb'       => $image,
+						'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'],true)
+						);
 					}
-					
-					$data['products'][] = array(
-					'thumb'       => $image,
-					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'],true)
-					);
+				}
+				
+				if(!empty($resultsTemplate)){
+					foreach ($resultsTemplate as $resultTemp) {
+						if (is_file(DIR_IMAGE . $resultTemp['image'])) {
+							$image = $this->model_tool_image->resize($resultTemp['image'], 60, 60);
+							} else {
+							$image = $this->model_tool_image->resize('placeholder.png', 60, 60);
+						}
+						
+						$data['products'][] = array(
+						'thumb'       => $image,
+						'href'        => $this->url->link('product/product', 'product_id=' . $resultTemp['product_id'],true)
+						);
+					}
+				}
+				
+				 $products=array();
+				foreach ($data['products'] as $key=>$product) {
+					if($key < 5){
+						$products[] = $product;	
+					}
 				}
 				
 				$state_name = $this->model_extension_purpletree_multivendor_vendor->getStateName($seller_list['store_state'],$seller_list['store_country']);
@@ -179,7 +203,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellers extends Controller 
 				'href'        => $this->url->link('extension/account/purpletree_multivendor/sellerstore/storeview', 'seller_store_id=' . $seller_list['id'],true),
 				'seller_contact' => $this->url->link('extension/account/purpletree_multivendor/sellercontact/customerreply', 'seller_id=' . $seller_list['seller_id'],true),
 				'product_total' => $product_total,
-				'products' => $data['products'],
+				'products' => $products,
 				'subscription_status'=>$subscription_status
 				);
 			}

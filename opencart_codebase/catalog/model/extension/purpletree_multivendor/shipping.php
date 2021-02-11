@@ -98,7 +98,9 @@ class ModelExtensionPurpletreeMultivendorShipping extends Model {
 			$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "purpletree_vendor_shipping pvs JOIN " .DB_PREFIX. "customer c ON(c.customer_id=pvs.seller_id) JOIN " .DB_PREFIX."country cu ON(pvs.shipping_country=cu.country_id)";
 			
 			$implode = array();
-			
+				if(isset($data['seller_id']) && $data['seller_id'] != ''){
+				$implode[] = "pvs.seller_id = '" . (int)$data['seller_id'] . "'";
+			}
 			if (isset($data['filter_shipping_country']) && ($data['filter_shipping_country'] != '')) {
 				$implode[] = "cu.country_id LIKE '" . (int)$data['filter_shipping_country'] . "'";
 			}

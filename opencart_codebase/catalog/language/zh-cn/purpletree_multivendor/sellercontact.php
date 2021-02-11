@@ -26,3 +26,8 @@ $_['text_contact_message'] 	=	"从页面提交的查询";
 //button
 $_['button_view_all'] ="查看全部";
 $_['button_submit'] ='提交';
+
+$_['text_files'] ='档案';
+$_['text_attach_file'] ='附加档案';
+$_['text_upload_file'] ='上传文件';
+$_['text_action'] ='行动';

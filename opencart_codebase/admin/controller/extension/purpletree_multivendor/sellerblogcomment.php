@@ -167,7 +167,7 @@ class ControllerExtensionPurpletreeMultivendorSellerblogcomment extends Controll
 		}
 		
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_post'])) {
 				$filter_post = $this->request->get['filter_post'];
 				} else {

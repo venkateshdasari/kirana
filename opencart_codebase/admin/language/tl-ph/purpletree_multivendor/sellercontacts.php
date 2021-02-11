@@ -29,3 +29,4 @@ $_['text_delete_success'] 	=	"Matagumpay na natanggal ang pagtatanong.";
 //button		
 
 $_['button_continue'] 	=	"Magpatuloy";
+$_['text_files'] ='Mga file';

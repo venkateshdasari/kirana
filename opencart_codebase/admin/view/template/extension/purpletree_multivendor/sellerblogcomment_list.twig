@@ -33,7 +33,7 @@
 					<div class="row">
 						<div class="col-sm-12 row">
 							<div class="col-sm-3">
-								<div class="form-group catdivdrop">
+								<div class="form-group catdivdroppp">
 									<input type="hidden" name="filter_seller_id" value="{{ filter_seller_id }}" class="form-control" />
 									<label class="control-label col-form-label" for="input-name">{{ entry_seller_store }}</label>
 									
@@ -87,7 +87,7 @@
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
-									<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\').prop('checked', this.checked);" /></td>
+									<td class="text-center ptsc-vendorlis-width"><input type="checkbox" onclick="$('input[name*=\'selected\').prop('checked', this.checked);" /></td>
 									<td class="text-left">{{ column_post }}</td>
 									<td class="text-left">{{ column_name }}</td>
 									<td class="text-center">{{ column_email }}</td>
@@ -211,13 +211,5 @@
 		
 		
 	//--></script> 
-	
-	<style>
-		.catdivdrop ul{
-		overflow: auto;
-		max-height: 120px;
-		width: 88%;
-		}
-	</style>
 </div>
 {{ footer }}

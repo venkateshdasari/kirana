@@ -36,7 +36,7 @@
           <div class="row p-3">
 		  
 				<div class="col-sm-4" >
-				  <div class="form-group catdivdrop">
+				  <div class="form-group catdivdropp">
 				   <input type="hidden" name="filter_id" value="" class="form-control" />
 					<label class="control-label col-form-label" for="input-name">{{ entry_categories }}</label>
 					<input type="text" name="filter_name" value="{{ filter_name }}" placeholder="{{ entry_categories }}" id="input-name" class="form-control" />
@@ -69,7 +69,7 @@
 				{% endif %}
 				<div class="col-sm-4 d-flex align-self-end justify-content-center">
 				  <div class="form-group">
-				  <input type="submit" value="{{ button_add1 }}" class="btn btn-primary" class="button-add" data-toggle="tooltip" title="{{ button_add }}" style=" padding: 8px 20px 8px 20px; margin: 22px 10px 0px 10px;" >				  
+				  <input type="submit" value="{{ button_add1 }}" class="btn btn-primary" class="button-add ptsc-categorycommi-paddmar" data-toggle="tooltip" title="{{ button_add }}">				  
 					
 				  </div>
 				</div>
@@ -80,14 +80,14 @@
         </div>
 		  <div class="panel-body card-body">
         <form action="" method="post" enctype="multipart/form-data" id="form-customer">
-		<div class="panel-heading" style="border-width: 1px; border-top-style: solid; border-left-style: solid; border-right-style: solid;">
+		<div class="panel-heading ptsc-categorycommi-border">
              <h4 class="panel-title card-header"> {{ text_Available_commission }}</h4>
            </div>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-center ptsc-vendorlis-width"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
                   <td class="text-left">{{ column_categories }}</td>
                   <td class="text-left">{% if sort == 'column_commission' %}
                     <a href="{{ sort_commission }}" class="{{ order|lower }}">{{ column_commission }}</a>
@@ -192,11 +192,4 @@ $('input[name=\'filter_id\']').val(item['value']);
 				  }	  
                   }
 </script>
-<style>
-.catdivdrop ul{
-	overflow: auto;
-	max-height: 120px;
-	width: 91%;
-}
-</style>
 {{ footer }} 

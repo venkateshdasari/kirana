@@ -39,3 +39,7 @@ $_['error_permission']      = "Cảnh báo: Bạn không có quyền sửa đổ
 $_['text_invalidfile']      = "Loại tệp không hợp lệ. Chọn .xls hoặc .xlsx";
 $_['text_nofile']      = "Chọn tệp để nhập";
 $_['admin_bulk_product_upload_sheet']    = "Tải xuống mẫu";
+$_['text_bulk_product_import_add']    	 = 'Nhập sản phẩm mới';
+$_['text_bulk_product_import_update']    = 'Cập nhật các sản phẩm hiện có';
+$_['text_update']            			 = 'Cập nhật';
+$_['text_bulk_product_status_heading'] = "Toplu Ürün İçe Aktarma / Güncelleme Durumu";

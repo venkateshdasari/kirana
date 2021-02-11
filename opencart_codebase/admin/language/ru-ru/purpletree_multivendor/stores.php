@@ -199,3 +199,6 @@ $_['entry_sellerarea'] = "Зоны продавца";
 $_['help_sellerarea'] = "(Автозаполнение)";
 $_['text_all_sellerarea'] = "Все";
 $_['text_selected_sellerarea'] = "Выбрано";
+
+$_['entry_multi_store']     = 'Opencart магазины';
+$_['entry_assign_stores']    = 'Назначить магазины Opencart';

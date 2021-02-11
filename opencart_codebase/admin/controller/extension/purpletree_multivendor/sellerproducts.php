@@ -13,6 +13,7 @@ class ControllerExtensionPurpletreeMultivendorSellerproducts extends Controller 
 		}
 		
 		protected function getList() {
+		    $this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
 				} else {

@@ -630,8 +630,10 @@ class ModelExtensionPurpletreeMultivendorSellerproduct extends Model{
 			
 			foreach ($data['product_description'] as $language_id => $value) {
 				if (defined('QUICK_ORDER') && QUICK_ORDER == 1 ){
-					if($data['product_name']){
-						 $value['name'] = $data['product_name'];
+						if (isset($data['quick_order']) && $data['quick_order'] == 1) {
+					if(isset($data['product_name'])){
+						 $value['name'] = $data['product_name'].$product_id;
+						}
 						}
 					}
 				if($value['meta_title'] == ''){
@@ -649,11 +651,15 @@ class ModelExtensionPurpletreeMultivendorSellerproduct extends Model{
 				
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 			}
-			$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$product_id . "'");
-			if (isset($data['product_store'])) {
-				foreach ($data['product_store'] as $store_id) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$store_id . "'");
+			
+			$ptsSql= $this->db->query("SELECT multi_store_id FROM " . DB_PREFIX . "purpletree_vendor_stores WHERE seller_id = '".(int)$data['seller_id']."'");
+			if($ptsSql->num_rows){
+				$store_ids=explode(',',$ptsSql->row['multi_store_id']);
+				$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$product_id . "'");
+				foreach($store_ids as $store_id){
+							$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$store_id . "'");
 				}
+				
 			}
 			
 			if (isset($data['product_attribute'])) {
@@ -822,7 +828,7 @@ class ModelExtensionPurpletreeMultivendorSellerproduct extends Model{
 					$data['product_to_customer_group'] = $this->getProductByCustomerGroups($product_id);
 				}
 				///////----End RESTRICT PRODUCTS BY CUSTOMER GROUP----//////
-				$this->addProduct($data);
+				return $this->addProduct($data);
 			}
 		}
 		
@@ -984,8 +990,10 @@ class ModelExtensionPurpletreeMultivendorSellerproduct extends Model{
 			
 			foreach ($data['product_description'] as $language_id => $value) {
 				if (defined('QUICK_ORDER') && QUICK_ORDER == 1 ){
+						if (isset($data['quick_order']) && $data['quick_order'] == 1) {
 					if($data['product_name']){
 						 $value['name'] = $data['product_name'];
+						}
 						}
 					}
 				if($value['meta_title'] == ''){
@@ -1005,7 +1013,7 @@ class ModelExtensionPurpletreeMultivendorSellerproduct extends Model{
 			}
 			if (defined('QUICK_ORDER') && QUICK_ORDER == 1 ){
 			if($data['product_name']){
-			$data['product_name'] = $data['product_name'].$product_id;
+			$data['product_name'] = $data['product_name'];
 			$this->db->query("UPDATE " . DB_PREFIX . "product_description SET name = '" . $this->db->escape($data['product_name']) . "' WHERE product_id = '" . (int)$product_id."'");
 			}
 			}

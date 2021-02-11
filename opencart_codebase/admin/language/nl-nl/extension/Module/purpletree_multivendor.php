@@ -166,3 +166,6 @@ $_['entry_seller_areaheading'] = "Hyperlokaal";
 $_['entry_header_popup'] = "Kop in pop-up voor HyperLlocal";
 $_['entry_area_selection'] = "Gebiedsselectie verplicht";
 $_['entry_seller_area_link'] = "Ga naar het verkopersgedeelte";
+$_['text_multiple_store']="Gebruik domeinvriendelijke winkels";
+$_['text_fix_commission']="Vaste commissie";
+$_['text_hyper_delivering'] = "Bezorgd aan";

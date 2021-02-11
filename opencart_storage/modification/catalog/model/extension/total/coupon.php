@@ -90,6 +90,8 @@ class ModelExtensionTotalCoupon extends Model {
 					$product_data[] = $product['product_id'];
 					$continueee = true;
 					continue;
+				}elseif(empty($coupon_product_data)&& ($product['product_id'] > 0)){
+				 $continueee = true;
 				}
 				foreach ($coupon_category_data as $category_id) {
 					$coupon_category_query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "product_to_category` WHERE `product_id` = '" . (int)$product['product_id'] . "' AND category_id = '" . (int)$category_id . "'");
@@ -127,7 +129,9 @@ class ModelExtensionTotalCoupon extends Model {
 
 				}
 		
-				if (!$product_data) {
+				
+				if (!$product_data && ($continueee != 1)) {
+		
 					$status = false;
 				}
 			}
@@ -208,6 +212,38 @@ class ModelExtensionTotalCoupon extends Model {
 					$coupon_info['discount'] = min($coupon_info['discount'], $sub_total);
 				}
 
+
+			  if ($seller_id != 0) {
+			   foreach ($this->cart->getSellerProducts($seller_id) as $product) {
+			   $discount = 0;
+
+					if (!$coupon_info['product']) {
+						$status = true;
+					} else {
+						$status = in_array($product['product_id'], $coupon_info['product']);
+					}
+
+					if ($status) {
+						if ($coupon_info['type'] == 'F') {
+							$discount = $coupon_info['discount'] * ($product['total'] / $sub_total);
+						} elseif ($coupon_info['type'] == 'P') {
+							$discount = $product['total'] / 100 * $coupon_info['discount'];
+						}
+
+						if ($product['tax_class_id']) {
+							$tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
+
+							foreach ($tax_rates as $tax_rate) {
+								if ($tax_rate['type'] == 'P') {
+									$total['taxes'][$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
+								}
+							}
+						}
+					}
+
+					$discount_total += $discount;
+				   } } else{
+		
 				foreach ($this->cart->getProducts() as $product) {
 					$discount = 0;
 
@@ -237,6 +273,9 @@ class ModelExtensionTotalCoupon extends Model {
 
 					$discount_total += $discount;
 				}
+
+			}
+		
 
 				if ($coupon_info['shipping'] && isset($this->session->data['shipping_method'])) {
 					if (!empty($this->session->data['shipping_method']['tax_class_id'])) {
@@ -327,6 +366,158 @@ class ModelExtensionTotalCoupon extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "coupon_history` ch LEFT JOIN `" . DB_PREFIX . "coupon` c ON (ch.coupon_id = c.coupon_id) LEFT JOIN `" . DB_PREFIX . "purpletree_vendor_coupons` pot ON (pot.coupon_id = ch.coupon_id) WHERE c.code = '" . $this->db->escape($coupon) . "'");	
 		
 		return $query->row['total'];
+	}
+			public function getsellercounponTotal($product_idd) {
+		if (isset($this->session->data['coupon'])) {
+
+		$seller_idby_coupon = $this->db->query("SELECT pvc.seller_id,co.* FROM `" . DB_PREFIX . "coupon` co Inner JOIN `" . DB_PREFIX . "purpletree_vendor_coupons` pvc ON (co.coupon_id = pvc.coupon_id) WHERE code = '" . $this->db->escape($this->session->data['coupon']) . "' AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) AND status = '1' AND pvc.seller_id >= '1'");
+		if($seller_idby_coupon->num_rows){
+			$seller_id =  $seller_idby_coupon->row['seller_id'];
+		}else{
+			$seller_id = 0;
+		}
+		
+			$this->load->language('extension/total/coupon', 'coupon');
+
+			$coupon_info = $this->getCoupon($this->session->data['coupon']);
+
+			if ($coupon_info) {
+				$discount_total = 0;
+
+				if (!$coupon_info['product']) {
+
+		if ($seller_id!= 0) {
+			$sub_total = $this->cart->getSellerSubTotal($seller_id);
+		}else{
+		
+					$sub_total = $this->cart->getSubTotal();
+
+		}
+		
+				} else {
+					$sub_total = 0;
+
+				if ($seller_id != 0) {
+					foreach ($this->cart->getSellerProducts($seller_id) as $product) {
+						if($product_idd == $product['product_id']) {
+							if (in_array($product['product_id'], $coupon_info['product'])) {
+								$sub_total += $product['total'];
+							}
+						}
+					}
+				}else{
+		
+
+					foreach ($this->cart->getProducts() as $product) {
+						if($product_idd == $product['product_id']) {
+							if (in_array($product['product_id'], $coupon_info['product'])) {
+								$sub_total += $product['total'];
+							}
+						}
+					}
+				}
+
+
+			}
+		
+				if ($coupon_info['type'] == 'F') {
+					$coupon_info['discount'] = min($coupon_info['discount'], $sub_total);
+				}
+
+
+			  if ($seller_id != 0) {
+			   foreach ($this->cart->getSellerProducts($seller_id) as $product) {
+				   if($product_idd == $product['product_id']) {
+			   $discount = 0;
+
+					if (!$coupon_info['product']) {
+						$status = true;
+					} else {
+						$status = in_array($product['product_id'], $coupon_info['product']);
+					}
+
+					if ($status) {
+						if ($coupon_info['type'] == 'F') {
+							$discount = $coupon_info['discount'] * ($product['total'] / $sub_total);
+						} elseif ($coupon_info['type'] == 'P') {
+							$discount = $product['total'] / 100 * $coupon_info['discount'];
+						}
+
+						if ($product['tax_class_id']) {
+							$tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
+
+							foreach ($tax_rates as $tax_rate) {
+								if ($tax_rate['type'] == 'P') {
+									//$total['taxes'][$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
+								}
+							}
+						}
+					}
+
+					$discount_total += $discount;
+				   }
+			  }
+				   } else{
+		
+				foreach ($this->cart->getProducts() as $product) {
+					if($product_idd == $product['product_id']) {
+					$discount = 0;
+
+					if (!$coupon_info['product']) {
+						$status = true;
+					} else {
+						$status = in_array($product['product_id'], $coupon_info['product']);
+					}
+
+					if ($status) {
+						if ($coupon_info['type'] == 'F') {
+							$discount = $coupon_info['discount'] * ($product['total'] / $sub_total);
+						} elseif ($coupon_info['type'] == 'P') {
+							$discount = $product['total'] / 100 * $coupon_info['discount'];
+						}
+
+						if ($product['tax_class_id']) {
+							$tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
+
+							foreach ($tax_rates as $tax_rate) {
+								if ($tax_rate['type'] == 'P') {
+									//$total['taxes'][$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
+								}
+							}
+						}
+					}
+
+					$discount_total += $discount;
+				}
+				}
+
+			}
+		
+
+				if ($coupon_info['shipping'] && isset($this->session->data['shipping_method'])) {
+					if (!empty($this->session->data['shipping_method']['tax_class_id'])) {
+						$tax_rates = $this->tax->getRates($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']);
+
+						foreach ($tax_rates as $tax_rate) {
+							if ($tax_rate['type'] == 'P') {
+								//$total['taxes'][$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
+							}
+						}
+					}
+
+					$discount_total += $this->session->data['shipping_method']['cost'];
+				}
+
+				// If discount greater than total
+				//if ($discount_total > $total['total']) {
+					//$discount_total = $total['total'];
+				//}
+
+				if ($discount_total > 0) {
+					return $discount_total;
+				}
+			}
+		}
 	}
 		
 	public function getTotalCouponHistoriesByCustomerId($coupon, $customer_id) {

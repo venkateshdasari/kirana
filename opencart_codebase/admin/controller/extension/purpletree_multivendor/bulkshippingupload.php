@@ -4,7 +4,7 @@ class ControllerExtensionPurpletreeMultivendorBulkshippingupload extends Control
 		public function index(){				
 			$this->load->language('purpletree_multivendor/bulkshippingupload');
 			$this->load->model('extension/purpletree_multivendor/bulkshippingupload');
-			$this->document->setTitle($this->language->get('heading_title'));
+			$this->document->setTitle($this->language->get('heading_title'));			
 			$this->getData();
 		}
 		public function upload(){
@@ -280,6 +280,7 @@ class ControllerExtensionPurpletreeMultivendorBulkshippingupload extends Control
 		}
 		
 		public function getData(){	
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$url = '';
 			$data['breadcrumbs'] = array();
 			$data['breadcrumbs'][] = array(

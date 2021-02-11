@@ -6,10 +6,11 @@ class ControllerExtensionPurpletreeMultivendorSubscriptionplanInvoice extends Co
 			$this->load->language('purpletree_multivendor/subscriptionplanInvoice');
 			
 			$this->document->setTitle('Offline Payment');
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->model('extension/purpletree_multivendor/subscriptionplanInvoice');
 		}
 		public function view() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (!isset($this->request->get['invoice_id']) || $this->request->get['invoice_id'] == '') {
 				$this->response->redirect($this->url->link('extension/purpletree_multivendor/managesubscriptionplan', 'user_token=' . $this->session->data['user_token'] , true));
 			} 

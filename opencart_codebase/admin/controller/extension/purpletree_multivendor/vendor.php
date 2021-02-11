@@ -42,6 +42,7 @@ class ControllerExtensionPurpletreeMultivendorVendor extends Controller{
 			}
 		}
 		public function confirmdeleteSeller(){
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->language('purpletree_multivendor/vendor');
 			$url = '';
 			if (isset($this->session->data['success'])) {
@@ -79,6 +80,7 @@ class ControllerExtensionPurpletreeMultivendorVendor extends Controller{
 			$this->response->setOutput($this->load->view('extension/purpletree_multivendor/seller_delete', $data));
 		}
 		protected function getList() {
+		    $this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
 				} else {

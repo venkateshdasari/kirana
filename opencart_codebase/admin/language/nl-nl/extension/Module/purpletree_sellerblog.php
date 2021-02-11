@@ -19,4 +19,5 @@ $_['error_permission'] = 'Waarschuwing: u bent niet gemachtigd om de Multivendor
 $_['error_name']       = 'De modulenaam moet tussen 3 en 128 tekens lang zijn!';
 $_['error_width']      = 'Breedte vereist!';
 $_['error_height']     = 'Hoogte vereist!';
+$_['error_limit']     = 'Limiet vereist!';
 ?>

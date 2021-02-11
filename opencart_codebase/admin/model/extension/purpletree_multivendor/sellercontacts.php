@@ -1,6 +1,15 @@
 <?php
 class ModelExtensionPurpletreeMultivendorSellercontacts extends Model{
-		
+
+		public function getAttachedEnquiriesFile($chat_id){
+			$sql = "SELECT * FROM " . DB_PREFIX . "purpletree_customer_vendor_enquiries WHERE chat_id = '".(int)$chat_id."'";
+			$query = $this->db->query($sql);
+			if($query->num_rows){
+				return $query->rows;
+			} else {
+				return NULL;
+			}
+		}
 		public function getsellercontacts($data = array()){
 			$sql = "SELECT pvc.*,CONCAT(c.firstname,' ',c.lastname) AS seller_name FROM " . DB_PREFIX . "purpletree_vendor_contact pvc JOIN " . DB_PREFIX . "customer c ON(c.customer_id=pvc.seller_id)";
 			

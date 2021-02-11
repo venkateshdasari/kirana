@@ -7,8 +7,7 @@ class ControllerExtensionPurpletreeMultivendorSellercustomfield extends Controll
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('extension/purpletree_multivendor/sellercustomfield');
-
+		$this->load->model('extension/purpletree_multivendor/sellercustomfield');        
 		$this->getList();
 	}
 
@@ -113,6 +112,7 @@ class ControllerExtensionPurpletreeMultivendorSellercustomfield extends Controll
 	}
 
 	public function getList() {
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -296,6 +296,7 @@ class ControllerExtensionPurpletreeMultivendorSellercustomfield extends Controll
 	}
 
 	protected function getForm() {
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 		$data['text_form'] = !isset($this->request->get['custom_field_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
 		if (isset($this->error['warning'])) {

@@ -43,10 +43,10 @@ $_['text_seller_label_status'] = "Katayuan:";
 $_['button_deliver'] = "Paghatid";
 $_['button_change_status'] = "Baguhin ang Katayuan";
 $_['text_change_order_status'] = "Baguhin ang katayuan ng order";
-$_['pts_text_customer'] = "<p> Ang iyong order ay matagumpay na naproseso! </ b> Maaari mong tingnan ang iyong kasaysayan ng order sa pamamagitan ng pagpunta sa <a href="%s"> aking account </ a > pahina at sa pamamagitan ng pag-click sa <a href="%s"> kasaysayan </a>. </ b> Kung ang iyong pagbili ay may nauugnay na pag-download, maaari kang pumunta sa account <a href = "% s" > mga pag-download </a> na pahina upang matingnan ang mga ito. </p> <p> Mangyaring idirekta ang anumang mga katanungan mayroon ka sa ";
+$_['pts_text_customer'] = '<p> Ang iyong order ay matagumpay na naproseso! </ b> Maaari mong tingnan ang iyong kasaysayan ng order sa pamamagitan ng pagpunta sa <a href="%s"> aking account </ a > pahina at sa pamamagitan ng pag-click sa <a href="%s"> kasaysayan </a>. </ b> Kung ang iyong pagbili ay may nauugnay na pag-download, maaari kang pumunta sa account <a href = "% s" > mga pag-download </a> na pahina upang matingnan ang mga ito. </p> <p> Mangyaring idirekta ang anumang mga katanungan mayroon ka sa ';
 $_['pts_text_guest'] = "<Ay matagumpay na naproseso ang iyong order! </p> <p> Mangyaring idirekta ang anumang mga katanungan sa";
 $_['pts_text_thanks'] = "</p> <p> Salamat sa pamimili sa amin online! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> may-ari ng store </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> may-ari ng store </a>.';
 $_['column_delivery_address'] = "Address sa Paghahatid";
 // // end_quick_order // //
 

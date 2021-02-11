@@ -1,0 +1,415 @@
+.ptsc-well11 .form-group {
+	margin-left:0;
+	margin-right:0;
+}
+.ptsc-well11 {
+	margin:19px;
+	padding:0;
+}
+.ptsc-vendorlis-width {
+    width: 1px;
+}
+.ptsc-upgrdatabas-padd {
+    padding: 8px 20px 8px 20px;
+}
+.ptsc-upgrdatabas-textpadd {
+    padding: 0px 0px 0px 8px;
+}
+.ptsc-subscrip-widpad {
+   width: 50%;
+   padding:20px;
+}
+.ptsc-subscrip-width {
+   width: 50%;
+}
+.ptsc-subscrip-pagebreak {
+   page-break-after: always;
+}
+.ptsc-subscrip-plpadbormarbot {
+   padding:8px 10px;
+   border:1px solid #ddd;
+   margin-bottom:10px
+}
+.ptsc-subscrip-plpadd {
+   padding: 0px 14px !important;
+}
+.ptsc-subscrip-plmartop {
+   margin-top: 8px;
+}
+.ptsc-subscrip-statusmartop {
+   margin-top:13px;
+}
+.ptsc-subscrip-updatstmartop {
+   margin-top:6px;
+}
+.ptsc-subscrip-updatstpadbor {
+  padding:8px 10px;
+  border:1px solid #ddd;
+}
+.ptsc-subscrip-updbgmarbotpadd {
+  background: #f3f3f3;
+  margin-bottom: 15px;
+  padding: 1px 15px;
+}
+.ptsc-subscrip-planhisbmp {
+ background: #f3f3f3;
+ margin-bottom: 15px;
+ padding: 12px 15px;
+}
+.ptsc-storeli-martop {
+ margin-top: 21px;
+}
+.ptsc-storefrm-nodisplay {
+  display: none;
+}
+/* width */
+	.pts-sidenav ::-webkit-scrollbar {
+	width: 10px;
+	float:left;
+	position:absolute;
+	right:0
+	}
+	
+	/* Track */
+	.pts-sidenav ::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+	}
+	
+	/* Handle */
+	.pts-sidenav ::-webkit-scrollbar-thumb {
+	background: #888; 
+	}
+	
+	/* Handle on hover */
+.pts-sidenav ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+}
+.inputgroup{
+	overflow-y:auto;
+	max-height:150px;
+	
+}
+.pts-sidenav .modal-dialog{
+    //position: absolute;
+	overflow-y:auto;
+    width: 25%;
+    margin-top: 5%;
+	border:none;
+}
+.pts-sidenav .modal-header{
+	padding:7px !important;
+	background:#337ab7;
+}
+.pts-sidenav .modal-title, .pts-sidenav .close{
+	margin: 0px !important;
+    color: #fff !important;
+}
+.pts-sidenav .modal-content{
+	height: 100%;
+	border: 0px solid #fff;
+}
+.ptsc-plans{
+	font-size:16px;
+	margin-left:10px;
+}
+input[type="radio"] {
+	-webkit-appearance: checkbox; /* Chrome, Safari, Opera */
+	-moz-appearance: checkbox;    /* Firefox */
+	-ms-appearance: checkbox;     /* not currently supported */
+	height:20px;
+	width:20px;
+}
+.ptsc-storef-heioflow{
+   height: 150px; 
+   overflow: auto;
+}
+.ptsc-storef-marglt{
+  margin-left: 15px;
+  margin-top: 20px;
+}
+.ptsc-storeff-heioflow{
+  height:300px;
+  overflow:auto;
+}
+.ptsc-storef-paddtop{
+  padding-top:7px;
+}
+.catdivdrop ul{
+	overflow: auto;
+	max-height: 100px;
+	width: 30%;
+}
+.ptsc-shippingli-color{
+  color:#1e91cf;
+}
+.greencolorr {
+   background: #f2dede;
+}
+.sellercolor div {
+	width: 42px;
+	height: 15px;
+	float: left;
+	margin-right: 10px;
+	margin-top: 3px;
+	border:1px solid #000;		
+}
+.ptsc-sellprod-textdecor{
+ text-decoration: line-through;
+}
+.pts-delete-seller-detail li{
+	list-style:bullet;
+	font-weight:normal;
+}
+.ptsc-delete-seller-marlef{
+  margin-left:10px;
+}
+.To{
+	background-color: #e6ffe6;
+}
+.From{
+	background-color: #e6e6ff !important;
+}
+.bluecolor {
+	background: #e6ffe6;
+}
+.greencolor {
+	background: #e6e6ff;
+}
+.pts-chat-seller{
+	border: 1px solid #cfe0ef;
+    border-radius: 20px !important;
+    background: white;
+    max-width: 50%;
+    padding: 9px 18px!important;
+    margin-right: 10px;
+    float: right;
+    margin-bottom: 5px;
+}
+.pts-chat-admin{
+	border: none;
+    border-radius: 20px !important;
+    background: aliceblue;
+    float: left;
+    margin-bottom: 5px;
+    max-width: 50%;
+    padding: 9px 18px!important;
+    margin-left: 10px;
+}
+.pts-tr-hover-none:hover{
+	background:transparent !important
+}
+.ptsc-sellcont-forntsize{
+   font-size:18px;
+}
+.catdivdropp ul{
+	overflow: auto;
+	max-height: 120px;
+	width: 91%;
+}
+.catdivdroppp ul{
+	overflow: auto;
+	max-height: 120px;
+	width: 88%;
+}
+.pts-table_order_list tr{
+	line-height: 25px;
+	border-bottom: 1px solid rgb(204, 204, 204);
+}
+.pts-table_order_list tr:last-child {
+	border-bottom: 0 none !important;
+}
+.ptsc-orderlist-shipwidth{
+   width: 18%;
+}
+.ptsc-orderlist-statuwidth{
+   width: 22%;
+}
+.ptsc-orderlist-snamwidth{
+   width: 25%;
+}
+.ptsc-orderlist-spaddwid{
+   padding: 5px;
+   width: 33%;
+}
+.ptsc-orderlist-tabwidth{
+  width: 100%
+}
+.ptsc-orderlist-olipadd{
+  padding: 0px;
+}
+.ptsc-orderlist-cnamwid{
+  width: 33%;
+}
+.amount-box{
+	text-align:center;
+}
+.ptsc-customfield-formlwid{
+  width: 70%;
+}
+.ptsc-commission-fontbold{
+  font-weight: bold;
+}
+.ptsc-commission-paypalwid{
+  width: 120px;
+}
+.ptsc-commission-hpaypalflpad{
+  float:left;
+  padding:7px;
+}
+.ptsc-commission-offlfloat{
+  float:left;
+}
+.ptsc-commission-offlpaddlef{
+  padding-left: 15px;
+}
+.ptsc-commission-tpaynoborder{
+  border:none !important;
+}
+.ptsc-commission-tabshadow{
+  box-shadow:0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+.pts-text-bold{
+	font-size:18px;
+	font-weight:bold
+}
+.b-payment{
+	font-size:15px;
+	padding-left: 15px;
+	margin-top: 5px;
+}
+.h3-payment{
+	font-size:25px;
+	font-weight:normal;
+	margin: 0;
+	padding: 2px 3px;
+}
+.pd{
+	padding:15px !important;
+	width:50%
+}
+.status-payment{
+	font-size:25px;
+	font-weight:normal
+}
+.payment-td{
+	font-weight:normal;
+	padding: 7px !important;
+	line-height: 2.5 !important;
+}
+.ptsc-categorycommi-paddmar{
+  padding: 8px 20px 8px 20px;
+  margin: 22px 10px 0px 10px;
+}
+.ptsc-categorycommi-border{
+  border-width: 1px; 
+  border-top-style: solid; 
+  border-left-style: solid; 
+  border-right-style: solid;
+}
+.ptsc-bulkshipp-nofontweig{
+ font-weight: normal;
+}
+.ptsc-bulkupload-impheight{
+ height:35px;
+}
+.control-label.overwrite {
+	padding: 10px 0px 0px 10px;
+}
+h4 .pts-title {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.ptsc-bulkupload-padd{
+ padding: 0px 0px 20px 0px;
+}
+.ptsc-bulkupload-btnadd{
+ padding: 8px 20px 8px 20px;  
+ margin-left: 7px;
+}
+.ptsc-adtemplat-width{
+  width:20%;
+}
+.ptsc-adtemplat-width{
+  width:20%;
+}
+.liceform .form-group py-1 {
+	margin:0;
+}
+	/* The Close Button */
+.ptsc-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}	
+.ptsc-close:hover,.ptsc-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.liceform .form-group py-1 {
+	margin:0;
+}
+.mbutton{
+	margin-top: 62px;
+	margin-left: 282px;
+}
+	/* Modal Content */
+.ptsc-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #888;
+	width: 30%;
+}
+	/* The Modal (background) */
+.pts-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.ptsc-mv-version{
+  line-height: 14px;
+  font-weight: bold;
+}
+.ptsc-mv-sellarealink{
+  padding: 8px 20px;
+  margin-left: 89px;
+  margin-bottom: 15px;
+}
+.ptsc-mv-selldasheig{
+  height: 150px !important;
+}
+.ptsc-mv-getlicpama{
+  padding: 8px 20px 8px 20px;
+  margin-top:15px;
+}
+.ptsc-mv-dontlicemart{
+  margin-top:14px;
+}
+.ptsc-mv-dontliceleft{
+  left:-13px;
+}
+.ptsc-mv-okbtncol{
+  color:#fff;
+}
+.ptsc-mv-enter_lice{
+  padding:0;
+}
+.ptsc-mv-licemargt{
+  margin-top: 15px;
+}
+.ptsc-mv-licebtnpadd{
+ padding: 8px 20px;
+}

@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = 'Sila Pilih Pelan Berlangganan!';
 $_['error_subscription_plan_limit']       = 'Had Pelan melebihi Hadapi Rancangan!';
 $_['error_subscription_plan_status']       = 'Pelan Langganan tidak mematikan Sila Aktifkan pelan Langganan!';
 $_['seller_bulk_product_upload_sheet']    = "Muat turun templat";
+$_['text_bulk_product_import_add']    	 = 'Import Produk Baru';
+$_['text_bulk_product_import_update']    = 'Kemas kini Produk Sedia Ada';
+$_['text_update']            			 = 'Kemas kini';
+$_['text_bulk_product_status_heading'] = "Status Import / Kemasukan Produk Pukal";

@@ -34,7 +34,12 @@ $data['sellercontact'] = $this->url->link('extension/account/purpletree_multiven
 					return $this->load->view('extension/module/account', $data);
 				 }
 				if(isset($store_detail['store_status'])){
-					if(isset($store_detail['multi_store_id']) && $store_detail['multi_store_id'] == $this->config->get('config_store_id')){
+				$stores=array();
+				
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+					if(isset($store_detail['multi_store_id']) && in_array($this->config->get('config_store_id'),$stores)){
 						if($this->config->get('module_purpletree_multivendor_hide_user_menu')){ } else{
 					
 					return $this->load->view('extension/module/account', $data);

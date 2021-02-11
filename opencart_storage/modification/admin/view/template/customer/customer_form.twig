@@ -316,7 +316,7 @@
                 <input type="radio" name="become_seller" value="0" checked="checked" id="add_document"/>
                 {{ text_no }}</label>
 				<label class="radio-inline">
-                <input type="radio" name="become_seller" value="1" {{ ((become_seller=="1")?'checked="checked"':'') }} id="remove_document"/>
+                <input type="radio" name="become_seller" value="1" {% if become_seller %} checked="checked"  {% endif %}   id="remove_document"/>
                 {{ text_yes }}</label>
 				</div> 
 			</div>

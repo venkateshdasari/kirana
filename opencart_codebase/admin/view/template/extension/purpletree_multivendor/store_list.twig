@@ -73,7 +73,7 @@
 								</span></div>
 						</div>              
 					</div>
-					<div class="col-sm-3" style="margin-top: 21px;"> 
+					<div class="col-sm-3 ptsc-storeli-martop"> 
 						<div class="form-group">  			   
 							<button type="button" id="button-filter" class="btn btn-primary pull-right float-right"><i class="fa fa-filter"></i> 
 							{{ button_filter }}</button>
@@ -86,7 +86,7 @@
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
-								<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+								<td class="text-center ptsc-vendorlis-width"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
 								<td class="text-left">{% if sort == 'store_name' %}
 									<a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_storename }}</a>
 									{% else %}

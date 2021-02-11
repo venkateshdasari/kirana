@@ -44,3 +44,7 @@ $_['error_subscription_plan']       = 'サブスクリプションプランを�
 $_['error_subscription_plan_limit']       = 'プランの上限を超えてくださいプランを変更してください！';
 $_['error_subscription_plan_status']       = 'プランサブスクリプションが無効になっています。';
 $_['seller_bulk_product_upload_sheet']    = "テンプレートをダウンロード";
+$_['text_bulk_product_import_add']    	 = '新製品のインポート';
+$_['text_bulk_product_import_update']    = '既存の製品を更新する';
+$_['text_update']            			 = '更新';
+$_['text_bulk_product_status_heading'] = "製品の一括インポート/更新ステータス";

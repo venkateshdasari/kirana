@@ -15,9 +15,9 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			}
 			
 			// Captcha
-			if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
-				$captcha = $this->load->controller('captcha/' . $this->config->get('config_captcha') . '/validate');
-				
+			if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
+				$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
+
 				if ($captcha) {
 					$this->error['captcha'] = $captcha;
 				}
@@ -43,9 +43,9 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			}
 			
 			// Captcha
-			if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
-				$captcha = $this->load->controller('captcha/' . $this->config->get('config_captcha') . '/validate');
-				
+			if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
+				$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
+
 				if ($captcha) {
 					$this->error['captcha'] = $captcha;
 				}
@@ -57,6 +57,17 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			if(!$this->customer->validateSeller()) {
 				$this->load->language('purpletree_multivendor/ptsmultivendor');
 				$this->error['error_warning'] = $this->language->get('error_license');
+			}
+			$store_detail = $this->customer->isSeller();
+			if(isset($store_detail['store_status'])){
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+						
+					if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			$this->load->model('extension/purpletree_multivendor/dashboard');
 			
@@ -178,6 +189,19 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 				$this->load->language('purpletree_multivendor/ptsmultivendor');
 				$this->session->data['error_warning'] = $this->language->get('error_license');
 				
+			}
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+						
+					if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			$this->load->model('extension/purpletree_multivendor/dashboard');
 			
@@ -310,6 +334,19 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 				$this->load->language('purpletree_multivendor/ptsmultivendor');
 				$this->error['error_warning'] = $this->language->get('error_license');
 			}
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+						
+					if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->load->model('extension/purpletree_multivendor/dashboard');
 			
 			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
@@ -349,6 +386,40 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			$data['customer'] = $this->customer->getId();	
 			
 			if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatemessage()) {
+				
+				$fileData=array();			
+				if(!empty($_FILES["attached_file"]['tmp_name'])){
+					$seller_folder = "Seller_".$seller_id;
+					$directory = DIR_IMAGE . 'catalog';
+					if (!is_dir($directory . '/' . $seller_folder)) {
+					mkdir($directory . '/' . $seller_folder, 0777);
+					chmod($directory . '/' . $seller_folder, 0777);
+					@touch($directory . '/' . $seller_folder . '/' . 'index.html');
+					}
+					
+					$seller_folder = "Seller_".$seller_id."/enquiries_file";
+					$directory = DIR_IMAGE . 'catalog';
+					if (!is_dir($directory . '/' . $seller_folder)) {
+					mkdir($directory . '/' . $seller_folder, 0777);
+					chmod($directory . '/' . $seller_folder, 0777);
+					@touch($directory . '/' . $seller_folder . '/' . 'index.html');
+					}
+					
+					$upload_url='catalog/Seller_'.$seller_id.'/enquiries_file/';
+					foreach($_FILES["attached_file"]['tmp_name'] as $key=>$file){
+						if($file){
+							$file_root=$upload_url.date("ddmmyyyyhis").$_FILES["attached_file"]['name'][$key];
+							$file_name= basename($upload_url.$_FILES["attached_file"]['name'][$key]);
+							$fileData[$key]=array(
+							'file_root'=>$file_root,
+							'file_name'=>$file_name,
+							);
+							move_uploaded_file($file,DIR_IMAGE . $file_root);	
+						}
+					}
+				}
+				
+				
 				$customerid = $this->request->post['customer_id'];
 				$customer = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($customerid);
 				$selllleeerr = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($seller_id);
@@ -358,9 +429,22 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 				'customer_name'  => $selllleeerr['firstname'].' '. $selllleeerr['lastname'],
 				'customer_email'  => $selllleeerr['email'],
 				'customer_message'  => $this->request->post['customer_message'],
-				'contact_from'   => 1
+				'contact_from'   => 1,
+				'attached_file'   => $fileData
 				);
-				$this->model_extension_purpletree_multivendor_sellercontact->addContact($dataa);
+				$chat_id=$this->model_extension_purpletree_multivendor_sellercontact->addContact($dataa);
+				$attached_files 	= $this->model_extension_purpletree_multivendor_sellercontact->getAttachedEnquiriesFile($chat_id);
+						$attach_file=array();
+						if(!empty($attached_files)){
+							foreach($attached_files as $filess){
+								if ($this->request->server['HTTPS']) {
+									$file_root = $this->config->get('config_ssl') . 'image/' . $filess['image'];
+								} else {
+									$file_root = $this->config->get('config_url') . 'image/' . $filess['image'];
+								}
+								$attach_file[]=$file_root;
+							}	
+						}
 				
 				$ptsmv_current_page='';
 				$seller_name = $selllleeerr['firstname'].' '. $selllleeerr['lastname'];
@@ -376,7 +460,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 									);
 				$email_message = $this->model_extension_purpletree_multivendor_vendor->getmsgfromarray($replacevar,$messtemplatefromdb);
 				$reciver = $customer['email'];
-				$this->model_extension_purpletree_multivendor_vendor->ptsSendMail($reciver,$email_subject,$email_message);
+				$this->model_extension_purpletree_multivendor_vendor->ptsSendMail($reciver,$email_subject,$email_message,$attach_file);
 				
 				$this->session->data['success'] = $this->language->get('text_success');
 				
@@ -440,6 +524,22 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			$date_added = array();
 			if(!empty($results2)) {
 				foreach($results2 as $result){
+					$attached_files 	= $this->model_extension_purpletree_multivendor_sellercontact->getAttachedEnquiriesFile($result['id']);
+						$attachedFileLinks=array();
+						if(!empty($attached_files)){
+							foreach($attached_files as $filess){
+								if ($this->request->server['HTTPS']) {
+									$file_root = $this->config->get('config_ssl') . 'image/' . $filess['image'];
+								} else {
+									$file_root = $this->config->get('config_url') . 'image/' . $filess['image'];
+								}
+								$name = $filess['image_name'];
+								$attachedFileLinks[]=array(
+								'name'=>$name,
+								'images'=>$file_root
+								);
+							}	
+						}
 					$data['sellercontacts'][] = array(
 					'contact_from'     => $result['contact_from'],
 					'customer_id'     => $result['customer_id'],
@@ -448,6 +548,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 					'customer_email'     => $result['customer_email'],
 					'customer_messages'       => html_entity_decode($result['customer_message'], ENT_QUOTES, 'UTF-8') . "\n",
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['created_at'])),
+					'attached_file'=>$attachedFileLinks 
 					);
 				}
 			}
@@ -463,11 +564,11 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 		}
 		
 		public function customerReply() {
-			
 			if(!$this->customer->validateSeller()) {
 				$this->load->language('purpletree_multivendor/ptsmultivendor');
 				$this->error['error_warning'] = $this->language->get('error_license');
 			}
+
 			if ($this->customer->isLogged()) {
 				$data['loggedin'] = '1';
 				} else {
@@ -519,6 +620,39 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			//$data['id'] = $this->request->get['id'];	
 			if (!$this->customer->isLogged()) {
 				if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+					
+				$fileData=array();			
+				if(!empty($_FILES["attached_file"]['tmp_name'])){
+					$seller_folder = "Seller_".$seller_id;
+					$directory = DIR_IMAGE . 'catalog';
+					if (!is_dir($directory . '/' . $seller_folder)) {
+					mkdir($directory . '/' . $seller_folder, 0777);
+					chmod($directory . '/' . $seller_folder, 0777);
+					@touch($directory . '/' . $seller_folder . '/' . 'index.html');
+					}
+					
+					$seller_folder = "Seller_".$seller_id."/enquiries_file";
+					$directory = DIR_IMAGE . 'catalog';
+					if (!is_dir($directory . '/' . $seller_folder)) {
+					mkdir($directory . '/' . $seller_folder, 0777);
+					chmod($directory . '/' . $seller_folder, 0777);
+					@touch($directory . '/' . $seller_folder . '/' . 'index.html');
+					}
+					
+					$upload_url='catalog/Seller_'.$seller_id.'/enquiries_file/';
+					foreach($_FILES["attached_file"]['tmp_name'] as $key=>$file){
+						if($file){
+							$file_root=$upload_url.date("ddmmyyyyhis").$_FILES["attached_file"]['name'][$key];
+							$file_name= basename($upload_url.$_FILES["attached_file"]['name'][$key]);
+							$fileData[$key]=array(
+							'file_root'=>$file_root,
+							'file_name'=>$file_name,
+							);
+							move_uploaded_file($file,DIR_IMAGE . $file_root);	
+						}
+					}
+				}
+					
 					//$seller_id = $this->request->post['seller_id'];
 					$sellerr = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($seller_id);
 					//$customerrr = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($customerid);
@@ -534,9 +668,22 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 					'customer_name'  => $this->request->post['customer_name'],
 					'customer_email'  => $this->request->post['customer_email'],
 					'customer_message'  => $this->request->post['customer_message'].$referrerUrl,
-					'contact_from'   => 0
+					'contact_from'   => 0,
+					'attached_file'   => $fileData
 					);
-					$this->model_extension_purpletree_multivendor_sellercontact->addContact($dataa);
+					$chat_id = $this->model_extension_purpletree_multivendor_sellercontact->addContact($dataa);
+					$attached_files 	= $this->model_extension_purpletree_multivendor_sellercontact->getAttachedEnquiriesFile($chat_id);
+						$attach_file=array();
+						if(!empty($attached_files)){
+							foreach($attached_files as $filess){
+								if ($this->request->server['HTTPS']) {
+									$file_root = $this->config->get('config_ssl') . 'image/' . $filess['image'];
+								} else {
+									$file_root = $this->config->get('config_url') . 'image/' . $filess['image'];
+								}
+								$attach_file[]=$file_root;
+							}	
+						}
 					$ptsmv_current_page='';
 					if(isset($this->session->data['ptsmv_current_page'])) {						
 						if($referrerUrl != '') {
@@ -597,7 +744,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 						}
 					}					
 					$reciver = $sellerr['email'];
-					$this->model_extension_purpletree_multivendor_vendor->ptsSendMail($reciver,$email_subject,$email_message);
+					$this->model_extension_purpletree_multivendor_vendor->ptsSendMail($reciver,$email_subject,$email_message,$attach_file);
 					
 					$this->session->data['success'] = $this->language->get('text_success');
 					unset($this->session->data['ptsmv_current_page']);
@@ -622,6 +769,40 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 				
 				} else {
 				if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatemessage()) {
+					
+				$fileData=array();
+			
+			if(!empty($_FILES["attached_file"]['tmp_name'])){
+					$seller_folder = "Seller_".$seller_id;
+					$directory = DIR_IMAGE . 'catalog';
+					if (!is_dir($directory . '/' . $seller_folder)) {
+					mkdir($directory . '/' . $seller_folder, 0777);
+					chmod($directory . '/' . $seller_folder, 0777);
+					@touch($directory . '/' . $seller_folder . '/' . 'index.html');
+					}
+					
+					$seller_folder = "Seller_".$seller_id."/enquiries_file";
+					$directory = DIR_IMAGE . 'catalog';
+					if (!is_dir($directory . '/' . $seller_folder)) {
+					mkdir($directory . '/' . $seller_folder, 0777);
+					chmod($directory . '/' . $seller_folder, 0777);
+					@touch($directory . '/' . $seller_folder . '/' . 'index.html');
+					}
+					
+					$upload_url='catalog/Seller_'.$seller_id.'/enquiries_file/';
+					foreach($_FILES["attached_file"]['tmp_name'] as $key=>$file){
+						if($file){
+							$file_root=$upload_url.date("ddmmyyyyhis").$_FILES["attached_file"]['name'][$key];
+							$file_name= basename($upload_url.$_FILES["attached_file"]['name'][$key]);
+							$fileData[$key]=array(
+							'file_root'=>$file_root,
+							'file_name'=>$file_name,
+							);
+							move_uploaded_file($file,DIR_IMAGE . $file_root);	
+						}
+					}
+				}
+
 					//$seller_id = $this->request->post['seller_id'];
 					$sellerr = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($seller_id);
 					$customerrr = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($customerid);
@@ -637,10 +818,24 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 					'customer_name'  => $customerrr['firstname'].' '. $customerrr['lastname'],
 					'customer_email'  => $customerrr['email'],
 					'customer_message'  => $this->request->post['customer_message'].$referrerUrl,
-					'contact_from'   => 0
+					'contact_from'   => 0,
+					'attached_file'   => $fileData
 					);
 					$customer_name  = $customerrr['firstname'].' '. $customerrr['lastname'];
-					$this->model_extension_purpletree_multivendor_sellercontact->addContact($dataa);
+					$chat_id=$this->model_extension_purpletree_multivendor_sellercontact->addContact($dataa);
+					$attached_files 	= $this->model_extension_purpletree_multivendor_sellercontact->getAttachedEnquiriesFile($chat_id);
+						$attach_file=array();
+						if(!empty($attached_files)){
+							foreach($attached_files as $filess){
+								if ($this->request->server['HTTPS']) {
+									$file_root = $this->config->get('config_ssl') . 'image/' . $filess['image'];
+								} else {
+									$file_root = $this->config->get('config_url') . 'image/' . $filess['image'];
+								}
+								$attach_file[]=$file_root;
+							}	
+						}
+					$product_id = $this->db->getLastId();
 					$ptsmv_current_page='';
 					if(isset($this->session->data['ptsmv_current_page'])) {						
 						if($referrerUrl != '') {
@@ -701,7 +896,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 						}
 					}					
 					$reciver = $sellerr['email'];
-					$this->model_extension_purpletree_multivendor_vendor->ptsSendMail($reciver,$email_subject,$email_message);
+					$this->model_extension_purpletree_multivendor_vendor->ptsSendMail($reciver,$email_subject,$email_message,$attach_file);
 					
 					$this->session->data['success'] = $this->language->get('text_success');
 					unset($this->session->data['ptsmv_current_page']);
@@ -767,26 +962,49 @@ class ControllerExtensionAccountPurpletreeMultivendorSellercontact extends Contr
 			if ($this->customer->isLogged()) {
 				$customer_id = $customerid;
 				$results2 	= $this->model_extension_purpletree_multivendor_sellercontact->getSellerContactCustomerschat11($seller_id,$customer_id);
+
 				$sellerr = $this->model_extension_purpletree_multivendor_sellercontact->getCustomer($seller_id);
 				$message = array();
 				$contact_from = array();
 				$date_added = array();
 				if(!empty($results2)) {
 					foreach($results2 as $result){
+						$attached_files 	= $this->model_extension_purpletree_multivendor_sellercontact->getAttachedEnquiriesFile($result['id']);
+						$attachedFileLinks=array();
+						if(!empty($attached_files)){
+							foreach($attached_files as $filess){
+								if ($this->request->server['HTTPS']) {
+									$file_root = $this->config->get('config_ssl') . 'image/' . $filess['image'];
+								} else {
+									$file_root = $this->config->get('config_url') . 'image/' . $filess['image'];
+								}
+								$name = $filess['image_name'];
+								$attachedFileLinks[]=array(
+								'name'=>$name,
+								'images'=>$file_root
+								);
+							}	
+						}
 						$data['sellercontacts'][] = array(
 						'contact_from'     => $result['contact_from'],
 						'customer_id'     => $result['customer_id'],
 						'customer_name'     => $result['customer_name'].'<br>'.$sellerr['email'],
 						'customer_email'     => $result['customer_email'],
 						'customer_messages'       =>   html_entity_decode($result['customer_message'], ENT_QUOTES, 'UTF-8') . "\n",
-						'date_added' => date($this->language->get('date_format_short'), strtotime($result['created_at']))
+						'date_added' => date($this->language->get('date_format_short'), strtotime($result['created_at'])),
+						'attached_file'=>$attachedFileLinks 
 						);
 					}
 				}
 			}
-			
+			/* // Captcha
+			$data['captcha'] = $this->load->controller('captcha/' . $this->config->get('config_captcha'), $this->error); */
 			// Captcha
-			$data['captcha'] = $this->load->controller('captcha/' . $this->config->get('config_captcha'), $this->error);
+				if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
+					$data['captcha'] = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha'), $this->error);
+				} else {
+					$data['captcha'] = '';
+				}
 						$direction = $this->language->get('direction');
 		 if ($direction=='rtl'){
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min-a.css');

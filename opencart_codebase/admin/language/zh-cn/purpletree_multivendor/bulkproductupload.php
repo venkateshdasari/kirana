@@ -39,3 +39,7 @@ $_['error_permission']      = "警告：您无权修改客户！";
 $_['text_invalidfile']      = "文件类型无效。 选择.xls或.xlsx";
 $_['text_nofile']      = "选择要导入的文件";
 $_['admin_bulk_product_upload_sheet']    = "下载范本";
+$_['text_bulk_product_import_add']    	 = '导入新产品';
+$_['text_bulk_product_import_update']    = '更新现有产品';
+$_['text_update']            			 = '更新资料';
+$_['text_bulk_product_status_heading'] = "批量产品导入/更新状态";

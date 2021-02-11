@@ -165,3 +165,6 @@ $_['entry_seller_areaheading'] = "Hyperlocal";
 $_['entry_header_popup'] = "หัวเรื่องในป๊อปอัปสำหรับ HyperLlocal";
 $_['entry_area_selection'] = "บังคับเลือกพื้นที่";
 $_['entry_seller_area_link'] = "ไปที่พื้นที่ผู้ขาย";
+$_['text_multiple_store']="ใช้โดเมนร้านค้าที่ชาญฉลาด";
+$_['text_fix_commission']="ค่าคอมมิชชั่นคงที่";
+$_['text_hyper_delivering'] = "กำลังส่งไปที่";

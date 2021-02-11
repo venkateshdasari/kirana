@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<div style="page-break-after: always;">
+			<div class="ptsc-orderinv-pagebreak">
 				<h1>{{ text_invoice_id }}#{{ invoice_id }}</h1>
 				<table class="table table-bordered">
 					<thead>
@@ -22,7 +22,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td style="width: 50%;">
+							<td class="ptsc-cuscontact-widthh">
 								{% if admin_info %}
 								<div class="pts-col-sm-6 admin-store">
 									<p><strong>{{ text_admin_storename }}: </strong>{{ admin_info.name }}</p>
@@ -33,7 +33,7 @@
 								</div>
 								{% endif %}		  
 							</td>
-							<td style="width: 50%;">
+							<td class="ptsc-cuscontact-widthh">
 								{% if store_info %}
 								<div class="pts-col-sm-6">
 									<p><strong>{{ text_seller_storename }}: </strong>{{ store_info.name }}</p>
@@ -92,7 +92,7 @@
 						<table class="table table-bordered">
 							<tbody>
 								<tr>
-									<td style="width: 50%; padding:20px;">
+									<td class="ptsc-subplaninv-widpadd">
 										<b>{{ text_invoice_id }}</b># {{ invoice_id }} <br />
 										<b>{{ text_created_date }}:</b> {{ invoice.created_date}} <br />
 									</td>

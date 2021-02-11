@@ -1,4 +1,5 @@
 <?php
+
 $_['text_seller_heading']          =	'كن بائعًا';
 $_['text_seller']          		   =	'كن بائعًا';
 $_['text_store_name']              =	'اسم المتجر';

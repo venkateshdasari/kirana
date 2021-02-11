@@ -25,7 +25,7 @@
 						<table class="pts-table">
 							<tbody>
 								<tr>
-									<td style="width: 1%;"><button data-toggle="tooltip" title="{{ text_store }}" class="pts-btn pts-btn-info pts-btn-xs"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
+									<td class="ptsc-orderinfo-width"><button data-toggle="tooltip" title="{{ text_store }}" class="pts-btn pts-btn-info pts-btn-xs"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
 									<td><a href="{{ store_url }}" target="_blank">{{ store_name }}</a></td>
 								</tr>
 								<tr>
@@ -53,7 +53,7 @@
 						</div>
 						<table class="pts-table">
 							<tr>
-								<td style="width: 1%;"><button data-toggle="tooltip" title="{{ text_customer }}" class="pts-btn pts-btn-info pts-btn-xs"><i class="fa fa-user fa-fw"></i></button></td>
+								<td class="ptsc-orderinfo-width"><button data-toggle="tooltip" title="{{ text_customer }}" class="pts-btn pts-btn-info pts-btn-xs"><i class="fa fa-user fa-fw"></i></button></td>
 								<td>{% if customer %}
 									{{ firstname }} {{ lastname }}
 									{% else %}
@@ -85,9 +85,9 @@
 					<table class="pts-table pts-table-bordered">
 						<thead>
 							<tr>
-								<td style="width: 50%;" class="pts-text-left">{{ text_payment_address }}</td>
+								<td class="pts-text-left ptsc-cuscontact-widthh">{{ text_payment_address }}</td>
 								{% if shipping_method %}
-								<td style="width: 50%;" class="pts-text-left">{{ text_shipping_address }}</td>
+								<td class="pts-text-left ptsc-cuscontact-widthh">{{ text_shipping_address }}</td>
 								{% endif %}
 							</tr>
 						</thead>

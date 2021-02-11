@@ -26,3 +26,8 @@ $_['text_contact_message'] 	=	"Inquiry na isinumite mula sa pahina";
 //button
 $_['button_view_all'] ="Tingnan lahat";
 $_['button_submit'] ='Ipasa';
+
+$_['text_files'] ='Mga file';
+$_['text_attach_file'] ='Maglakip ng file';
+$_['text_upload_file'] ='Mag-upload ng file';
+$_['text_action'] ='Kilos';

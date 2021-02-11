@@ -39,3 +39,7 @@ $_['error_permission']      = "Babala: Wala kang pahintulot na baguhin ang mga c
 $_['text_invalidfile']      = "Di-wastong uri ng file. Piliin ang .xls o .xlsx";
 $_['text_nofile']      = "Piliin ang File sa Pag-import";
 $_['admin_bulk_product_upload_sheet']    = "I-download ang template";
+$_['text_bulk_product_import_add']    	 = 'Mag-import ng Mga Bagong Produkto';
+$_['text_bulk_product_import_update']    = 'I-update ang Mga Umiiral na Produkto';
+$_['text_update']            			 = 'Update';
+$_['text_bulk_product_status_heading'] = "Kalakihang Pag-import / Katayuan ng Pag-update ng Produkto";

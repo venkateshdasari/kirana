@@ -85,6 +85,9 @@ class ControllerExtensionPurpletreeMultivendorStores extends Controller{
 					}
 					$this->model_extension_purpletree_multivendor_stores->updateVacationProductByOff($this->request->post['seller_id']);
 				}
+				if(isset($this->request->post['multiple_store'])){
+				$this->request->post['multi_store']=implode(',',$this->request->post['multiple_store']);
+				}
 				$this->model_extension_purpletree_multivendor_stores->editStore($this->request->get['store_id'], $this->request->post,$file,$admin_store_id);
 				///vacation
 				$this->model_extension_purpletree_multivendor_stores->storeTime($this->request->get['store_id'], $this->request->post);
@@ -204,9 +207,9 @@ class ControllerExtensionPurpletreeMultivendorStores extends Controller{
 		
 		
 		public function getForm(){	
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$data['heading_title'] = $this->language->get('heading_title');
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$data['text_form'] = !isset($this->request->get['store_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 			$data['module_purpletree_multivendor_allow_live_chat'] = 0;
 			if(NULL !== $this->config->get('module_purpletree_multivendor_allow_live_chat')) {
@@ -797,7 +800,13 @@ class ControllerExtensionPurpletreeMultivendorStores extends Controller{
 				} else {
 				$data['store_phone'] = '';
 			}
-			
+			if (isset($this->request->post['multiple_store'])) {
+				$data['multi_store_id'] = $this->request->post['multiple_store'];
+				} elseif (!empty($seller_info)) {
+				$data['multi_store_id'] = explode(',',$seller_info['multi_store_id']);
+				} else {
+				$data['multi_store_id'] = '';
+			}
 			if (isset($this->request->post['store_video'])) {
 				$data['store_video'] = $this->request->post['store_video'];
 				} elseif (isset($seller_info['store_video'])) {
@@ -1179,6 +1188,51 @@ class ControllerExtensionPurpletreeMultivendorStores extends Controller{
 				}
 			}
 			//end social
+						//assign multiple stores
+	$stores = array();
+	$data['assignstores'] = array();
+		
+		$data['assignstores'][] = array(
+			'store_id' => 0,
+			'name'     => $this->language->get('text_default')
+		);
+		$this->load->model('setting/store');
+		$stores = $this->model_setting_store->getStores();
+
+		foreach ($stores as $store) {
+			$data['assignstores'][] = array(
+				'store_id' => $store['store_id'],
+				'name'     => $store['name']
+			);
+		}
+
+		if(!empty($data['assignstores'])){
+			foreach($data['assignstores'] as $storeData){
+			if(!empty($data['multi_store_id'])){
+				if(in_array($storeData['store_id'],$data['multi_store_id'])){
+					$data['assignmstores'][] = array(
+						'store_id' => $storeData['store_id'],
+						'name'     => $storeData['name'],
+						'checked' => 'checked'
+					);	
+					
+				} else {
+					$data['assignmstores'][] = array(
+						'store_id' => $storeData['store_id'],
+						'name'     => $storeData['name'],
+						'checked' => ''
+					);	
+				}
+			}
+			}
+		}
+$data['use_domain_wise_stores'] = '';
+$use_domain_wise_stores = $this->config->get('module_purpletree_multivendor_multi_store');
+	
+if($use_domain_wise_stores){	
+	$data['use_domain_wise_stores'] = $use_domain_wise_stores;
+}
+//assign multiple stores
 			
 			$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 			$data['ver']=VERSION;
@@ -1199,6 +1253,7 @@ class ControllerExtensionPurpletreeMultivendorStores extends Controller{
 		}
 		
 		protected function getList() {
+		    $this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
 				} else {
@@ -1589,6 +1644,7 @@ class ControllerExtensionPurpletreeMultivendorStores extends Controller{
 		}
 		
 		public function seller_order_info(){
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->model('extension/purpletree_multivendor/stores');
 			if (isset($this->request->get['order_id'])) {
 				$order_id = $this->request->get['order_id'];

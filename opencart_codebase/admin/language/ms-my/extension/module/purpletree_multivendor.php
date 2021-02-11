@@ -169,3 +169,6 @@ $_['entry_seller_areaheading'] = "Hyperlocal";
 $_['entry_header_popup'] = "Tajuk dalam Popup untuk HyperLlocal";
 $_['entry_area_selection'] = "Wajib Pemilihan Kawasan";
 $_['entry_seller_area_link'] = "Pergi ke Kawasan Penjual";
+$_['text_multiple_store']="Gunakan kedai bijak domain";
+$_['text_fix_commission']="Tetap Komisen";
+$_['text_hyper_delivering'] = "Menghantar ke";

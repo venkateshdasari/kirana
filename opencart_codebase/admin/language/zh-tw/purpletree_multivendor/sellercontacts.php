@@ -31,3 +31,4 @@ $_['text_delete_success'] 	=	"查询已成功删除。";
 //button		
 
 $_['button_continue'] 	=	"继续";
+$_['text_files'] ='档案';

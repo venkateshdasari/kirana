@@ -11,7 +11,7 @@ class ControllerExtensionPurpletreeMultivendorManagesubscriptionplan extends Con
 			$this->load->language('purpletree_multivendor/managesubscriptionplan');
 			$this->document->setTitle($this->language->get('heading_title'));
 			$this->load->model('extension/purpletree_multivendor/managesubscriptionplan');
-			$this->getList();
+			$this->getList();			
 		}
 		
 		public function add() {
@@ -682,6 +682,7 @@ class ControllerExtensionPurpletreeMultivendorManagesubscriptionplan extends Con
 		}
 		
 		public function viewAllPlan() {
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');	
 		if (!$this->customer->validateSeller()) {
 		$this->load->language('purpletree_multivendor/ptsmultivendor');
 		$this->session->data['error_warning'] = $this->language->get('error_license');
@@ -1030,6 +1031,7 @@ class ControllerExtensionPurpletreeMultivendorManagesubscriptionplan extends Con
 		}
 		
 		public function view() {
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 		if (!$this->customer->validateSeller()) {
 		$this->load->language('purpletree_multivendor/ptsmultivendor');
 		$this->session->data['error_warning'] = $this->language->get('error_license');
@@ -1298,6 +1300,7 @@ class ControllerExtensionPurpletreeMultivendorManagesubscriptionplan extends Con
 		}
 		
 		protected function getList() {
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');	
 		if (isset($this->request->get['sort'])) {
 		$sort = $this->request->get['sort'];
 		} else {

@@ -27,3 +27,8 @@ $_['text_contact_message'] 	=	"Demande soumise à partir de la page";
 //button
 $_['button_view_all'] ='Voir tout';
 $_['button_submit'] ='Soumettre';
+
+$_['text_files'] ='Des dossiers';
+$_['text_attach_file'] ='Pièce jointe';
+$_['text_upload_file'] ='Téléverser un fichier';
+$_['text_action'] ='action';

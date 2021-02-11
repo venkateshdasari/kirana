@@ -24,3 +24,4 @@ $_['text_delete_success'] 	=	"Anfrage wurde erfolgreich gelöscht.";
 
 //button
 $_['button_continue'] 	=	"Weiter";
+$_['text_files'] ='Dateien';

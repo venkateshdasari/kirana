@@ -90,6 +90,17 @@ class ModelExtensionPurpletreeMultivendorSellercontact extends Model{
 			$query = $this->db->query($sql);
 			return $query->rows;
 		}
+		
+	public function getAttachedEnquiriesFile($chat_id){
+			$sql = "SELECT * FROM " . DB_PREFIX . "purpletree_customer_vendor_enquiries WHERE chat_id = '".(int)$chat_id."'";
+			$query = $this->db->query($sql);
+			if($query->num_rows){
+				return $query->rows;
+			} else {
+				return NULL;
+			}
+		}
+		
 		public function getSellerContactCustomers122($data=array()){
 			
 			if ($data['start'] < 0) {
@@ -213,7 +224,20 @@ class ModelExtensionPurpletreeMultivendorSellercontact extends Model{
 		}
 		
 		public function addContact($data){
+			
 			$this->db->query("INSERT into " . DB_PREFIX . "purpletree_vendor_contact SET seller_id= '".(int)$data['seller_id']."',customer_id= '".(int)$data['customer_id']."',contact_from= '".(int)$data['contact_from']."', customer_name ='".$this->db->escape($data['customer_name'])."', customer_email='".$this->db->escape($data['customer_email'])."', customer_message='".$this->db->escape($data['customer_message'])."', created_at=NOW(), updated_at=NOW()");
+			
+			$chat_id = $this->db->getLastId();
+			if(!empty($data['attached_file'])){
+				foreach($data['attached_file'] as $attached_file){
+					$this->db->query("INSERT into " . DB_PREFIX . "purpletree_customer_vendor_enquiries SET chat_id= '".(int)$chat_id."',image_name= '".$this->db->escape($attached_file['file_name'])."',image= '".$this->db->escape($attached_file['file_root'])."'");
+				}
+			}
+			if($chat_id){
+				return $chat_id;
+			} else {
+				return NULL;
+			}
 		}
 		
 		public function getCusatemail($id){

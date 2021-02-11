@@ -17,7 +17,11 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
 				}else{
-				if(isset($store_detail['store_status']) && $store_detail['multi_store_id'] != $this->config->get('config_store_id')){	
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
 					$this->response->redirect($this->url->link('account/account','', true));
 				}
 			}
@@ -35,6 +39,19 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerblogpost', '', true);
 				
 				$this->response->redirect($this->url->link('account/login', '', true));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			$this->load->model('extension/purpletree_multivendor/dashboard');
 			
@@ -96,6 +113,14 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 			$store_detail = $this->customer->isSeller();
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			
 			if(!$this->customer->validateSeller()) {
@@ -149,6 +174,14 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 			$store_detail = $this->customer->isSeller();
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			
 			if(!$this->customer->validateSeller()) {
@@ -203,6 +236,14 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 			$store_detail = $this->customer->isSeller();
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			
 			if(!$this->customer->validateSeller()) {
@@ -245,7 +286,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 		}
 		
 		protected function getList() {
-			
+
 			if (isset($this->request->get['sort'])) {
 				$sort = $this->request->get['sort'];
 				} else {
@@ -417,7 +458,6 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 		}
 		
 		protected function getForm() {
-			
 			
 			$data['heading_title'] = $this->language->get('heading_title');
 			
@@ -721,4 +761,4 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerblogpost extends Cont
 			$this->response->addHeader('Content-Type: application/json');
 			$this->response->setOutput(json_encode($json));
 		}
-}
+}?>

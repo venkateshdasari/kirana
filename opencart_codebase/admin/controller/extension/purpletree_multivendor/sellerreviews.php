@@ -128,6 +128,7 @@ class ControllerExtensionPurpletreeMultivendorSellerreviews extends Controller {
 		}
 		
 		protected function getList() {
+		   $this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_customer_name'])) {
 				$filter_customer_name = $this->request->get['filter_customer_name'];
 				} else {

@@ -32,6 +32,7 @@
 <link href="catalog/view/theme/default/stylesheet/purpletree/custom.css" type="text/css" rel="stylesheet" />
 <link href="catalog/view/javascript/purpletree/css/stylesheet/adminstylesheet.css" type="text/css" rel="stylesheet" />
 {% endif %}
+<link href="catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css" type="text/css" rel="stylesheet" />
 {% for scriptpts in scriptspts %}
 <script src="{{ scriptpts }}" type="text/javascript"></script>
 {% endfor %}
@@ -43,11 +44,15 @@
 {{ analytic }}
 {% endfor %}
 </head>
-<body>
+<body> 
+<body> 
 <div id="container">
 <header id="header" class="navbar navbar-static-top">
   <div class="container-fluid">
-    <div id="header-logo" class="pts-navbar-header"><a style="font-weight: bold;" href="{{ dashboardpageurl }}" class="pts-pull-left navbar-brand">{{ text_seller_panel }}</a></div>
+    <div id="header-logo" class="pts-navbar-header">{% if logo %}<a class="pts-pull-left navbar-brand ptsc-header-padding" href="{{ home }}"  /><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive ptsc-header-height" /></a>{% else %}
+          <h1><a  class="pts-pull-left navbar-brand" href="{{ home }}">{{ name }}</a></h1>
+          {% endif %}</div>
+
     <a href="#" id="button-menu" class="hidden-md hidden-lg"><span class="fa fa-bars"></span></a>
 		{% if logged %}
     <ul class="nav navbar-nav pts-navbar-nav pts-navbar-right pts-pull-right accountptsdrop">
@@ -69,12 +74,3 @@
 	</div>
   </div>
 </header>
-<style>
-.ptssellertop button {
-	background:none;
-	border:none;
-}
-.ptssellertop li {
-	list-style:none;
-}
-</style>

@@ -27,3 +27,8 @@ $_['text_contact_message'] = 'Inquiry submitted from page';
 //button
 $_['button_view_all'] ='View All';
 $_['button_submit'] ='Submit';
+
+$_['text_files'] ='Files';
+$_['text_attach_file'] ='Attach file';
+$_['text_upload_file'] ='Upload file';
+$_['text_action'] ='Action';

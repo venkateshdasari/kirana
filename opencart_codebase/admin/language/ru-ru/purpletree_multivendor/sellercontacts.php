@@ -29,3 +29,4 @@ $_['text_delete_success'] 	=	"Запрос успешно удален.";
 //button		
 
 $_['button_continue'] 	=	"Продолжить";
+$_['text_files'] ='Файлы';

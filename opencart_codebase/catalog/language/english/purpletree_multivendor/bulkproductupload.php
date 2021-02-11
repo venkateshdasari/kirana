@@ -45,3 +45,7 @@ $_['text_nofile']      = 'Select File to Import';
 $_['error_subscription_plan']       = 'Please Select Subscription Plan!';
 $_['error_subscription_plan_limit']       = 'Plan Limit exceed Please change Plan!';
 $_['error_subscription_plan_status']       = 'Plan Subscription is disable  Please Enable plan Subscription!';
+$_['text_bulk_product_import_add']    	 = 'Import New Products';
+$_['text_bulk_product_import_update']    = 'Update Existing Products';
+$_['text_update']            			 = 'Update';
+$_['text_bulk_product_status_heading'] = "Bulk Product Import/Update Status";

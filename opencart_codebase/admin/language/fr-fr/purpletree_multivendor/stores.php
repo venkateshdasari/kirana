@@ -202,3 +202,6 @@ $_['entry_sellerarea'] = "Zones du vendeur";
 $_['help_sellerarea'] = "(Autocomplete)";
 $_['text_all_sellerarea'] = "Tout";
 $_['text_selected_sellerarea'] = "Sélectionné";
+
+$_['entry_multi_store']     = 'Magasins Opencart';
+$_['entry_assign_stores']    = 'Attribuer des magasins Opencart';

@@ -38,3 +38,7 @@ $_['error_permission']      = 'Uyarı: Müşterileri değiştirme izniniz yok!';
 $_['text_invalidfile']      = 'Geçersiz dosya türü. Uzantı.xls veya .xlsx olmalı';
 $_['text_nofile']      = 'İçe Aktarılacak Dosyayı Seçin';
 $_['admin_bulk_product_upload_sheet']    = "Şablonu indirin";
+$_['text_bulk_product_import_add']    	 = 'Yeni Ürün İthalatı';
+$_['text_bulk_product_import_update']    = 'Mevcut Ürünleri Güncelleme';
+$_['text_update']            			 = 'Güncelleme';
+$_['text_bulk_product_status_heading'] = "Kalakihang Pag-import / Katayuan ng Pag-update ng Produkto";

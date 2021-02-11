@@ -39,4 +39,8 @@ $_['error_permission'] = 'Atenție: Nu aveți permisiunea de a modifica clienți
 $_['text_invalidfile'] = 'Tip de fișier nevalid. Selectați .xls sau .xlsx ';
 $_['text_nofile'] = 'Selectați fișierul pentru a importa';
 $_['entry_custom_fields']       = "câmpuri customizate";
+$_['text_bulk_product_import_add']    	 = 'Importați produse noi';
+$_['text_bulk_product_import_update']    = 'Actualizați produsele existente';
+$_['text_update']            			 = 'Actualizați';
+$_['text_bulk_product_status_heading'] = "Status de importação / atualização de produto em massa";
 ?>

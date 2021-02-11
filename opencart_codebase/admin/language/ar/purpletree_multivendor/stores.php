@@ -194,3 +194,6 @@ $_['entry_sellerarea']       = "مناطق البائع";
 $_['help_sellerarea']       = "(إكمال تلقائي)";
 $_['text_all_sellerarea']       = "الكل";
 $_['text_selected_sellerarea']       = "المحدد";
+
+$_['entry_multi_store']     = 'Opencart متاجر';
+$_['entry_assign_stores']    = 'Opencartتعيين متاجر';

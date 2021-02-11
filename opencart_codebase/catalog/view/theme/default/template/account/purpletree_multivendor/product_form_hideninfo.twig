@@ -67,7 +67,7 @@
 						<label class="pts-col-sm-2 pts-control-label" for="input-category"><span data-toggle="tooltip" title="{{ help_category }}">{{ entry_category }}</span></label>
 						<div class="pts-col-sm-10">
 							<input type="text" name="category" value="" placeholder="{{ entry_category }}" id="input-category" class="pts-form-control" />
-							<div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;"> {% for product_category in product_categories %}
+							<div id="product-category" class="well well-sm ptsc-product-heigoflow"> {% for product_category in product_categories %}
 								<div id="product-category{{ product_category.category_id }}"><i class="fa fa-minus-circle"></i> {{ product_category.name }}
 									<input type="hidden" name="product_category[]" value="{{ product_category.category_id }}" />
 								</div>
@@ -105,9 +105,9 @@
 					{% endif %}	
 					<!--Store-->
 					<div class="pts-form-group">
-						<label class="pts-col-sm-2 pts-control-label"  style="display:none">{{ entry_store }}</label>
+						<label class="pts-col-sm-2 pts-control-label ptsc-productl-nodisplay">{{ entry_store }}</label>
 						<div class="pts-col-sm-10">
-							<div class="well well-sm" style="height: 150px; overflow: auto;display:none;"> {% for store in stores %}
+							<div class="well well-sm ptsc-product-heigoflow ptsc-productl-nodisplay"> {% for store in stores %}
 								<div class="checkbox">
 									<label> {% if store.store_id in product_store %}
 										<input type="checkbox" name="product_store[]"   value="{{ store.store_id }}" checked="checked" />
@@ -195,7 +195,7 @@
 					<div class="pts-form-group">
 						<label class="pts-col-sm-2 pts-control-label">{{ entry_customer_group }}</label>
 						<div class="pts-col-sm-10">
-							<div class="pts-well pts-well-sm" style="height: 150px; overflow: auto;">
+							<div class="pts-well pts-well-sm ptsc-product-heigoflow">
 								{% for customer_group in customer_groups %}
 								<div class="checkbox">
 									<label>
@@ -316,7 +316,7 @@
 				</div>
 				<div class="pts-form-group">
 					<label class="pts-col-sm-2 pts-control-label" for="tab-special">{{ tab_special }}</label>
-					<div class="tab-pane pts-col-sm-10" style="padding:0; margin-bottom:10px" id="tab-special">
+					<div class="tab-pane pts-col-sm-10 ptsc-smproduct-padmarbot" id="tab-special">
 						<div class="pts-table-responsive">
 							<table id="special" class="pts-table pts-table-striped pts-table-bordered pts-table-hover">
 								<thead>
@@ -349,12 +349,12 @@
 										</select></td>
 										<td class="pts-text-right"><input type="text" name="product_special[{{ special_row }}][priority]" value="{{ product_special.priority }}" placeholder="{{ entry_priority }}" class="pts-form-control" /></td>
 										<td class="pts-text-right"><input type="text" name="product_special[{{ special_row }}][price]" value="{{ product_special.price }}" placeholder="{{ entry_price }}" class="pts-form-control" /></td>
-										<td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex">
+										<td class="pts-text-left ptsc-attr-tab-width"><div class="pts-input-group date d-flex">
 											<input type="text" name="product_special[{{ special_row }}][date_start]" value="{{ product_special.date_start }}" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" />
 											<span class="pts-input-group-pts-btn">
 												<button class="pts-btn pts-btn-default" type="button"><i class="fa fa-calendar"></i></button>
 											</span></div></td>
-											<td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex">
+											<td class="pts-text-left ptsc-attr-tab-width"><div class="pts-input-group date d-flex">
 												<input type="text" name="product_special[{{ special_row }}][date_end]" value="{{ product_special.date_end }}" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" />
 												<span class="pts-input-group-pts-btn">
 													<button class="pts-btn pts-btn-default" type="button"><i class="fa fa-calendar"></i></button>
@@ -570,7 +570,7 @@
 				
 			</div>
 		</div>
-		<div class="buttons clearfix" style="clear: both;">
+		<div class="buttons clearfix ptsc-coupon-clear" >
 			<div class="pts-pull-left"><a href="{{ back }}" class="pts-btn pts-btn-default">{{ button_back }}</a></div>
 			<div class="pts-pull-right">
 				<input type="submit" value="{{ button_continue }}" class="pts-btn pts-btn-primary" />
@@ -738,7 +738,7 @@
 	{% endif %}
 	function addAttribute() {
 		html  = '<tr id="attribute-row' + attribute_row + '">';
-		html += '  <td class="pts-text-left" style="width: 20%;"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="{{ entry_attribute }}" class="pts-form-control" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="{{ entry_attribute }}" class="pts-form-control" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
 		html += '  <td class="pts-text-left">';
 		{% for language in languages %}
 		html += '<div class="pts-input-group"><span class="pts-input-group-addon"><img src="catalog/language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span><textarea name="product_attribute[' + attribute_row + '][product_attribute_description][{{ language.language_id }}][text]" rows="5" placeholder="{{ entry_text }}" class="pts-form-control"></textarea></div>';
@@ -834,7 +834,7 @@
 			}
 			
 			if (item['type'] == 'file') {
-				html += '	<div class="pts-form-group" style="display: none;">';
+				html += '	<div class="pts-form-group ptsc-productl-nodisplay">';
 				html += '	  <label class="pts-col-sm-2 pts-control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
 				html += '	  <div class="pts-col-sm-10"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="pts-form-control" /></div>';
 				html += '	</div>';
@@ -886,7 +886,7 @@
 				html += '  </table>';
 				html += '</div>';
 				
-				html += '  <select id="option-values' + option_row + '" style="display: none;">';
+				html += '  <select id="option-values' + option_row + '" class="ptsc-productl-nodisplay">';
 				
 				for (i = 0; i < item['option_value'].length; i++) {
 					html += '  <option value="' + item['option_value'][i]['option_value_id'] + '">' + item['option_value'][i]['name'] + '</option>';
@@ -974,8 +974,8 @@
 		html += '  <td class="pts-text-right"><input type="text" name="product_discount[' + discount_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="pts-form-control" /></td>';
 		html += '  <td class="pts-text-right"><input type="text" name="product_discount[' + discount_row + '][priority]" value="" placeholder="{{ entry_priority }}" class="pts-form-control" /></td>';
 		html += '  <td class="pts-text-right"><input type="text" name="product_discount[' + discount_row + '][price]" value="" placeholder="{{ entry_price }}" class="pts-form-control" /></td>';
-		html += '  <td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex"><input type="text" name="product_discount[' + discount_row + '][date_start]" value="" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-		html += '  <td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex"><input type="text" name="product_discount[' + discount_row + '][date_end]" value="" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><div class="pts-input-group date d-flex"><input type="text" name="product_discount[' + discount_row + '][date_start]" value="" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><div class="pts-input-group date d-flex"><input type="text" name="product_discount[' + discount_row + '][date_end]" value="" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
 		html += '  <td class="pts-text-left"><button type="button" onclick="$(\'#discount-pts-row' + discount_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="pts-btn pts-btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 		html += '</tr>';
 		
@@ -1000,8 +1000,8 @@
 		html += '  </select></td>';
 		html += '  <td class="pts-text-right"><input type="text" name="product_special[' + special_row + '][priority]" value="" placeholder="{{ entry_priority }}" class="pts-form-control" /></td>';
 		html += '  <td class="pts-text-right"><input type="text" name="product_special[' + special_row + '][price]" value="" placeholder="{{ entry_price }}" class="pts-form-control" /></td>';
-		html += '  <td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex"><input type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-		html += '  <td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex"><input type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><div class="pts-input-group date d-flex"><input type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><div class="pts-input-group date d-flex"><input type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
 		html += '  <td class="pts-text-left"><button type="button" onclick="$(\'#special-pts-row' + special_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="pts-btn pts-btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 		html += '</tr>';
 		

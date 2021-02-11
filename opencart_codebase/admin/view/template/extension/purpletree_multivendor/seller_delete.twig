@@ -43,7 +43,7 @@
 								<li>{{ text_shipping_rate }}</li>
 							</ul>
 						</div>
-						<label for="check-1" style="margin-left:10px;">
+						<label for="check-1" class="ptsc-delete-seller-marlef">
 						<input type="checkbox" id="chek-1 "name="delete_product" value="1"> {{ text_delete_product }}</label> 
 					</div>
 					<button type="submit" id="confirm-seller-delete" data-toggle="tooltip"  title="{{ "Delete Confirm" }}" class="btn btn-danger">{{ text_delete_confirm }}</button>
@@ -53,12 +53,6 @@
 	</div>
 </div>
 {{ footer }} 
-<style>
-	.pts-delete-seller-detail li{
-	list-style:bullet;
-	font-weight:normal;
-	}
-</style>
 <script>
 	$('#confirm-seller-delete').click(function (e) { if(!confirm('Do you want to delete all the information of seller?')){ e.preventDefault(); } });
 </script>

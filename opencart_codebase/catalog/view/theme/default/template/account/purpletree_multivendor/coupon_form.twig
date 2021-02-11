@@ -125,7 +125,7 @@
 						<label class="pts-col-sm-2 pts-control-label" for="input-product"><span data-toggle="tooltip" title="{{ help_product }}">{{ entry_product }}</span></label>
 						<div class="col-sm-10">
 							<input type="text" name="product" value="" placeholder="{{ entry_product }}" id="input-product" class="pts-form-control" />
-							<div id="pts-coupon-product" class="well well-sm" style="height: 150px; overflow: auto;"> {% for coupon_product in coupon_product %}
+							<div id="pts-coupon-product" class="well well-sm ptsc-coupon-heiover"> {% for coupon_product in coupon_product %}
 								<div id="coupon-product{{ coupon_product.product_id }}"><i class="fa fa-minus-circle"></i> {{ coupon_product.name }}
 									<input type="hidden" name="coupon_product[]" value="{{ coupon_product.product_id }}" />
 								</div>
@@ -136,7 +136,7 @@
 						<label class="pts-col-sm-2 pts-control-label" for="input-category"><span data-toggle="tooltip" title="{{ help_category }}">{{ entry_category }}</span></label>
 						<div class="col-sm-10">
 							<input type="text" name="category" value="" placeholder="{{ entry_category }}" id="input-category" class="form-control" />
-							<div id="coupon-category" class="well well-sm" style="height: 150px; overflow: auto;"> {% for coupon_category in coupon_category %}
+							<div id="coupon-category" class="well well-sm ptsc-coupon-heiover"> {% for coupon_category in coupon_category %}
 								<div id="coupon-category{{ coupon_category.category_id }}"><i class="fa fa-minus-circle"></i> {{ coupon_category.name }}
 									<input type="hidden" name="coupon_category[]" value="{{ coupon_category.category_id }}" />
 								</div>
@@ -199,7 +199,7 @@
 				</div>
 				{% endif %}
 			</div>
-			<div class="buttons clearfix" style="clear: both;">
+			<div class="buttons clearfix ptsc-coupon-clear">
 				<div class="pts-pull-left"><a href="{{ back }}" class="pts-btn pts-btn-default">{{ button_back }}</a></div>
 				<div class="pts-pull-right">
 					<input type="submit" id="coupon-button-continue" value="{{ button_continue }}" class="pts-btn pts-btn-primary" />

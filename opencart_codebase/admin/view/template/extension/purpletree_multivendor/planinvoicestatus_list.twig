@@ -37,8 +37,7 @@
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
-									<td style="width: 1px;" 
-									class="text-center"><input onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" type="checkbox"></td>
+									<td	class="text-center ptsc-vendorlis-width"><input onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" type="checkbox"></td>
 									<td class="text-left">{{ column_status_name }}</td>
 									<td class="text-left">{{ column_created_date }}</td>
 									<td class="text-left">{{ column_modified_date }}</td>
@@ -50,7 +49,7 @@
 								{% for planinvoice_status in planinvoice_statuss %}
 								<tr>
 									<!-- <td style="width: 1px;" class="text-center"><input type="checkbox"></td> -->
-									<td style="width: 1px;" class="text-center">{% if planinvoice_status.status_id in selected %}
+									<td class="text-center ptsc-vendorlis-width">{% if planinvoice_status.status_id in selected %}
 										<input type="checkbox" name="selected[]" value="{{ planinvoice_status.status_id }}" checked="checked" />
 										{% else %}
 										<input type="checkbox"  name="selected[]" value="{{ planinvoice_status.status_id }}" />

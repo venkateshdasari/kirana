@@ -166,3 +166,6 @@ $_['entry_seller_areaheading'] = "Hiper Yerel";
 $_['entry_header_popup'] = "HyperLlocal için Açılır Pencerede Başlık";
 $_['entry_area_selection'] = "Alan Seçimi Zorunlu";
 $_['entry_seller_area_link'] = "Satıcı Alanına Git";
+$_['text_multiple_store']="Alan adı bilge mağazaları kullanın";
+$_['text_fix_commission']="Sabit Komisyon";
+$_['text_hyper_delivering'] = "Teslim Ediliyor";

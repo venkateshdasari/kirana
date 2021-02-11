@@ -200,3 +200,6 @@ $_['entry_sellerarea'] = "Satıcı Alanları";
 $_['help_sellerarea'] = "(Otomatik Tamamlama)";
 $_['text_all_sellerarea'] = "Tümü";
 $_['text_selected_sellerarea'] = "Seçildi";
+
+$_['entry_multi_store']     = 'Opencart Mağazaları';
+$_['entry_assign_stores']    = 'Opencart Mağazalarını Atayın';

@@ -19,10 +19,16 @@
 				{% if sellercontacts %}
 				<table class="pts-table pts-table-striped pts-table-bordered">
 					{% for contact in sellercontacts %}
-					<tr {% if contact.seen %} style="background-color: #aec483;" {% endif %}>
+					<tr {% if contact.seen %} class="ptsc-cusreply-baccolor" {% endif %}>
 						<td><strong>{{ contact.customer_name }} -</strong>
 							</br><strong> {{ contact.customer_email }} </strong>
-							- {{ contact.customer_messages }}						
+							- {{ contact.customer_messages }}
+							{% if contact.attached_file %}
+								<br><strong>{{ text_files }}</strong>
+								{% for files in contact.attached_file %}
+								<br>&nbsp; &nbsp;<a href="{{ files.images }}" target="_blank" >{{ files.name }} </a>
+								{% endfor %}
+							{% endif %}							
 						</td>
 						<td class="pts-text-right">
 							{{ contact.date_added }}
@@ -50,6 +56,31 @@
 							{% endif %}
 						</div>
 					</div>
+<!-- add attach file -->
+	<div class="pts-form-group">
+	<label class="pts-col-sm-2 pts-control-label" for="input-enquiry">{{ text_attach_file }}</label>
+	<div class="pts-col-sm-10">
+		<div class="pts-table-responsive">
+			<table id="attached-file" class="pts-table pts-table-striped pts-table-bordered pts-table-hover">
+				<thead>
+					<tr>
+						<td class="pts-text-left">{{ text_upload_file }}</td>
+						<td>{{ text_action }}</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="1" width="80%"></td>
+						<td class="pts-text-left" width="20%"><button type="button" onclick="attachedFile();" data-toggle="tooltip" title="{{ text_attach_file }}" class="pts-btn pts-btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		</div>
+	</div>
+	<!-- add attach file -->
 					{{ captcha }}
 				</fieldset>
 				<div class="pts-buttons">
@@ -63,4 +94,19 @@
 		</div>
 	</div>
 </div>
+<script>
+var attach_file_row = 1;		
+function attachedFile() {	
+	html = '<tr id="attach_file_row' + attach_file_row + '">';
+	html += '<td class="pts-text-left">';
+	html += '<input type="file" name="attached_file[' + attach_file_row + ']" value="" placeholder="" id="attach_file_row' + attach_file_row + '"class="pts-form-control date" />';
+	html += '</td>';
+	html += '<td class="pts-text-left">';
+	html += '<button type="button" onclick="$(\'#attach_file_row' + attach_file_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="pts-btn pts-btn-danger"><i class="fa fa-minus-circle"></i></button>';
+	html += '</td>';
+	html += '</tr>';
+	$('#attached-file tbody').append(html);
+	attach_file_row++;
+}
+</script>
 {{ footer }}

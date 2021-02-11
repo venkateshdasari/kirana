@@ -734,7 +734,7 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 			//***** Seller area ******//
-			if ($this->user->hasPermission('access', 'extension/purpletree_multivendor/sellerenquiries')) {
+			if ($this->user->hasPermission('access', 'extension/purpletree_multivendor/sellerarea')) {
 				$purpletree_multivendor[] = array(
 					'name'	   => $this->language->get('text_pt_seller_area'),
 					'href'     => $this->url->link('extension/purpletree_multivendor/sellerarea', 'user_token=' . $this->session->data['user_token'], true),

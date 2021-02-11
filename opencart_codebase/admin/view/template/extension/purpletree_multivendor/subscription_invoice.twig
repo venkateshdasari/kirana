@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<div style="page-break-after: always;">
+			<div class="ptsc-subscrip-pagebreak">
 				<h1>{{ text_invoice }}#{{ invoice_id }}</h1>
 				<table class="table table-bordered">
 					<thead>
@@ -22,7 +22,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td style="width: 50%;">
+							<td class="ptsc-subscrip-width">
 								
 								{% if admin_info %}
 								<div class="col-sm-6 admin-store">
@@ -34,7 +34,7 @@
 								</div>
 								{% endif %}		  
 							</td>
-							<td style="width: 50%;">
+							<td class="ptsc-subscrip-width">
 								{% if store_info %}
 								<div class="col-sm-6">
 									<p>{{ text_seller_store_name }} - <strong>{{ store_info.name }}</strong></p>
@@ -91,12 +91,12 @@
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
-							<td style="width: 50%; padding:20px;">
+							<td class="ptsc-subscrip-widpad">
 								<b>{{ text_invoice_id }}</b>#{{ invoice_id }} <br />
 								<b>{{ text_created_date }}</b> {{ created_date}} <br />
 							</td>
 							<td>
-								<h3 style="text-align:center">{{ current_status }}</h3>
+								<h3 class="text-center">{{ current_status }}</h3>
 							</td>
 						</tr>
 					</tbody>

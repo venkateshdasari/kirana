@@ -1,5 +1,14 @@
 <?php
 class ModelExtensionPurpletreeMultivendorOrderinvoice extends Model{
+	public function checkSellerCoupon($orderid,$code) {
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "purpletree_order_total WHERE order_id = '" . (int)$orderid . "' AND code = '" . $this->db->escape($code). "'");
+			if($query->num_rows){
+			  return true;
+			}else{
+			  return false;
+			}
+			
+		}
 		public function getsellerorder($orderid) {
 			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "purpletree_vendor_orders WHERE order_id = '" . (int)$orderid . "'");
 			

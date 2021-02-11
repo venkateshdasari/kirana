@@ -203,4 +203,7 @@ $_['entry_sellerarea'] = "Zonele vânzătorului";
 $_['help_sellerarea'] = "(Completare automată)";
 $_['text_all_sellerarea'] = "Toate";
 $_['text_selected_sellerarea'] = "Selectat";
+
+$_['entry_multi_store']     = 'Magazinele Opencart';
+$_['entry_assign_stores']    = 'Atribuiți magazine Opencart';
 ?>

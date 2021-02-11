@@ -102,9 +102,13 @@ class ControllerCommonHeader extends Controller {
 						if($store_detail['is_removed']==1){
 							$data['seller_panel_link'] = $this->url->link('extension/account/purpletree_multivendor/sellerstore/becomeseller', '', true);
 						} else {
-						if($store_detail['store_status']==1 && $store_detail[  'multi_store_id'] == $this->config->get('config_store_id')){
+						$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+						if($store_detail['store_status']==1 && in_array($this->config->get('config_store_id'),$stores)){
 							$data['seller_panel_link'] = $this->url->link('extension/account/purpletree_multivendor/dashboardicons', '', true);
-						}elseif($store_detail[  'multi_store_id'] != $this->config->get('config_store_id')){
+						} elseif(!in_array($this->config->get('config_store_id'),$stores)){
 						  $data['seller_panel_link'] = $this->url->link('extension/account/purpletree_multivendor/sellerlogin');
 						   $data['text_seller_panel'] = $this->language->get('text_seller_register');
 						} else {

@@ -199,3 +199,9 @@ $_['entry_sellerarea'] = "Áreas para vendedores";
 $_['help_sellerarea'] = "(Preenchimento automático)";
 $_['text_all_sellerarea'] = "Todos";
 $_['text_selected_sellerarea'] = "Selecionado";
+
+$_['entry_multi_store']     = 'Lojas Opencart';
+$_['entry_assign_stores']    = 'Atribuir lojas Opencart';
+$_['text_bulk_product_import_add']    	 = 'importe novos produtos';
+$_['text_bulk_product_import_update']    = 'Atualizar produtos existentes';
+$_['text_update']            			 = 'Atualizar';

@@ -19,4 +19,5 @@ $_['error_permission'] = 'Warnung: Sie sind nicht berechtigt, das Multivendor Bl
 $_['error_name']       = 'Modulname muss zwischen 3 und 128 Zeichen lang sein!';
 $_['error_width']      = 'Breite erforderlich!';
 $_['error_height']     = 'Höhe erforderlich!';
+$_['error_limit']      = 'Limit erforderlich!';
 ?>

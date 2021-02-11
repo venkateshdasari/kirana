@@ -19,4 +19,5 @@ $_['error_permission'] = '警告：您无权修改多厂商博客设置模块！
 $_['error_name']       = '模块名称必须介于3到128个字符之间！';
 $_['error_width']      = '需要宽度！';
 $_['error_height']     = '需要高度！';
+$_['error_limit']     = '需要限制！';
 ?>

@@ -7,13 +7,12 @@ class ControllerExtensionPurpletreeMultivendorSellerorders extends Controller {
 			
 			$this->document->setTitle($this->language->get('heading_title'));
 			
-			$this->load->model('extension/purpletree_multivendor/stores');
-			
+			$this->load->model('extension/purpletree_multivendor/stores');			
 			$this->getList();
 		}
 		
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->language('purpletree_multivendor/sellerorder');
 			
 			if (isset($this->request->get['filter_order_status'])) {
@@ -758,14 +757,27 @@ class ControllerExtensionPurpletreeMultivendorSellerorders extends Controller {
 									}
 								}
 								$total_data = array();
-								if($sellerid == 0 || count($sellorders) === 1) {
-									$totals = $this->model_sale_order->getOrderTotals($order_id);
+								if($sellerid == 0 ) {
+									$totalss = $this->model_sale_order->getOrderTotals($order_id);
+									$check_seller_coupon = $this->model_extension_purpletree_multivendor_orderinvoice->checkSellerCoupon($order_id,'coupon');
+									if($check_seller_coupon == 1)
+									{
+									foreach($totalss as $key=>$val){
+										if($val['code']!='coupon'){
+											$totals[$key]= $val;
+										}else{
+										 $sellercoupon = $val['value'];
+										}
+									}
+									}else{ 
+									$totals = $totalss; 
+									}
 									} else {
 									$totals = $this->model_extension_purpletree_multivendor_orderinvoice->getOrderTotals($order_id,$sellerid);
 								}
 								$totall =0;
 								foreach ($totals as $total) {
-									if($sellerid == 0 || count($sellorders) === 1) {
+									if($sellerid == 0 ) {
 										if($total['code'] == 'sub_total') {
 											$total_data[] = array(
 											'title' => $total['title'],
@@ -1604,7 +1616,7 @@ class ControllerExtensionPurpletreeMultivendorSellerorders extends Controller {
 			$json = array();
 			if (isset($this->request->get['order_id'])) {
 				$order_id = $this->request->get['order_id'];
-				$access_token = $this->getAccestoken();
+				//$access_token = $this->getAccestoken();
 				$access_token = $this->getAccestoken();
 				if($access_token != '') {
 				$this->load->model('extension/payment/pp_adaptive');

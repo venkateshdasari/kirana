@@ -24,7 +24,9 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 			$data['text_enabled'] = $this->language->get('text_enabled');
 			$data['text_disabled'] = $this->language->get('text_disabled');
 			$data['entry_status'] = $this->language->get('entry_status');
-			
+			$data['entry_limit'] = $this->language->get('entry_limit');
+			$data['entry_width'] = $this->language->get('entry_width');
+			$data['entry_height'] = $this->language->get('entry_height');
 			$data['button_save'] = $this->language->get('button_save');
 			$data['button_cancel'] = $this->language->get('button_cancel');
 			
@@ -33,8 +35,22 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 				} else {
 				$data['error_warning'] = '';
 			}
-			
-			
+			if (isset($this->error['width'])) {
+			$data['error_width'] = $this->error['width'];
+			} else {
+				$data['error_width'] = '';
+			}
+
+			if (isset($this->error['height'])) {
+				$data['error_height'] = $this->error['height'];
+			} else {
+				$data['error_height'] = '';
+			}			
+			if (isset($this->error['limit'])) {
+				$data['error_limit'] = $this->error['limit'];
+			} else {
+				$data['error_limit'] = '';
+			}
 			
 			$data['breadcrumbs'] = array();
 			
@@ -73,6 +89,29 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 				} else {
 				$data['module_purpletree_featuredstore_status'] = $this->config->get('module_purpletree_featuredstore_status');
 			}
+		if (isset($this->request->post['module_purpletree_featuredstore_limit'])) {
+			$data['limit'] = $this->request->post['module_purpletree_featuredstore_limit'];
+		} elseif ($this->config->get('module_purpletree_featuredstore_limit')) {
+			$data['limit'] = $this->config->get('module_purpletree_featuredstore_limit');
+		} else {
+			$data['limit'] = 5;
+		}
+
+		if (isset($this->request->post['module_purpletree_featuredstore_width'])) {
+			$data['width'] = $this->request->post['module_purpletree_featuredstore_width'];
+		} elseif ($this->config->get('module_purpletree_featuredstore_width')) {
+			$data['width'] = $this->config->get('module_purpletree_featuredstore_width');
+		} else {
+			$data['width'] = 200;
+		}
+
+		if (isset($this->request->post['module_purpletree_featuredstore_height'])) {
+			$data['height'] = $this->request->post['module_purpletree_featuredstore_height'];
+		} elseif ($this->config->get('module_purpletree_featuredstore_height')){
+			$data['height'] = $this->config->get('module_purpletree_featuredstore_height');
+		} else {
+			$data['height'] = 200;
+		}			
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
@@ -82,6 +121,17 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 		protected function validate() {
 			if (!$this->user->hasPermission('modify', 'extension/module/purpletree_featuredstore')) {
 				$this->error['warning'] = $this->language->get('error_permission');
+			}
+			if (!$this->request->post['module_purpletree_featuredstore_width']) {
+			$this->error['width'] = $this->language->get('error_width');
+			}
+
+			if (!$this->request->post['module_purpletree_featuredstore_height']) {
+				$this->error['height'] = $this->language->get('error_height');
+			}
+			
+			if (!$this->request->post['module_purpletree_featuredstore_limit']) {
+				$this->error['limit'] = $this->language->get('error_limit');
 			}
 			return !$this->error;
 		}

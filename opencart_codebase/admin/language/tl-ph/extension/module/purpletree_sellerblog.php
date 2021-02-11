@@ -19,4 +19,5 @@ $_['error_permission'] = 'Babala: Wala kang pahintulot na baguhin ang module na 
 $_['error_name']       = 'Pangalan ng Module ay dapat nasa pagitan ng 3 at 128 na mga character!';
 $_['error_width']      = 'Kinakailangan ang lapad!';
 $_['error_height']     = 'Kinakailangan ang taas!';
+$_['error_limit']     = 'Limitado ang kinakailangan!';
 ?>

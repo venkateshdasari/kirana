@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = 'Vui lòng chọn gói đăng ký!';
 $_['error_subscription_plan_limit']       = 'Giới hạn kế hoạch vượt quá Vui lòng thay đổi gói!';
 $_['error_subscription_plan_status']       = 'Đăng ký gói đang tắt Vui lòng bật Đăng ký gói!';
 $_['seller_bulk_product_upload_sheet']    = "Tải xuống mẫu";
+$_['text_bulk_product_import_add']    	 = 'Nhập sản phẩm mới';
+$_['text_bulk_product_import_update']    = 'Cập nhật các sản phẩm hiện có';
+$_['text_update']            			 = 'Cập nhật';
+$_['text_bulk_product_status_heading'] = "Toplu Ürün İçe Aktarma / Güncelleme Durumu";

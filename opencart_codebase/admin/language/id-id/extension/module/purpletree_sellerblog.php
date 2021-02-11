@@ -19,4 +19,5 @@ $_['error_permission'] = 'Peringatan: Anda tidak memiliki izin untuk memodifikas
 $_['error_name']       = 'Nama Modul harus antara 3 dan 128 karakter!';
 $_['error_width']      = 'Perlu lebar!';
 $_['error_height']     = 'Tinggi diperlukan!';
+$_['error_limit'] = 'Diperlukan batas!';
 ?>

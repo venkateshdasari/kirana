@@ -201,3 +201,6 @@ $_['entry_sellerarea'] = "Mga Lugar ng Nagbebenta";
 $_['help_sellerarea'] = "(Autocomplete)";
 $_['text_all_sellerarea'] = "Lahat";
 $_['text_selected_sellerarea'] = "Napili";
+
+$_['entry_multi_store']     = 'Mga Tindahan ng Opencart';
+$_['entry_assign_stores']    = 'Magtalaga ng Mga Tindahan ng Opencart';

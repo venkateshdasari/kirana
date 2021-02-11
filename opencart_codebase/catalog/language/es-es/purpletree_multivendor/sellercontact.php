@@ -26,3 +26,8 @@ $_['text_contact_message'] 	=	"Consulta enviada desde la página";
 //button
 $_['button_view_all'] ='ver todo';
 $_['button_submit'] ='Enviar';
+
+$_['text_files'] ='Archivos';
+$_['text_attach_file'] ='Adjuntar archivo';
+$_['text_upload_file'] ='Subir archivo';
+$_['text_action'] ='Acción';

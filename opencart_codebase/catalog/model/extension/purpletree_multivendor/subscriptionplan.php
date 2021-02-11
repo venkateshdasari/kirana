@@ -118,7 +118,7 @@ class ModelExtensionPurpletreeMultivendorSubscriptionplan extends Model{
 		}
 		
 		public function getTotalSellerPorduct($seller_id) {
-			$query=$this->db->query("SELECT COUNT(id) AS total_product FROM ". DB_PREFIX ."purpletree_vendor_products WHERE seller_id='".(int)$seller_id."' AND is_approved=1 ");
+			$query=$this->db->query("SELECT COUNT(DISTINCT p.product_id) AS total_product FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) JOIN " . DB_PREFIX . "purpletree_vendor_products pvp ON(pvp.product_id=p.product_id) JOIN " .DB_PREFIX. "customer c ON(c.customer_id=pvp.seller_id) LEFT JOIN ".DB_PREFIX. "product_to_category ptc ON(ptc.product_id=p.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND pvp.seller_id ='".(int)$seller_id."' "); 			
 			if($query->num_rows){
 				return $query->row['total_product'];	
 				} else { 

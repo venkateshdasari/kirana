@@ -145,7 +145,7 @@ class ControllerExtensionPurpletreeMultivendorSellerarea extends Controller {
 			$this->getList();
 		}
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$url = '';
 			
 			$data['breadcrumbs'] = array();
@@ -288,7 +288,7 @@ class ControllerExtensionPurpletreeMultivendorSellerarea extends Controller {
 				} elseif (isset($this->request->get['area_id'])) {
 				$data['sellerarea'] = $this->model_extension_purpletree_multivendor_sellerarea->getSellerAreaDescriptions($this->request->get['area_id']);
 				} else {
-				$data['subscription'] = array();
+				$data['sellerarea'] = array();
 			}
 			
 			if (isset($this->request->get['area_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {

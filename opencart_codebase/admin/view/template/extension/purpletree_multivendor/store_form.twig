@@ -57,6 +57,9 @@
 						{% if check_category_bar %}
 						<li class="nav-item"><a href="#tab-category-assign" class="nav-link" data-toggle="tab">Assign category</a></li>
 						{% endif %}
+						{% if use_domain_wise_stores %}
+						<li class="nav-item"><a href="#tab-multiple-store"class="nav-link"  data-toggle="tab">{{ entry_assign_stores }}</a></li>
+						{% endif %}
 						<!-- pay-pal -->
 					</ul>
 					<div class="tab-content">
@@ -257,7 +260,7 @@
 								    <input type="text" name="sellerarea" value="" disabled id="input-sellerarea" class="form-control"/>
 								 {% endif %}
 								 
-								  <div id="seller-area" class="well well-sm" style="height: 150px; overflow: auto;"> 
+								  <div id="seller-area" class="well well-sm ptsc-storef-heioflow"> 
 								  {% for sellerarea in sellerareas %}
 									  <div id="seller-area{{ sellerarea.area_id }}"><i class="fa fa-minus-circle"></i> {{ sellerarea.name }}
 										<input type="hidden" name="seller_area[]" value="{{ sellerarea.area_id  }}"/>
@@ -338,12 +341,12 @@
 									<input type="text" name="twitter_link" value="{{ twitter_link }}" placeholder="{{ entry_twitter }}" id="input-twitter" class="form-control" />
 								</div>
 							</div>
-							<div class="form-group row">
+							<!--<div class="form-group row">
 								<label class="col-sm-2 control-label col-form-label" for="input-google">{{ entry_google }}</label>
 								<div class="col-sm-10">
 									<input type="text" name="google_link" value="{{ google_link }}" placeholder="{{ entry_google }}" id="input-google" class="form-control" />
 								</div>
-							</div>
+							</div>-->
 							<div class="form-group row">
 								<label class="col-sm-2 control-label col-form-label" for="input-inswtagram">{{ entry_instagram }}</label>
 								<div class="col-sm-10">
@@ -392,7 +395,7 @@
 							</div>
 							<div class="form-group row">
 								<label class="col-sm-2 control-label col-form-label" for="input-storetin">{{ text_document }}</label> 
-								<div class="col-sm-10" style="padding-top:7px;">
+								<div class="col-sm-10 ptsc-storef-paddtop">
 									<input type="file" name="upload_file" value="" />
 									{% if upload_file_existing %} 
 									<input type="hidden" name="upload_file_exiting" value="{{ upload_file_existing }}" />
@@ -408,7 +411,7 @@
 						</div>
 						<div class="tab-pane card" id="tab-product-assign">
 							<div class="col-sm-8">
-								<div class="well well-sm" style="height:300px;overflow:auto">
+								<div class="well well-sm ptsc-storeff-heioflow">
 									{% if products %}
 									{% for product in products %}
 									<div class="checkbox">
@@ -490,7 +493,7 @@
 							<div class="form-group row">
 								<label class="col-sm-2 control-label col-form-label" for="input-live_chat_code">{{ entry_live_chat_code }}</label>
 								<div class="col-sm-6">
-									<input type="text" id="input-live_chat_code" name="store_live_chat_code" class="form-control" value="{{ store_live_chat_code }}" />
+									<textarea rows="5" id="input-live_chat_code" name="store_live_chat_code" class="form-control">{{ store_live_chat_code }}</textarea>
 								</div>
 							</div>
 						</div>
@@ -670,7 +673,7 @@
 								</div>
 							</div>
 							<div class="row">
-							<h4 style="margin-left: 15px;margin-top: 20px;">{{ text_store_opening }}</h4>
+							<h4 class="ptsc-storef-marglt">{{ text_store_opening }}</h4>
 							</div>
 							<div class="form-group row">
 							 <label class="col-sm-3 control-label col-form-label" for="input-sunday1">{{ text_open }}</label>
@@ -741,7 +744,7 @@
 													
 						</div>
 						<div class="row">
-							<h4 style="margin-left: 15px;margin-top: 20px;">{{ text_holiday }}</h4>
+							<h4 class="ptsc-storef-marglt">{{ text_holiday }}</h4>
 							</div>
 							
 				<div class="table-responsive">
@@ -779,7 +782,25 @@
 					</table>
 				  </div>
 						</div>
-						
+		<!-- Assign Multiple Store-->
+		{% if use_domain_wise_stores %}
+		<div class="tab-pane" id="tab-multiple-store">
+			<div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_multi_store }}</label>
+                <div class="col-sm-10">
+                  <div class="well well-sm ptsc-storef-heioflow"> {% for store in assignmstores %}
+                      <div class="checkbox">
+                        <label> 
+                            <input type="checkbox" name="multiple_store[]" value="{{ store.store_id }}" {% if store.checked=='checked' %} checked="checked" {% endif %} />
+                            {{ store.name }}
+                          </label>
+                      </div>
+                    {% endfor %}</div>
+                </div>
+            </div>
+		</div>
+	{% endif %}
+	<!-- Assign Multiple Store-->	
 					
 						{% if check_category_bar %}
 						<div class="tab-pane card" id="tab-category-assign">
@@ -801,7 +822,7 @@
 										{% else %}
 										<input type="text" name="category" value="" id="input-category" class="form-control" />
 										{% endif %}
-										<div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
+										<div id="product-category" class="well well-sm ptsc-storef-heioflow">
 											{% if allow_category %}
 											{%	for key, product_category in allow_category %}
 											<div id="product-category{{ product_category }}"><i class="fa fa-minus-circle"></i> {{ key }} 
@@ -843,9 +864,9 @@
 						{% if subscription_plan %}
 						{% for key,values in subscription_plan %}
 						<div class="radio">
-							<span class="plans">
+							<span class="plans ptsc-plans">
 								
-								<label><input type="radio" name="optradio" class="plan" value=" {{ values.plan_id }}" ><span class="plans"> {{ values.plan_name }}</span></label>
+								<label><input type="radio" name="optradio" class="plan" value=" {{ values.plan_id }}" ><span class="plans ptsc-plans"> {{ values.plan_name }}</span></label>
 								
 							</span>
 							<input type="hidden" name="productID" value="">
@@ -854,7 +875,7 @@
 						{% endfor %}
 						{% else %}
 						<div class="radio">
-							<span class="plans">					  
+							<span class="plans ptsc-plans">					  
 							<label>{{ 'Plan not found!' }}</span></label>				 
 						</span>
 						<input type="hidden" name="productID" value="">
@@ -870,65 +891,6 @@
 	</div>
 </div>
 <!--/ popup model-->
-<style>
-	/* width */
-	.pts-sidenav ::-webkit-scrollbar {
-	width: 10px;
-	float:left;
-	position:absolute;
-	right:0
-	}
-	
-	/* Track */
-	.pts-sidenav ::-webkit-scrollbar-track {
-	background: #f1f1f1; 
-	}
-	
-	/* Handle */
-	.pts-sidenav ::-webkit-scrollbar-thumb {
-	background: #888; 
-	}
-	
-	/* Handle on hover */
-	.pts-sidenav ::-webkit-scrollbar-thumb:hover {
-	background: #555; 
-	}
-	.inputgroup{
-	overflow-y:auto;
-	max-height:150px;
-	
-	}
-	.pts-sidenav .modal-dialog{
-    //position: absolute;
-	overflow-y:auto;
-    width: 25%;
-    margin-top: 5%;
-	border:none;
-	}
-	.pts-sidenav .modal-header{
-	padding:7px !important;
-	background:#337ab7;
-	}
-	.pts-sidenav .modal-title, .pts-sidenav .close{
-	margin: 0px !important;
-    color: #fff !important;
-	}
-	.pts-sidenav .modal-content{
-	height: 100%;
-	border: 0px solid #fff;
-	}
-	input[type="radio"] {
-	-webkit-appearance: checkbox; /* Chrome, Safari, Opera */
-	-moz-appearance: checkbox;    /* Firefox */
-	-ms-appearance: checkbox;     /* not currently supported */
-	height:20px;
-	width:20px;
-	}
-	.plans{
-	font-size:16px;
-	margin-left:10px;
-	}
-</style>
 <script>
 	$('input[type="checkbox"]').on('change', function(e){
 	if(e.target.checked){
@@ -1140,7 +1102,7 @@ $('button[id^=\'button-custom-field\']').on('click', function() {
 	
 	$('#form-upload').remove();
 	
-	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" class="ptsc-storefrm-nodisplay"><input type="file" name="file" /></form>');
 	
 	$('#form-upload input[name=\'file\']').trigger('click');
 	

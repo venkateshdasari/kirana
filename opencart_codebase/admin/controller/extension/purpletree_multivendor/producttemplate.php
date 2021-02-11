@@ -6,7 +6,6 @@ class ControllerExtensionPurpletreeMultivendorProducttemplate extends Controller
 			$this->load->language('purpletree_multivendor/admintemplate');
 			
 			$this->document->setTitle($this->language->get('heading_title'));
-			
 			$this->load->model('catalog/product');
 			if(!$this->config->get('module_purpletree_multivendor_seller_product_template')){
 				$this->response->redirect($this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'] . $url, true));
@@ -128,6 +127,7 @@ class ControllerExtensionPurpletreeMultivendorProducttemplate extends Controller
 		}
 		
 		protected function getList() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
 				} else {
@@ -983,6 +983,7 @@ class ControllerExtensionPurpletreeMultivendorProducttemplate extends Controller
 			$this->response->setOutput($this->load->view('extension/purpletree_multivendor/admintemplate_form', $data));
 		}
 		public function productForm() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->language('purpletree_multivendor/admintemplate');
 			
 			$this->document->setTitle($this->language->get('heading_title'));

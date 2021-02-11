@@ -14,21 +14,36 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 			$data['store']=array();	
 			$purpletree_multivendor_subscription_plans = $this->config->get('module_purpletree_multivendor_subscription_plans');
 			if($purpletree_multivendor_subscription_plans==1){
-				$stores = $this->model_extension_module_storefeatured->getLatest();
+				$storess = $this->model_extension_module_storefeatured->getLatest();
+			}			
+			if(!empty($storess)){
+			if ($this->config->get('module_purpletree_featuredstore_limit')) {
+			$stores = array_slice($storess, 0, (int)$this->config->get('module_purpletree_featuredstore_limit'));
+			}else{
+			$stores = array_slice($storess, 0,5);
+			}
+			}
+			$image_height = 200;
+			$image_width = 200;
+			if ($this->config->get('module_purpletree_featuredstore_height')) {
+			  $image_height = $this->config->get('module_purpletree_featuredstore_height');
+			}
+			if ($this->config->get('module_purpletree_featuredstore_width')) {
+			  $image_width = $this->config->get('module_purpletree_featuredstore_width');
 			}
 			if(!empty($stores)){
 				$i=0;
 				$storearray = array();				
-				$count= 0;
+				//$count= 0;
 				foreach($stores as $store){
-					if($count < 8) {
-						$count++;
+					//if($count < 8) {
+					//	$count++;
 						if(!in_array($store['id'],$storearray)) {
 							$storearray[] = $store['id'];		
 							if($stores[$i]['store_logo']) {
-								$store_logo = $this->model_tool_image->resize($stores[$i]['store_logo'], '200' , '200');
+								$store_logo = $this->model_tool_image->resize($stores[$i]['store_logo'],$image_width , $image_height);
 								} else {
-								$store_logo = $this->model_tool_image->resize('placeholder.png', '200', '200');
+								$store_logo = $this->model_tool_image->resize('placeholder.png',$image_width , $image_height);
 								
 							}
 							$i++;
@@ -38,7 +53,7 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 							'href'    => $this->url->link('extension/account/purpletree_multivendor/sellerstore/storeview','seller_store_id=' . $store['id'])
 							);
 						}
-					}
+					//}
 				}
 				//owl carousel condition
 			$themePrevent=array(
@@ -58,6 +73,7 @@ class ControllerExtensionModulePurpletreeFeaturedstore extends Controller {
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
 			}
+			$this->document->addStyle('catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css');
 			}
 			$data['heading_title'] = $this->language->get('heading_title');	 	
 			

@@ -27,3 +27,8 @@ $_['text_contact_message'] = 'Soru sayfadan gönderildi';
 //button
 $_['button_view_all'] ='Tümünü Gör';
 $_['button_submit'] ='Gönder';
+
+$_['text_files'] ='Dosyalar';
+$_['text_attach_file'] ='Dosya eki';
+$_['text_upload_file'] ='Dosya yükleme';
+$_['text_action'] ='Aksiyon';

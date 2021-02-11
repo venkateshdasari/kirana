@@ -165,3 +165,6 @@ $_['entry_seller_areaheading'] = "Siêu địa phương";
 $_['entry_header_popup'] = "Tiêu đề trong Cửa sổ bật lên cho HyperLlocal";
 $_['entry_area_selection'] = "Bắt buộc lựa chọn khu vực";
 $_['entry_seller_area_link'] = "Chuyển đến Khu vực Người bán";
+$_['text_multiple_store']="Sử dụng các cửa hàng thông minh miền"; 
+$_['text_fix_commission']="Hoa hồng cố định";
+$_['text_hyper_delivering'] = "Đang gửi tới";

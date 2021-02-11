@@ -67,7 +67,7 @@ class ControllerExtensionPurpletreeMultivendorSellerenquiries extends Controller
 		}
 		
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_seller_name'])) {
 				$filter_seller_name = $this->request->get['filter_seller_name'];
 				} else {
@@ -338,6 +338,7 @@ class ControllerExtensionPurpletreeMultivendorSellerenquiries extends Controller
 			$this->response->setOutput($this->load->view('extension/purpletree_multivendor/sellerenquiries_list', $data));
 		}
 		public function sendSellerMessage() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->language('purpletree_multivendor/sellerenquiries');
 			
 			$this->document->setTitle($this->language->get('heading_title'));

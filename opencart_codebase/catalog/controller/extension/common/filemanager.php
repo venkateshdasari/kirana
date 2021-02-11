@@ -268,9 +268,9 @@ class ControllerExtensionCommonFileManager extends Controller {
 			if (isset($this->request->get['seller_name'])) {
 				$seller_name = str_replace(" ","_",$this->request->get['seller_name']);
 			}
-			
+
 			// Check its a directory
-			if (!is_dir($directory) || substr(str_replace('\\', '/', realpath($directory)), 0, strlen(DIR_IMAGE . 'catalog')) != DIR_IMAGE . 'catalog') {
+			if (!is_dir($directory) || substr(str_replace('\\', '/', realpath($directory)), 0, strlen(DIR_IMAGE . 'catalog')) != str_replace('\\', '/', realpath(DIR_IMAGE . 'catalog'))) {
 				$json['error'] = $this->language->get('error_directory');
 			}
 			
@@ -363,7 +363,7 @@ class ControllerExtensionCommonFileManager extends Controller {
 			}
 			
 			// Check its a directory
-			if (!is_dir($directory) || substr(str_replace('\\', '/', realpath($directory)), 0, strlen(DIR_IMAGE . 'catalog')) != DIR_IMAGE . 'catalog') {
+			if (!is_dir($directory) || substr(str_replace('\\', '/', realpath($directory)), 0, strlen(DIR_IMAGE . 'catalog')) != str_replace('\\', '/', realpath(DIR_IMAGE . 'catalog'))) {
 				$json['error'] = $this->language->get('error_directory');
 			}
 			
@@ -409,7 +409,7 @@ class ControllerExtensionCommonFileManager extends Controller {
 			// Loop through each path to run validations
 			foreach ($paths as $path) {
 				// Check path exsists
-				if ($path == DIR_IMAGE . 'catalog' || substr(str_replace('\\', '/', realpath(DIR_IMAGE . $path)), 0, strlen(DIR_IMAGE . 'catalog')) != DIR_IMAGE . 'catalog') {
+				if ($path == DIR_IMAGE . 'catalog' || substr(str_replace('\\', '/', realpath(DIR_IMAGE . $path)), 0, strlen(DIR_IMAGE . 'catalog')) != str_replace('\\', '/', realpath(DIR_IMAGE . 'catalog'))) {
 					$json['error'] = $this->language->get('error_delete');
 					
 					break;

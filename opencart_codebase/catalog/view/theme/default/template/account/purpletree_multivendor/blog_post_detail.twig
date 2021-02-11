@@ -88,13 +88,13 @@
 							{% for popular_blog in pts_blogs %}
 							
 							<a href="{{ popular_blog.href }}">
-								<div class="pts-col-md-12 pts-col-sm-12 pts-col-xs-12 pts-col-lg-12" style="border:1px solid #eee">
+								<div class="pts-col-md-12 pts-col-sm-12 pts-col-xs-12 pts-col-lg-12 ptsc-blogpost-border">
 									<div class="pts-col-md-12 pts-col-sm-12 pts-col-xs-12 pts-col-lg-12">
 										<b>{{ popular_blog.date }}</b>
 										<h5>{{ popular_blog.title }}</h5>
 									</div>
 									<div class="pts-col-md-12 pts-col-sm-12 pts-col-xs-12 pts-col-lg-12">
-										<div class="ptsblogcontent" style="text-align: center;"><img src="{{ popular_blog.thumb }}"></div>
+										<div class="ptsblogcontent pts-text-center"><img src="{{ popular_blog.thumb }}"></div>
 									</div>
 									
 								</div>

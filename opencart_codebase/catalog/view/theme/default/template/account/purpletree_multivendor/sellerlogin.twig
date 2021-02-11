@@ -4,14 +4,14 @@
   <br>
     <br>
     <div class="row">
-				<div class="{{ setdivclass }} col-sm-offset-4 col-sm-4">
+				<div class="col-sm-offset-4 col-sm-4">
 				  {% if success %}
 	<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
 	{% endif %}
 	{% if error_warning %}
 	<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
 	{% endif %} 
-					<div class="pts-well seller-login-form" style="">
+					<div class="pts-well seller-login-form">
 						<h2 class="text-center">{{ text_seller_login }}</h2>
 						<form action="{{ action }}" method="post" id="regForm" enctype="multipart/form-data">
 							<div class="pts-form-group">
@@ -28,7 +28,7 @@
 									<input id="seller-login-button" type="submit" value="{{ button_login }}" class="pts-btn pts-btn-primary" />
 								</div>
 								<div class="pts-pr-3 text-center pts-pull-right-1 pts-mt-3">
-									<p class="new-seller-register-here"><span class="login-seller" ><i class="fa fa-user-o fa-users"></i> {{ text_new_seller }}  </span><a href="{{ sellerregister }}" style="font-size:11px" id="pts-reg-seller"> {{ text_register_new }} </a></p>
+									<p class="new-seller-register-here"><span class="login-seller" ><i class="fa fa-user-o fa-users"></i> {{ text_new_seller }}  </span><a href="{{ sellerregister }}" class="ptsc-sregister-sellog" id="pts-reg-seller"> {{ text_register_new }} </a></p>
 									</div>
 								</div>
 								{% if redirect %}
@@ -40,6 +40,7 @@
 				</div>
 		</div>
 </div>
+<link href="catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css" type="text/css" rel="stylesheet" />
 <style>
 #button-menu {
 	display: none;

@@ -25,3 +25,8 @@ $_['text_contact_message'] 	=	"Pertanyaan yang dihantar dari halaman";
 //button
 $_['button_view_all'] ='lihat semua';
 $_['button_submit'] ='Hantar';
+
+$_['text_files'] ='Fail';
+$_['text_attach_file'] ='Melampirkan fail';
+$_['text_upload_file'] ='Muat naik fail';
+$_['text_action'] ='Tindakan';

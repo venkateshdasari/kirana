@@ -192,6 +192,9 @@ $_['entry_custom_fields']       = "Campi personalizzati";
 $_['text_sort_order']       = "Ordinamento";
 $_['tab_seller_paypal_details'] = "Dettagli PayPal";//pay-pal
 $_['entry_sellerarea'] = "Aree venditore";
-$_['help_sellerarea"] = "(Autocomplete)";
-$_['text_all_sellerarea"] = "Tutti";
-$_['text_selected_sellerarea"] = "Selezionato";
+$_['help_sellerarea'] = "(Autocomplete)";
+$_['text_all_sellerarea'] = "Tutti";
+$_['text_selected_sellerarea'] = "Selezionato";
+
+$_['entry_multi_store']     = 'Negozi Opencart';
+$_['entry_assign_stores']    = 'Assegna negozi Opencart';

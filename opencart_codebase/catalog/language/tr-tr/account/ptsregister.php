@@ -40,10 +40,10 @@ $_['text_seller_label_status']              = 'Durum:';
 $_['button_deliver'] = "Teslim Et";
 $_['button_change_status'] = "Durumu Değiştir";
 $_['text_change_order_status'] = "Sipariş durumunu değiştir";
-$_['pts_text_customer'] = "<p> Siparişiniz başarıyla işlendi! </p> <p> Sipariş geçmişinizi <a href="%s"> hesabıma </ a giderek görüntüleyebilirsiniz > sayfasına gidin ve <a href="%s"> geçmiş </a> 'i tıklayın. </p> <p> Satın alma işleminizle ilişkili bir indirme varsa, <a href = "%s" hesabına gidebilirsiniz > indirmeler </a> sayfasını görüntülemek için. </p> <p> Lütfen tüm sorularınızı ";
+$_['pts_text_customer'] = '<p> Siparişiniz başarıyla işlendi! </p> <p> Sipariş geçmişinizi <a href="%s"> hesabıma </ a giderek görüntüleyebilirsiniz > sayfasına gidin ve <a href="%s"> geçmiş </a> i tıklayın. </p> <p> Satın alma işleminizle ilişkili bir indirme varsa, <a href = "%s" hesabına gidebilirsiniz > indirmeler </a> sayfasını görüntülemek için. </p> <p> Lütfen tüm sorularınızı ';
 $_['pts_text_guest'] = "<p> Siparişiniz başarıyla işlendi! </p> <p> Lütfen tüm sorularınızı";
 $_['pts_text_thanks'] = "</p> <p> Bizimle çevrimiçi alışveriş yaptığınız için teşekkürler! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> mağaza sahibi </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> mağaza sahibi </a>.';
 $_['column_delivery_address'] = "Teslimat Adresi";
 //// end_quick_order ////
 

@@ -19,7 +19,7 @@
     </div>
   </div>
 			<div>
-				<div class="pts-row pts-well"style="margin-left: 0px;margin-right: 0px;" >
+				<div class="pts-row pts-well ptsc-shipping-marlr">
 					<div class="pts-col-sm-4">
 						<div class="pts-form-group catdivdrop">
 							<input type="hidden" name="filter_plan_id" value="{{ filter_plan_id }}" class="pts-form-control" />
@@ -84,7 +84,7 @@
 				</div>
 				
 				<div>
-					<div class="pts-panel pts-panel-default" style="margin-top: 18px;">
+					<div class="pts-panel pts-panel-default ptsc-geo-margin">
 						<div class="pts-panel-heading">
 							<h3 class="pts-panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
 						</div>
@@ -114,7 +114,7 @@
 												<td class="pts-text-left">{{ subscriptions.end_date }}</td>
 												<td class="pts-text-left">{{ subscriptions.created_date }}</td>              
 												<td class="pts-text-right">
-													<div class="pts-btn-group" style="min-width: 65px;">
+													<div class="pts-btn-group ptsc-subscr-planmwidth">
 														<a href="{{ subscriptions.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn pts-btn-info"><i class="fa fa-eye"></i></a>                     
 													</div>
 												</td>
@@ -264,11 +264,4 @@
 	
 	
 //--></script>
-<style>
-	.catdivdrop ul{
-	overflow: auto;
-	max-height: 120px;
-	width: 89%;
-	}
-</style>
 {{ footer }}

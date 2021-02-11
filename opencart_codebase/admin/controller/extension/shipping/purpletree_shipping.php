@@ -4,7 +4,7 @@ class ControllerExtensionShippingPurpletreeShipping extends Controller {
 		
 		public function index() {
 			$this->load->language('extension/shipping/purpletree_shipping');
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->document->setTitle($this->language->get('heading_title'));
 			
 			$this->load->model('setting/setting');

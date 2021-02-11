@@ -25,3 +25,4 @@ $_['text_delete_success'] 	=	"La consulta ha sido eliminada con éxito.";
 
 //button
 $_['button_continue'] 	=	"Continuar";
+$_['text_files'] ='Archivos';

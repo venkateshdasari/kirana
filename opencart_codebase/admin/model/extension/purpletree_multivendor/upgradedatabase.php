@@ -1,7 +1,21 @@
 <?php
 class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 		public function upgradeDatabase( ){
+		// cusotmer seller enquiries 
+			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_customer_vendor_enquiries` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`chat_id` int(11) NOT NULL,
+				`image_name` varchar(255) NOT NULL,
+				`image` varchar(255) NOT NULL,
+				PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
+			");
+		// cusotmer seller enquiries
 		//// seller event /////
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "event WHERE  code = 'pts_getjournal3filterproducts'");
+			if($query->num_rows){} else {
+		        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` ( `code`, `trigger`, `action`, `status`) VALUES ('pts_getjournal3filterproducts', 'catalog/model/journal3/filter/getProducts/after', 'extension/account/purpletree_multivendor/events/getFilterProducts', 1)");
+		   }
+		   
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "event WHERE  code = 'pts_getfilterproducts'");
 			if($query->num_rows){} else {
 		        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` ( `code`, `trigger`, `action`, `status`) VALUES ('pts_getfilterproducts', 'catalog/model/catalog/product/getProducts/after', 'extension/account/purpletree_multivendor/events/getFilterProducts', 1)");
@@ -20,6 +34,12 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 		        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` ( `code`, `trigger`, `action`, `status`) VALUES ('pts_admin_header', 'catalog/view/common/header/after', 'extension/account/purpletree_multivendor/events/beforeheader', 1)");
 		   }  
 		///end seller event ///
+		//seller coupon
+			$field_query = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "purpletree_vendor_commission_invoice` LIKE 'seller_coupon_amount'");
+			if (!$field_query->num_rows) {
+				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_commission_invoice`  ADD `seller_coupon_amount` decimal(11,2) NOT NULL AFTER `total_pay_amount`");
+			}
+		//seller coupon
 		/////seller area /////
 		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_area` (
 				`area_id` int(11) NOT NULL AUTO_INCREMENT,		
@@ -34,7 +54,10 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 				`area_name` varchar(150) NOT NULL,		
 				PRIMARY KEY (`id`),FOREIGN KEY (`area_id`) REFERENCES " . DB_PREFIX . "purpletree_vendor_area(`area_id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
-			
+			$field_query = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "purpletree_vendor_area` LIKE 'id'");
+			if ($field_query->num_rows) {
+				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_area`  CHANGE `id` `area_id` INT(11) NOT NULL AUTO_INCREMENT");
+			}
 		////seller area /////
 		//// vacation mode  ////
 		    $this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_store_time` (
@@ -106,7 +129,7 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			`google_map` text NOT NULL,
 			`google_map_link` text NOT NULL,
 			`store_timings` text NOT NULL,
-			`multi_store_id` int(11) NOT NULL,
+			`multi_store_id` varchar(100) NOT NULL,
 			PRIMARY KEY (`id`)  ) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
 			
@@ -139,6 +162,12 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			`seen` int(11) NOT NULL DEFAULT '1',
 			PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
+			
+			$field_query = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "purpletree_vendor_stores` LIKE 'multi_store_id'");
+			if ($field_query->num_rows) {
+				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_stores` CHANGE multi_store_id multi_store_id varchar(100) NOT NULL");
+			}
+			
 			$field_query = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "purpletree_vendor_orders` LIKE 'shipping'");
 			if (!$field_query->num_rows) {
 				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_orders`  ADD `shipping` text NOT NULL  AFTER `order_id`");
@@ -181,7 +210,7 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			`order_id` int(11) NOT NULL,
 			`product_id` int(11) NOT NULL,
 			`vendor_order_table_id` int(11) NOT NULL,
-			`commission_fixed` int(50) NOT NULL DEFAULT '0',
+			`commission_fixed` double NOT NULL DEFAULT '0',
 			`commission_percent` decimal(4,2) NOT NULL DEFAULT '0.00',
 			`commission_shipping` float(8,2) NOT NULL DEFAULT '0.00',
 			`invoice_status` int(50) NOT NULL DEFAULT '0',
@@ -191,6 +220,7 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			`updated_at` date NOT NULL,
 			PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_commissions` CHANGE `commission_fixed` `commission_fixed` double NOT NULL DEFAULT '0'");
 			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_payments` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`invoice_id` int(11) NOT NULL,
@@ -209,7 +239,7 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`category_id` int(11) NOT NULL,
 			`commission` decimal(4,2) NOT NULL,
-			`commison_fixed` double NOT NULL,
+			`commison_fixed` double NULL DEFAULT NULL,
 			`seller_group` int(50) NOT NULL DEFAULT '1',
 			PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");	
@@ -556,12 +586,13 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			`order_id` int(50) NOT NULL,
 			`product_id` int(50) NOT NULL,
 			`seller_id` int(50) NOT NULL,
-			`commission_fixed` int(50) NOT NULL DEFAULT '0',
+			`commission_fixed` double NOT NULL DEFAULT '0',
 			`commission_percent` decimal(4,2) NOT NULL DEFAULT '0.00',
 			`commission_shipping` decimal(4,2) NOT NULL DEFAULT '0.00',
 			`total_commission` float(8,2) NOT NULL,
 			PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_commission_invoice_items` CHANGE `commission_fixed` `commission_fixed` double NOT NULL DEFAULT '0'");
 			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_commission_invoice` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`total_amount` decimal(11,2) NOT NULL DEFAULT '0.00',
@@ -572,8 +603,9 @@ class ModelExtensionPurpletreeMultivendorUpgradedatabase extends Model{
 			");
 			$field_query = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "purpletree_vendor_categories_commission` LIKE 'commison_fixed'");
 			if (!$field_query->num_rows) {
-				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_categories_commission`  ADD `commison_fixed` double NOT NULL AFTER `commission`");
+				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_categories_commission`  ADD `commison_fixed` double NULL DEFAULT NULL AFTER `commission`");
 			}
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_categories_commission` CHANGE `commison_fixed` `commison_fixed` double NULL DEFAULT NULL");
 			$field_query = $this->db->query("SHOW COLUMNS FROM `" . DB_PREFIX . "purpletree_vendor_categories_commission` LIKE 'seller_group'");
 			if (!$field_query->num_rows) {
 				$this->db->query("ALTER TABLE `" . DB_PREFIX . "purpletree_vendor_categories_commission`  ADD `seller_group` int(50) NOT NULL DEFAULT '1' AFTER `commison_fixed`");

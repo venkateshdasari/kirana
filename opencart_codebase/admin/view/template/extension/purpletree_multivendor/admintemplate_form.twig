@@ -295,7 +295,7 @@
 								<label class="col-sm-2 control-label" for="input-category"><span data-toggle="tooltip" title="{{ help_category }}">{{ entry_category }}</span></label>
 								<div class="col-sm-10">
 									<input type="text" name="category" value="" placeholder="{{ entry_category }}" id="input-category" class="form-control" />
-									<div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;"> {% for product_category in product_categories %}
+									<div id="product-category" class="well well-sm ptsc-storef-heioflow"> {% for product_category in product_categories %}
 										<div id="product-category{{ product_category.category_id }}"><i class="fa fa-minus-circle"></i> {{ product_category.name }}
 											<input type="hidden" name="product_category[]" value="{{ product_category.category_id }}" />
 										</div>
@@ -306,7 +306,7 @@
 								<label class="col-sm-2 control-label" for="input-filter"><span data-toggle="tooltip" title="{{ help_filter }}">{{ entry_filter }}</span></label>
 								<div class="col-sm-10">
 									<input type="text" name="filter" value="" placeholder="{{ entry_filter }}" id="input-filter" class="form-control" />
-									<div id="product-filter" class="well well-sm" style="height: 150px; overflow: auto;"> {% for product_filter in product_filters %}
+									<div id="product-filter" class="well well-sm ptsc-storef-heioflow"> {% for product_filter in product_filters %}
 										<div id="product-filter{{ product_filter.filter_id }}"><i class="fa fa-minus-circle"></i> {{ product_filter.name }}
 											<input type="hidden" name="product_filter[]" value="{{ product_filter.filter_id }}" />
 										</div>
@@ -316,7 +316,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">{{ entry_store }}</label>
 								<div class="col-sm-10">
-									<div class="well well-sm" style="height: 150px; overflow: auto;"> {% for store in stores %}
+									<div class="well well-sm ptsc-storef-heioflow"> {% for store in stores %}
 										<div class="checkbox">
 											<label> {% if store.store_id in product_store %}
 												<input type="checkbox" name="product_store[]" value="{{ store.store_id }}" checked="checked" />
@@ -333,7 +333,7 @@
 								<label class="col-sm-2 control-label" for="input-download"><span data-toggle="tooltip" title="{{ help_download }}">{{ entry_download }}</span></label>
 								<div class="col-sm-10">
 									<input type="text" name="download" value="" placeholder="{{ entry_download }}" id="input-download" class="form-control" />
-									<div id="product-download" class="well well-sm" style="height: 150px; overflow: auto;"> {% for product_download in product_downloads %}
+									<div id="product-download" class="well well-sm ptsc-storef-heioflow"> {% for product_download in product_downloads %}
 										<div id="product-download{{ product_download.download_id }}"><i class="fa fa-minus-circle"></i> {{ product_download.name }}
 											<input type="hidden" name="product_download[]" value="{{ product_download.download_id }}" />
 										</div>
@@ -344,7 +344,7 @@
 								<label class="col-sm-2 control-label" for="input-related"><span data-toggle="tooltip" title="{{ help_related }}">{{ entry_related }}</span></label>
 								<div class="col-sm-10">
 									<input type="text" name="related" value="" placeholder="{{ entry_related }}" id="input-related" class="form-control" />
-									<div id="product-related" class="well well-sm" style="height: 150px; overflow: auto;"> {% for product_related in product_relateds %}
+									<div id="product-related" class="well well-sm ptsc-storef-heioflow"> {% for product_related in product_relateds %}
 										<div id="product-related{{ product_related.product_id }}"><i class="fa fa-minus-circle"></i> {{ product_related.name }}
 											<input type="hidden" name="product_related[]" value="{{ product_related.product_id }}" />
 										</div>
@@ -367,7 +367,7 @@
 										{% set attribute_row = 0 %}
 										{% for product_attribute in product_attributes %}
 										<tr id="attribute-row{{ attribute_row }}">
-											<td class="text-left" style="width: 40%;"><input type="text" name="product_attribute[{{ attribute_row }}][name]" value="{{ product_attribute.name }}" placeholder="{{ entry_attribute }}" class="form-control" />
+											<td class="text-left ptsc-adtemplat-attrwidth"><input type="text" name="product_attribute[{{ attribute_row }}][name]" value="{{ product_attribute.name }}" placeholder="{{ entry_attribute }}" class="form-control" />
 											<input type="hidden" name="product_attribute[{{ attribute_row }}][attribute_id]" value="{{ product_attribute.attribute_id }}" /></td>
 											<td class="text-left">{% for language in languages %}
 												<div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
@@ -455,7 +455,7 @@
 											</div>
 											{% endif %}
 											{% if product_option.type == 'file' %}
-											<div class="form-group" style="display: none;">
+											<div class="form-group ptsc-storefrm-nodisplay">
 												<label class="col-sm-2 control-label" for="input-value{{ option_row }}">{{ entry_option_value }}</label>
 												<div class="col-sm-10">
 													<input type="text" name="product_option[{{ option_row }}][value]" value="{{ product_option.value }}" placeholder="{{ entry_option_value }}" id="input-value{{ option_row }}" class="form-control" />
@@ -620,7 +620,7 @@
 											</tfoot>
 										</table>
 									</div>
-									<select id="option-values{{ option_row }}" style="display: none;">
+									<select id="option-values{{ option_row }}" class="ptsc-storefrm-nodisplay">
 										
 										
 										{% if option_values[product_option.option_id] %}
@@ -1042,7 +1042,7 @@
 	
 	function addAttribute() {
 		html  = '<tr id="attribute-row' + attribute_row + '">';
-		html += '  <td class="text-left" style="width: 20%;"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="{{ entry_attribute }}" class="form-control" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
+		html += '  <td class="text-left ptsc-adtemplat-width"><input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="{{ entry_attribute }}" class="form-control" /><input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" /></td>';
 		html += '  <td class="text-left">';
 		{% for language in languages %}
 		html += '<div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span><textarea name="product_attribute[' + attribute_row + '][product_attribute_description][{{ language.language_id }}][text]" rows="5" placeholder="{{ entry_text }}" class="form-control"></textarea></div>';
@@ -1137,7 +1137,7 @@
 			}
 			
 			if (item['type'] == 'file') {
-				html += '	<div class="form-group" style="display: none;">';
+				html += '	<div class="form-group" class="ptsc-storefrm-nodisplay">';
 				html += '	  <label class="col-sm-2 control-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
 				html += '	  <div class="col-sm-10"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="form-control" /></div>';
 				html += '	</div>';
@@ -1186,7 +1186,7 @@
 				html += '  </table>';
 				html += '</div>';
 				
-				html += '  <select id="option-values' + option_row + '" style="display: none;">';
+				html += '  <select id="option-values' + option_row + '" class="ptsc-storefrm-nodisplay">';
 				
 				for (i = 0; i < item['option_value'].length; i++) {
 					html += '  <option value="' + item['option_value'][i]['option_value_id'] + '">' + item['option_value'][i]['name'] + '</option>';

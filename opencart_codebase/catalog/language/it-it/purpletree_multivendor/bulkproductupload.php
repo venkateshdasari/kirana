@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = 'Si prega di selezionare il piano di abbon
 $_['error_subscription_plan_limit']       = 'Il limite del piano eccede Si prega di cambiare piano!';
 $_['error_subscription_plan_status']       = "La sottoscrizione al piano è disabilitata Si prega di abilitare l'abbonamento al piano!";
 $_['seller_bulk_product_upload_sheet']    = "Scarica il modello";
+$_['text_bulk_product_import_add']    	 = 'Importazione di nuovi prodotti';
+$_['text_bulk_product_import_update']    = 'Aggiorna prodotti esistenti';
+$_['text_update']            			 = 'Aggiornare';
+$_['text_bulk_product_status_heading'] = "Stato importazione / aggiornamento prodotti in blocco";

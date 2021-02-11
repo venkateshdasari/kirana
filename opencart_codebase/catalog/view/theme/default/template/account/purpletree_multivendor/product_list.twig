@@ -67,7 +67,7 @@
 									{% endif %}
 								</select>
 							</div>
-							<button type="button" id="pts-button-filter" class="pts-btn pts-btn-primary pts-pull-right" style="margin-top: 25px;"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+							<button type="button" id="pts-button-filter" class="pts-btn pts-btn-primary pts-pull-right ptsc-temppro-filtermar"><i class="fa fa-filter"></i> {{ button_filter }}</button>
 						</div>
 					</div>
 				</div>
@@ -89,7 +89,7 @@
 				<div class="pts-col-sm-7">
 				</div>
 				<div class="pts-col-sm-2">
-				<div class="pts-pull-right" style="margin-bottom: 10px;">
+				<div class="pts-pull-right ptsc-product-di">
 				<div class="pts-btn-group pts-btn-group-sm">
 				{% set class1 = " " %}
 				{% set class2 = " " %}
@@ -116,7 +116,7 @@
 						<table class="pts-table pts-table-bordered pts-table-hover">
 							<thead>
 								<tr>
-									<td style="width: 1px;" class="pts-text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+									<td class="pts-text-center ptsc-attr-tab-width"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
 									<td class="pts-text-center">{{ column_image }}</td>
 									<td class="pts-text-left">{{ column_name }}</td>
 									<td class="pts-text-left">{{ column_model }}</td>
@@ -152,7 +152,7 @@
 									<td class="pts-text-left h4name{{ product.product_id }}">{{ product.name }}</td>
 									<td class="pts-text-left">{{ product.model }}</td>
 									<td class="pts-text-right">{% if product.special %}
-										<span class="pts_price{{ product.product_id }}" style="text-decoration: line-through;">{{ product.price }}</span><br/>
+										<span class=" ptsc-product-picp pts_price{{ product.product_id }}">{{ product.price }}</span><br/>
 										<div class="text-danger">{{ product.special }}</div>
 										{% else %}
 										<span class="pts_price{{ product.product_id }}">{{ product.price }}</span>
@@ -188,12 +188,12 @@
 										{% if product_buttonhide %}
 										{% if product.is_featured !=0 or product.is_category_featured!=0 %}
 										{% else %}
-										<a style="{% if direction =='rtl' %} margin-top: 5px;{% endif %}" id="productIdForSelenium" href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="pts-btn pts-btn-primary"><i class="fa fa-pencil fas fa-edit fas fa-pen"></i></a>
-										<a id="quick_edit" title="{{ title_quick_edit }}" style="background: #5cb85c; {% if direction =='rtl' %} margin-top: 5px;{% endif %}" class="pts-btn pts-btn-primary pts_quick_edit" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>
+										<a id="productIdForSelenium" href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="pts-btn pts-btn-primary {% if direction =='rtl' %} ptsc-productlis-margtop{% endif %}"><i class="fa fa-pencil fas fa-edit fas fa-pen"></i></a>
+										<a id="quick_edit" title="{{ title_quick_edit }}" class="pts-btn pts-btn-primary pts_quick_edit ptsc-productlis-qbgcol {% if direction =='rtl' %} ptsc-productlis-margtop{% endif %}" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>
 										{% endif %}
 										{% else %}
-										<a style="{% if direction =='rtl' %} margin-top: 5px;{% endif %}" id="productIdForSelenium" href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="pts-btn pts-btn-primary"><i class="fa fa-pencil fas fa-edit fas fa-pen"></i></a>
-										<a id="quick_edit" title="{{ title_quick_edit }}" style="background: #5cb85c; {% if direction =='rtl' %} margin-top: 5px;{% endif %}" class="pts-btn pts-btn-primary pts_quick_edit" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>
+										<a id="productIdForSelenium" href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="pts-btn pts-btn-primary {% if direction =='rtl' %} ptsc-productlis-margtop{% endif %}"><i class="fa fa-pencil fas fa-edit fas fa-pen"></i></a>
+										<a id="quick_edit" title="{{ title_quick_edit }}" class="pts-btn pts-btn-primary pts_quick_edit ptsc-productlis-qbgcol {% if direction =='rtl' %} ptsc-productlis-margtop{% endif %}" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>
 										{% endif %}
 									</td>
 								</tr>
@@ -231,9 +231,9 @@
 								{% endif %}
 									</div>
 									<div class="pts-button-group pts-text-right"id="producteditlink{{ product.product_id }}" >
-									<div class="pts-quick-lable">
+									<div class="ptsc-quick-lable">
 									{% if selected in product.product_id %}
-										<input class="pts-quick-lable" type="checkbox" name="selected[]" value="{{ product.product_id }}" checked="checked" />
+										<input class="ptsc-quick-lable" type="checkbox" name="selected[]" value="{{ product.product_id }}" checked="checked" />
 										{% else %}
 										<input type="checkbox" name="selected[]" value="{{ product.product_id }}" />			
 									{% endif %}
@@ -244,39 +244,17 @@
 										{% else %}
 										<span class="label label-success pts_quantity{{ product.product_id }}" data-toggle="tooltip" title="{{ column_quantity }}">{{ product.quantity }}</span>
 									 {% endif %}
-									<span style="color: {{ product.color }}; font-weight: bold;"class="pts-quick-lable pts_status{{ product.product_id }}" data-toggle="tooltip" title="{{ column_status }}">{{ product.status }}</span>
-								    
-									<style>
-									.pro-grid a{
-										margin-bottom: 5px;
-										margin-top: 5px;
-									}
-									.pts-quick-lable {
-									        color:#2e6da4;
-											display: inline-block;
-											padding: 6px 12px;
-											margin-bottom: 0;
-											margin-left: -11px;
-											font-size: 14px;
-											font-weight: 400;
-											line-height: 1.42857143;
-											text-align: center;
-											white-space: nowrap;
-											vertical-align: middle;    
-											background-image: none;
-											border: 1px solid transparent;
-											border-radius: 4px;
-                                       }
-									</style>									
+									<span style="color: {{ product.color }}; font-weight: bold;"class="ptsc-quick-lable pts_status{{ product.product_id }}" data-toggle="tooltip" title="{{ column_status }}">{{ product.status }}</span>
+								    									
 										{% if product_buttonhide %}
 										{% if product.is_featured !=0 or product.is_category_featured!=0 %}
 										{% else %}
 										<a id="productIdForSelenium" href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="pts-btn pts-btn-primary"><i class="fa fa-pencil fas fa-edit fas fa-pen"></i></a>
-										<a style="background: #5cb85c;" id="quick_edit" title="{{  title_quick_edit }}" class="pts-btn pts-btn-primary pts_quick_edit" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>
+										<a id="quick_edit" title="{{  title_quick_edit }}" class="pts-btn pts-btn-primary pts_quick_edit ptsc-product-statuscoenb" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>
 										{% endif %}
 										{% else %}
 										<a id="productIdForSelenium" href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="pts-btn pts-btn-primary"><i class="fa fa-pencil fas fa-edit fas fa-pen"></i></a>
-										<a style="background: #5cb85c;"  id="quick_edit" title="{{  title_quick_edit }}" class="pts-btn pts-btn-primary pts_quick_edit" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>									
+										<a id="quick_edit" title="{{  title_quick_edit }}" class="pts-btn pts-btn-primary pts_quick_edit ptsc-product-statuscoenb" onclick="quick_edit({{ product.product_id }})"><i class = "fa fa-pencil fas fa-pencil fas fa-pen"></i></a>									
 										{% endif %}					
 									</div>
 								</div>
@@ -316,12 +294,12 @@
 						{% if product_plan_info is not empty %} 
 						{% for plans in product_plan_info %}	
 						<div class="radio">				
-						    <label><input  id="planidcheck{{ plans.plan_id }}" type="radio" name="popup_product_plan_id" value="{{ plans.plan_id }}" class="plan planidcheck" checked="checked" ><span class="plans">{{ plans.plan_name }}</span></label>
+						    <label><input  id="planidcheck{{ plans.plan_id }}" type="radio" name="popup_product_plan_id" value="{{ plans.plan_id }}" class="plan planidcheck" checked="checked" ><span class="plans ptsc-plans">{{ plans.plan_name }}</span></label>
 						</div>				
 						{% endfor %}{% else %} 
 						<div class="radio">
 							<label><input type="radio" name="popup_product_plan_id" class=" planidcheck" checked="checked">
-							<span class="planidcheck plans">{{ 'Plan Not Found' }}</span></label>
+							<span class="planidcheck plans ptsc-plans">{{ 'Plan Not Found' }}</span></label>
 						</div>
 						{% endif %} 
 					</div>
@@ -335,67 +313,13 @@
 </div>
 
 <!--/ popup model-->
-<style>
-	/* width */
-	.pts-sidenav ::-webkit-scrollbar {
-	width: 10px;
-	float:left;
-	position:absolute;
-	right:0
-	}
-	
-	/* Track */
-	.pts-sidenav ::-webkit-scrollbar-track {
-	background: #f1f1f1; 
-	}
-	
-	/* Handle */
-	.pts-sidenav ::-webkit-scrollbar-thumb {
-	background: #888; 
-	}
-	
-	/* Handle on hover */
-	.pts-sidenav ::-webkit-scrollbar-thumb:hover {
-	background: #555; 
-	}
-	.inputgroup{
-	overflow-y:auto;
-	max-height:150px;
-	
-	}
-	@media(min-width:768px){
-	.pts-sidenav .modal-dialog{
-    //position: absolute;
-	width: 25%;
-    margin-top: 5%;
-	border:none;
-	}
-	}
-	.pts-sidenav .modal-header .modal-title{
-	font-size: 20x
-	}
-	.pts-sidenav .modal-header{
-	padding:7px !important;
-	background:#337ab7;
-	}
-	.pts-sidenav .modal-title, .pts-sidenav .close{
-	margin: 0px !important;
-    color: #fff !important;
-	}
-	.pts-sidenav .modal-content{
-	height: 100%;
-	border: 0px solid #fff;
-	}
+<style>	
 	input[type="radio"] {
 	-webkit-appearance: checkbox; /* Chrome, Safari, Opera */
 	-moz-appearance: checkbox;    /* Firefox */
 	-ms-appearance: checkbox;     /* not currently supported */
 	height:20px;
 	width:20px;
-	}
-	.plans{
-	font-size:16px;
-	margin-left:10px;
 	}
 </style>
 <script>
@@ -715,8 +639,8 @@ var option_value_row = 0;
 		html += '  </select></td>';
 		html += '  <td class="pts-text-right"><input id="prioritySpecialId" type="text" name="product_special[' + special_row + '][priority]" value="" placeholder="{{ entry_priority }}" class="pts-form-control" /></td>';
 		html += '  <td class="pts-text-right"><input id="priceSpecialId" type="text" name="product_special[' + special_row + '][price]" value="" placeholder="{{ entry_price }}" class="pts-form-control" /></td>';
-		html += '  <td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex d-flex"><input id="dataStartSpecialId" type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-		html += '  <td class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex d-flex"><input id="dataEndSpecialId" type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><div class="pts-input-group date d-flex d-flex"><input id="dataStartSpecialId" type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-product-width"><div class="pts-input-group date d-flex d-flex"><input id="dataEndSpecialId" type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
 		html += '  <td class="pts-text-left"><button type="button" onclick="$(\'#special-pts-row' + special_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="pts-btn pts-btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 		html += '</tr>';
 		
@@ -745,7 +669,7 @@ var option_value_row = 0;
 				$('.special-pts-row-class').remove();
 				$.each (json.special_price, function (special_price1) {                 
 		if(special_price1 !=0){
-   		 html  = '<tr style="background: #c1dec1;" class="special-pts-row-class" id="special-pts-row' + special_row + '">';
+   		 html  = '<tr class="special-pts-row-class ptsc-product-spicpcol" id="special-pts-row' + special_row + '">';
 		html += '  <td class="pts-text-left"><select name="product_special[' + special_row + '][customer_group_id]" class="pts-form-control">';
 		
 		{% for customer_group in customer_groups %}		
@@ -757,10 +681,10 @@ var option_value_row = 0;
 		}
 		{% endfor %}
 		html += '  </select></td>';
-		html += '  <td style="display: none;" class="pts-text-right"><input id="prioritySpecialId" type="text" name="product_special[' + special_row + '][priority]" value="'+json.special_price[special_price1].priority+'" placeholder="{{ entry_priority }}" class="pts-form-control" /></td>';
+		html += '  <td class="pts-text-right ptsc-productl-nodisplay ptsc-product-width"><input id="prioritySpecialId" type="text" name="product_special[' + special_row + '][priority]" value="'+json.special_price[special_price1].priority+'" placeholder="{{ entry_priority }}" class="pts-form-control" /></td>';
 		html += '  <td class="pts-text-right"><input id="priceSpecialId" type="text" name="product_special[' + special_row + '][price]" value="'+json.special_price[special_price1].price+'" placeholder="{{ entry_price }}" class="pts-form-control" /></td>';
-		html += '  <td style="display: none;" class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex d-flex"><input id="dataStartSpecialId" type="text" name="product_special[' + special_row + '][date_start]" value="'+json.special_price[special_price1].date_start+'" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-		html += '  <td style="display: none;" class="pts-text-left" style="width: 20%;"><div class="pts-input-group date d-flex d-flex"><input id="dataEndSpecialId" type="text" name="product_special[' + special_row + '][date_end]" value="'+json.special_price[special_price1].date_end+'" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-productl-nodisplay ptsc-product-width"><div class="pts-input-group date d-flex d-flex"><input id="dataStartSpecialId" type="text" name="product_special[' + special_row + '][date_start]" value="'+json.special_price[special_price1].date_start+'" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+		html += '  <td class="pts-text-left ptsc-productl-nodisplay ptsc-product-width"><div class="pts-input-group date d-flex d-flex"><input id="dataEndSpecialId" type="text" name="product_special[' + special_row + '][date_end]" value="'+json.special_price[special_price1].date_end+'" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" class="pts-form-control" /><span class="pts-input-group-pts-btn"><button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
 		html += '  <td class="pts-text-left"><button type="button" onclick="$(\'#special-pts-row' + special_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="pts-btn pts-btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 		html += '</tr>';
 		
@@ -817,7 +741,7 @@ var option_value_row = 0;
 			}
 			
 			if (json.product_option[product_option1].type == 'file') {
-				html += '	<div class="pts-form-group row" style="display: none;">';
+				html += '	<div class="pts-form-group row ptsc-productl-nodisplay">';
 				html += '	  <label class="pts-col-sm-2 col-form-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
 				html += '	  <div class="pts-col-sm-10"><input type="text" name="product_option[' + option_row + '][value]" value="'+json.product_option[product_option1].value+'" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="pts-form-control" /></div>';
 				html += '	</div>';
@@ -850,11 +774,11 @@ var option_value_row = 0;
 				html += '  	 <thead>';
 				html += '      <tr>';
 				html += '        <td class="pts-text-left">{{ entry_option_value }}</td>';
-				html += '        <td style="display: none;" class="pts-text-right">{{ entry_quantity }}</td>';
-				html += '        <td style="display: none;" class="pts-text-left">{{ entry_subtract }}</td>';
+				html += '        <td class="pts-text-right ptsc-productl-nodisplay">{{ entry_quantity }}</td>';
+				html += '        <td class="pts-text-left ptsc-productl-nodisplay">{{ entry_subtract }}</td>';
 				html += '        <td class="pts-text-right">{{ entry_price }}</td>';
-				html += '        <td style="display: none;" class="pts-text-right">{{ entry_option_points }}</td>';
-				html += '        <td style="display: none;" class="pts-text-right">{{ entry_weight }}</td>';
+				html += '        <td class="pts-text-right ptsc-productl-nodisplay">{{ entry_option_points }}</td>';
+				html += '        <td class="pts-text-right ptsc-productl-nodisplay">{{ entry_weight }}</td>';
 				html += '        <td></td>';
 				html += '      </tr>';
 				html += '  	 </thead>';
@@ -878,8 +802,8 @@ var option_value_row = 0;
 				}); 
 				html += $('#option-values' + option_row).html();
 				html += '  </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="'+product_option_value4.product_option_value_id+'" /></td>';
-				html += '  <td style="display: none;" class="pts-text-right pts-product-option"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="'+product_option_value4.quantity+'" placeholder="{{ entry_quantity }}" class="pts-form-control" /></td>';
-				html += '  <td style="display: none;" class="pts-text-left pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="pts-form-control">';
+				html += '  <td class="pts-text-right pts-product-option ptsc-productl-nodisplay"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="'+product_option_value4.quantity+'" placeholder="{{ entry_quantity }}" class="pts-form-control" /></td>';
+				html += '  <td class="pts-text-left pts-product-option ptsc-productl-nodisplay"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="pts-form-control">';
 				if(product_option_value4.subtract == 1){
 				    html += '    <option value="1" selected="selected">{{ text_yes }}</option>';
 				    html += '    <option value="0">{{ text_no }}</option>';
@@ -889,7 +813,7 @@ var option_value_row = 0;
 					}
 				
 				html += '  </select></td>';
-				html += '  <td class="pts-text-right pts-product-option"><select style="display: none;" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price_prefix]" class="pts-form-control">';
+				html += '  <td class="pts-text-right pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price_prefix]" class="pts-form-control ptsc-productl-nodisplay">';
 				if(product_option_value4.price_prefix == '+'){
 				    html += '    <option value="+" selected="selected">+</option>';
 					}else{
@@ -903,7 +827,7 @@ var option_value_row = 0;
 				
 				html += '  </select>';
 				html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="'+product_option_value4.price+'" placeholder="{{ entry_price }}" class="pts-form-control" /></td>';
-				html += '  <td style="display: none;" class="pts-text-right pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points_prefix]" class="pts-form-control">';
+				html += '  <td class="pts-text-right pts-product-option ptsc-productl-nodisplay"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points_prefix]" class="pts-form-control">';
 				if(product_option_value4.points_prefix == '+'){
 				   html += '    <option value="+" selected="selected">+</option>';
 				   
@@ -918,7 +842,7 @@ var option_value_row = 0;
 				
 				html += '  </select>';
 				html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points]" value="'+product_option_value4.points+'" placeholder="{{ entry_points }}" class="pts-form-control" /></td>';
-				html += '  <td style="display: none;" class="pts-text-right pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight_prefix]" class="pts-form-control">';
+				html += '  <td class="pts-text-right pts-product-option ptsc-productl-nodisplay"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight_prefix]" class="pts-form-control">';
 				if(product_option_value4.weight_prefix == '+'){
 				    html += '    <option value="+" selected="selected">+</option>';
 					}else{
@@ -947,7 +871,7 @@ var option_value_row = 0;
 				html += '  </table>';
 				html += '</div>';
 				
-				html += '  <select id="option-values' + option_row + '" style="display: none;">';
+				html += '  <select id="option-values' + option_row + '" class="ptsc-productl-nodisplay">';
 				$.each (json.product_option_values_data, function (product_option_values_data1,product_option_values_data2) { 
 				$.each (product_option_values_data2, function (product_option_values_data3,product_option_values_data4) {
 					
@@ -1016,7 +940,7 @@ var option_value_row = 0;
         <!-- Modal Header -->
         <div class="modal-header">
                  <h4 class="modal-title" id="quick_edit_Label">{{  title_quick_edit }}</h4>		
-           <button type="button" class="close pts-rtl-close" data-dismiss="modal" style="margin-top: -23px;">&times;</button>
+           <button type="button" class="close pts-rtl-close ptsc-product-martop" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
@@ -1061,22 +985,22 @@ var option_value_row = 0;
 							<thead>
 								<tr>
 								    <td class="pts-text-left">{{ entry_customer_group }}</td>
-									<td style="display: none;"class="pts-text-right">{{ entry_priority }}</td>
+									<td class="pts-text-right ptsc-productl-nodisplay">{{ entry_priority }}</td>
 									{% if metals_product == 1 %}                      
 									<td class="pts-text-right"><span id="priExtr">{{ entry_price_extra }}<span id="priExtrTypeFxd">{{ text_fixed }}</span>
 									<span id="priExtrTypePercent">{{ text_percentage }}</span></span><span id="pri">{{ entry_price }}</span></td>
 									{% else %}
 									<td class="pts-text-right">{{ entry_price }}</td>
 									{% endif %}
-									<td style="display: none;" class="pts-text-left">{{ entry_date_start }}</td>
-									<td style="display: none;" class="pts-text-left">{{ entry_date_end }}</td>
+									<td class="pts-text-left ptsc-productl-nodisplay">{{ entry_date_start }}</td>
+									<td class="pts-text-left ptsc-productl-nodisplay">{{ entry_date_end }}</td>
 									<td></td>
 								</tr>
 							</thead>
 							<tbody class="quicksprice">
 							</tbody>
 							<tfoot>
-								<tr style="display: none;">
+								<tr class="ptsc-productl-nodisplay">
 									<td colspan="5"></td>
 									<td class="pts-text-left"><button id="addSpecialButtonId" type="button" onclick="addSpecial();" data-toggle="tooltip" title="{{ button_special_add }}" class="pts-btn pts-btn-primary"><i class="fa fa-plus-circle"></i></button></td>
 								</tr>
@@ -1099,8 +1023,8 @@ var option_value_row = 0;
 						<label class="pts-control-label pts-col-form-label" for="quick-product-status">{{ entry_status }}</label>
 				  </div>
 				  <div class="pts-col-sm-9 pts-form-group">	
-						<input  type="radio" name = "quick_product_status" value="1">&nbsp <span style="color:#5cb85c; font-weight: bold;"> {{ text_enabled }}</span>&nbsp&nbsp 
-                        <input  type="radio" name = "quick_product_status" value="0">&nbsp <span style="color:#c73e38; font-weight: bold;">{{ text_disabled }}</span>
+						<input  type="radio" name = "quick_product_status" value="1">&nbsp <span class="ptsc-product-statuscoenb ptsc-product-statuscodis"> {{ text_enabled }}</span>&nbsp&nbsp 
+                        <input  type="radio" name = "quick_product_status" value="0">&nbsp <span class="ptsc-product-statuscodis ptsc-product-statuscodis">{{ text_disabled }}</span>
 					</div>
 				</div>
 				<div class="pts-row"> 
@@ -1184,7 +1108,7 @@ var option_value_row = 0;
 			}
 			
 			if (item['type'] == 'file') {
-				html += '	<div class="pts-form-group row" style="display: none;">';
+				html += '	<div class="pts-form-group row ptsc-productl-nodisplay">';
 				html += '	  <label class="pts-col-sm-2 col-form-label" for="input-value' + option_row + '">{{ entry_option_value }}</label>';
 				html += '	  <div class="pts-col-sm-10"><input type="text" name="product_option[' + option_row + '][value]" value="" placeholder="{{ entry_option_value }}" id="input-value' + option_row + '" class="pts-form-control" /></div>';
 				html += '	</div>';
@@ -1217,11 +1141,11 @@ var option_value_row = 0;
 				html += '  	 <thead>';
 				html += '      <tr>';
 				html += '        <td class="pts-text-left">{{ entry_option_value }}</td>';
-				html += '        <td style="display: none;" class="pts-text-right">{{ entry_quantity }}</td>';
-				html += '        <td style="display: none;" class="pts-text-left">{{ entry_subtract }}</td>';
+				html += '        <td class="pts-text-right ptsc-productl-nodisplay">{{ entry_quantity }}</td>';
+				html += '        <td class="pts-text-left ptsc-productl-nodisplay">{{ entry_subtract }}</td>';
 				html += '        <td class="pts-text-right">{{ entry_price }}</td>';
-				html += '        <td style="display: none;" class="pts-text-right">{{ entry_option_points }}</td>';
-				html += '        <td style="display: none;" class="pts-text-right">{{ entry_weight }}</td>';
+				html += '        <td class="pts-text-right ptsc-productl-nodisplay">{{ entry_option_points }}</td>';
+				html += '        <td class="pts-text-right ptsc-productl-nodisplay">{{ entry_weight }}</td>';
 				html += '        <td></td>';
 				html += '      </tr>';
 				html += '  	 </thead>';
@@ -1236,7 +1160,7 @@ var option_value_row = 0;
 				html += '  </table>';
 				html += '</div>';
 				
-				html += '  <select id="option-values' + option_row + '" style="display: none;">';
+				html += '  <select id="option-values' + option_row + '" class="ptsc-productl-nodisplay">';
 				
 				for (i = 0; i < item['option_value'].length; i++) {
 					html += '  <option value="' + item['option_value'][i]['option_value_id'] + '">' + item['option_value'][i]['name'] + '</option>';
@@ -1279,22 +1203,22 @@ var option_value_row = 0;
 		html += '  <td class="pts-text-left pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]" class="pts-form-control">';
 		html += $('#option-values' + option_row).html();
 		html += '  </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="" /></td>';
-		html += '  <td style="display: none;" class="pts-text-right pts-product-option"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="pts-form-control" /></td>';
-		html += '  <td style="display: none;" class="pts-text-left pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="pts-form-control">';
+		html += '  <td class="pts-text-right pts-product-option ptsc-productl-nodisplay"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="pts-form-control" /></td>';
+		html += '  <td class="pts-text-left pts-product-option ptsc-productl-nodisplay"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="pts-form-control">';
 		html += '    <option value="1">{{ text_yes }}</option>';
 		html += '    <option value="0">{{ text_no }}</option>';
 		html += '  </select></td>';
-		html += '  <td class="pts-text-right pts-product-option"><select style="display: none;" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price_prefix]" class="pts-form-control">';
+		html += '  <td class="pts-text-right pts-product-option "><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price_prefix]" class="pts-form-control ptsc-productl-nodisplay">';
 		html += '    <option value="+">+</option>';
 		html += '    <option value="-">-</option>';
 		html += '  </select>';
 		html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" placeholder="{{ entry_price }}" class="pts-form-control" /></td>';
-		html += '  <td style="display: none;" class="pts-text-right pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points_prefix]" class="pts-form-control">';
+		html += '  <td class="pts-text-right pts-product-option ptsc-productl-nodisplay"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points_prefix]" class="pts-form-control">';
 		html += '    <option value="+">+</option>';
 		html += '    <option value="-">-</option>';
 		html += '  </select>';
 		html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points]" value="" placeholder="{{ entry_points }}" class="pts-form-control" /></td>';
-		html += '  <td style="display: none;" class="pts-text-right pts-product-option"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight_prefix]" class="pts-form-control">';
+		html += '  <td class="pts-text-right pts-product-option ptsc-productl-nodisplay"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight_prefix]" class="pts-form-control">';
 		html += '    <option value="+">+</option>';
 		html += '    <option value="-">-</option>';
 		html += '  </select>';

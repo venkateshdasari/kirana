@@ -20,6 +20,7 @@ $_['text_select_language']             = 'Select Language';
 $_['text_none']             = '-----NONE-----';
 $_['text_bulkuploadsuccess']             = 'File Uploaded Successfully';
 $_['text_aproved_product']             = 'Approve Seller Product';
+$_['text_bulk_product_status_heading'] = 'Bulk Product Import/Update Status';
 
 //Entry
 $_['entry_select_language']             = 'Select Language';
@@ -37,3 +38,6 @@ $_['error_warning']         = 'Warning: Please check the form carefully for erro
 $_['error_permission']      = 'Warning: You do not have permission to modify customers!';
 $_['text_invalidfile']      = 'Invalid File Type. Select .xls or .xlsx';
 $_['text_nofile']      = 'Select File to Import';
+$_['text_bulk_product_import_add']    	 = 'Import New Products';
+$_['text_bulk_product_import_update']    = 'Update Existing Products';
+$_['text_update']            			 = 'Update';

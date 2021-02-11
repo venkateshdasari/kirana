@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = 'Mangyaring Piliin ang Subscription Plan!'
 $_['error_subscription_plan_limit']       = 'Lumagpas ang Limit ng Plan Mangyaring baguhin ang Plano!';
 $_['error_subscription_plan_status']       = 'Hindi pinapagana ang Subscription Plan Mangyaring 		Paganahin ang Subscription ng plano!';
 $_['seller_bulk_product_upload_sheet']    = "I-download ang template";
+$_['text_bulk_product_import_add']    	 = 'Mag-import ng Mga Bagong Produkto';
+$_['text_bulk_product_import_update']    = 'I-update ang Mga Umiiral na Produkto';
+$_['text_update']            			 = 'Update';
+$_['text_bulk_product_status_heading'] = "Kalakihang Pag-import / Katayuan ng Pag-update ng Produkto";

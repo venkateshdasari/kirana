@@ -12,9 +12,12 @@ class ModelExtensionPurpletreeMultivendorShipping extends Model {
 		
 		
 		
-		public function getSellers() {
+		public function getSellers($data = array()) {
 			
 			$sql = "SELECT pvs.seller_id,pvs.store_name AS name FROM " . DB_PREFIX . "purpletree_vendor_stores pvs LEFT JOIN " . DB_PREFIX . "customer c ON (c.customer_id = pvs.seller_id) WHERE c.status=1 AND pvs.store_status=1";
+			if (!empty($data['filter_name'])) {
+			$sql .= " AND pvs.store_name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			}
 			$query = $this->db->query($sql);
 			return $query->rows;
 		}

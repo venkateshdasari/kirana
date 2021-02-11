@@ -162,3 +162,6 @@ $_['entry_seller_areaheading'] = "ハイパーローカル";
 $_['entry_header_popup'] = "HyperLlocalのポップアップの見出し";
 $_['entry_area_selection'] = "エリア選択必須";
 $_['entry_seller_area_link'] = "セラーエリアに移動";
+$_['text_multiple_store']="ドメインワイズストアを使用する"; 
+$_['text_fix_commission']="固定手数料";
+$_['text_hyper_delivering'] = "配信先";

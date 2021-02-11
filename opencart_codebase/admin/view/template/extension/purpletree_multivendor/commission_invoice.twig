@@ -1,17 +1,4 @@
 {{ header }}
-<style>
-	.pts-text-bold{
-	font-size:18px;
-	font-weight:bold
-	
-	}
-	.b-payment{font-size:15px;padding-left: 15px;margin-top: 5px;}
-	.h3-payment{font-size:25px;font-weight:normal;margin: 0;padding: 2px 3px;}
-	.pd{padding:15px !important;width:50%}
-	.status-payment{font-size:25px;font-weight:normal}
-	.payment-td{font-weight:normal;padding: 7px !important;line-height: 2.5 !important;}
-	
-</style>
 {{ column_left }}
 <div id="content">
 	<div class="page-header">
@@ -44,7 +31,7 @@
 		</div>
 		<div class="panel-body card-body">
 			<!----------------->
-			<div style="page-break-after: always;">
+			<div class="ptsc-subscrip-pagebreak">
 				<h1>{{ invoice_number_text }}{{ invoice_number }}</h1>
 				<table class="table table-bordered">
 					<thead>
@@ -121,23 +108,30 @@
 							<td class=" pts-text-bold">{{ commision_product }}</td>
 							<td class="text-right pts-text-bold">{{ total_commissionn }}</td>
 						</tr>
+						{% if seller_coupon_amount !='0.00' %}
+						<tr>		
+							<td class="text-right" colspan="5"></td>          
+							<td>Seller Coupon</td>
+							<td class="text-right">{{ seller_coupon_amount_c_f }}</td>
+						</tr>
+						{% endif %}
 					</tfoot>
 				</table>
 				
 				<!---------------End Code PayPal------------------------->	
 				<table class="table table-bordered">
-					<tbody style="box-shadow:0px 0px 5px 0px rgba(0,0,0,0.5)">
-						<tr style="border:none !important">
+					<tbody class="ptsc-commission-tabshadow">
+						<tr class="ptsc-commission-tpaynoborder">
 							<td colspan="2"><h3 class="h3-payment">{{ text_payment }}</h3></td>
 						</tr>
 						<tr>	
-							<td class="text-left payment-td" style="">
+							<td class="text-left payment-td">
 								
 								<b class="b-payment">{{ text_totla_payable_amount }}</b>: {{ total_pay_amountt }}<br>
 								<b class="b-payment">{{ payment_status }}</b>: {{ invoice_status }}<br>
 								{% if invoice_status_id == 2 %}
 								<!-----link------>
-								<a href="{{ pay_offline }}" class="" style="padding-left: 15px;">{{ transaction_history }} </a>
+								<a href="{{ pay_offline }}" class="ptsc-commission-offlpaddlef">{{ transaction_history }} </a>
 								<!------end------>
 								{% else %}
 								{% if paypal.buttonshow %}
@@ -145,10 +139,10 @@
 										<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ paypal.text_testmode }}</div>
 									{% endif %}
 								<div class="b-payment">
-									<a href="{{ pay_offline }}" class="btn btn-primary" style="float:left"> <b>{{ button_pay_offline }}</b> </a>
+									<a href="{{ pay_offline }}" class="btn btn-primary ptsc-commission-offlfloat"> <b>{{ button_pay_offline }}</b> </a>
 									<!---------------Start Code PayPal------------------------->
 									{% if paypal.hosted_button_id %}
-									<form style="float:left;padding:7px;" name="_xclick" action="{{ paypal.action }}" method="post">
+									<form class="ptsc-commission-hpaypalflpad" name="_xclick" action="{{ paypal.action }}" method="post">
 										<input type="hidden" name="cmd" value="_xclick"/>
 										<input type="hidden" name="return" value="{{ paypal.return_url }}"/>
 										<input type="hidden" name="notify_url" value="{{ paypal.notify_url }}"/>
@@ -167,7 +161,7 @@
 										<input type="hidden" name="country" value="{{ paypal.country }}"/>
 										<input type="hidden" name="night_phone_a" value="{{ paypal.mobile }}"/>
 										<input type="hidden" name="email" value="{{ paypal.store_email }}"/>
-										<input style="width: 120px;" type="image" src="{{ paypal.paypalbutton }}" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+										<input class="ptsc-commission-paypalwid" type="image" src="{{ paypal.paypalbutton }}" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
 									</form>
 									{% endif %}
 								</div>

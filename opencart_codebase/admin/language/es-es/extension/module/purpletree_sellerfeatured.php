@@ -9,6 +9,11 @@ $_['text_edit']        = 'Editar el Módulo Destacado del Vendedor';
 
 // Entry
 $_['entry_status']     = 'Estado';
-
+$_['entry_limit']      = 'Límite';
+$_['entry_width']      = 'Anchura';
+$_['entry_height']     = 'Altura';
 // Error
 $_['error_permission'] = 'Advertencia: ¡no tienes permiso para modificar el módulo presentado!';
+$_['error_width']      = 'Ancho requerido!';
+$_['error_height']     = 'Altura requerida!';
+$_['error_limit']     = '¡Límite requerido!';

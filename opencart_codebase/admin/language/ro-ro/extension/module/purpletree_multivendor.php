@@ -170,4 +170,7 @@ $_['entry_seller_areaheading'] = "Hiperlocal";
 $_['entry_header_popup'] = "Titlu în fereastra pop-up pentru HyperLlocal";
 $_['entry_area_selection'] = "Selectarea zonei este obligatorie";
 $_['entry_seller_area_link'] = "Accesați zona vânzătorului";
+$_['text_multiple_store']="Folosiți magazine inteligente de domeniu"; 
+$_['text_fix_commission']="Comision fix";
+$_['text_hyper_delivering'] = "Livrare către";
 ?>

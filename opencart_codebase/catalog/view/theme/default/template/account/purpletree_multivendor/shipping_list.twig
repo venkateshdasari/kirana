@@ -17,7 +17,7 @@
 				{% endfor %}
               </ul>
 			  	<div class="pts-pull-right">
-				<a href="{{url}}" data-toggle="tooltip" title="{{ button_upload }}"><input type="button" value="{{ button_upload }}" class="pts-btn pts-btn-primary" class="button_add"  style=" padding: 8px 20px 8px 20px; " ></a>
+				<a href="{{url}}" data-toggle="tooltip" title="{{ button_upload }}"><input type="button" value="{{ button_upload }}" class="pts-btn pts-btn-primary ptsc-shipping-add button_add "></a>
 				<button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-seller').toggleClass('hidden-sm hidden-xs');" class="pts-btn pts-btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
 				<a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="pts-btn pts-btn-primary"><i class="fa fa-plus"></i></a>
 				<button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="pts-btn pts-btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-seller').submit() : false;"><i class="fa fa-trash-o fas fa-trash-alt"></i></button>
@@ -25,7 +25,7 @@
     </div>
   </div>
 			<div>
-				<div class="pts-row pts-well"style="margin-left: 0px;margin-right: 0px;" >
+				<div class="pts-row pts-well ptsc-shipping-marlr">
 					<div class="pts-col-sm-4">
 						<!-- country -->						
 						<div class="pts-form-group">
@@ -76,7 +76,7 @@
 				</div>
 				
 				<div>
-					<div class="pts-panel pts-panel-default" style="margin-top: 18px;">
+					<div class="pts-panel pts-panel-default ptsc-geo-margin">
 						<div class="pts-panel-heading">
 							<h3 class="pts-panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
 						</div>
@@ -86,7 +86,7 @@
 									<table class="pts-table pts-table-bordered pts-table-hover">
 										<thead>
 											<tr>
-												<td style="width: 1px;" class="pts-text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+												<td class="pts-text-center ptsc-attr-tab-width"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
 												<td class="pts-text-left">{{ column_shipping_country }}</td>
 												
 												<td class="pts-text-left">{{ column_zip_from }}</td>

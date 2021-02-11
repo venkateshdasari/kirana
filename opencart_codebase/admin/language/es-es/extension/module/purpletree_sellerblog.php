@@ -19,4 +19,5 @@ $_['error_permission'] = 'Advertencia: ¡No tienes permiso para modificar el mó
 $_['error_name']       = '¡El nombre del módulo debe tener entre 3 y 128 caracteres!';
 $_['error_width']      = 'Ancho requerido!';
 $_['error_height']     = 'Altura requerida!';
+$_['error_limit']     = '¡Límite requerido!';
 ?>

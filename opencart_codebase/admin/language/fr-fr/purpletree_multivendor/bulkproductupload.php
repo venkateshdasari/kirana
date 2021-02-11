@@ -38,3 +38,7 @@ $_['error_permission']      = "Attention: Vous n'avez pas la permission de modif
 $_['text_invalidfile']      = "Type de fichier invalide. Sélectionnez .xls ou .xlsx";
 $_['text_nofile']      = "Sélectionnez le fichier à importer";
 $_['admin_bulk_product_upload_sheet']    = "Télécharger le modèle";
+$_['text_bulk_product_import_add']    	 = 'Importation de produits en vrac Nouveaux produits';
+$_['text_bulk_product_import_update']    = 'Mise à jour des produits existants';
+$_['text_update']            			 = 'Mise à jour';
+$_['text_bulk_product_status_heading'] = "Statut d'importation / mise à jour de produit en masse";

@@ -19,7 +19,7 @@
 		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
 		</div>
 		{% endif %}
-	    <div class="alert alert-success alertseucess" style="display:none"></div>
+	    <div class="alert alert-success alertseucess ptsc-storefrm-nodisplay"></div>
 		{% if success %}
 		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
 		</div>
@@ -34,9 +34,9 @@
 						<li class="active"><a href="#tab-general" data-toggle="tab">{{ text_general }}</a></li>
 						<li><a href="#tab-seller" data-toggle="tab">{{ text_seller }}</a></li>
 						<li><a href="#tab-subscription" id="subscription-tab" data-toggle="tab">{{ text_subscription }}</a></li>
-						<li><a href="#tab-other" data-toggle="tab">{{ text_other_settings }}</a></li>
 						<li><a href="#tab-development" data-toggle="tab">{{ text_development }}</a></li>
 						<li><a href="#tab-hyperlocal" data-toggle="tab">{{ entry_seller_areaheading }}</a></li>
+						<li><a href="#tab-other" data-toggle="tab">{{ text_other_settings }}</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane fade in active" id="tab-general">
@@ -64,37 +64,36 @@
 									<input type="hidden" name="module_purpletree_multivendor_encypt_text" value="{{ module_purpletree_multivendor_encypt_text }}">
 								</div>
 								<div class="col-sm-12 col-sm-offset-2 offset-md-2">
-									<button type="button" class="btn btn-primary" style="padding: 8px 20px;" id="getLicensee">{{ button_get_license }}</button>
+									<button type="button" class="btn btn-primary ptsc-mv-licebtnpadd" id="getLicensee">{{ button_get_license }}</button>
 								</div>
 							</div>
 							
-							<div id="licenseModal" class="modal">
+							<div id="licenseModal" class="modal pts-modal">
 								<!-- Modal content -->
-								<div class="modal-content">
+								<div class="modal-content ptsc-modal-content">
 									<div class="row">
 										<div class="col-lg-12 liceform">
-											<span class="close">&times;</span>
+											<span class="close ptsc-close">&times;</span>
 											
-											<div style="display:none" class="alert alert-danger col-lg-12" id="modal_lic_error">
+											<div class="alert alert-danger col-lg-12 ptsc-storefrm-nodisplay" id="modal_lic_error">
 											</div>
-											<div class="d-flex py-1" name="Licencekeyval1" style="margin-top: 15px;" >
+											<div class="d-flex py-1 ptsc-mv-licemargt" name="Licencekeyval1">
 												
-												<div class="col-lg-8"  style="padding:0;">
-													
+												<div class="col-lg-8 ptsc-mv-enter_lice">
 													<label class="control-label col-form-label" for="input-name">{{ enter_license_key1 }}</label>
 													<input name="" id="licenskey1" value="" placeholder="{{ enter_license_key1 }}" class="form-control" autocomplete="off" type="text" name="Licencekeyval" /><ul class="dropdown-menu"></ul>
 												</div>
 												<div class="col-lg-2">
-													<label class="control-label col-form-label" for="input-name" style="color:#fff">.</label>
+													<label class="control-label col-form-label ptsc-mv-okbtncol" for="input-name">.</label>
 													<input value="{{ button_ok }}" class="btn btn-primary okbtn" type="button" onclick="savelicc()"/>
 													
 												</div>
 											</div>
-											<div class="col-lg-12" style="left:-13px;";>
-												<input value="{{ dont_have_lisence_key }}" class="btn btn-primary licencekey2" style="margin-top:14px " type="button" onclick="dontlice()"/>	
+											<div class="col-lg-12 ptsc-mv-dontliceleft">
+												<input value="{{ dont_have_lisence_key }}" class="btn btn-primary licencekey2 ptsc-mv-dontlicemart" type="button" onclick="dontlice()"/>	
 											</div>
 											
-											<div class="orderdiv col-lg-12 form-group p-0" style="display:none;">
+											<div class="orderdiv col-lg-12 form-group p-0 ptsc-storefrm-nodisplay">
 												<label class="control-label col-form-label" for="input-name">{{ entry_order_id }}</label>
 												<input name="order_id" id="order_id" value="" placeholder="{{ entry_order_id }}" id="input-name" class="form-control" autocomplete="off" type="text"><ul class="dropdown-menu" ></ul>
 												
@@ -104,7 +103,7 @@
 												</div>
 												<div class="text-center col-lg-12  py-1">
 													<input value="{{
-													button_submit }}" class="btn btn-primary getlicbtn" style=" padding: 8px 20px 8px 20px;margin-top:15px; " type="button" onclick="getlicense()"/>
+													button_submit }}" class="btn btn-primary getlicbtn ptsc-mv-getlicpama"  type="button" onclick="getlicense()"/>
 													
 												</div>
 											</div>
@@ -171,13 +170,23 @@
 											<div class="form-group py-1 required row">
 												<label class="col-md-3 control-label col-form-label" for="input-commissionn">{{ entry_commission }}</label>
 												<div class="col-md-9">
-													<input type="text" name="module_purpletree_multivendor_commission" class="form-control" value="{{ module_purpletree_multivendor_commission is defined?module_purpletree_multivendor_commission:'' }}" id = "input-commissionn"/>
+													<input type="number" min="0" name="module_purpletree_multivendor_commission" class="form-control" value="{{ module_purpletree_multivendor_commission is defined?module_purpletree_multivendor_commission:'' }}" id = "input-commissionn"/>
 													{% if commission_error %}
 													<div class="text-danger">{{ commission_error }}</div>
 													{% endif %}
 												</div>
 											</div>
 										</div>
+										<!--fix global commission-->
+										  <div class="col-sm-12">
+											<div class="form-group py-1 required row">
+												<label class="col-md-3 control-label col-form-label" for="input-fix-commissionn">{{ text_fix_commission }}</label>
+												<div class="col-md-9">
+													<input type="text" name="module_purpletree_multivendor_fix_commission" class="form-control" value="{{ module_purpletree_multivendor_fix_commission is defined?module_purpletree_multivendor_fix_commission:'' }}" id = "input-fix-commissionn"/>
+												</div>
+											</div>
+										</div>
+										<!-- End fix global commission-->
 										<!--Shipping Commission-->
 										<div class="col-sm-12">
 											<div class="form-group py-1 required row">
@@ -238,7 +247,7 @@
 											<div class="form-group py-1 required row">
 												<label class="col-md-3 control-label col-form-label" for="input-allow_order_status">{{ entry_allow_order_status }}</label>
 												<div class="col-md-9">
-													<select style="height: 150px !important;" name="module_purpletree_multivendor_allow_order_status[]" class="form-control"id="input-allow_order_status" multiple>
+													<select name="module_purpletree_multivendor_allow_order_status[]" class="form-control ptsc-mv-selldasheig"id="input-allow_order_status" multiple>
 														
 														{% for order_status in allow_order_statuse3 %}
 														
@@ -260,7 +269,7 @@
 											<div class="form-group py-1 required row">
 												<label class="col-md-3 control-label col-form-label" for="input-allow_order_status"> {{ entry_seller_dashboard_icon }}</label>
 												<div class="col-md-9">
-													<select style="height: 150px !important;" name="module_purpletree_multivendor_icons_status[]" class="form-control"id="input-allow_order_status" multiple>
+													<select name="module_purpletree_multivendor_icons_status[]" class="form-control ptsc-mv-selldasheig"id="input-allow_order_status" multiple>
 
 												
 														{% for key,allow_icon_status in allow_icon_statuse %}
@@ -368,7 +377,7 @@
 													{% else %}
 													<input type="text" name="category" value="" id="input-category" class="form-control" />
 													{% endif %}
-													<div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
+													<div id="product-category" class="well well-sm ptsc-storef-heioflow">
 														{% if module_purpletree_multivendor_allow_category %}
 														{%	for key, product_category in module_purpletree_multivendor_allow_category %}
 														<div id="product-category{{ product_category }}"><i class="fa fa-minus-circle"></i> {{ key }} 
@@ -414,7 +423,7 @@
 														<option value="1">{{ text_yes }}</option>
 														{% endif %}
 													</select>
-												</div>
+													</div>
 											</div>
 										</div>						
 										<div class="col-sm-12">
@@ -466,6 +475,23 @@
 											</div>
 										</div>	
 										<!--End Hide user menu--> 
+										<!--Start domain wise store--> 
+									<div class="col-sm-12">
+											<div class="form-group py-1 required row">
+												<label class="col-md-3 control-label col-form-label" for="input-hide-user-menu">{{ text_multiple_store }}</label>
+												<div class="col-md-9">
+													<select name="module_purpletree_multivendor_multi_store" class="form-control" id="input-hide-user-menu">
+														{% if module_purpletree_multivendor_multi_store %}
+														<option value="0">{{ text_no }}</option>
+														<option value="1" selected="selected">{{ text_yes }}</option>
+														{% else %}
+														<option value="0" selected="selected">{{ text_no }}</option>
+														<option value="1">{{ text_yes }}</option>
+													{% endif %}								</select>
+												</div>
+											</div>
+										</div>	
+										<!--End domain wise store--> 
 									</div>
 								</div>
 							</div>
@@ -883,7 +909,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="subscription" {% if module_purpletree_multivendor_subscription_plans %} {% else %} style="display:none" {% endif %} >
+									<div class="subscription {% if module_purpletree_multivendor_subscription_plans %} {% else %} ptsc-storefrm-nodisplay {% endif %}" >
 										<div class="col-sm-12">
 											<div class="form-group py-1 required row">
 												<label class="col-md-3 control-label col-form-label" for="input-name">{{ enable_subscription_price_txt }}</label>
@@ -1107,7 +1133,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="HypeLocal" {% if module_purpletree_multivendor_hyperlocal_status %} {% else %} style="display:none" {% endif %} >
+										<div class="HypeLocal {% if module_purpletree_multivendor_hyperlocal_status %} {% else %} ptsc-storefrm-nodisplay {% endif %}">
 										<div class="col-sm-12">
 											<div class="form-group py-1 row">
 												<label class="col-md-3 control-label col-form-label" for="input-name">{{ entry_header_popup }}</label>
@@ -1140,7 +1166,7 @@
 										
 										<div class="col-sm-12 col-sm-offset-2 offset-md-2">					   
 										  
-										     <a href="{{ seller_area_link }}" class="btn btn-primary" style="padding: 8px 20px;margin-left: 89px;margin-bottom: 15px;">{{ entry_seller_area_link }}</a>
+										     <a href="{{ seller_area_link }}" class="btn btn-primary ptsc-mv-sellarealink">{{ entry_seller_area_link }}</a>
 										   
 										</div>
 										<!--end Hyper Local -->	
@@ -1149,7 +1175,7 @@
 					<!----end development option---------->
 				</form>
 			</div>
-			<div style="line-height: 14px;font-weight: bold;" class="panel-footer card-footer text-center">{{ version}}
+			<div class="panel-footer card-footer text-center ptsc-mv-version">{{ version}}
 			</div>
 			</div>
 	</div>
@@ -1255,57 +1281,9 @@
 	});
 	
 </script>
-<style>
-	
+<style>	
 	<!-- body {font-family: Arial, Helvetica, sans-serif;} -->
-	body {font-family: Arial, Helvetica, sans-serif;}
-	
-	/* The Modal (background) */
-	.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
-	
-	/* Modal Content */
-	.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 15px;
-    border: 1px solid #888;
-	width: 30%;
-	}
-	.mbutton{
-	margin-top: 62px;
-	margin-left: 282px;
-	}
-	
-	
-	/* The Close Button */
-	.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-	}
-	
-	.close:hover,
-	.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-	}
-	.liceform .form-group py-1 {
-	margin:0;
-	}		
+	body {font-family: Arial, Helvetica, sans-serif;}		
 </style>
 <script>
 	var modal = document.getElementById('licenseModal');

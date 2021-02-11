@@ -44,7 +44,20 @@ class ControllerExtensionModulePurpletreeCasellerfeatured extends Controller {
 				$this->load->model('extension/module/purpletree_casellerfeatured');
 				
 				
-				$products = $this->model_extension_module_purpletree_casellerfeatured->getFeatured($category_id);
+				$productss = $this->model_extension_module_purpletree_casellerfeatured->getFeatured($category_id);
+				if ($this->config->get('module_purpletree_sellerfeatured_limit')) {
+				$products = array_slice($productss, 0, (int)$this->config->get('module_purpletree_casellerfeatured_limit'));
+				}else{
+				$products = array_slice($productss, 0, 5);
+				}
+				$image_height = 200;
+				$image_width = 200;
+				if ($this->config->get('module_purpletree_casellerfeatured_height')) {
+				  $image_height = $this->config->get('module_purpletree_casellerfeatured_height');
+				}
+				if ($this->config->get('module_purpletree_casellerfeatured_width')) {
+			    $image_width = $this->config->get('module_purpletree_casellerfeatured_width');
+			   }
 				/* get active skin */
 				$data['no_Of_product'] = 4;
 				if (strpos($this->config->get('config_template'), 'journal2') === 0){
@@ -64,22 +77,22 @@ class ControllerExtensionModulePurpletreeCasellerfeatured extends Controller {
 				
 				if(!empty($products)) {
 					$prodssarray = array();
-					$count= 0;
+					//$count= 0;
 					foreach ($products as $product) {
-						if($count < 8) {
-							$count++;
+						//if($count < 8) {
+							//$count++;
 							if(!in_array($product['product_id'],$prodssarray)) {
 								$prodssarray[] = $product['product_id'];
 								$product_info = $this->model_catalog_product->getProduct($product['product_id']);
 								
 								if ($product_info) {
 									if ($product_info['image']) {
-										$image = $this->model_tool_image->resize($product_info['image'], '200' , '200');
+										$image = $this->model_tool_image->resize($product_info['image'], $image_width, $image_height);
 										if (!filter_var($image, FILTER_VALIDATE_URL)) {
-										$image = $this->model_tool_image->resize('placeholder.png', '200' , '200');
+										$image = $this->model_tool_image->resize('placeholder.png', $image_width, $image_height);
 										}
 										} else {
-										$image = $this->model_tool_image->resize('placeholder.png', '200' , '200');
+										$image = $this->model_tool_image->resize('placeholder.png', $image_width, $image_height);
 									}
 									
 									if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -170,7 +183,7 @@ class ControllerExtensionModulePurpletreeCasellerfeatured extends Controller {
 									);
 								}
 							}
-						}
+						//}
 					}
 				}
 			}
@@ -194,6 +207,7 @@ class ControllerExtensionModulePurpletreeCasellerfeatured extends Controller {
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
 			}
+			$this->document->addStyle('catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css');
 				return $this->load->view('extension/module/purpletree_casellerfeatured', $data);
 			}
 		}

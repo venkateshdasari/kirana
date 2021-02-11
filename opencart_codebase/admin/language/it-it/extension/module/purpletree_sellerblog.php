@@ -19,4 +19,5 @@ $_['error_permission'] = "Avviso: non si dispone dell'autorizzazione per modific
 $_['error_name']       = 'Il nome del modulo deve essere compreso tra 3 e 128 caratteri!';
 $_['error_width']      = 'Larghezza richiesta!';
 $_['error_height']     = 'Altezza richiesta!';
+$_['error_limit']     = 'Limite richiesto!';
 ?>

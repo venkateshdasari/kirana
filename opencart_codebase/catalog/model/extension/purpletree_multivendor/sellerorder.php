@@ -172,12 +172,12 @@ class ModelExtensionPurpletreeMultivendorSellerorder extends Model{
 		}
 		
 		public function getSellerOrdersTotal($seller_id,$order_id){
-			$query = $this->db->query("SELECT value AS total  FROM " . DB_PREFIX . "purpletree_order_total WHERE seller_id = '".(int)$seller_id."' AND order_id = '".(int)$order_id."' AND code='sub_total'");
+			$query = $this->db->query("SELECT value AS total  FROM " . DB_PREFIX . "purpletree_order_total WHERE seller_id = '".(int)$seller_id."' AND order_id = '".(int)$order_id."' AND code='total'");
 			
 			return $query->row;
 		}
 		public function getTotalllseller($seller_id,$order_id){
-			$query = $this->db->query("SELECT value AS total  FROM " . DB_PREFIX . "purpletree_order_total WHERE seller_id = '".(int)$seller_id."' AND order_id = '".(int)$order_id."' AND code='sub_total'");
+			$query = $this->db->query("SELECT value AS total  FROM " . DB_PREFIX . "purpletree_order_total WHERE seller_id = '".(int)$seller_id."' AND order_id = '".(int)$order_id."' AND code='total'");
 			
 			return $query->row;
 		}
@@ -1353,7 +1353,7 @@ class ModelExtensionPurpletreeMultivendorSellerorder extends Model{
 			return $query->rows;
 		}
 		public function getsellerorderunique($order_id,$seller_id){
-			$query = $this->db->query("SELECT seller_id FROM " . DB_PREFIX . "purpletree_vendor_orders WHERE order_id='".(int)$order_id."' AND seller_id !=".$seller_id);
+			$query = $this->db->query("SELECT seller_id FROM " . DB_PREFIX . "purpletree_vendor_orders WHERE order_id='".(int)$order_id."' AND seller_id =".$seller_id);
 			if($query->num_rows) {
 				return $query->rows;
 			}

@@ -35,7 +35,14 @@ class ControllerExtensionAccountPurpletreeMultivendorCommonHeader extends Contro
 		$this->load->language('extension/module/purpletree_sellerpanel');  
 		$this->load->language('purpletree_multivendor/header');  
 		$this->load->language('account/ptsregister');  
-	
+		$data['name'] = $this->config->get('config_name');
+
+			if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
+				$data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+			} else {
+				$data['logo'] = '';
+			}
+		$data['home'] = $this->url->link('common/home');	
 		if($this->customer->isLogged() && $seller_store = $this->customer->isSeller()) {
 			$this->load->model('extension/purpletree_multivendor/vendor');
 			$data['logged'] = 1;
@@ -48,8 +55,8 @@ class ControllerExtensionAccountPurpletreeMultivendorCommonHeader extends Contro
 				}
 				if(isset($seller['firstname'])) {
 					$data['firstname'] = $seller['firstname'];
-				} 
-			
+					} 
+			 
 				if(isset($seller['lastname'])) {
 					$data['lastname']  = $seller['lastname'];
 				}

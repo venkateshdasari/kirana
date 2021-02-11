@@ -90,10 +90,16 @@ class ControllerExtensionAccountPurpletreeMultivendorEvents extends Controller {
 					$data['seller_area_namea'] = $this->language->get('text_all_sellerarea');
 				  }
 			 $this->load->model('extension/purpletree_multivendor/vendor');
+			 $data['seller_area'] = '';
 			if((isset($this->session->data['seller_area'])) && ($this->session->data['seller_area'] != '')) {
 			if($this->session->data['seller_area'] > 0){
 		        $seller_area = $this->model_extension_purpletree_multivendor_vendor->getSellerAreasName($this->session->data['seller_area']); 
-	            $data['seller_area_namea'] = $seller_area;
+	            if(isset($seller_area)){
+				   $data['seller_area_namea'] = $seller_area;
+				}else{
+				   unset($this->session->data['seller_area']);
+				   $data['seller_area_namea'] = "...";
+					}
 			   }else{
 			     if($this->session->data['seller_area'] == 0){
 				    $data['seller_area_namea'] = $this->language->get('text_all_sellerarea');
@@ -101,8 +107,11 @@ class ControllerExtensionAccountPurpletreeMultivendorEvents extends Controller {
 					 $data['seller_area_namea'] = "...";
 				  }
 			   }
+			    if(isset( $this->session->data['seller_area'])){
 				$data['seller_area'] = $this->session->data['seller_area'];	
-			   
+				}else{
+				 $data['seller_area'] = '';
+				}
 	         }
              // start hyper local  section//
                 $hyper_local=$this->config->get('module_purpletree_multivendor_hyperlocal_status');
@@ -135,6 +144,7 @@ class ControllerExtensionAccountPurpletreeMultivendorEvents extends Controller {
 		    $assign_area = array();
 		    $all_seller_store = array();
 			$results = $this->model_extension_purpletree_multivendor_vendor->getSellerAreas();
+			$sellerareas = array();
 			if(!empty($results)){
 			foreach ($results as $result) {	
 			/* $all_seller_store = $this->model_extension_purpletree_multivendor_vendor->getAllSellerInfo();

@@ -26,3 +26,8 @@ $_['text_contact_message'] 	=	"ページからのお問い合わせ";
 //button
 $_['button_view_all'] ='すべて見る';
 $_['button_submit'] ='提出する';
+
+$_['text_files'] ='ファイル';
+$_['text_attach_file'] ='ファイルを添付する';
+$_['text_upload_file'] ='ファイルをアップロードする';
+$_['text_action'] ='アクション';

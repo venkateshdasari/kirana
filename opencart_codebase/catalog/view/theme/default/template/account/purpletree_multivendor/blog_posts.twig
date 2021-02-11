@@ -11,13 +11,13 @@
 			{% if blog %}
 			<div class="pts-row">
 				{% for pts_blog in blog %}
-				<div class="pts-col-lg-3 pts-col-md-3 pts-col-sm-6 pts-col-xs-12">	<div class=" pts-text-center pts-product-thumb transition" style="text-align:center !important">	  
+				<div class="pts-col-lg-3 pts-col-md-3 pts-col-sm-6 pts-col-xs-12">	<div class=" ptsc-text-center-imp pts-product-thumb transition">	  
 					<div class="transition">
 						
 						<div class="pts-text-left">
 							{{ pts_blog.date }}
 						</div>			
-						<div><a href="{{ pts_blog.href }}"><img src="{{ pts_blog.thumb }}" alt="{{ pts_blog.title }}" title="{{ pts_blog.title }}" class=" pts-seller-blog-image img-responsive" style = "display: inline-block;"></a></div>
+						<div><a href="{{ pts_blog.href }}"><img src="{{ pts_blog.thumb }}" alt="{{ pts_blog.title }}" title="{{ pts_blog.title }}" class=" pts-seller-blog-image img-responsive ptsc-display-inline" ></a></div>
 						<div class="caption">
 							<h4><a href="{{ pts_blog.href }}">{{ pts_blog.title }}</a></h4>
 							<p>{{ pts_blog.description }}</p>

@@ -38,3 +38,7 @@ $_['error_permission']      = "Waarschuwing: u bent niet gemachtigd om klanten t
 $_['text_invalidfile']      = "Ongeldig bestandstype. Selecteer .xls of .xlsx";
 $_['text_nofile']      = "Selecteer Bestand om te importeren";
 $_['admin_bulk_product_upload_sheet']    = "Download sjabloon";
+$_['text_bulk_product_import_add']    	 = 'Nieuwe producten importeren';
+$_['text_bulk_product_import_update']    = 'Bestaande producten bijwerken';
+$_['text_update']            			 = 'Bijwerken';
+$_['text_bulk_product_status_heading'] = "Bulkproduct importeren / bijwerken status";

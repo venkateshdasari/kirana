@@ -45,10 +45,10 @@ $_['text_seller_label_status'] = "Statut:";
 $_['button_deliver'] = "Livrer";
 $_['button_change_status'] = "Modifier l'état";
 $_['text_change_order_status'] = "Modifier l'état de la commande";
-$_['pts_text_customer'] = "<p> Votre commande a été traitée avec succès! </p> <p> Vous pouvez consulter l'historique de vos commandes en accédant à <a href="%s"> mon compte </ a > et en cliquant sur <a href="%s"> historique </a>. </p> <p> Si votre achat est associé à un téléchargement, vous pouvez accéder au compte <a href = "%s" > téléchargements </a> pour les afficher. </p> <p> Veuillez adresser toutes vos questions à la page ";
+$_['pts_text_customer'] = '<p> Votre commande a été traitée avec succès! </p> <p> Vous pouvez consulter l historique de vos commandes en accédant à <a href="%s"> mon compte </ a > et en cliquant sur <a href="%s"> historique </a>. </p> <p> Si votre achat est associé à un téléchargement, vous pouvez accéder au compte <a href = "%s" > téléchargements </a> pour les afficher. </p> <p> Veuillez adresser toutes vos questions à la page ';
 $_['pts_text_guest'] = "<p> Votre commande a été traitée avec succès! </p> <p> Veuillez adresser toutes vos questions au";
 $_['pts_text_thanks'] = "</p> <p> Merci d'avoir magasiné avec nous en ligne! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> propriétaire du magasin </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> propriétaire du magasin </a>.';
 $_['column_delivery_address'] = "Adresse de livraison";
 //// end_quick_order ////
 

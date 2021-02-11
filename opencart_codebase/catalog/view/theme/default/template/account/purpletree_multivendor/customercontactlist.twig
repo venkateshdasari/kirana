@@ -19,13 +19,13 @@
 			{% for contact in sellercontacts %}
 			<table class="pts-table pts-table-striped pts-table-bordered">
 				<tr>
-					<td style="width: 50%;"><strong>{{ contact.customer_name }}</strong><br>
+					<td class="ptsc-cuscontact-widthh"><strong>{{ contact.customer_name }}</strong><br>
 					<strong>{% if contact.customer_id ==0 %}{{ contact.customer_email }}{% endif %}</strong></td>
 					<td class="pts-text-right"><a href='{{ contact.reply }}' > {{ button_view_all }} </a> </td>
 				</tr>
 				<tr>
 					
-					<td style="width: 80%;">
+					<td class="ptsc-cuscontact-width">
 						<p>{{ contact.message }} </p>
 					</td>
 					<td colspan="2">

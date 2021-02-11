@@ -38,3 +38,7 @@ $_['error_permission']      = "Amaran: Anda tidak mempunyai kebenaran untuk memo
 $_['text_invalidfile']      = "Jenis fail tidak sah. Pilih .xls atau .xlsx";
 $_['text_nofile']      = "Pilih Fail untuk Import";
 $_['admin_bulk_product_upload_sheet']    = "Muat turun templat";
+$_['text_bulk_product_import_add']    	 = 'Import Produk Baru';
+$_['text_bulk_product_import_update']    = 'Kemas kini Produk Sedia Ada';
+$_['text_update']            			 = 'Kemas kini';
+$_['text_bulk_product_status_heading'] = "Status Import / Kemasukan Produk Pukal";

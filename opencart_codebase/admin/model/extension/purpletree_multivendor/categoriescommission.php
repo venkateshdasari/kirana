@@ -15,7 +15,12 @@ class ModelExtensionPurpletreeMultivendorCategoriescommission extends Model{
 			if(isset($data['filter_seller_group'])) {
 				$qryadd = ", seller_group='".(int)$data['filter_seller_group']."'";
 			}
-			$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_categories_commission SET category_id ='".(int)$data['filter_id']."', commission='".(float)$data['filter_commission']."', commison_fixed='".(float)$data['filter_commission_fixed']."'".$qryadd ."");
+			if($data['filter_commission_fixed'] == '') {
+				$fixed_commission = 'NULL';
+				} else {
+				$fixed_commission = (float)$data['filter_commission_fixed'];
+			}
+			$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_categories_commission SET category_id ='".(int)$data['filter_id']."', commission='".(float)$data['filter_commission']."', commison_fixed=".$fixed_commission.$qryadd .""); 		
 		}
 		
 		
@@ -24,8 +29,12 @@ class ModelExtensionPurpletreeMultivendorCategoriescommission extends Model{
 			if(isset($data['filter_seller_group'])) {
 				$qryadd = ", seller_group='".(int)$data['filter_seller_group']."'";
 			}
-			$this->db->query("UPDATE " . DB_PREFIX . "purpletree_vendor_categories_commission SET commission ='".(float)$data['filter_commission']."', commison_fixed='".(float)$data['filter_commission_fixed']."'".$qryadd ." WHERE id='".(int)$data['filter_id']."'");
-			
+			if($data['filter_commission_fixed'] == '') {
+				$fixed_commission = 'NULL';
+				} else {
+				$fixed_commission = (float)$data['filter_commission_fixed'];
+			}
+			$this->db->query("UPDATE " . DB_PREFIX . "purpletree_vendor_categories_commission SET commission ='".(float)$data['filter_commission']."', commison_fixed=".$fixed_commission.$qryadd ." WHERE id='".(int)$data['filter_id']."'"); 		
 		}
 		public function deleteCategoriesCommission($id){ 
 			

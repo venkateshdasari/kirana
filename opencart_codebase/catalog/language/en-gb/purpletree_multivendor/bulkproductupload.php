@@ -23,6 +23,7 @@ $_['text_select_language']             = 'Select Language';
 $_['text_none']             = '-----NONE-----';
 $_['text_bulkuploadsuccess']             = 'File Uploaded Successfully';
 $_['text_aproved_product']             = 'Approve Seller Product';
+$_['text_bulk_product_status_heading'] = 'Bulk Product Import/Update Status';
 //Entry
 $_['entry_select_language']             = 'Select Language';
 $_['entry_select_seller']             = 'Select Seller';
@@ -45,3 +46,6 @@ $_['text_nofile']      = 'Select File to Import';
 $_['error_subscription_plan']       = 'Please Select Subscription Plan!';
 $_['error_subscription_plan_limit']       = 'Plan Limit exceed Please change Plan!';
 $_['error_subscription_plan_status']       = 'Plan Subscription is disable  Please Enable plan Subscription!';
+$_['text_bulk_product_import_add']    	 = 'Import New Products';
+$_['text_bulk_product_import_update']    = 'Update Existing Products';
+$_['text_update']            			 = 'Update';

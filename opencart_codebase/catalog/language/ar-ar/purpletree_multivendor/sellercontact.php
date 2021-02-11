@@ -11,7 +11,7 @@ $_['text_empty_result'] = 'لا توجد استفسارات من العملاء 
 // Entry
 $_['entry_name']     = 'اسمك';
 $_['entry_email']    = 'عنوان البريد الإلكتروني';
-$_['entry_enquiry']  = 'تحقيق';
+$_['entry_enquiry']  = 'الاستفسار';
 
 // Email
 $_['email_subject']  = 'استفسار٪ s';
@@ -26,3 +26,8 @@ $_['text_contact_message'] = 'الاستفسار المقدم من الصفحة'
 //button
 $_['button_view_all'] ='عرض الكل';
 $_['button_submit'] ='إرسال';
+
+$_['text_files'] ='الملفات';
+$_['text_attach_file'] ='أرفق ملف';
+$_['text_upload_file'] ='رفع ملف';
+$_['text_action'] ='الإجراء';

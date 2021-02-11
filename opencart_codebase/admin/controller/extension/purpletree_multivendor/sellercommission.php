@@ -8,7 +8,7 @@ class ControllerExtensionPurpletreeMultivendorSellercommission extends Controlle
 				
 			}
 			$this->load->language('purpletree_multivendor/sellercommission');
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->model('extension/purpletree_multivendor/sellercommission');
 			
 			if (isset($this->request->get['filter_date_from'])) {
@@ -195,6 +195,7 @@ class ControllerExtensionPurpletreeMultivendorSellercommission extends Controlle
 			$this->load->model('extension/purpletree_multivendor/commissioninvoice');
 			if (isset($this->request->post['selected'])) {
 				$commisionss = $this->request->post['selected'];
+				
 				try {
 					$commisioninvoiceids = array();
 					$so_id = array();
@@ -212,6 +213,8 @@ class ControllerExtensionPurpletreeMultivendorSellercommission extends Controlle
 						$uniqueSoId=array_unique($so_id,SORT_REGULAR);
 						foreach($uniqueSoId as $vvvv){
 							$total_price[$vvvv['seller_id']][]= $this->model_extension_purpletree_multivendor_commissioninvoice->getCommissionTotal($vvvv['order_id'],$vvvv['seller_id']);
+							
+							$coupon_amount[$vvvv['seller_id']][]= $this->model_extension_purpletree_multivendor_commissioninvoice->getCouponAmount($vvvv['order_id'],$vvvv['seller_id']);
 						}
 						
 						$t_comm=array();
@@ -236,12 +239,26 @@ class ControllerExtensionPurpletreeMultivendorSellercommission extends Controlle
 							}
 							
 						}
+						$coupon_total=array();
+						if(!empty($coupon_amount)){
+							foreach($coupon_amount as $vk1=>$vv1){
+								$t_tot=0;
+								foreach($vv1 as $vkk2=>$vvv2){
+									$t_tot+=$vvv2;	
+								}
+								$coupon_total[$vk1]=$t_tot;	
+							}
+							
+						}
 						if(!empty($t_comm)){
 							foreach($t_comm as $seller_idd=>$seller_commm){
 								$total_price=$t_total[$seller_idd];
 								$total_pay_amount=$total_price-$seller_commm;
-								
-								$linkid[$seller_idd] = $this->model_extension_purpletree_multivendor_commissioninvoice->savelinkid($total_price,$seller_commm,$total_pay_amount);
+								$coupon_amt=0;
+								if(!empty($coupon_total[$seller_idd])){
+								$coupon_amt=$coupon_total[$seller_idd];
+								}
+								$linkid[$seller_idd] = $this->model_extension_purpletree_multivendor_commissioninvoice->savelinkid($total_price,$seller_commm,$total_pay_amount,$coupon_amt);
 							}
 						}
 						foreach ($commisionss as $commisionid => $order_id) {

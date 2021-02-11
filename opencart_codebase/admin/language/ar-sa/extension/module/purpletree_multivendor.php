@@ -166,3 +166,6 @@ $_['entry_seller_areaheading']="فرط محلي";
 $_['entry_header_popup']="عنوان في يظهر فجأة إلى عن على هايبر محلي"; 
 $_['entry_area_selection']="تحديد المنطقة إلزامي";
 $_['entry_seller_area_link']="انتقل إلى منطقة البائع";
+$_['text_multiple_store']="استخدم مخازن المجال"; 
+$_['text_fix_commission']="العمولة الثابتة";
+$_['text_hyper_delivering']           = 'يسلم ل';

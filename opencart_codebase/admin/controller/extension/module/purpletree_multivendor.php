@@ -4,9 +4,9 @@ class ControllerExtensionModulePurpletreeMultivendor extends Controller {
 		
 		public function index() {
 			$this->load->language('extension/module/purpletree_multivendor');
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->document->setTitle($this->language->get('heading_title'));
-			$data['version'] = "Version 3.16.03";
+			$data['version'] = "Version 3.16.10";
 			$this->load->model('setting/setting'); 
 			$this->load->model('localisation/order_status');
 			$data['order_statuses'] = array();
@@ -169,9 +169,28 @@ class ControllerExtensionModulePurpletreeMultivendor extends Controller {
 							
 							$check_price_extension4 = $this->db->query("Select `code` FROM " . DB_PREFIX . "layout_module WHERE code = 'purpletree_sellerprice'");
 							if($check_price_extension4->num_rows) { } else {
-								$this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '".$check_price_extension3->row['layout_id']."', code = 'purpletree_sellerprice', position = 'column_right', sort_order = '1'");
+								$this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '".$check_price_extension3->row['layout_id']."', code = 'purpletree_sellerprice', position = 'column_right', sort_order = '-1'");
 							}
 						}
+					    $check_sellerdetail_extension = $this->db->query("SELECT `code` FROM " . DB_PREFIX . "extension WHERE code = 'purpletree_sellerdetail'");	
+						if($check_sellerdetail_extension->num_rows){  } else {
+							$this->db->query("INSERT INTO " . DB_PREFIX . "extension SET type = 'module', code = 'purpletree_sellerdetail'");
+						}
+						$check_sellerdetail_extension2 = $this->db->query("SELECT `code` FROM " . DB_PREFIX . "setting WHERE code = 'module_purpletree_multivendor' AND `key`= 'module_purpletree_sellerdetail_status'");	
+						if($check_sellerdetail_extension2->num_rows){
+							$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = '1' WHERE code = 'module_purpletree_multivendor' AND `key`= 'module_purpletree_sellerdetail_status'");
+							} else {
+							
+							$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `serialized`) VALUES (NULL, '0', 'module_purpletree_multivendor', 'module_purpletree_sellerdetail_status', '1', '0')");
+						}
+						$check_sellerdetail_extension3 = $this->db->query("Select layout_id FROM " . DB_PREFIX . "layout WHERE name = 'Product'");
+						if($check_sellerdetail_extension3->num_rows) { 
+							
+							$check_sellerdetail_extension4 = $this->db->query("Select `code` FROM " . DB_PREFIX . "layout_module WHERE code = 'purpletree_sellerdetail'");
+							if($check_sellerdetail_extension4->num_rows) { } else {
+								$this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '".$check_sellerdetail_extension3->row['layout_id']."', code = 'purpletree_sellerdetail', position = 'column_right', sort_order = '-1'");
+							}
+						}	
 					}
 					$this->response->redirect($this->url->link('extension/module/purpletree_multivendor', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
 					
@@ -400,6 +419,16 @@ class ControllerExtensionModulePurpletreeMultivendor extends Controller {
 				} else {
 				$data['module_purpletree_multivendor_commission'] = "10";
 			}
+			///*** Fix commission ***///			
+			$data['text_fix_commission'] = $this->language->get('text_fix_commission');
+			if (isset($this->request->post['module_purpletree_multivendor_fix_commission'])) {
+				$data['module_purpletree_multivendor_fix_commission'] = $this->request->post['module_purpletree_multivendor_fix_commission'];
+				} elseif($this->config->get('module_purpletree_multivendor_fix_commission')){
+				$data['module_purpletree_multivendor_fix_commission'] = $this->config->get('module_purpletree_multivendor_fix_commission');
+				} else {
+				$data['module_purpletree_multivendor_fix_commission'] = "0";
+			}
+			///*** End fix commission ***///
 			if (isset($this->request->post['module_purpletree_multivendor_commission_status'])) {
 				$data['module_purpletree_multivendor_commission_status'] = $this->request->post['module_purpletree_multivendor_commission_status'];
 				} else {
@@ -428,7 +457,7 @@ class ControllerExtensionModulePurpletreeMultivendor extends Controller {
 				$data['module_purpletree_multivendor_customer_manage_order'] = $this->request->post['module_purpletree_multivendor_customer_manage_order'];
 				} else {
 				$data['module_purpletree_multivendor_customer_manage_order'] = $this->config->get('module_purpletree_multivendor_customer_manage_order');
-			}
+				}
 			$this->load->model('localisation/order_status');
 
 		     $data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
@@ -535,10 +564,10 @@ class ControllerExtensionModulePurpletreeMultivendor extends Controller {
 
 			if(isset($this->request->post['module_purpletree_multivendor_hp_heading'])){
 				$data['module_purpletree_multivendor_hp_heading'] = $this->request->post['module_purpletree_multivendor_hp_heading'];
-				} elseif($this->config->get('module_purpletree_multivendor_hp_heading') || $this->config->get('module_purpletree_multivendor_hp_heading') == '0'){
+				} elseif($this->config->get('module_purpletree_multivendor_hp_heading')){
 				$data['module_purpletree_multivendor_hp_heading'] = $this->config->get('module_purpletree_multivendor_hp_heading');
 				} else {
-				$data['module_purpletree_multivendor_hp_heading'] = "";
+				$data['module_purpletree_multivendor_hp_heading'] = $this->language->get('text_hyper_delivering');
 			}
 
              if (isset($this->request->post['module_purpletree_multivendor_area_status'])) {
@@ -742,6 +771,14 @@ class ControllerExtensionModulePurpletreeMultivendor extends Controller {
 				$data['module_purpletree_multivendor_hide_user_menu'] = $this->config->get('module_purpletree_multivendor_hide_user_menu');
 			}
 			////End Hide User Menu////
+			//Start domain wise store
+			if (isset($this->request->post['module_purpletree_multivendor_multi_store'])) {
+				$data['module_purpletree_multivendor_multi_store'] = $this->request->post['module_purpletree_multivendor_multi_store'];
+				} else {
+				$data['module_purpletree_multivendor_multi_store'] = $this->config->get('module_purpletree_multivendor_multi_store');
+			}
+			//End domain wise store
+			
 			if (isset($this->request->post['module_purpletree_multivendor_seller_contact'])) {
 				$data['module_purpletree_multivendor_seller_contact'] = $this->request->post['module_purpletree_multivendor_seller_contact'];
 				} else {

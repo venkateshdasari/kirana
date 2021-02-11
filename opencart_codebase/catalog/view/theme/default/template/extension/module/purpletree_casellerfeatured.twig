@@ -3,10 +3,10 @@
 	<div id="carousel_seller_featured" class="owl-carousel">
 		{% for product in products %}
 		<div class="item text-center">
-			<div class="pts-product-layout" style="margin:6px;">
+			<div class="pts-product-layout ptsc-cfeatured-modumar">
 				<div class="pts-product-thumb transition">
 					<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
-					<div class="pts-caption" style="min-height:auto !important">
+					<div class="pts-caption ptsc-cfeatured-modumihei">
 						<h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
 						<p>{{ product.description }}</p>
 						{% if product.rating %}
@@ -29,9 +29,9 @@
 							{% if show_seller_address %}		  
 								{% if product.store_address %}		  
 								  {% if product.google_map %}	
-									<a href="{{ product.google_map }}"><p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp{{ product.store_address }}</p></a>
+									<a href="{{ product.google_map }}"><p><i class ="fa fa-map-marker ptsc-store-addressco"></i>&nbsp{{ product.store_address }}</p></a>
 									{% else %}
-									<p><i class ="fa fa-map-marker" style = "color: #6aa5d1;"></i>&nbsp{{ product.store_address }}</p>
+									<p><i class ="fa fa-map-marker ptsc-store-addressco"></i>&nbsp{{ product.store_address }}</p>
 								{% endif %}
 								{% endif %}
 							{% endif %}
@@ -51,7 +51,7 @@
 					</div>
 					<div class="pts-button-group">
 					 {% if product.pts_quick_status %}
-						  <button  type="button" style="width: 100%;"><a href="{{ product.quick_order }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_deliver }}</span></a></button>
+						  <button  type="button" class="ptsc-quick-deliverb"><a href="{{ product.quick_order }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_deliver }}</span></a></button>
 						  {% else %}
 						<button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs1 hidden-sm1 hidden-md1">{{ button_cart }}</span></button>
 						<button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>

@@ -255,7 +255,13 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 			if(isset($data['store_live_chat_code'])) {
 				$store_live_chat_code = ', store_live_chat_code="'. $this->db->escape($data['store_live_chat_code']).'"';
 			}
-			$this->db->query("UPDATE " . DB_PREFIX. "purpletree_vendor_stores SET store_name='".$this->db->escape(trim($data['store_name']))."', store_logo='".$this->db->escape($data['store_logo'])."', store_email='".$this->db->escape($data['store_email'])."', store_phone='".$this->db->escape($data['store_phone'])."',store_video='".$data['store_video']."', store_banner='".$this->db->escape($data['store_banner'])."', store_image='".$this->db->escape($data['store_image'])."',store_description='".$this->db->escape($data['store_description'])."' ".$dcument.$store_live_chat_enable.$store_live_chat_code.", store_address='".$this->db->escape($data['store_address'])."', store_city='".$this->db->escape($data['store_city'])."',store_country='".(int)$data['store_country']."', store_state='".(int)$data['store_state']."', store_zipcode='".$this->db->escape($data['store_zipcode'])."',store_area='".$this->db->escape($data['seller_area'])."',google_map ='".$this->db->escape($data['google_map'])."',google_map_link ='".$this->db->escape($data['google_map_link'])."',store_timings ='".$data['store_timings']."', store_shipping_policy='".$this->db->escape($data['store_shipping_policy'])."', store_return_policy='".$this->db->escape($data['store_return_policy'])."', store_meta_keywords='".$this->db->escape($data['store_meta_keywords'])."', store_meta_descriptions='".$this->db->escape($data['store_meta_description'])."', store_bank_details='".$this->db->escape($data['store_bank_details'])."', store_tin='".$this->db->escape($data['store_tin'])."', store_status= '".(int)$data['store_status']."', sort_order= '".(int)$data['sort_order']."',vacation= '".(int)$data['vacation']."', store_shipping_type ='".$this->db->escape($data['store_shipping_type'])."',store_shipping_order_type ='".$this->db->escape($data['store_shipping_order_type'])."', store_shipping_charge='".$store_shipping_charge."',store_commission=".$datastore_commission.",seller_paypal_id='".$seller_paypal_id."',store_updated_at=NOW() where id='".(int)$store_id."'");
+			$ptssql="UPDATE " . DB_PREFIX. "purpletree_vendor_stores SET store_name='".$this->db->escape(trim($data['store_name']))."', store_logo='".$this->db->escape($data['store_logo'])."', store_email='".$this->db->escape($data['store_email'])."', store_phone='".$this->db->escape($data['store_phone'])."',store_video='".$data['store_video']."', store_banner='".$this->db->escape($data['store_banner'])."', store_image='".$this->db->escape($data['store_image'])."',store_description='".$this->db->escape($data['store_description'])."' ".$dcument.$store_live_chat_enable.$store_live_chat_code.", store_address='".$this->db->escape($data['store_address'])."', store_city='".$this->db->escape($data['store_city'])."',store_country='".(int)$data['store_country']."', store_state='".(int)$data['store_state']."', store_zipcode='".$this->db->escape($data['store_zipcode'])."',store_area='".$this->db->escape($data['seller_area'])."',google_map ='".$this->db->escape($data['google_map'])."',google_map_link ='".$this->db->escape($data['google_map_link'])."',store_timings ='".$data['store_timings']."', store_shipping_policy='".$this->db->escape($data['store_shipping_policy'])."', store_return_policy='".$this->db->escape($data['store_return_policy'])."', store_meta_keywords='".$this->db->escape($data['store_meta_keywords'])."', store_meta_descriptions='".$this->db->escape($data['store_meta_description'])."', store_bank_details='".$this->db->escape($data['store_bank_details'])."', store_tin='".$this->db->escape($data['store_tin'])."', store_status= '".(int)$data['store_status']."', sort_order= '".(int)$data['sort_order']."',vacation= '".(int)$data['vacation']."', store_shipping_type ='".$this->db->escape($data['store_shipping_type'])."',store_shipping_order_type ='".$this->db->escape($data['store_shipping_order_type'])."', store_shipping_charge='".$store_shipping_charge."',store_commission=".$datastore_commission.",seller_paypal_id='".$seller_paypal_id."'";
+			if(isset($data['multi_store'])){
+				$ptssql.=",multi_store_id='".$this->db->escape($data['multi_store'])."'";
+			}
+			$ptssql.=",store_updated_at=NOW() where id='".(int)$store_id."'";
+			
+			$this->db->query($ptssql);
 			$seller_id = $data['seller_id'];
 			
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : json_encode(array())) . "' WHERE customer_id = '" . (int)$seller_id . "'");
@@ -269,6 +275,19 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 				$this->db->query("INSERT into " . DB_PREFIX . "purpletree_vendor_social_links SET facebook_link ='".$this->db->escape($data['facebook_link'])."', twitter_link='".$this->db->escape($data['twitter_link'])."', google_link='".$this->db->escape($data['google_link'])."', instagram_link='".$this->db->escape($data['instagram_link'])."', pinterest_link='".$this->db->escape($data['pinterest_link'])."', wesbsite_link='".$this->db->escape($data['wesbsite_link'])."', whatsapp_link='".$this->db->escape($data['whatsapp_link'])."', store_id = " . (int)$store_id . "");
 			}
 			//end social icon
+		// Assign store to product
+		if($this->config->get('module_purpletree_multivendor_multi_store')){
+			$ptsSql=$this->db->query("SELECT pvp.product_id FROM " . DB_PREFIX . "purpletree_vendor_stores pvs LEFT JOIN " . DB_PREFIX . "purpletree_vendor_products pvp ON(pvs.seller_id=pvp.seller_id)  WHERE pvs.id = '" . (int)$store_id . "'");
+			if($ptsSql->num_rows){
+				foreach($ptsSql->rows as $productid){
+					$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$productid['product_id']. "'");
+					foreach($data['multiple_store'] as $multiStoreId){
+						$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$productid['product_id'] . "', store_id = '" . (int)$multiStoreId . "'");	
+					}
+				}
+			}
+		}
+		// Assign store to product
 			
 			if($this->config->get('module_purpletree_multivendor_product_approval')){
 				$is_approved = 0;
@@ -276,13 +295,20 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 				$is_approved = 1;
 			}
 			if($this->config->get('module_purpletree_multivendor_subscription_plans')!=1){
-				if(!empty($data['product_ids'])){
+							if(!empty($data['product_ids'])){
 					foreach($data['product_ids'] as $product_id){
 						$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_products SET seller_id='".(int)$data['seller_id']."',product_id='".(int)$product_id."', is_approved='".(int)$is_approved."', created_at =NOW(), updated_at =NOW()");
-						$found_store = $this->checkStoreID($admin_store_id, $product_id);
-						if($found_store){
-							$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$admin_store_id . "'");
+						// $multiple_stores=explode(',',$admin_store_id);
+						$multiple_stores=$data['multiple_store'];
+						if(!empty($multiple_stores)){
+							$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$product_id . "'");
+							foreach($multiple_stores as $storeId){
+						// $found_store = $this->checkStoreID($storeId, $product_id);
+						// if($found_store){
+							$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$storeId . "'");
+						// }
 						}
+					}
 					}
 				}
 			}
@@ -304,19 +330,36 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 			if(!empty($data['seller_amount'])){
 				$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_payments SET seller_id='".(int)$data['seller_id']."',transaction_id='".$this->db->escape($data['seller_transaction'])."',amount ='".(float)$data['seller_amount']."', payment_mode ='".$this->db->escape($data['seller_payment'])."', status ='success' , created_at =NOW(), updated_at =NOW()");
 			}
+				
 			if ($data['store_seo']) {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE query = 'seller_store_id=" . (int)$store_id . "'");
 				if($query->num_rows > 0){
-					$row = $query->row;
-					$this->db->query("UPDATE " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '0', keyword = '" . $this->db->escape($data['store_seo']) . "' WHERE seo_url_id=".$this->db->escape($row['seo_url_id']));
+					$row = $query->row;					
+					if($this->config->get('module_purpletree_multivendor_multi_store')){
+					$multi_store_ids = array();
+					$multi_store_ids = explode(',',$data['multi_store']);
+					if(!empty($multi_store_ids)){
+					foreach($multi_store_ids as $multi_store_id){	
+					   $this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'seller_store_id=" . (int)$store_id . "' AND store_id = '" . (int)$multi_store_id . "'");
+					   if(VERSION=='3.1.0.0_b'){
+						$push='route=extension/account/purpletree_multivendor/sellerstore/storeview&seller_store_id='.(int)$store_id;	
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', store_id = '" . (int)$multi_store_id . "', keyword = '" . $this->db->escape($data['store_seo']) . "', push='".$push."'");
+						}else {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', store_id = '" . (int)$multi_store_id . "', keyword = '" . $this->db->escape($data['store_seo']) . "'");
+					    }
+					  }
+					}
+					}else{
+					 $this->db->query("UPDATE " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', keyword = '" . $this->db->escape($data['store_seo']) . "' WHERE seo_url_id=".$this->db->escape($row['seo_url_id']));
+					}
 					
 					} else{
 					
-					if(VERSION=='3.1.0.0_b'){
+					 if(VERSION=='3.1.0.0_b'){
 						$push='route=extension/account/purpletree_multivendor/sellerstore/storeview&seller_store_id='.(int)$store_id;	
-						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '1', keyword = '" . $this->db->escape($data['store_seo']) . "', push='".$push."'");
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', keyword = '" . $this->db->escape($data['store_seo']) . "', push='".$push."'");
 						}else {
-						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '0', keyword = '" . $this->db->escape($data['store_seo']) . "'");
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', keyword = '" . $this->db->escape($data['store_seo']) . "'");
 					}
 					
 				}
@@ -400,9 +443,9 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 			}
 		}
 		public function getStore($store_id){
-			$query = $this->db->query("SELECT pvs.*,CONCAT(c.firstname, ' ', c.lastname) AS seller_name, (SELECT keyword FROM " . DB_PREFIX . "seo_url WHERE query = 'seller_store_id=" . (int)$store_id . "') AS store_seo FROM " . DB_PREFIX . "purpletree_vendor_stores pvs JOIN " . DB_PREFIX . "customer c ON(c.customer_id = pvs.seller_id) where pvs.id='".(int)$store_id."'");
+			$query = $this->db->query("SELECT pvs.*,CONCAT(c.firstname, ' ', c.lastname) AS seller_name, (SELECT DISTINCT keyword FROM " . DB_PREFIX . "seo_url WHERE query = 'seller_store_id=" . (int)$store_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "') AS store_seo FROM " . DB_PREFIX . "purpletree_vendor_stores pvs JOIN " . DB_PREFIX . "customer c ON(c.customer_id = pvs.seller_id) where pvs.id='".(int)$store_id."'");
 			return $query->row;
-		}
+		} 
 		
 		public function getStoreDetail($customer_id){
 			$query = $this->db->query("SELECT pvs.* FROM " . DB_PREFIX . "purpletree_vendor_stores pvs where pvs.seller_id='".(int)$customer_id."'");
@@ -1301,7 +1344,7 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 			}
 			
 		}
-		public function checkStoreID($store_id,$product_id) {
+	/* 	public function checkStoreID($store_id,$product_id) {
 			
 			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$product_id . "' AND store_id = '" . (int)$store_id . "'");
 			if($query->num_rows>0){
@@ -1309,7 +1352,7 @@ class ModelExtensionPurpletreeMultivendorStores extends Model{
 				}else {
 				return true;
 			}
-		}
+		} */
 		public function updateRefund($data) {		
 			$refund = - $data['refund_value'];
 			$ids = explode('_',$data['code']);

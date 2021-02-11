@@ -46,3 +46,7 @@ $_['error_subscription_plan']       = 'Lütfen Abonelik Planı Seçin!';
 $_['error_subscription_plan_limit']       = 'Plan sınırı aşıldı. Lütfen planı değiştirin!';
 $_['error_subscription_plan_status']       = 'Plan Aboneliği devre dışı bırakıldı. Lütfen Plan Aboneliğini etkinleştir!';
 $_['seller_bulk_product_upload_sheet']    = "Şablonu indirin";
+$_['text_bulk_product_import_add']    	 = 'Yeni Ürün İthalatı';
+$_['text_bulk_product_import_update']    = 'Mevcut Ürünleri Güncelleme';
+$_['text_update']            			 = 'Güncelleme';
+$_['text_bulk_product_status_heading'] = "Kalakihang Pag-import / Katayuan ng Pag-update ng Produkto";

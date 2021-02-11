@@ -166,3 +166,6 @@ $_['entry_seller_areaheading'] = "Hyperlocal";
 $_['entry_header_popup'] = "En-tête dans une fenêtre contextuelle pour HyperLlocal";
 $_['entry_area_selection'] = "Sélection de zone obligatoire";
 $_['entry_seller_area_link'] = "Accéder à l'espace vendeur";
+$_['text_multiple_store']="Utilisez les magasins par domaine"; 
+$_['text_fix_commission']="Commission fixe";
+$_['text_hyper_delivering'] = "Livraison à";

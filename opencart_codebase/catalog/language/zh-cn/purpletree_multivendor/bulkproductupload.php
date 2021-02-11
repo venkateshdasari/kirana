@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = '请选择订阅计划！';
 $_['error_subscription_plan_limit']       = '超出计划限额请更改计划！';
 $_['error_subscription_plan_status']       = '计划订阅已禁用请启用计划订阅！';
 $_['seller_bulk_product_upload_sheet']    = "下载范本";
+$_['text_bulk_product_import_add']    	 = '导入新产品';
+$_['text_bulk_product_import_update']    = '更新现有产品';
+$_['text_update']            			 = '更新资料';
+$_['text_bulk_product_status_heading'] = "批量产品导入/更新状态";

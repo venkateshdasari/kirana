@@ -22,13 +22,13 @@
 			<div class="pts-row">
 				<div class="pts-col-md-4 pts-col-sm-4">
 					<div class="search_seller">
-						<div class="pts-input-group d-flex" id="search-pts" style="display:inline-flex">
+						<div class="pts-input-group d-flex ptsc-seller-sdisplay" id="search-pts">
 							<input type="text" class="pts-form-control pts-input-lg search pts-ser-box" placeholder="{{ text_refine }}" value="{{ filter }}" name="{{ text_refine }}">
 							<span class="pts-input-group-pts-btn"><button class="pts-btn pts-btn-default pts-btn-lg" type="button"><i class="fa fa-search"></i></button></span>
 						</div>
 					</div>
 				</div>
-				<div class="pts-col-md-3 pts-col-sm-3">
+				<div class="pts-col-md-2 pts-col-sm-2">
 				</div>
 				<div class="pts-col-md-3 pts-col-xs-6 pts-col-sm-3">
 					<div class="pts-form-group pts-input-group pts-input-group-sm ptssortcss">
@@ -44,7 +44,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="pts-col-md-2 pts-col-xs-6 pts-col-sm-2">
+				<div class="pts-col-md-3 pts-col-xs-6 pts-col-sm-3">
 					<div class="pts-form-group pts-input-group pts-input-group-sm ptssortcss">
 						<label class="pts-input-group-addon" for="input-limit">{{ text_limit }}</label>
 						<select id="input-limit" class="pts-form-control" onchange="location = this.value;">
@@ -110,6 +110,7 @@
 	{{ content_bottom }}</div>
 {{ column_right }}</div>
 </div>
+<link href="catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css" type="text/css" rel="stylesheet" />
 <script>
 	$(document).ready(function(){
 		$('.search_seller .pts-btn').click(function(){

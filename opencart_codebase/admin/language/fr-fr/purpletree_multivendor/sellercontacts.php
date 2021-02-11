@@ -29,3 +29,4 @@ $_['text_delete_success'] 	=	"L'enquête a été supprimée avec succès.";
 //button		
 
 $_['button_continue'] 	=	"Continuer";
+$_['text_files'] ='Des dossiers';

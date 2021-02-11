@@ -160,3 +160,6 @@ $_['entry_seller_areaheading'] = "Hyperlocal";
 $_['entry_header_popup'] = "Überschrift in Popup für HyperLlocal";
 $_['entry_area_selection'] = "Bereichsauswahl obligatorisch";
 $_['entry_seller_area_link'] = "Zum Verkäuferbereich gehen";
+$_['text_multiple_store']="Verwenden Sie domänenweise Speicher"; 
+$_['text_fix_commission']="Feste Provision";
+$_['text_hyper_delivering'] = "Liefern an";

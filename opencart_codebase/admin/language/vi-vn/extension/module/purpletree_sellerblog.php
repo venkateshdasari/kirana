@@ -19,4 +19,5 @@ $_['error_permission'] = 'Cảnh báo: Bạn không có quyền sửa đổi mô
 $_['error_name']       = 'Tên mô-đun phải từ 3 đến 128 ký tự!';
 $_['error_width']      = 'Chiều rộng yêu cầu!';
 $_['error_height']     = 'Yêu cầu chiều cao!';
+$_['error_limit']      = 'Yêu cầu giới hạn!';
 ?>

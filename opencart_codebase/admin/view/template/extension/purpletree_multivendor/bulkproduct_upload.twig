@@ -28,22 +28,23 @@
 			</div>
 			
 			<div class="panel-body card-body">
+			<div class="col-sm-12" >
 				<div class="well card mb-3 p-3">
 					<div class="row">
-						<div class="col-sm-12" style="text-align:left;">
+						<div class="col-sm-12 text-left">
 							<div>
 								<div>
-									<label class="control-label col-form-label" for="input-name" style="  font-weight: normal; ">{{ text_maxtime_info }}</label><label style="font-weight: bold;">&nbsp;{{ max_time }}&nbsp;{{ text_seconds }}</label>
+									<label class="control-label col-form-label ptsc-bulkshipp-nofontweig" for="input-name">{{ text_maxtime_info }}</label><label class="ptsc-commission-fontbold">&nbsp;{{ max_time }}&nbsp;{{ text_seconds }}</label>
 									
 								</div>
 								<div>
 									
-									<label class="control-label col-form-label" for="input-name" style=" font-weight: normal ">{{ text_file_size_info }} </label><label style="font-weight: bold;">&nbsp;{{ memory_limit }}</label>
+									<label class="control-label col-form-label ptsc-bulkshipp-nofontweig" for="input-name">{{ text_file_size_info }} </label><label class="ptsc-commission-fontbold">&nbsp;{{ memory_limit }}</label>
 									
 								</div>
 								<div>
 									
-									<label style="font-weight: bold;"><a href="{{ admin_template}}">{{ admin_bulk_product_upload_sheet }}</a></label>
+									<label class="ptsc-commission-fontbold"><a href="{{ admin_template}}">{{ admin_bulk_product_upload_sheet }}</a></label>
 									
 								</div>
 							</div>
@@ -51,12 +52,15 @@
 						</div>
 					</div>
 				</div>  
-				<form action="{{ export }}"  method="post" enctype="multipart/form-data" id="form-customer">
-					<div class="well card mb-3 p-3">
-						<h4 class="panel-title" style=" padding: 0px 0px 20px 0px; "> {{ text_bulk_product_export }}</h4>
+				</div>  
+				
+					<div class="col-sm-12">
+					<div class="col-sm-12 well">
+						<h4 class="panel-title ptsc-bulkupload-padd"> <span class="pts-title">{{ text_bulk_product_export }}</span></h4>
 						<div class="row">
+							<form action=""  method="post" enctype="multipart/form-data" id="form-export-product">
 							
-							<div class="col-sm-6" style="text-align:left;">
+							<div class="col-sm-6 text-left">
 								<div class="form-group">
 									<label class="control-label col-form-label" for="input-name" >{{ entry_select_seller }}</label>
 									<select name="seller_id" id="input-status" class="form-control">
@@ -71,7 +75,7 @@
 								</div>
 							</div>
 							
-							<div class="col-sm-6" style="text-align:left;">
+							<div class="col-sm-6 text-left">
 								<div class="form-group">
 									<label class="control-label col-form-label" for="input-name" >{{ entry_select_language }}</label>
 									<select name="language" id="input-status" class="form-control">
@@ -84,23 +88,23 @@
 							</div>
 							
 							
-							<div class="col-sm-12" style="text-align:left;">
+							<div class="col-sm-12 text-left">
 								<div class="form-group">
-									<input type="submit" value="{{ text_export }}" class="btn btn-primary" class="button_add"  style=" padding: 8px 20px 8px 20px;  mmargin-left: 7px;" >
+									<input type="submit" value="{{ text_export }}" class="btn btn-primary" class="button_add ptsc-bulkupload-btnadd" form="form-export-product" formaction="{{ export }}" >
 									
 								</div>
 							</div>
+							</form>
 						</div>
 					</div>
-				</form>
-				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-customer">
-					<div class="well card mb-3 p-3">
-						<h4 class="panel-title " style=" padding: 0px 0px 20px 0px; "> {{ text_bulk_product_import }}</h4>
+					</div>
+				<div class="col">
+					<div class="col-sm-6">
+					<div class="well">
+						<h4 class="panel-title ptsc-bulkupload-padd"> <span class="pts-title">{{ text_bulk_product_import_add }}</span></h4>
 						<div class="row">
-							
-							
-							
-							<div class="col-sm-6" style="text-align:left;">
+							<form action="" method="post" enctype="multipart/form-data" id="form-add-product">
+							<div class="col-sm-12 text-left">
 								<div class="form-group">
 									<label class="control-label col-form-label" for="input-name" >{{ entry_select_seller }}</label>
 									<select name="seller_id" id="input-status" class="form-control">
@@ -115,7 +119,50 @@
 								</div>
 							</div>
 							
-							<div class="col-sm-6" style="text-align:left;">
+							<div class="col-sm-12 text-left">
+								<div class="form-group">
+									<label class="control-label col-form-label" for="input-name" >{{ entry_select_language }}</label>
+									<select name="language" id="input-status" class="form-control">
+										{% for lang in lang %}
+										<option value="{{ lang.language_id }}" {% if lang.default %} selected  {% endif %} >{{ lang.name }}</option>
+										{% endfor %}
+									</select>
+									
+								</div>
+							</div>
+							<div class="col-sm-12 text-left">
+								<div class="form-group">
+									<input type="file" class="ptsc-bulkupload-impheight"  name="import">
+								</div>
+							</div>
+							<div class="col-sm-12">
+									<button type="submit" name="submit" value="{{ button_upload }}" class="btn btn-primary" class="button_add ptsc-upgrdatabas-padd" form="form-add-product" formaction="{{ add_product }}" >{{ text_import }}</button>
+						</div>
+					</form>				
+						</div>
+					</div>
+					</div>
+		<div class="col-sm-6">
+			<div class="well">
+						<h4 class="panel-title ptsc-bulkupload-padd"> <span class="pts-title">{{ text_bulk_product_import_update }}</span></h4>
+						<div class="row">
+							<form action="" method="post" enctype="multipart/form-data" id="form-update-product">
+							<div class="col-sm-12 text-left">
+								<div class="form-group">
+									<label class="control-label col-form-label" for="input-name" >{{ entry_select_seller }}</label>
+									<select name="seller_id" id="input-status" class="form-control">
+										
+										<option value="" >{{ text_none }} </option>
+										{% for seller_id in seller_id %}
+										
+										<option value="{{ seller_id.seller_id  }}" >{{ seller_id.store_name }} ({{ seller_id.seller_id }})</option>
+										{% endfor %}
+									</select>
+									
+								</div>
+							</div>
+							
+							<div class="col-sm-12 text-left">
 								<div class="form-group">
 									<label class="control-label col-form-label" for="input-name" >{{ entry_select_language }}</label>
 									<select name="language" id="input-status" class="form-control">
@@ -128,34 +175,33 @@
 							</div>
 							
 							
-							<div class="col-sm-7" style="text-align:left;">
+							<div class="col-sm-12 text-left">
 								<div class="form-group">
-									<input type="file" style="height:35px"  name="import">
+									<input type="file" class="ptsc-bulkupload-impheight"  name="import">
 									
 								</div>
 							</div>
 							
-							<div class="col-sm-3" style="text-align:left;">
-								<div class="form-group">
-									<input type="checkbox" id="check" value="true" name="dataoverwrite"  />
-									<label class="control-label col-form-label overwrite" onclick="checkbox()" for="input-name" >{{ text_upload_info }}</label>
-								</div>
+							<div class="col-sm-12" >
+									<button type="submit" name="submit" value="{{ button_upload }}" class="btn btn-primary" class="button_add ptsc-upgrdatabas-padd" form="form-update-product" formaction="{{ update_product }}">{{ text_update }}</button>
 							</div>
 							
-							<div class="col-sm-2" style="text-align:left;">
-								<div class="form-group">
-									<button type="submit" name="submit" value="{{ button_upload }}" class="btn btn-primary" class="button_add"  style=" padding: 8px 20px 8px 20px; " >{{ text_import }}</button>
-									
-								</div>
-							</div>
-							
+							</form>
 						</div>
 					</div>
-				</form>
-				
+				</div>
 			</div>
 		</div>
+		<div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-exclamation-triangle"></i>{{ text_bulk_product_status_heading }}</h3>
+      </div>
+      <div class="panel-body">
+        <textarea wrap="off" rows="15" readonly class="form-control">{% for status_msg in status_msgs %}
+{{ status_msg.msg }}
+{% endfor %}</textarea>
+      </div>
 	</div>
+</div>
 	
 	{{ footer }} 
 	<script type="text/javascript">
@@ -170,8 +216,3 @@
 			}
 		}
 	</script>
-	<style type="text/css">
-		.control-label.overwrite {
-		padding: 10px 0px 0px 10px;
-		}
-	</style>	

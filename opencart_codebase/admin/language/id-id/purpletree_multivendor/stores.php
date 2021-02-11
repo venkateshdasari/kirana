@@ -198,3 +198,6 @@ $_['entry_sellerarea'] = "Area Penjual";
 $_['help_sellerarea'] = "(Pelengkapan Otomatis)";
 $_['text_all_sellerarea'] = "Semua";
 $_['text_selected_sellerarea'] = "Dipilih";
+
+$_['entry_multi_store']     = 'Buka Toko';
+$_['entry_assign_stores']    = 'Tetapkan Toko Opencart';

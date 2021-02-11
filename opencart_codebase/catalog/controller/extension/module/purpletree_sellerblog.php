@@ -16,12 +16,19 @@ class ControllerExtensionModulePurpletreeSellerblog extends Controller {
 			$data['all_blog'] = $this->url->link('extension/account/purpletree_multivendor/blog_post/all_blog','', true);
 			
 			$results = $this->model_extension_module_purpletree_sellerblog->getPurpletreeBlog($this->config->get('module_purpletree_sellerblog_limit'));
-			
+			$image_height = 150;
+			$image_width = 150;
+			if ($this->config->get('module_purpletree_sellerblog_height')) {
+			  $image_height = $this->config->get('module_purpletree_sellerblog_height');
+			}
+			if ($this->config->get('module_purpletree_sellerblog_width')) {
+			  $image_width = $this->config->get('module_purpletree_sellerblog_width');
+			}
 			foreach ($results as $result) {
 				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], 150, 150);
+					$image = $this->model_tool_image->resize($result['image'], $image_width, $image_height);
 					} else {
-					$image = $this->model_tool_image->resize('placeholder.png',150, 150);
+					$image = $this->model_tool_image->resize('placeholder.png',$image_width, $image_height);
 				}
 				
 				$shortdescription = utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..';
@@ -58,6 +65,7 @@ class ControllerExtensionModulePurpletreeSellerblog extends Controller {
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
 			}
+			$this->document->addStyle('catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css');
 				return $this->load->view('extension/module/purpletree_sellerblog', $data);
 			}
 		}

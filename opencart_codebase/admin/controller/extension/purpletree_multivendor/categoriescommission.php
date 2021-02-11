@@ -9,13 +9,13 @@ class ControllerExtensionPurpletreeMultivendorCategoriescommission extends Contr
 			$this->document->setTitle($this->language->get('heading_title'));
 			
 			$this->load->model('extension/purpletree_multivendor/categoriescommission');
-			$this->load->model('customer/customer_group');
-			
+			$this->load->model('customer/customer_group');			
 			$this->getList();
 		}
 		
 		
 		protected function getList() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
 				} else {
@@ -252,7 +252,7 @@ class ControllerExtensionPurpletreeMultivendorCategoriescommission extends Contr
 		'commission_id' =>	$categoriescommission['id'],
 		'name' => $categoriescommission['name'],
 		'commission' => $categoriescommission['commission']."%",
-		'commission_fixed' => $this->currency->format($categoriescommission['commission_fixed'], $currency_detail['code'], $currency_detail['value']),
+		'commission_fixed' => isset($categoriescommission['commission_fixed'])?$this->currency->format($categoriescommission['commission_fixed'], $currency_detail['code'], $currency_detail['value']):'',
 		'seller_group' => isset($categoriescommission['seller_group'])?$categoriescommission['seller_group']:'',
 		'editaction' => $this->url->link('extension/purpletree_multivendor/categoriescommission/edit', 'user_token=' . $this->session->data['user_token'] . '&commission_id=' . $categoriescommission['id'] . $url, true),
 		'deleteaction' => $this->url->link('extension/purpletree_multivendor/categoriescommission/delete', 'user_token=' . $this->session->data['user_token'] . '&commission_id=' . $categoriescommission['id'] . $url, true)
@@ -277,7 +277,7 @@ class ControllerExtensionPurpletreeMultivendorCategoriescommission extends Contr
 		
 		
 		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->request->post['filter_id'] && $this->request->post['filter_commission'] && is_numeric($this->request->post['filter_commission']) && is_numeric($this->request->post['filter_commission_fixed'])) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->request->post['filter_id'] && $this->request->post['filter_commission'] && is_numeric($this->request->post['filter_commission']) && (is_numeric($this->request->post['filter_commission_fixed']) || ($this->request->post['filter_commission_fixed'] == ''))) {
 		
 		$this->model_extension_purpletree_multivendor_categoriescommission->addCategoriesCommission($this->request->post);
 		
@@ -302,14 +302,10 @@ class ControllerExtensionPurpletreeMultivendorCategoriescommission extends Contr
 		}
 		$url = "";
 		$this->response->redirect($this->url->link('extension/purpletree_multivendor/categoriescommission', 'user_token=' . $this->session->data['user_token'] . $url, true));
-		
-		
-		
-		
 		}
 		
 		public function edit(){	
-		
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 		if (!$this->customer->validateSeller()) {
 		$this->load->language('purpletree_multivendor/ptsmultivendor');
 		$this->session->data['error_warning'] = $this->language->get('error_license');
@@ -325,7 +321,7 @@ class ControllerExtensionPurpletreeMultivendorCategoriescommission extends Contr
 		$this->load->model('customer/customer_group');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-		if(is_numeric($this->request->post['filter_commission'] )) {
+		if(is_numeric($this->request->post['filter_commission'] ) && (is_numeric($this->request->post['filter_commission_fixed']) || ($this->request->post['filter_commission_fixed'] == ''))) {
 		
 		
 		$this->model_extension_purpletree_multivendor_categoriescommission->editCategoriesCommission($this->request->post);

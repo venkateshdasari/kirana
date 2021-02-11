@@ -13,7 +13,7 @@
 	<body>
 		<div class="container">
 			{% for order in orders %}
-			<div style="page-break-after: always;">
+			<div class="ptsc-orderinv-pagebreak">
 				<h1>{{ text_invoice }} #{{ order.order_id }}</h1>
 				<table class="table table-bordered">
 					<thead>
@@ -23,7 +23,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td style="width: 50%;"><address>
+							<td class="ptsc-cuscontact-widthh"><address>
 								<strong>{{ order.store_name }}</strong><br />
 								{{ order.store_address }}
 							</address>
@@ -33,7 +33,7 @@
 							{% endif %}
 							<b>{{ text_email }}</b> {{ order.store_email }}<br />
 							<b>{{ text_website }}</b> <a href="{{ order.store_url }}">{{ order.store_url }}</a></td>
-							<td style="width: 50%;"><b>{{ text_date_added }}</b> {{ order.date_added }}<br />
+							<td class="ptsc-cuscontact-widthh"><b>{{ text_date_added }}</b> {{ order.date_added }}<br />
 								{% if order.invoice_no %}
 								<b>{{ text_invoice_no }}</b> {{ order.invoice_no }}<br />
 								{% endif %}
@@ -48,8 +48,8 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<td style="width: 50%;"><b>{{ text_payment_address }}</b></td>
-							<td style="width: 50%;"><b>{{ text_shipping_address }}</b></td>
+							<td class="ptsc-cuscontact-widthh"><b>{{ text_payment_address }}</b></td>
+							<td class="ptsc-cuscontact-widthh"><b>{{ text_shipping_address }}</b></td>
 						</tr>
 					</thead>
 					<tbody>

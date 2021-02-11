@@ -37,3 +37,7 @@ $_['error_permission']      = "Warnung: Sie sind nicht berechtigt, Kunden zu än
 $_['text_invalidfile']      = "Ungültiger Dateityp. Wählen Sie .xls oder .xlsx";
 $_['text_nofile']      = "Wählen Sie Zu importierende Datei";
 $_['admin_bulk_product_upload_sheet']    = "Vorlage herunterladen";
+$_['text_bulk_product_import_add']    	 = 'Importieren Sie neue Produkte';
+$_['text_bulk_product_import_update']    = 'Aktualisieren Sie vorhandene Produkte';
+$_['text_update']            			 = 'Aktualisieren';
+$_['text_bulk_product_status_heading'] = "Import- / Aktualisierungsstatus für Massenprodukte";

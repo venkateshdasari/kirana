@@ -55,6 +55,11 @@ class ControllerExtensionModulePurpletreeSellerblog extends Controller {
 				} else {
 				$data['error_height'] = '';
 			}
+			if (isset($this->error['limit'])) {
+				$data['error_limit'] = $this->error['limit'];
+			} else {
+				$data['error_limit'] = '';
+			}
 			
 			$data['breadcrumbs'] = array();
 			
@@ -151,6 +156,9 @@ class ControllerExtensionModulePurpletreeSellerblog extends Controller {
 			
 			if (!$this->request->post['module_purpletree_sellerblog_height']) {
 				$this->error['height'] = $this->language->get('error_height');
+			}
+			if (!$this->request->post['module_purpletree_sellerblog_limit']) {
+				$this->error['limit'] = $this->language->get('error_limit');
 			}
 			
 			return !$this->error;

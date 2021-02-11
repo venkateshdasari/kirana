@@ -16,7 +16,11 @@ class ControllerExtensionAccountPurpletreeMultivendorProductReturns extends Cont
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
 				}else{
-				if(isset($store_detail['store_status']) && $store_detail['multi_store_id'] != $this->config->get('config_store_id')){	
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
 					$this->response->redirect($this->url->link('account/account','', true));
 				}
 			}
@@ -32,6 +36,18 @@ class ControllerExtensionAccountPurpletreeMultivendorProductReturns extends Cont
 		
 		
 		public function edit() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->load->language('purpletree_multivendor/product_returns');
 			
 			$this->document->setTitle($this->language->get('heading_title'));
@@ -99,6 +115,18 @@ class ControllerExtensionAccountPurpletreeMultivendorProductReturns extends Cont
 			$this->getForm();
 		}
 		protected function getList() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->document->addScriptpts('catalog/view/javascript/purpletree/jquery/datetimepicker/moment/moment.min.js'); 
 			$this->document->addScriptpts('catalog/view/javascript/purpletree/jquery/datetimepicker/moment/moment-with-locales.min.js'); 
 			$this->document->addScriptpts('catalog/view/javascript/purpletree/jquery/datetimepicker/bootstrap-datetimepicker.min.js'); 
@@ -418,6 +446,18 @@ class ControllerExtensionAccountPurpletreeMultivendorProductReturns extends Cont
 		}
 		
 		protected function getForm() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$data['text_form'] = !isset($this->request->get['return_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 			
 			$this->load->model('extension/purpletree_multivendor/dashboard');

@@ -38,3 +38,7 @@ $_['error_permission']      = "警告：顧客を変更する権限がありま�
 $_['text_invalidfile']      = "無効なファイルタイプ。 .xlsまたは.xlsxを選択します。";
 $_['text_nofile']      = "インポートするファイルを選択";
 $_['admin_bulk_product_upload_sheet']    = "テンプレートをダウンロード";
+$_['text_bulk_product_import_add']    	 = '新製品のインポート';
+$_['text_bulk_product_import_update']    = '既存の製品を更新する';
+$_['text_update']            			 = '更新';
+$_['text_bulk_product_status_heading'] = "製品の一括インポート/更新ステータス";

@@ -76,8 +76,8 @@ class ModelExtensionPurpletreeMultivendorCommissioninvoice extends Model{
 			$query = $this->db->query("SELECT pvs.* FROM " . DB_PREFIX . "purpletree_vendor_stores pvs where pvs.seller_id='".(int)$customer_id."'");
 			return $query->row;
 		}
-		public function savelinkid($total_price,$total_commission,$total_pay_amount){
-			$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_commission_invoice SET total_amount='".(float)$total_price."',total_commission='".(float)$total_commission."', total_pay_amount='".(float)$total_pay_amount."', created_at ='".date('Y-m-d')."'");
+		public function savelinkid($total_price,$total_commission,$total_pay_amount,$seller_coupon_amount=0){
+			$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_commission_invoice SET total_amount='".(float)$total_price."',total_commission='".(float)$total_commission."', total_pay_amount='".(float)$total_pay_amount."',seller_coupon_amount='".(float)$seller_coupon_amount."', created_at ='".date('Y-m-d')."'");
 			return $this->db->getLastId();
 		}
 		public function getiinvoiceitems($lnk_id = NULL){
@@ -92,7 +92,7 @@ class ModelExtensionPurpletreeMultivendorCommissioninvoice extends Model{
 		}
 		
 		public function saveCommisionInvoice($data=array(),$link_id = NULL){
-			$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_commission_invoice_items SET commission_id ='".(int)$data['id']."',order_id ='".(int)$data['order_id']."', product_id='".(int)$data['product_id']."', seller_id='".(int)$data['seller_id']."', commission_fixed='".(int)$data['commission_fixed']."', commission_percent='".(float)$data['commission_percent']."', commission_shipping='".(float)$data['commission_shipping']."', total_commission ='".(float)$data['commission']."', link_id ='".(int)$link_id."'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_commission_invoice_items SET commission_id ='".(int)$data['id']."',order_id ='".(int)$data['order_id']."', product_id='".(int)$data['product_id']."', seller_id='".(int)$data['seller_id']."', commission_fixed='".(float)$data['commission_fixed']."', commission_percent='".(float)$data['commission_percent']."', commission_shipping='".(float)$data['commission_shipping']."', total_commission ='".(float)$data['commission']."', link_id ='".(int)$link_id."'");
 			$this->db->query("UPDATE " . DB_PREFIX . "purpletree_vendor_commissions SET invoice_status = 1 WHERE id='".(int)$data['id']."'");
 		} 
 		public function getCommissions($data=array()){
@@ -247,6 +247,14 @@ class ModelExtensionPurpletreeMultivendorCommissioninvoice extends Model{
 		}
 		public function getCommissionTotal($order_id,$seller_id) {
 			$query = $this->db->query("SELECT value FROM ". DB_PREFIX ."purpletree_order_total WHERE order_id='".(int)$order_id."' AND seller_id='".(int)$seller_id."' AND code='sub_total'");
+			if ($query->num_rows) {
+				return $query->row['value'];
+			}
+			return false;
+		}
+		public function getCouponAmount($order_id,$seller_id) {
+			$query = $this->db->query("SELECT value FROM ". DB_PREFIX ."purpletree_order_total WHERE order_id='".(int)$order_id."' AND seller_id='".(int)$seller_id."' AND code='coupon'");
+
 			if ($query->num_rows) {
 				return $query->row['value'];
 			}

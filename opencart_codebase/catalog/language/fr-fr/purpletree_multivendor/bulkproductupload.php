@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = "Veuillez sélectionner un plan d'abonneme
 $_['error_subscription_plan_limit']       = 'Dépassement de la limite du plan Veuillez modifier le plan!';
 $_['error_subscription_plan_status']       = "Plan Abonnement est désactivé Veuillez activer l'abonnement au plan!";
 $_['seller_bulk_product_upload_sheet']    = "Télécharger le modèle";
+$_['text_bulk_product_import_add']    	 = 'Importation de produits en vrac Nouveaux produits';
+$_['text_bulk_product_import_update']    = 'Mise à jour des produits existants';
+$_['text_update']            			 = 'Mise à jour';
+$_['text_bulk_product_status_heading'] = "Statut d'importation / mise à jour de produit en masse";

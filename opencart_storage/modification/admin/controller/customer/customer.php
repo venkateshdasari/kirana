@@ -798,7 +798,7 @@ if (isset($this->error['seller_store'])) {
 			if (isset($this->request->post['become_seller'])) {
 			$data['become_seller'] = $this->request->post['become_seller'];
 		} elseif (!empty($seller_info)) {
-			$data['become_seller'] = $seller_info['store_status'];
+			$data['become_seller'] = 1;
 		} else {
 			$data['become_seller'] = '';
 			}

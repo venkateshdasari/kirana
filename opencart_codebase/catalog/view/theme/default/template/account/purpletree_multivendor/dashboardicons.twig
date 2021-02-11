@@ -67,7 +67,7 @@
 								<span class=" {% if enquiries_icons %} pts-counting-1 {% else %} pts-counting-2 {% endif %}">{{ totalenqures }}</span>
 								{% endif %}
 							</a><br>
-
+                         {% if purpletree_multivendor_subscription_plans %}
 							<a href="{{ subscriptionplan }}">
                             {% if plan_icons %}
 							<img src="image/catalog/dashboardicon/subscription.png"  class="sellerAccountImg"/>
@@ -75,7 +75,7 @@
                              <div class="sellerAccountImg"></div>
                            {% endif %}
 							<div class="icons-text">{{ text_Subscription_plan }}</div></a><br>
-
+                         {% endif %}
 							<a href="{{ sellerreview }}">
                             {% if reviews_icons %}
 							<img src="image/catalog/dashboardicon/review-icon-2.png" class="sellerAccountImg"/>

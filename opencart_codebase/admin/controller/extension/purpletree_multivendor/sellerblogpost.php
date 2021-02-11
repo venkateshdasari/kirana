@@ -170,7 +170,7 @@ class ControllerExtensionPurpletreeMultivendorSellerblogpost extends Controller 
 		}
 		
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['sort'])) {
 				$sort = $this->request->get['sort'];
 				} else {
@@ -340,7 +340,7 @@ class ControllerExtensionPurpletreeMultivendorSellerblogpost extends Controller 
 		
 		protected function getForm() {
 			
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$data['heading_title'] = $this->language->get('heading_title');
 			
 			$data['text_form'] = !isset($this->request->get['blog_post_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');

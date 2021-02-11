@@ -16,7 +16,11 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerattribute extends Con
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
 				}else{
-				if(isset($store_detail['store_status']) && $store_detail['multi_store_id'] != $this->config->get('config_store_id')){	
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
 					$this->response->redirect($this->url->link('account/account','', true));
 				}
 			}
@@ -35,6 +39,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerattribute extends Con
 		}
 		
 		public function add() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->load->language('purpletree_multivendor/sellerattribute');
 			
 			$this->document->setTitle($this->language->get('heading_title'));
@@ -72,6 +88,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerattribute extends Con
 		}
 		
 		public function edit() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->load->language('purpletree_multivendor/sellerattribute');
 			
 			$this->document->setTitle($this->language->get('heading_title'));
@@ -108,6 +136,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerattribute extends Con
 		}
 		
 		public function delete() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->load->language('purpletree_multivendor/sellerattribute');
 			
 			$this->document->setTitle($this->language->get('heading_title'));
@@ -146,6 +186,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerattribute extends Con
 		}
 		
 		protected function getList() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (isset($this->request->get['sort'])) {
 				$sort = $this->request->get['sort'];
 				} else {
@@ -292,7 +344,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerattribute extends Con
 		}
 		
 		protected function getForm() {
-			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$data['text_form'] = !isset($this->request->get['attribute_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 			
 			if (isset($this->request->get['attribute_id'])) {

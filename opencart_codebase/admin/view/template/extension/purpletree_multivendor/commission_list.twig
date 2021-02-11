@@ -79,7 +79,7 @@
 							</div>
 						</div>
 					</div>
-					<div><div style ="font-weight: bold" >{{ help_store }}</div><div class="sellercolor"> <div class="greencolor"></div>{{ help_Invoice }} </div></div>
+					<div><div class ="ptsc-commission-fontbold" >{{ help_store }}</div><div class="sellercolor"> <div class="bluecolor"></div>{{ help_Invoice }} </div></div>
 				</div>
 				<form method="post" action="{{ commission_invoice }}" enctype="multipart/form-data" id="form-order">
 					<div class="table-responsive">
@@ -101,7 +101,7 @@
 							<tbody>
 								{% if seller_commissions %}
 								{% for seller_commission in seller_commissions %}
-								<tr {% if seller_commission.invoice_status == 1 %} style = "background: #e6ffe6;"{% endif %}>
+								<tr {% if seller_commission.invoice_status == 1 %} class = "bluecolor"{% endif %}>
 									<td class="text-center ff">
 										<input data-order-id="{{ seller_commission.order_id }}" class="inputcheckbx inputcheckbx_{{ seller_commission.order_id }}" type="checkbox" 
 										{% if seller_commission.invoice_status == 1 %} disabled= "disabled" 
@@ -211,19 +211,4 @@
 			});
 		}
 	//--></script></div>
-	{{ footer }}
-	<style>
-		.greencolor {
-	    background: #e6ffe6;
-		}
-		.sellercolor div {
-		width: 42px;
-		height: 15px;
-		float: left;
-		margin-right: 10px;
-		margin-top: 3px;
-		border:1px solid #000;
-		
-		}
-		
-	</style>	
+	{{ footer }}	

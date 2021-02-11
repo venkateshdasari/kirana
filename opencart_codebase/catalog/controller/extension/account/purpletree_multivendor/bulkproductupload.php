@@ -1,6 +1,7 @@
 <?php
 class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends Controller{
 		private $error = array();
+		public $status_msgg = array();
 		public function index(){
 			$this->load->language('purpletree_multivendor/bulkproductupload');
 			$this->load->model('extension/purpletree_multivendor/bulkproductupload');
@@ -17,7 +18,12 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
 				}else{
-				if(isset($store_detail['store_status']) && $store_detail[  'multi_store_id'] != $this->config->get('config_store_id')){	
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+						
+					if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
 					$this->response->redirect($this->url->link('account/account','', true));
 				}
 			}
@@ -37,8 +43,17 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 			}
 			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
 			$store_detail = $this->customer->isSeller();
+			$store_detail = $this->customer->isSeller();
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			if(!$this->customer->validateSeller()) {
 				$this->load->language('purpletree_multivendor/ptsmultivendor');
@@ -85,23 +100,23 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 				$this->exportExcelData($objPHPexl,'ProductOptionValue','product_option_value',$postSellerId,$postLanguageId,12);    
 				$objPHPexl->setActiveSheetIndex(0);
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPexl, 'Excel2007');
-				$objWriter->save(DIR_SYSTEM.'/library/purpletree_multivendor/export/'.$fileName.'.xlsx'); 
-				$attachment_location = DIR_SYSTEM."/library/purpletree_multivendor/export/".$fileName.".xlsx";
+				//$objWriter->save(DIR_SYSTEM.'/library/purpletree_multivendor/export/'.$fileName.'.xlsx'); 
+				//$attachment_location = DIR_SYSTEM."/library/purpletree_multivendor/export/".$fileName.".xlsx";
 				
-				if (file_exists($attachment_location)) {
+				//if (file_exists($attachment_location)) {
 					header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
 					header("Cache-Control: public");
 					header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 					header("Content-Transfer-Encoding: Binary");
-					header("Content-Length:".filesize($attachment_location));
+					//header("Content-Length:".filesize($attachment_location));
 					header("Content-Disposition: attachment; filename=PurpletreePoductExport.xlsx");
-					readfile($attachment_location);
+				//	readfile($attachment_location);
 					$objWriter->save('php://output');
 					$this->session->data['success'] = $this->language->get('text_success');
 					die();
-					} else {
-					die("File not found.");
-				}
+					// } else { 
+					// die("File not found.");
+				// }
 			}
 		}
 		
@@ -231,7 +246,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 							$extraTypeData= '';	
 						}
 						$exportData[]=array(
-						'add_product'			=>	'',
+						// 'add_product'			=>	'',
 						'product_id'		=>	$vv['product_id'],
 						'model'				=>	$vv['model'],
 						'sku'				=>	$vv['sku'],
@@ -267,7 +282,9 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 						);
 					}
 				}
-				$tableName=array('A'=>'add_product','B'=>'product_id','C'=>'model','D'=>'sku','E'=>'upc','F'=>'ean','G'=>'jan','H'=>'isbn','I'=>'mpn','J'=>'location','K'=>'quantity','L'=>'stock_status','M'=>'image','N'=>'manufacturer','O'=>'shipping','P'=>'price','Q'=>'price_extra_type','R'=>'price_extra','S'=>'points','T'=>'tax_class','U'=>'date_available','V'=>'weight','W'=>'weight_class','X'=>'length','Y'=>'width','Z'=>'height','AA'=>'length_class','AB'=>'subtract','AC'=>'minimum','AD'=>'sort_order','AE'=>'status','AF'=>'metal');
+				// $tableName=array('A'=>'add_product','B'=>'product_id','C'=>'model','D'=>'sku','E'=>'upc','F'=>'ean','G'=>'jan','H'=>'isbn','I'=>'mpn','J'=>'location','K'=>'quantity','L'=>'stock_status','M'=>'image','N'=>'manufacturer','O'=>'shipping','P'=>'price','Q'=>'price_extra_type','R'=>'price_extra','S'=>'points','T'=>'tax_class','U'=>'date_available','V'=>'weight','W'=>'weight_class','X'=>'length','Y'=>'width','Z'=>'height','AA'=>'length_class','AB'=>'subtract','AC'=>'minimum','AD'=>'sort_order','AE'=>'status','AF'=>'metal');
+				
+				$tableName=array('A'=>'product_id','B'=>'model','C'=>'sku','D'=>'upc','E'=>'ean','F'=>'jan','G'=>'isbn','H'=>'mpn','I'=>'location','J'=>'quantity','K'=>'stock_status','L'=>'image','M'=>'manufacturer','N'=>'shipping','O'=>'price','P'=>'price_extra_type','Q'=>'price_extra','R'=>'points','S'=>'tax_class','T'=>'date_available','U'=>'weight','V'=>'weight_class','W'=>'length','X'=>'width','Y'=>'height','Z'=>'length_class','AA'=>'subtract','AB'=>'minimum','AC'=>'sort_order','AD'=>'status','AE'=>'metal');
 			}
 			if($tblName=='product_attribute')
 			{
@@ -767,6 +784,19 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 		
 		
 		/* ************************************************************************************ */
+		
+		public function addProduct(){
+			$this->request->post['dataoverwrite']=false;
+			$this->request->post['add_product']='yes';
+			$this->upload();
+		}
+			
+		public function updateProduct(){
+			$this->request->post['dataoverwrite']=true;
+			$this->request->post['add_product']='';
+			$this->upload();
+		}
+		
 		public function upload(){
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/bulkproductupload', '', true);
@@ -777,8 +807,17 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 			$this->load->model('extension/purpletree_multivendor/dashboard');
 			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
 			$store_detail = $this->customer->isSeller();
+			$store_detail = $this->customer->isSeller();
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){		
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
 			}
 			if(!$this->customer->validateSeller()) {
 				$this->load->language('purpletree_multivendor/ptsmultivendor');
@@ -868,7 +907,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 							//$tableName='product';
 							
 							$produtbl=array(
-							'A'=>'add_product',
+							// 'A'=>'add_product',
 							'B' => 'product_id',
 							'C' => 'model',
 							'D' => 'sku',
@@ -1006,7 +1045,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 													}
 													
 													$filter_data = array(
-													'add_product'=>$data['add_product'],
+													// 'add_product'=>$data['add_product'],
 													'product_id' => $data['product_id'],
 													//'metal' => $metal_type,
 													'model' => $data['model'],
@@ -1046,7 +1085,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 													
 													$numofproduct=$this->model_extension_purpletree_multivendor_bulkproductupload->getTotalProductProductTable($filter_data);
 													//if($numofproduct==0){
-													$addProduct_action=strtoupper(trim($filter_data['add_product']));
+													$addProduct_action=strtoupper(trim($this->request->post['add_product']));
 													if($addProduct_action==='YES' ){
 														// Subscription
 														if($this->config->get('module_purpletree_multivendor_subscription_plans')){
@@ -1075,6 +1114,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 															@fclose($savefile);
 														}
 														$logger->write("Product ID ".$product_id." Uploaded Successfully");
+														$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Uploaded Successfully");
 														$passed_array[] = $product_id;	
 														$new_products[$filter_data['product_id']] = $product_id;								
 														}else {
@@ -1089,12 +1129,14 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																		$savefile = @fopen(DIR_IMAGE."catalog/Seller_".$sseller_id."/".basename(trim($data['image'])), 'w');
 																		@fwrite($savefile, $sourcecode);
 																	@fclose($savefile);}
-																	$logger->write("Product ID ".$filter_data['product_id']." Updated Successfully"); 
+																	$logger->write("Product ID ".$filter_data['product_id']." Updated Successfully");
+																	$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$filter_data['product_id']." Updated Successfully");
 																	$passed_array[] = $filter_data['product_id'];
 																	$update_products[] = $filter_data['product_id'];
 																	
 																	} else {									
 																	$logger->write("Product ID ".$filter_data['product_id']." Invalid !");
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$filter_data['product_id']." Invalid !");
 																	$failed_array[] = $filter_data['product_id'];
 																}
 															}
@@ -1102,6 +1144,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 															} else {
 															
 															$logger->write("Product ID ".$filter_data['product_id']." Duplicate !");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$filter_data['product_id']." Duplicate !");
 															$failed_array[] = $filter_data['product_id'];	
 														}
 													}
@@ -1109,10 +1152,12 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 													}else {
 													
 													$logger->write("Product ID ".$data['product_id']." Invalid !");
+													$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$data['product_id']." Invalid !");
 													$failed_array[] = $data['product_id'];	
 												}
 												}catch(Exception $e){ 
 												$logger->write("Product ID ".$data['product_id']." Error ! ".$e->getMessage()); 
+												$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$data['product_id']." Error ! ".$e->getMessage());
 												$failed_array[] = $data['product_id'];	
 											}
 										}
@@ -1206,25 +1251,29 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																$product_id = $new_products[$product_id_old];
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductGeneralTab($generalData);
 																$logger->write("Product ID ".$product_id." General data Uploaded Successfully"); 
+																$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." General data Uploaded Successfully");
 																} else {
 																
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) {
 																	
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductGeneralTab($generalData);
-																	$logger->write("Product ID ".$product_id."General data Updated Successfully"); 
+																	$logger->write("Product ID ".$product_id."General data Updated Successfully");
+$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id."General data Updated Successfully");																	
 																	} else {
 																	$logger->write("Product ID ".$product_id." General data Failed !");
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." General data Failed !");
 																	$failed_array[] = $product_id;
 																}
 																
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." General data Invalid !");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." General data Invalid !");
 															$failed_array[] = $product_id;
 														}
 														}catch(Exception $e){ 
 														$logger->write("Product ID".$product_id." General data Error! ".$e->getMessage()); 
-														$failed_array[] = $product_id;
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID".$product_id." General data Error! ".$e->getMessage());														$failed_array[] = $product_id;
 													}
 													//
 													
@@ -1236,6 +1285,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 							}
 							}catch(Exception $e){ 
 							$logger->write("General data Error! ".$e->getMessage()); 
+							$status_msgg[] = array("status"=>"error", "msg" => "General data Error! ".$e->getMessage());
 						}
 						
 						
@@ -1535,13 +1585,16 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductLinkTab($value1);
 																$logger->write("Product ID ".$product_id." Link data Uploaded Successfully"); 
+																$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Link data Uploaded Successfully");
 																} else {
 																if(isset($this->request->post['dataoverwrite'])== true) {
 																	if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) {
 																		$this->model_extension_purpletree_multivendor_bulkproductupload->editProductLinkTab($value1,$product_id);
 																		$logger->write("Product  ID ".$product_id." Link data Updated Successfully"); 
+																		$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Link data Updated Successfully");
 																		} else {
 																		$logger->write("Product ID ".$product_id." Link data Duplicate !");
+																		$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Link data Duplicate !");
 																		
 																		
 																	}
@@ -1549,12 +1602,14 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																}
 															} }else {
 															$logger->write("Product ID ".$product_id." Link data Invalid");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Link data Invalid");
 															
 															
 														}
 														}catch(Exception $e){ 
 														
 														$logger->write("Product ID ".$product_id." Link data Error! ".$e->getMessage()); 
+														$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Link data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -1566,7 +1621,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								} catch(Exception $e){ 
 								
 								$logger->write("Link data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "Link data Error! ".$e->getMessage());
 							}
 							
 						}
@@ -1619,22 +1674,26 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 															if (array_key_exists($product_id_old,$new_products)) {
 																$product_id = $new_products[$product_id_old];
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductAttributeTab($attributeData);
-																$logger->write("Product ID ".$product_id." Attribute data Uploaded Successfully"); 
+																$logger->write("Product ID ".$product_id." Attribute data Uploaded Successfully");
+																$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Attribute data Uploaded Successfully");
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) {
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductAttributeTab($attributeData);
 																	$logger->write("Product  ID ".$product_id." Attribute data Updated Successfully"); 
-																	
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Attribute data Updated Successfully");																	
 																	} else {
 																	$logger->write("Product ID ".$product_id." Attribute data Duplicate!");
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Attribute data Duplicate!");
 																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." Attribute data Invalid");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Attribute data Invalid");
 														}
 														}catch(Exception $e){ 
 														$logger->write("Product ID ".$product_id." Attribute data Error! ".$e->getMessage()); 
+														$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Attribute data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -1646,7 +1705,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								
 								}catch(Exception $e){ 
 								$logger->write("Attribute data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"success", "msg" => "Attribute data Error! ".$e->getMessage());
 							}
 						}	
 						/* --------------------------------------< /Attribute >------------------------------ */
@@ -1697,23 +1756,27 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 															if (array_key_exists($recurring_product_id_old,$new_products)) {
 																$product_id = $new_products[$recurring_product_id_old];
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductRecurringTab($recurringData,$product_id);
-																$logger->write("Product ID ".$product_id." Recurring data Uploaded Successfully"); 
+																$logger->write("Product ID ".$product_id." Recurring data Uploaded Successfully");
+																$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Recurring data Uploaded Successfully");
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) {
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductRecurringTab($recurringData,$product_id);
 																	$logger->write("Product  ID ".$product_id." Recurring data Updated Successfully"); 
-																	
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Recurring data Updated Successfully");																	
 																	} else {
 																	$logger->write("Product ID ".$product_id." Recurring data Duplicate !");
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Recurring data Duplicate !");
 																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id."  Recurring data Invalid");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."  Recurring data Invalid");
 															
 														}
 														}catch(Exception $e){ 
-														$logger->write("Product ID ".$product_id." Recurring data Error! ".$e->getMessage()); 
+														$logger->write("Product ID ".$product_id." Recurring data Error! ".$e->getMessage());
+														$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Recurring data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -1724,7 +1787,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								}
 								}catch(Exception $e){ 
 								$logger->write("Recurring data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "Recurring data Error! ".$e->getMessage());
 							}
 						}	
 						
@@ -1811,33 +1874,38 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																if($product_discount_id ==''){
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->addProductDiscountTab($discountData);
 																	$logger->write("Product ID ".$product_id." Discount data Uploaded Successfully"); 
+																	$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Discount data Uploaded Successfully");
 																	} elseif(in_array($product_discount_id,$discount_id)) {
 																	$logger->write("Product ID ".$product_id." Discount data ".$product_discount_id."  duplicate "); 
-																	}else {
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Discount data ".$product_discount_id."  duplicate ");																	}else {
 																	$logger->write("Product ID ".$product_id." Discount data ".$product_discount_id." Invalid Id"); 
-																}
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Discount data ".$product_discount_id." Invalid Id");																}
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																	if($product_discount_id=='') {
 																		$this->model_extension_purpletree_multivendor_bulkproductupload->addProductDiscountTab($discountData);
-																		$logger->write("Product ID ".$product_id." Discount data Uploaded Successfully");	
+																		$logger->write("Product ID ".$product_id." Discount data Uploaded Successfully");
+																		$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Discount data Uploaded Successfully");
 																		}elseif(in_array($product_discount_id,$discount_id)) {
 																		$this->model_extension_purpletree_multivendor_bulkproductupload->editProductDiscountTab($discountData);
 																		$logger->write("Product  ID ".$product_id." Discount data Updated Successfully");
+																		$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Discount data Updated Successfully");
 																		} else {
-																		$logger->write("Product  ID ".$product_id." Discount data ".$product_discount_id." Invalid Id");	
+																		$logger->write("Product  ID ".$product_id." Discount data ".$product_discount_id." Invalid Id");
+																		$status_msgg[] = array("status"=>"error", "msg" => "Product  ID ".$product_id." Discount data ".$product_discount_id." Invalid Id");
 																	} 					
 																	} else {
-																	$logger->write("Product ID ".$product_id." Discount data Duplicate !");					
+																	$logger->write("Product ID ".$product_id." Discount data Duplicate !");	
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Discount data Duplicate !");
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." Discount data Invalid");
-															
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Discount data Invalid");
 														}
 														}catch(Exception $e){ 
 														$logger->write("Product ID ".$product_id." Discount data Error! ".$e->getMessage()); 
-														
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Discount data Error! ".$e->getMessage());														
 													}
 												}
 											}
@@ -1846,7 +1914,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								}
 								}catch(Exception $e){ 
 								$logger->write("Discount data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "Discount data Error! ".$e->getMessage());
 							}
 							
 						}	
@@ -1928,35 +1996,38 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																if($product_special_id ==''){
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->addProductSpecialTab($specialData,$product_id);
 																	$logger->write("Product ID ".$product_id." Special data Uploaded Successfully"); 
-																	} elseif(in_array($product_special_id,$special_id)) {
+$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Special data Uploaded Successfully");																	} elseif(in_array($product_special_id,$special_id)) {
 																	$logger->write("Product ID ".$product_id." Special data ".$product_special_id."  duplicate id "); 
-																	}else {
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Special data ".$product_special_id."  duplicate id ");																	}else {
 																	$logger->write("Product ID ".$product_id." Special data ".$product_special_id." Invalid Id"); 
 																}
-																
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Special data ".$product_special_id." Invalid Id");																
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																	if($product_special_id=='') {
 																		$this->model_extension_purpletree_multivendor_bulkproductupload->addProductSpecialTab($specialData,$product_id);
 																		$logger->write("Product ID ".$product_id." Special data Uploaded Successfully");	
-																		}elseif(in_array($product_special_id,$special_id)) {
+	$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Special data 	 Successfully");																	}elseif(in_array($product_special_id,$special_id)) {
 																		$this->model_extension_purpletree_multivendor_bulkproductupload->editProductSpecialTab($specialData,$product_id);
 																		$logger->write("Product  ID ".$product_id." Special data Updated Successfully");
+																		$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Special data Updated Successfully");
 																		} else {
-																		$logger->write("Product  ID ".$product_id." Special data ".$product_special_id." Invalid Id");	
+																		$logger->write("Product  ID ".$product_id." Special data ".$product_special_id." Invalid Id");
+																		$status_msgg[] = array("status"=>"error", "msg" => "Product  ID ".$product_id." Special data ".$product_special_id." Invalid Id");
 																	} 
 																	
 																	} else {
 																	$logger->write("Product ID ".$product_id."Special data Duplicate !");
-																	
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."Special data Duplicate !");																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." Special data Invalid");
-															
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Special data Invalid");															
 														}
 														}catch(Exception $e){ 
-														$logger->write("Product ID ".$product_id." Special data Error! ".$e->getMessage()); 
+														$logger->write("Product ID ".$product_id." Special data Error! ".$e->getMessage());
+														$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Special data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -1966,7 +2037,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								}
 								}catch(Exception $e){ 
 								$logger->write("Special data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "Special data Error! ".$e->getMessage());
 							}
 							
 							
@@ -2015,22 +2086,23 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																$product_id = $new_products[$product_id_old];
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductRewardpointsTab($rewardpointsData);
 																$logger->write("Product ID ".$product_id." Reward points data Uploaded Successfully"); 
-																} else {
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id."Reward points data Uploaded Successfully");																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																	
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductRewardpointsTab($rewardpointsData);
 																	$logger->write("Product  ID ".$product_id."Reward points data Updated Successfully"); 
-																	} else {
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id."Reward points data Updated Successfully");																	} else {
 																	$logger->write("Product ID ".$product_id."Reward points data Duplicate !");
-																	
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."Reward points data Duplicate !");																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." Reward points data Invalid");
-															
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Reward points data Invalid");
 														}
 														}catch(Exception $e){ 
-														$logger->write(" Product ID ".$product_id." Reward points data Error! ".$e->getMessage()); 
+														$logger->write(" Product ID ".$product_id." Reward points data Error! ".$e->getMessage());
+														$status_msgg[] = array("status"=>"error", "msg" => " Product ID ".$product_id." Reward points data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -2039,7 +2111,8 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 										
 									}				}
 									}catch(Exception $e){ 
-									$logger->write("Reward Points data Error! ".$e->getMessage()); 
+									$logger->write("Reward Points data Error! ".$e->getMessage());
+									$status_msgg[] = array("status"=>"error", "msg" => "Reward Points data Error! ".$e->getMessage());
 									
 							}
 							
@@ -2095,22 +2168,27 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																$product_id = $new_products[$product_id_old];
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductSeoTab($seoData);
 																$logger->write("Product ID ".$product_id." SEO Data Uploaded Successfully"); 
+																$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." SEO Data Uploaded Successfully");
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																	
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductSeoTab($seoData);
 																	$logger->write("Product  ID ".$product_id." SEO Data Updated Successfully"); 
+																	$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." SEO Data Updated Successfully");
 																	} else {
 																	$logger->write("Product ID ".$product_id."SEO Data Duplicate Product Id !");
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."SEO Data Duplicate Product Id !");
 																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id."SEO Data Product Id Invalid");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."SEO Data Product Id Invalid");
 															
 														}
 														}catch(Exception $e){ 
-														$logger->write("Product ID ".$product_id."SEO Data Error! ".$e->getMessage()); 
+														$logger->write("Product ID ".$product_id."SEO Data Error! ".$e->getMessage());
+														$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."SEO Data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -2120,7 +2198,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								}
 								}catch(Exception $e){ 
 								$logger->write("SEO data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "SEO data Error! ".$e->getMessage());
 							}
 							
 						}	
@@ -2178,22 +2256,26 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																$product_id = $new_products[$product_id_old];
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductDesignTab($designData);
 																$logger->write("Product ID ".$product_id."  Design Data Uploaded Successfully"); 
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Design Data Uploaded Successfully");
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																	
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductDesignTab($designData);
-																	$logger->write("Product  ID ".$product_id." Design Data Updated Successfully"); 
+																	$logger->write("Product  ID ".$product_id." Design Data Updated Successfully");
+																	$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Design Data Updated Successfully");
 																	} else {
 																	$logger->write("Product ID ".$product_id." Design Data Duplicate Product Id !");
+																	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Design Data Duplicate Product Id !");
 																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." Design Data Product Id Invalid");
-															
+                                                            $status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Design Data Product Id Invalid");
 														}
 														}catch(Exception $e){ 
-														$logger->write("Product ID ".$product_id." Design Data Error! ".$e->getMessage()); 
+														$logger->write("Product ID ".$product_id." Design Data Error! ".$e->getMessage());
+														$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Design Data Error! ".$e->getMessage());
 														
 													}
 												}
@@ -2203,7 +2285,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								}
 								}catch(Exception $e){ 
 								$logger->write("Design data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "Design data Error! ".$e->getMessage());
 							}
 						}	
 						/*-------------------------------------< /Design >--------------------------- */
@@ -2241,22 +2323,23 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																	$product_id = $new_products[$product_id_old];
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->assignDataToSeller($sellerIdData);
 																	$logger->write("Product ID ".$product_id." Seller Uploaded Successfully"); 
-																	} else {
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Seller Uploaded Successfully");																	} else {
 																	if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																		
 																		$this->model_extension_purpletree_multivendor_bulkproductupload->editAssignDataToSeller($sellerIdData);
 																		$logger->write("Product  ID ".$product_id." Seller Updated Successfully"); 
-																		} else {
+	$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Seller Updated Successfully");					} else {
 																		$logger->write("Product ID ".$product_id."  Seller Duplicate Product Id !");
-																		
+																		$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."  Seller Duplicate Product Id !");
 																	}
 																}
 																} else {
 																$logger->write("Product ID ".$product_id." Seller Product Id Invalid");
-																
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Seller Product Id Invalid");																
 															}
 															}catch(Exception $e){ 
 															$logger->write("Product ID ".$product_id." Seller Error! ".$e->getMessage()); 
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Seller Error! ".$e->getMessage());
 															
 														}
 													}
@@ -2268,7 +2351,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 									
 									}catch(Exception $e){ 
 									$logger->write("Seller data Error! ".$e->getMessage()); 
-									
+									$status_msgg[] = array("status"=>"error", "msg" => "Seller data Error! ".$e->getMessage());
 								}
 							} 
 						}		
@@ -2341,12 +2424,12 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																		@fwrite($savefile, $sourcecode);
 																		@fclose($savefile);	
 																		$logger->write("Product ID ".$product_id." Image data Uploaded Successfully"); 
-																		} elseif(in_array($product_image_id,$image_id)) {
+	$status_msgg[] = array("status"=>"success", "msg" => "Product ID ".$product_id." Image data Uploaded Successfully");																	} elseif(in_array($product_image_id,$image_id)) {
 																		$logger->write("Product ID ".$product_id." Image data ".$product_image_id."  duplicate id "); 
-																		}else {
+	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Image data ".$product_image_id."  duplicate id ");																	}else {
 																		$logger->write("Product ID ".$product_id." Image data ".$product_image_id." Invalid Id"); 
 																	}
-																	
+	$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Image data ".$product_image_id." Invalid Id");																
 																	} else {
 																	if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) {
 																		if($product_image_id=='') {
@@ -2355,28 +2438,32 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																			@fwrite($savefile, $sourcecode);
 																			@fclose($savefile);	
 																			$logger->write("Product ID ".$product_id." Image data Uploaded Successfully");	
-																			}elseif(in_array($product_image_id,$image_id)) {
+		$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Image data Uploaded Successfully");																	}elseif(in_array($product_image_id,$image_id)) {
 																			$this->model_extension_purpletree_multivendor_bulkproductupload->editProductImageTab($imageData);					
 																			$savefile = @fopen(DIR_IMAGE."catalog/Seller_".$sseller_id."/".basename(trim($valueImage['image'])), 'w');
 																			@fwrite($savefile, $sourcecode);
 																			@fclose($savefile);	
 																			$logger->write("Product  ID ".$product_id." Image data Updated Successfully");
-																			} else {
-																			$logger->write("Product  ID ".$product_id." Image data ".$product_image_id." Invalid Id");	
-																		} 					
+		$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Image data Updated Successfully");																	} else {
+																			$logger->write("Product  ID ".$product_id." Image data ".$product_image_id." Invalid Id");  
+																			$status_msgg[] = array("status"=>"error", "msg" => "Product  ID ".$product_id." Image data ".$product_image_id." Invalid Id");
+																			} 					
 																		} else {
 																		//$logger->write("Product ID ".$product_id."Image data  Duplicate Id !");
 																	}
 																}
 																} else {
-																$logger->write("Product ID ".$product_id." Image data Id Invalid");	
+																$logger->write("Product ID ".$product_id." Image data Id Invalid");
+																$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Image data Id Invalid");
 															}
 															}catch(Exception $e){ 
 															$logger->write("Product ID ".$product_id." Image data Error! ".$e->getMessage()); 
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Image data Error! ".$e->getMessage());
 															
 														}
 														} else {
-														$logger->write("Product Id".$product_id."Image data Not Found "); 		
+														$logger->write("Product Id".$product_id."Image data Not Found ");
+														$status_msgg[] = array("status"=>"error", "msg" => "Product Id".$product_id."Image data Not Found");
 													}
 												}
 											}
@@ -2385,7 +2472,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 								}
 								}catch(Exception $e){ 
 								$logger->write("Image data Error! ".$e->getMessage()); 
-								
+								$status_msgg[] = array("status"=>"error", "msg" => "Image data Error! ".$e->getMessage());
 							}
 						}	
 						/*-------------------------------------< /Image >--------------------------- */
@@ -2446,28 +2533,29 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 															
 															$this->model_extension_purpletree_multivendor_bulkproductupload->addProductOptionTab($productOptionData);
 															$logger->write("Product ID ".$product_id." Option Data Uploaded Successfully"); 
+															$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Option Data Uploaded Successfully");
 															} else {
 															if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																
 																$this->model_extension_purpletree_multivendor_bulkproductupload->editProductOptionTab($productOptionData);
 																$logger->write("Product  ID ".$product_id." Option Data Updated Successfully"); 
-																} else {
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." Option Data Updated Successfully");																} else {
 																$logger->write("Product ID ".$product_id." Option Data Duplicate Product Id !");
-																
+$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Option Data Duplicate Product Id !");																
 															}
 														}
 														} else {
 														
 														$logger->write("product ID ".$product_id." , Option Data Invalid !");
-														
+														$status_msgg[] = array("status"=>"error", "msg" => "product ID ".$product_id." , Option Data Invalid !");
 													}
 													} else {
 													$logger->write("Product ID ".$product_id." Option Data Invalid");
-													
+													$status_msgg[] = array("status"=>"error", "msg" => "product ID ".$product_id." , Option Data Invalid !");
 												}
 												}catch(Exception $e){ 
 												$logger->write("Product ID ".$product_id." Option Data Error! ".$e->getMessage()); 
-												
+												$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." Option Data Error! ".$e->getMessage());
 											}
 										}
 									}
@@ -2550,31 +2638,38 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 																
 																$this->model_extension_purpletree_multivendor_bulkproductupload->addProductOptionValueTab($productOptionValueData);
 																$logger->write("Product ID ".$product_id." product option value Data Uploaded Successfully"); 
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." product option value Data Uploaded Successfully");
 																} else {
 																if(isset($this->request->post['dataoverwrite'])==true && in_array($product_id,$update_products)) { 
 																	
 																	$this->model_extension_purpletree_multivendor_bulkproductupload->editProductOptionvalueTab($productOptionValueData);
 																	$logger->write("Product  ID ".$product_id." product option value Data Updated Successfully"); 
+$status_msgg[] = array("status"=>"success", "msg" => "Product  ID ".$product_id." product option value Data Updated Successfully");
 																	} else {
 																	$logger->write("Product ID ".$product_id." product option value Data Duplicate Id !");
+																				$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." product option value Data Duplicate Id !");
+
+																	
 																	
 																}
 															}
 															} else {
 															$logger->write("Product ID ".$product_id." product option value Data is invalid !");
+															$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." , product option value Data is invalid !");
 														}
 														} else {
 														
 														$logger->write("option ID ".$product_id." , product option value Data Invalid Option Value !");
+														$status_msgg[] = array("status"=>"error", "msg" => "option ID ".$product_id." , product option value Data Invalid Option Value !");
 														
 													}
 													} else {
 													$logger->write("Product ID ".$product_id." product option value Data Invalid");
-													
+												    $status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id." product option value Data Invalid");	
 												}
 												}catch(Exception $e){ 
 												$logger->write("Product ID ".$product_id."  product option value Data Error! ".$e->getMessage()); 
-												
+												$status_msgg[] = array("status"=>"error", "msg" => "Product ID ".$product_id."  product option value Data Error! ".$e->getMessage());
 											}
 										}
 									}
@@ -2584,6 +2679,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 						/*--------------------< / Product Option Value >--------------------------- */
 						
 						$this->session->data['success'] = $this->language->get('text_bulkuploadsuccess');
+						$this->session->data['status_msg'] = $status_msgg;
 						$url='';
 						$this->response->redirect($this->url->link('extension/account/purpletree_multivendor/bulkproductupload', '' . $url, true));
 						} else {
@@ -2665,6 +2761,11 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 		/* -----------------------------------------< /Data Tab Function >---------------------- */
 		protected function getData() {
 			$url = '';
+			if(isset($this->session->data['status_msg'])){
+			 $data['status_msgs'] = $this->session->data['status_msg'];
+				}
+			
+			unset($this->session->data['status_msg']);
 			$data['breadcrumbs'] = array();
 			$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -2688,6 +2789,7 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 			$data['text_select_seller_id'] = $this->language->get('text_select_seller_id');
 			//$data['text_bulkuploadsuccess'] = $this->language->get('text_bulkuploadsuccess');
 			$data['text_aproved_product'] = $this->language->get('text_aproved_product');
+			$data['text_bulk_product_status_heading'] = $this->language->get('text_bulk_product_status_heading');
 			
 			//$data['user_token'] = $this->session->data['user_token'];
 			$data['text_bulk_product_upload'] = $this->language->get('text_bulk_product_upload');	
@@ -2716,7 +2818,8 @@ class ControllerExtensionAccountPurpletreeMultivendorBulkproductupload extends C
 			
 			$data['memory_limit'] = ini_get("upload_max_filesize");
 			
-			$data['action'] = $this->url->link('extension/account/purpletree_multivendor/bulkproductupload/upload', '', true);	
+			$data['add_product'] = $this->url->link('extension/account/purpletree_multivendor/bulkproductupload/addproduct', '', true);	
+			$data['update_product'] = $this->url->link('extension/account/purpletree_multivendor/bulkproductupload/updateproduct', '', true);	
 			$data['export'] = $this->url->link('extension/account/purpletree_multivendor/bulkproductupload/export', '', true);
 			$data['column_left'] = $this->load->controller('extension/account/purpletree_multivendor/common/column_left');
 			$data['footer'] = $this->load->controller('extension/account/purpletree_multivendor/common/footer');

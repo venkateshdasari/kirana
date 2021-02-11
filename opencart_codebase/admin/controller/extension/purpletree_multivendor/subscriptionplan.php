@@ -154,7 +154,7 @@ class ControllerExtensionPurpletreeMultivendorSubscriptionplan extends Controlle
 			$this->getList();
 		}
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$url = '';
 			
 			$data['breadcrumbs'] = array();

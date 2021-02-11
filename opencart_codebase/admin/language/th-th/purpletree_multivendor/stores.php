@@ -202,3 +202,6 @@ $_['entry_sellerarea'] = "พื้นที่ผู้ขาย";
 $_['help_sellerarea'] = "(เติมข้อความอัตโนมัติ)";
 $_['text_all_sellerarea'] = "ทั้งหมด";
 $_['text_selected_sellerarea'] = "เลือกแล้ว";
+
+$_['entry_multi_store']     = 'ร้านค้า Opencart';
+$_['entry_assign_stores']    = 'กำหนดร้านค้า Opencart';

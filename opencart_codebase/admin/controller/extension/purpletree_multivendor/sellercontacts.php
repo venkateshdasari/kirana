@@ -67,7 +67,7 @@ class ControllerExtensionPurpletreeMultivendorSellercontacts extends Controller 
 		}
 		
 		protected function getList() {
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_seller_name'])) {
 				$filter_seller_name = $this->request->get['filter_seller_name'];
 				} else {
@@ -196,12 +196,12 @@ class ControllerExtensionPurpletreeMultivendorSellercontacts extends Controller 
 				'contact_from'     => $result['contact_from'],
 				'customer_name'     => $result['customer_name'],
 				'customer_email'     => $result['customer_email'],
-				'customer_message'       => utf8_substr(nl2br($result['customer_message']),0,40),
+				'customer_message'       => utf8_substr(nl2br(strip_tags($result['customer_message'])),0,40),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['created_at'])),
 				'view' => $view
 				);
 			}
-			
+
 			$data['heading_title'] = $this->language->get('heading_title');
 			
 			$data['text_list'] = $this->language->get('text_list');
@@ -323,6 +323,7 @@ class ControllerExtensionPurpletreeMultivendorSellercontacts extends Controller 
 			$data['sort'] = $sort;
 			$data['order'] = $order;
 			$data['ver']=VERSION;
+			
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
@@ -379,8 +380,10 @@ class ControllerExtensionPurpletreeMultivendorSellercontacts extends Controller 
 			
 			if (isset($this->request->get['id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 				$message_info = $this->model_extension_purpletree_multivendor_sellercontacts->getMessage($this->request->get['id']);
+				
+				$message_attachment = $this->model_extension_purpletree_multivendor_sellercontacts->getAttachedEnquiriesFile($this->request->get['id']);
 			}
-			
+
 			$data['user_token'] = $this->session->data['user_token'];
 			
 			if (!empty($message_info)) {
@@ -410,11 +413,26 @@ class ControllerExtensionPurpletreeMultivendorSellercontacts extends Controller 
 				} else {
 				$data['customer_message'] = '';
 			}
-			
+			if (!empty($message_attachment)) {
+				foreach($message_attachment as $files){
+					if ($this->request->server['HTTPS']) {
+						$file_root = HTTPS_CATALOG . 'image/' . $files['image'];
+					} else {
+						$file_root = HTTP_CATALOG . 'image/' . $files['image'];
+					}
+					$data['file_attach'][]=array(
+					'file_name'=>$files['image_name'],
+					'file_root'=>$file_root
+					);
+				}
+				} else {
+				$data['file_attach'] = '';
+			}
+
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
 			
 			$this->response->setOutput($this->load->view('extension/purpletree_multivendor/sellercontact_view', $data));
 		}
-}
+}?>

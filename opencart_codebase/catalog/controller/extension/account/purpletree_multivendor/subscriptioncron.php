@@ -2,15 +2,19 @@
 class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Controller {
 		private $error = array();
 		public function index() {
+			    $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron index");
 			$this->load->model('extension/purpletree_multivendor/subscriptioncron');
 			//Multivendor status Enable
 			if($this->config->get('module_purpletree_multivendor_status')==1){
 				if($this->config->get('module_purpletree_multivendor_subscription_plans')==1){
 					
 					if($this->config->get('module_purpletree_multivendor_multiple_subscription_plan_active')){
+				$logger->write("Subscriptioncron multiple if");
 						$this->reminderForMultiplePlan();
 						$this->multipleEnable();
 						} else {
+				$logger->write("Subscriptioncron single else");
 						$this->reminder();
 						$this->enable();
 					}
@@ -20,6 +24,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 		}
 		//Start reminder 	 
 		protected function reminder(){
+			 $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron reminder");
 			// First Reminder
 			// $seller_data=array();
 			date_default_timezone_set('Asia/Calcutta'); 
@@ -243,7 +249,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 		}
 		
 		protected function enable(){
-			
+			   $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron enable");
 			$seller_data=array();
 			$seller_data=$this->model_extension_purpletree_multivendor_subscriptioncron->planActive();
 			if(isset($seller_data)){
@@ -342,6 +349,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 			}
 		}
 		protected function renewPlan($plan_id,$seller_id) {
+			 $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron renewPlan");
 			$this->load->language('purpletree_multivendor/subscriptionplan');
 			$this->document->setTitle($this->language->get('heading_title'));
 			$this->load->model('extension/purpletree_multivendor/subscriptionplan');
@@ -535,6 +544,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 		protected function reminderForMultiplePlan(){
 			// First Reminder
 			// $seller_data=array();
+			 $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron reminderForMultiplePlan");
 			date_default_timezone_set('Asia/Calcutta'); 
 			$seller_data=$this->model_extension_purpletree_multivendor_subscriptioncron->cronReminderForMultiplePlan();
 			
@@ -762,7 +773,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 		// product enable
 		
 		protected function multipleEnable(){	
-			
+				 $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron multipleEnable");
 			$seller_data=array();
 			$seller_data=$this->model_extension_purpletree_multivendor_subscriptioncron->multiplePlanActive();
 			
@@ -860,6 +872,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 		}
 		
 		protected function renewMultiplePlan($plan_id,$seller_id) {
+				 $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron renewMultiplePlan");
 			$this->load->language('purpletree_multivendor/subscriptionplan');
 			$this->document->setTitle($this->language->get('heading_title'));
 			$this->load->model('extension/purpletree_multivendor/subscriptionplan');
@@ -1051,6 +1065,8 @@ class ControllerExtensionAccountPurpletreeMultivendorSubscriptioncron extends Co
 		}
 		
 		public function remindPrice($start_date,$validity,$s_price,$s_date){
+				 $logger = new Log('error.log'); 
+				$logger->write("Subscriptioncron remindPrice");
 			$this->load->language('purpletree_multivendor/subscriptionplan');
 			$this->document->setTitle($this->language->get('heading_title'));
 			$price=0;

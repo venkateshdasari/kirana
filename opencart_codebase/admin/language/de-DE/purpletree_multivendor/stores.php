@@ -194,3 +194,6 @@ $_['entry_sellerarea'] = "Verkäuferbereiche";
 $_['help_sellerarea'] = "(Autocomplete)";
 $_['text_all_sellerarea'] = "Alle";
 $_['text_selected_sellerarea'] = "Selected";
+
+$_['entry_multi_store']     = 'Opencart Stores';
+$_['entry_assign_stores']    = 'Opencart Stores zuweisen';

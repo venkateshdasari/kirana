@@ -27,3 +27,8 @@ $_['text_contact_message'] 	=	"Anfrage von Seite eingereicht";
 //button
 $_['button_view_all'] ='Alle ansehen';
 $_['button_submit'] ='einreichen';
+
+$_['text_files'] ='Dateien';
+$_['text_attach_file'] ='Datei anhängen';
+$_['text_upload_file'] ='Datei hochladen';
+$_['text_action'] ='Aktion';

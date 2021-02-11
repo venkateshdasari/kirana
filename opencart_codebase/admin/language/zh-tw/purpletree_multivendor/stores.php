@@ -205,3 +205,6 @@ $_['entry_sellerarea'] ="卖家区域";
 $_['help_sellerarea'] ="（自动完成）";
 $_['text_all_sellerarea'] ="全部";
 $_['text_selected_sellerarea'] ="已选择";
+
+$_['entry_multi_store']     = 'Opencart商店';
+$_['entry_assign_stores']    = '分配Opencart商店';

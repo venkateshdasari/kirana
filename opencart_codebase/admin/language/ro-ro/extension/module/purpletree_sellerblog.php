@@ -18,6 +18,6 @@ $_['error_permission'] = 'Atenție: Nu aveți permisiunea de a modifica modul de
 $_['error_name'] = 'Numele modulului trebuie să aibă între 3 și 128 de caractere!';
 $_['error_width'] = 'Lățime necesară!';
 $_['error_height'] = 'Înălțimea necesară!';
-
+$_['error_limit'] = 'Limită necesară!';
 
 ?>

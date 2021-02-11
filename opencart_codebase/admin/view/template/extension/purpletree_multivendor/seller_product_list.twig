@@ -91,14 +91,14 @@
 							<button type="button" id="button-filter" class="btn btn-primary pull-right float-right"><i class="fa fa-filter"></i> {{ button_filter }}</button>
 						</div>
 					</div>
-					<div><div class="sellercolor"> <div class="greencolor"></div>{{ seller_vacation_product }} </div></div>
+					<div><div class="sellercolor"> <div class="greencolorr"></div>{{ seller_vacation_product }} </div></div>
 				</div>
 				<form action="" method="post" enctype="multipart/form-data" id="form-product">
 					<div class="table-responsive">
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
-									<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+									<td class="text-center ptsc-vendorlis-width"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
 									<td class="text-center">{{ column_image }}</td>
 									<td class="text-left">{% if sort == 'pd.name' %}
 										<a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
@@ -133,7 +133,7 @@
 							<tbody>
 								{% if products %}
 								{% for product in products %}
-								<tr {% if product.vacation !=0 %} style="background-color: #f2dede;"  {% endif %}>
+								<tr {% if product.vacation !=0 %} class="greencolorr"  {% endif %}>
 									<td class="text-center">{% if selected in product.product_id %}
 										<input type="checkbox" name="selected[]" value="{{ product.product_id }}" checked="checked" />
 										{% else %}
@@ -148,7 +148,7 @@
 									<td class="text-left">{{ product.seller_name }}</td>
 									<td class="text-left">{{ product.model }}</td>
 									<td class="text-right">{% if product.special %}
-										<span style="text-decoration: line-through;">{{ product.price }}</span><br/>
+										<span class="ptsc-sellprod-textdecor">{{ product.price }}</span><br/>
 										<div class="text-danger">{{ product.special }}</div>
 										{% else %}
 										{{ product.price }}
@@ -280,19 +280,4 @@
 			}
 		});
 	//--></script></div>
-	<style>
-		.greencolor {
-	    background: #f2dede;
-		}
-		.sellercolor div {
-		width: 42px;
-		height: 15px;
-		float: left;
-		margin-right: 10px;
-		margin-top: 3px;
-		border:1px solid #000;
-		
-		}
-		
-	</style>
 	{{ footer }}	

@@ -19,7 +19,7 @@
     </div>
   </div>
 				<div class="">
-					<div class="pts-panel pts-panel-default" style="margin-top: 18px;">
+					<div class="pts-panel pts-panel-default ptsc-geo-margin">
 						<div class="pts-panel-heading">
 							<h3 class="pts-panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
 						</div>
@@ -54,7 +54,7 @@
 										<div class="pts-col-sm-3">
 											<div class="pts-form-group date">
 												<label class="pts-control-label" for="input-date-added">{{ entry_date_added }}</label>
-												<div class="pts-input-group pts-date d-flex" style="display:flex">
+												<div class="pts-input-group pts-date d-flex ptsc-commison-display">
 													<input type="text" name="filter_date_added" value="{{ filter_date_added }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD" id="input-date-added" class="pts-form-control" />
 													<span class="pts-input-group-pts-btn">
 														<button type="button" class="pts-btn pts-btn-default"><i class="fa fa-calendar"></i></button>
@@ -62,7 +62,7 @@
 											</div>
 										</div>
 										<div class="pts-col-sm-3 text-right">
-										<button type="button" id="button-filter" class="pts-btn pts-btn-primary" style="margin-top:26px;""><i class="fa fa-filter"></i> {{ button_filter }}</button>
+										<button type="button" id="button-filter" class="pts-btn pts-btn-primary ptsc-blog-martop"><i class="fa fa-filter"></i> {{ button_filter }}</button>
 									</div>
 								</div>
 							</div>
@@ -72,7 +72,7 @@
 								<table class="pts-table pts-table-bordered pts-table-hover">
 									<thead>
 										<tr>
-											<td style="width: 1px;" class="pts-text-center"><input type="checkbox" onclick="$('input[name*=\'selected\').prop('checked', this.checked);" /></td>
+											<td class="pts-text-center ptsc-attr-tab-width"><input type="checkbox" onclick="$('input[name*=\'selected\').prop('checked', this.checked);" /></td>
 											<td class="pts-text-left">{{ column_post }}</td>
 											<td class="pts-text-left">{{ column_name }}</td>
 											<td class="pts-text-center">{{ column_email }}</td>

@@ -176,3 +176,6 @@ $_['entry_seller_areaheading']="Hyperlocal ";
 $_['entry_header_popup']="Heading in Popup for Hyperlocal "; 
 $_['entry_area_selection']="Area Selection Mandatory"; 
 $_['entry_seller_area_link']="Go to Seller Area"; 
+$_['text_multiple_store']="Use domain wise stores"; 
+$_['text_fix_commission']="Fixed Commission";
+$_['text_hyper_delivering']           = 'Delivering to';

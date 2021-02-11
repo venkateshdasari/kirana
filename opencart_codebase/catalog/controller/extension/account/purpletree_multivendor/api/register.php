@@ -139,7 +139,7 @@ class ControllerExtensionAccountPurpletreeMultivendorApiRegister extends Control
 			if(isset($requestjson['become_seller'])){
 				if($requestjson['become_seller']){
 					$json['data']['become_seller'] = $requestjson['become_seller'];	
-					if((utf8_strlen($requestjson['seller_storename']) < 5) || (utf8_strlen(trim($requestjson['seller_storename'])) > 50)) {
+					if(!isset($requestjson['seller_storename']) || (utf8_strlen($requestjson['seller_storename']) < 5) || (utf8_strlen(trim($requestjson['seller_storename'])) > 50)) {
 						$this->error['seller_store'] = $this->language->get('error_storename');
 					}
 				}
@@ -270,7 +270,7 @@ class ControllerExtensionAccountPurpletreeMultivendorApiRegister extends Control
 				);
 				$json['success'] = 'success';
 				$json['error'] = '';
-			}
+			} 
 			$this->response->addHeader('Content-Type: application/json');
 			$this->response->setOutput(json_encode($json));
 		}

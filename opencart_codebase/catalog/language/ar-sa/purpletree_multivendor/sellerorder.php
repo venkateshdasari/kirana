@@ -152,5 +152,5 @@ $_['error_action']               	=	"تحذير: لا يمكن إكمال هذا
 $_['error_filetype']			 	=	"ملف نوع غير صالح";
 
 $_['for_completed_orders']       = "للطلبات المكتملة";
-$_['module_purpletree_multivendor_commission_status_warning']			 = "تحذير: قد تكون الحسابات خاطئة يرجى الاتصال بمسؤول لتعيين حالة حساب Commision من Purpletree إعدادات Multivendor!";
+$_['module_purpletree_multivendor_commission_status_warning']			 = "تحذير: قد تكون الحسابات خاطئة يرجى الاتصال بمسؤول لتعيين حالة حساب Commision من  إعدادات متعدد البائعين!";
 $_['text_no_results']			= "لا نتيجة!";

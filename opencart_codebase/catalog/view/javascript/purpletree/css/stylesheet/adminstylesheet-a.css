@@ -995,4 +995,11 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
      padding-left:60px!important;
      margin-top:-35px!important;
 	 margin-right: 62px!important;
-    }
+	 }
+.menu-icons{
+	padding-right: 27px !important;
+    margin-top: -19px !important;
+}
+.ptssellertop #form-currency .currency-select, .ptssellertop #form-language .language-select {
+    text-align: right;
+}	 

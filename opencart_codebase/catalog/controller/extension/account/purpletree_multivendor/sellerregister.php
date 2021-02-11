@@ -20,7 +20,11 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerregister extends Cont
 						$this->response->redirect($this->url->link(	'extension/account/purpletree_multivendor/sellerstore/becomeseller', '', true));
 						} else {
 						if($store_detail['store_status']==1){
-							if($store_detail['multi_store_id']== $this->config->get('config_store_id')){
+							$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+							if(in_array($this->config->get('config_store_id'),$stores)){
 								$this->response->redirect($this->url->link(	'extension/account/purpletree_multivendor/dashboardicons', '', true));
 								} else {
 								$this->response->redirect($this->url->link(	'account/account', '', true));
@@ -550,7 +554,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerregister extends Cont
 			  if (isset($this->request->post['seller_area'])) {			    
 			    if(isset($this->request->post['seller_area_selection_type']) &&($this->request->post['seller_area_selection_type'] == 1)){
 				$data['seller_area_selection_type'] = 1;
-				$sellerareas = Unserialize($this->request->post['seller_area']);
+				$sellerareas = $this->request->post['seller_area'];
 				}else{
 				 $sellerareas = array();
 				$data['seller_area_selection_type'] = 0;
@@ -936,7 +940,7 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerregister extends Cont
 			$this->document->setTitle($this->language->get('heading_title'));
 			$this->load->model('extension/purpletree_multivendor/subscriptionplan');
 			$this->load->model('extension/purpletree_multivendor/dashboard');
-			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			//$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
 			$data=array();
 			
 			$plan_id=$this->model_extension_purpletree_multivendor_subscriptionplan->defaultPlan();

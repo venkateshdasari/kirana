@@ -43,4 +43,8 @@ $_['error_subscription_plan'] = 'Selectați Planul de abonament!';
 $_['error_subscription_plan_limit'] = 'Depășiți limita planului Vă rugăm să modificați planul!';
 $_['error_subscription_plan_status'] = 'Abonamentul plan este dezactivat Vă rugăm să activați abonamentul la plan!';
 $_['seller_bulk_product_upload_sheet']    = "Șablon de descărcare";
+$_['text_bulk_product_import_add']    	 = 'Importați produse noi';
+$_['text_bulk_product_import_update']    = 'Actualizați produsele existente';
+$_['text_update']            			 = 'Actualizați';
+$_['text_bulk_product_status_heading'] = "Status de importação / atualização de produto em massa";
 ?>

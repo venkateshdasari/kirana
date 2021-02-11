@@ -25,3 +25,8 @@ $_['text_contact_message'] 	=	"Yêu cầu gửi từ trang";
 //button
 $_['button_view_all'] ="xem tất cả";
 $_['button_submit'] ='Gửi đi';
+
+$_['text_files'] ='Các tập tin';
+$_['text_attach_file'] ='Đính kèm tệp';
+$_['text_upload_file'] ='Cập nhật dử liệu';
+$_['text_action'] ='Hoạt động';

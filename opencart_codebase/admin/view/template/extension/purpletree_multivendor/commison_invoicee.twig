@@ -9,23 +9,10 @@
 		<script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
 		<link href="view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
 		<link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="all" />
-		<style>
-			.pts-text-bold{
-			font-size:18px;
-			font-weight:bold
-			
-			}
-			.b-payment{font-size:15px;padding-left: 15px;margin-top: 5px;}
-			.h3-payment{font-size:25px;font-weight:normal;margin: 0;padding: 2px 3px;}
-			.pd{padding:15px !important;width:50%}
-			.status-payment{font-size:25px;font-weight:normal}
-			.payment-td{font-weight:normal;padding: 7px !important;line-height: 2.5 !important;}
-			
-		</style>
 	</head>
 	<body>
 		<div class="container">
-			<div style="page-break-after: always;">
+			<div class="ptsc-subscrip-pagebreak">
 				<h1>{{ invoice_number_text }}{{ invoice_number }}</h1>
 				<table class="table table-bordered">
 					<thead>
@@ -103,12 +90,12 @@
 					</tfoot>
 				</table>
 				<table class="table table-bordered">
-					<tbody style="box-shadow:0px 0px 5px 0px rgba(0,0,0,0.5)">
-						<tr style="border:none !important">
+					<tbody class="ptsc-commission-tabshadow">
+						<tr class="ptsc-commission-tpaynoborder">
 							<td colspan="2"><h3 class="h3-payment">{{ text_payment }}</h3></td>
 						</tr>
 						<tr>	
-							<td class="text-left payment-td" style="">
+							<td class="text-left payment-td">
 								
 								<b class="b-payment">{{ text_totla_payable_amount }}</b>: {{ total_pay_amountt }}<br>
 								<b class="b-payment">{{ payment_status }}</b>: {{ invoice_status }}<br>	

@@ -206,7 +206,7 @@ class ControllerProductProduct extends Controller {
 				$data['store_live_chat_code'] ='';
 				if(isset($seller_detailss['store_live_chat_code'])) {
 					
-				$data['store_live_chat_code'] = $seller_detailss['store_live_chat_code'];	
+				$data['store_live_chat_code'] = html_entity_decode($seller_detailss['store_live_chat_code'], ENT_QUOTES, "UTF-8");	
 					if($data['store_live_chat_code'] != '') {
 						$this->session->data['seller_sto_page'] = $seller_detailss['id'];
 					}					

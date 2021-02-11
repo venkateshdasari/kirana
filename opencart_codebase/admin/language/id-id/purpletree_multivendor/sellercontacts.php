@@ -30,3 +30,4 @@ $_['text_delete_success'] 	=	"Permintaan telah berhasil dihapus.";
 //button		
 
 $_['button_continue'] 	=	"Terus";
+$_['text_files'] ='File';

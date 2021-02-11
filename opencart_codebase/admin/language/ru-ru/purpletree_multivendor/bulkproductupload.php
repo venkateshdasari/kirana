@@ -39,3 +39,7 @@ $_['error_permission']      = "Предупреждение: у вас нет р
 $_['text_invalidfile']      = "Неверный тип файла. Выберите .xls или .xlsx.";
 $_['text_nofile']      = "Выберите «Файл для импорта";
 $_['admin_bulk_product_upload_sheet']    = "Скачать шаблон";
+$_['text_bulk_product_import_add']    	 = 'импорт новых продуктов';
+$_['text_bulk_product_import_update']    = 'обновление существующих продуктов';
+$_['text_update']            			 = 'Обновить';
+$_['text_bulk_product_status_heading'] = "Статус массового импорта / обновления продукта";

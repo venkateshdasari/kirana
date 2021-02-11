@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']          	=	"السمات";
+$_['heading_title']          	=	"الصفات";
 
 // Text
 $_['text_success'] = 'لقد قمت بتعديل السمات بنجاح';

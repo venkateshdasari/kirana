@@ -44,3 +44,7 @@ $_['error_subscription_plan']       = 'Selecteer Abonnementsplan!';
 $_['error_subscription_plan_limit']       = 'Planlimiet overschrijden Wijzig aub Plan!';
 $_['error_subscription_plan_status']       = 'Abonnement is uitgeschakeld Schakel het abonnement in!';
 $_['seller_bulk_product_upload_sheet']    = "Download sjabloon";
+$_['text_bulk_product_import_add']    	 = 'Nieuwe producten importeren';
+$_['text_bulk_product_import_update']    = 'Bestaande producten bijwerken';
+$_['text_update']            			 = 'Bijwerken';
+$_['text_bulk_product_status_heading'] = "Status Import / Kemasukan Produk Pukal";

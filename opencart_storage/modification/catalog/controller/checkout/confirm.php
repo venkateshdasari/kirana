@@ -225,7 +225,7 @@ class ControllerCheckoutConfirm extends Controller {
 
 $seller_id = $this->cart->getvendorcart($product['cart_id']);
 				$order_data['products'][] = array(
-'seller_id'  => $seller_id,
+'seller_id'  => isset($seller_id)?$seller_id:'',
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
@@ -375,6 +375,7 @@ $seller_id = $this->cart->getvendorcart($product['cart_id']);
 
 				$data['products'][] = array(
 					'cart_id'    => $product['cart_id'],
+'seller_id'  => isset($seller_id)?$seller_id:'',
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],

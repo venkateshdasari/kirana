@@ -19,4 +19,5 @@ $_['error_permission'] = 'Uyarı: Çoklu satıcı blog ayar modülünü değişt
 $_['error_name']       = 'Modül Adı 3 ile 128 karakter arasında olmalıdır!';
 $_['error_width']      = 'Genişlik gerekli!';
 $_['error_height']     = 'Yükseklik gerekli!';
+$_['error_limit'] = 'Limit gerekli!';
 ?>

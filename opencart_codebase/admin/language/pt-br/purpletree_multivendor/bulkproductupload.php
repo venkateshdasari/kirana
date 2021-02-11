@@ -39,3 +39,4 @@ $_['error_permission']      = "Aviso: Você não tem permissão para modificar c
 $_['text_invalidfile']      = "Tipo de arquivo inválido. Selecione .xls ou .xlsx";
 $_['text_nofile']      = "Selecione o arquivo a ser importado";
 $_['entry_custom_fields']       = "Os campos personalizados";
+$_['text_bulk_product_status_heading'] = "Status de importação / atualização de produto em massa";

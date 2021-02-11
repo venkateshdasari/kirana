@@ -199,3 +199,6 @@ $_['entry_sellerarea'] = "Verkopersgebieden";
 $_['help_sellerarea'] = "(Autocomplete)";
 $_['text_all_sellerarea'] = "Alles";
 $_['text_selected_sellerarea'] = "Geselecteerd";
+
+$_['entry_multi_store']     = 'Opencart Stores';
+$_['entry_assign_stores']    = 'Wijs Opencart Stores toe';

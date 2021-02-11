@@ -38,3 +38,7 @@ $_['error_permission']      = "Avviso: non si dispone dell'autorizzazione per mo
 $_['text_invalidfile']      = "Tipo di file non valido. Seleziona .xls o .xlsx";
 $_['text_nofile']      = "Seleziona File da importare";
 $_['admin_bulk_product_upload_sheet']    = "Scarica il modello";
+$_['text_bulk_product_import_add']    	 = 'Importazione di nuovi prodotti';
+$_['text_bulk_product_import_update']    = 'Aggiorna prodotti esistenti';
+$_['text_update']            			 = 'Aggiornare';
+$_['text_bulk_product_status_heading'] = "Stato importazione / aggiornamento prodotti in blocco";

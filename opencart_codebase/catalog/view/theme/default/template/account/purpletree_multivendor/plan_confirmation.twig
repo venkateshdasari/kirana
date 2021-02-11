@@ -49,7 +49,7 @@
 					</div>
 					<div class="pts-row">
 						{% if subscriptions %}
-						<div class="pts-col-sm-4" style="margin-left: 10px;padding: 5px;">
+						<div class="pts-col-sm-4 ptsc-planconf-marpad">
 							<select name="s_date" class="dropdwonnn form-control">
 								<!-- <option value="0" >{{ text_start_now }}</option> -->
 								<option value="1" >{{ text_start_at_end }}</option>
@@ -57,7 +57,7 @@
 						</div>
 						
 						{% else %}	
-						<div class="pts-col-sm-4" style="margin-left: 10px;padding: 5px;">
+						<div class="pts-col-sm-4 ptsc-planconf-marpad">
 							<select name="s_date" class="dropdwonnn form-control">
 								<option value="0" >{{ text_start_now }}</option>
 								{% if currentplan %}

@@ -33,6 +33,16 @@
 							<td><strong>{{ text_description }}</strong></td>
 							<td>{{ customer_message }}</td>
 						</tr>
+						{% if file_attach %}
+						<tr>
+						<td><strong>{{ text_files }}</strong></td>
+						 <td>
+						 {% for files in file_attach %}
+						 <br><a href="{{ files.file_root }}" target="_blank" > {{ files.file_name }}</a>
+						 {% endfor %}
+						 </td>
+						</tr> 
+						{% endif %}
 					</tbody>
 				</table>
 			</div>

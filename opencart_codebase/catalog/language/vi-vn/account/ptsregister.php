@@ -41,10 +41,10 @@ $_['text_seller_label_status'] = "Trạng thái:";
 $_['button_deliver'] = "Giao hàng";
 $_['button_change_status'] = "Thay đổi trạng thái";
 $_['text_change_order_status'] = "Thay đổi trạng thái đơn hàng";
-$_['pts_text_customer'] = "<p> Đơn đặt hàng của bạn đã được xử lý thành công! </p> <p> Bạn có thể xem lịch sử đơn đặt hàng của mình bằng cách truy cập <a href="%s"> tài khoản của tôi </ a > và bằng cách nhấp vào <a href="%s"> lịch sử </a>. </p> <p> Nếu giao dịch mua của bạn có tải xuống liên quan, bạn có thể truy cập tài khoản <a href = "%s" > tải xuống trang </a> để xem chúng. </p> <p> Vui lòng chuyển bất kỳ câu hỏi nào bạn có đến ";
+$_['pts_text_customer'] = '<p> Đơn đặt hàng của bạn đã được xử lý thành công! </p> <p> Bạn có thể xem lịch sử đơn đặt hàng của mình bằng cách truy cập <a href="%s"> tài khoản của tôi </ a > và bằng cách nhấp vào <a href="%s"> lịch sử </a>. </p> <p> Nếu giao dịch mua của bạn có tải xuống liên quan, bạn có thể truy cập tài khoản <a href = "%s" > tải xuống trang </a> để xem chúng. </p> <p> Vui lòng chuyển bất kỳ câu hỏi nào bạn có đến ';
 $_['pts_text_guest'] = "<p> Đơn đặt hàng của bạn đã được xử lý thành công! </p> <p> Vui lòng chuyển bất kỳ câu hỏi nào bạn có tới";
 $_['pts_text_thanks'] = "</p> <p> Cảm ơn bạn đã mua sắm trực tuyến với chúng tôi! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> chủ cửa hàng </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> chủ cửa hàng </a>.';
 $_['column_delivery_address'] = "Địa chỉ Giao hàng";
 //// end_quick_order ////
 

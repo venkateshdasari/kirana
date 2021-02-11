@@ -10,7 +10,7 @@ class ControllerExtensionPurpletreeMultivendorAdmintemplate extends Controller {
 			$this->load->model('catalog/product');
 			if(!$this->config->get('module_purpletree_multivendor_seller_product_template')){
 				$this->response->redirect($this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'] . $url, true));
-			}
+			}			
 			$this->getList();
 		}
 		
@@ -72,7 +72,7 @@ class ControllerExtensionPurpletreeMultivendorAdmintemplate extends Controller {
 			$this->load->language('purpletree_multivendor/admintemplate');
 			
 			$this->document->setTitle($this->language->get('heading_title'));
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->model('catalog/product');
 			$this->load->model('extension/purpletree_multivendor/vendor');
 			
@@ -177,6 +177,7 @@ class ControllerExtensionPurpletreeMultivendorAdmintemplate extends Controller {
 			}
 			
 			protected function getList() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 			} else {
@@ -399,6 +400,7 @@ class ControllerExtensionPurpletreeMultivendorAdmintemplate extends Controller {
 			}
 			
 			protected function getForm() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$data['text_form'] = !isset($this->request->get['product_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 			
 			if (isset($this->error['warning'])) {
@@ -991,6 +993,7 @@ class ControllerExtensionPurpletreeMultivendorAdmintemplate extends Controller {
 			$this->response->setOutput($this->load->view('extension/purpletree_multivendor/admintemplate_form', $data));
 			}
 			public function productForm() {
+				$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->language('purpletree_multivendor/admintemplate');
 			
 			$this->document->setTitle($this->language->get('heading_title'));

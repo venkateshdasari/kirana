@@ -1,21 +1,21 @@
-<div class="main-compare">
-	<div class="pts-border-grey">
+<div class="main-compare ptsc-compare">
+	<div class="pts-border-grey ptsc-border-grey">
 		<label class="seller-heading-compare">{{ text_seller_price }}</label>
 		{% for template_price in template_prices %}
-		<div class="pts-px-1 bg-strip">
+		<div class="pts-px-1 ptsc-px-1 bg-strip pts-bg-strip">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-9">
-						<h5 class="m-0" style="margin:0;font-size:14px;{% if journal2 %}margin-left:5%;{% endif %}">
+						<h5 class="m-0 {% if journal2 %}ptsc-sellerprice-marlef{% endif %} ptsc-sellerprice-margfsiz">
 							<a href="{{ template_price.href }}"><span>{{ template_price.store_name }}</span></a>
 						</h5>
 					</div>
 					<div class="col-md-3">
-						<a href="{{ template_price.href }}"><img src={{ template_price.store_logo }} style="{% if journal2 %}margin-left:5%; width:20%;{% endif %}" class="img-fluid img-responsive"></a>
+						<a href="{{ template_price.href }}"><img src={{ template_price.store_logo }} class="img-fluid img-responsive {% if journal2 %}ptsc-sellerprice-marwid{% endif %}"></a>
 					</div>
 					<div class="col-md-12 text-left">
 						<div class="row">
-							<div class="price-new compare-pts-star">
+							<div class="price-new  ptsc-price-new compare-pts-star compare-ptsc-star">
 								<div class="">
 									<label><i class="fa fa-doller"></i>{{ template_price.price }}</label>
 								</div>
@@ -34,7 +34,7 @@
 								
 								
 								<div class="">
-									<button class="pts-btn pts-btn-primary" onclick="addcartseller('{{ template_price.seller_id }}');" style="border-radius:0px;padding:2px"><i class="fa fa-shopping-cart"></i> {{ button_add_cart }}</button>
+									<button class="pts-btn pts-btn-primary ptsc-sellprice-bradius" onclick="addcartseller('{{ template_price.seller_id }}');"><i class="fa fa-shopping-cart"></i> {{ button_add_cart }}</button>
 								</div>
 							</div>
 						</div>
@@ -50,36 +50,9 @@
 </div>
 
 <style>
-	.main-compare{margin-bottom:15px;}
-	.pts-border-grey{
-	border:1px solid #ddd;
-	background:#fff;
-	}
-	.pts-px-1{
-	padding:8px 0px;
-	border-bottom: 1px solid #eee;
-	}
-	.main-compare .seller-heading-compare{
-	margin-top:0px;
-	margin-bottom:0px;
-	padding:2px 10px;
-	background:#337ab7;
-	color:#fff;
-	font-size:18px;
-	width:100%
-	}
-	.price-new label{
-	font-size: 16px;
-	color: red;
-	line-height:1 !important
-	}
-	.bg-strip:nth-last-child(2n+1){
-	background:#e5f3ff;
-	}
 	.pl-0{padding-left:0 !important}
 	.mt-2{margin-top:5px}
-	.compare-pts-star{padding:8px 0px;{% if not journal2 %}display: flex;{% endif %}justify-content: space-between;padding:10px 12px;line-height: 2;}
-	.compare-pts-star i{font-size:12px !important}
+	.compare-pts-star{padding:8px 0px;{% if not journal2 %}display: flex;{% endif %}justify-content: space-between;padding:10px 12px;line-height: 2;}	
 	.cart-btn-compare{background:transparent;border:none;color:#337ab7}
 	.cart-btn-compare .fa::before{font-size:18px;}
 </style>
@@ -166,13 +139,6 @@
 		}
 	});
 </script>
-<style>
-	@media only screen and (max-width: 760px) {
-	.pts-column-right-sellerpprice,#column-right {
-	display: block !important;
-	}
-	}
-</style>
 <script>
 	$(window).load(function() {
 		if($('.main-compare').parent().attr('id') == 'column-right' || $('.main-compare').parent().hasClass('right_column')) {
@@ -183,15 +149,4 @@
 		}
 	});
 </script>
-<style>
-	
-	@media only screen and (max-width: 760px) {
-	.compare-pts-star {
-	     	display: unset !important;
-	 }
-	.pts-column-right-sellerpprice,#column-right {
-	display: block !important;
-	}
-	}
-</style>
 {% endif %}

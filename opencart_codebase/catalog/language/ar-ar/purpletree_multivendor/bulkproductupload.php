@@ -42,3 +42,7 @@ $_['error_subscription_plan']       = 'يرجى اختيار خطة الاشتر
 $_['error_subscription_plan_limit']       = 'تجاوز حد الخطة يرجى تغيير الخطة!';
 $_['error_subscription_plan_status']       = 'خطة الاشتراك هو تعطيل الرجاء تفعيل خطة الاشتراك!';
 $_['seller_bulk_product_upload_sheet']    = "تحميل النموذج";
+$_['text_bulk_product_import_add']    	 = 'استيراد منتجات جديدة';
+$_['text_bulk_product_import_update']    = 'تحديث المنتجات الموجودة';
+$_['text_update']            			 = 'تحديث';
+$_['text_bulk_product_status_heading'] = 'حالة استيراد / تحديث المنتج بالجملة';

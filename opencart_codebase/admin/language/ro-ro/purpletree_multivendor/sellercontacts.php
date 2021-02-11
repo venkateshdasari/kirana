@@ -31,4 +31,5 @@ $_['text_delete_success'] = 'Ancheta a fost șters cu succes.';
 
 $_['button_continue'] = 'Continuați';
 $_['text_home'] = "Acasă";
+$_['text_files'] ='Dosare';
 ?>

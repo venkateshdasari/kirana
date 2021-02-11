@@ -3,7 +3,7 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="pull-right float-right">
-				<a href="{{url}}" data-toggle="tooltip" title="{{ button_upload }}"><input type="button" value="{{ button_upload }}" class="btn btn-primary" class="button_add"  style=" padding: 8px 20px 8px 20px; " ></a>
+				<a href="{{url}}" data-toggle="tooltip" title="{{ button_upload }}"><input type="button" value="{{ button_upload }}" class="btn btn-primary" class="button_add ptsc-upgrdatabas-padd" ></a>
 				<button type="button" data-toggle="tooltip" title="{{ button_filter }}" onclick="$('#filter-seller').toggleClass('hidden-sm hidden-xs');" class="btn btn-default hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
 				<a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
 				<button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-seller').submit() : false;"><i class="fa fa-trash-o fas fa-trash-alt"></i></button>
@@ -28,7 +28,7 @@
 		</div>
 		{% endif %}
 		<div class="panel-heading">
-			<h3 class="panel-title card-header"><i class="fa fa-filter"></i> <a style="color:#1e91cf;" target="_blank" href="{{ manageshippingoptionUrl }}">{{ manageshippingoption }}</a></h3> 
+			<h3 class="panel-title card-header"><i class="fa fa-filter"></i> <a class="ptsc-shippingli-color" target="_blank" href="{{ manageshippingoptionUrl }}">{{ manageshippingoption }}</a></h3> 
 		</div>
 		<div class="row">
 			<div class="col-md-9 col-sm-12">
@@ -42,7 +42,7 @@
 								<table class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+											<td class="text-center ptsc-vendorlis-width"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
 											
 											<td class="text-left">{{ column_name }}</td>
 											
@@ -236,14 +236,7 @@
 		});
 		
 		
-	//--></script> 
-	<style>
-		.catdivdrop ul{
-		overflow: auto;
-		max-height: 100px;
-		width: 30%;
-		}
-	</style>
+	//--></script>
 	<script>
 		function checkdata(e){			
 			if (confirm("{{ text_confirm }}")) {

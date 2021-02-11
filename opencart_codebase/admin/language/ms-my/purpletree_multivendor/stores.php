@@ -198,3 +198,6 @@ $_['entry_sellerarea'] = "Kawasan Penjual";
 $_['help_sellerarea'] = "(Autolengkap)";
 $_['text_all_sellerarea'] = "Semua";
 $_['text_selected_sellerarea'] = "Terpilih";
+
+$_['entry_multi_store']     = 'Kedai Opencart';
+$_['entry_assign_stores']    = 'Tetapkan Kedai Opencart';

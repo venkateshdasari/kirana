@@ -106,7 +106,8 @@ class ModelExtensionPurpletreeMultivendorDashboard extends Model{
 			return $query->rows;
 		}
 		public function getCountSeen1($seller_id){
-			$query = $this->db->query("SELECT COUNT(seen) as totalenquries FROM " . DB_PREFIX . "purpletree_vendor_contact pvc JOIN ". DB_PREFIX ."purpletree_vendor_stores pvs ON(pvc.seller_id=pvs.seller_id)  WHERE pvc.seller_id='".(int)$seller_id. "' AND pvc.seen = '1' AND pvs.multi_store_id='".(int)$this->config->get('config_store_id') ."'");
+			$store_id=(int)$this->config->get('config_store_id');
+			$query = $this->db->query("SELECT COUNT(seen) as totalenquries FROM " . DB_PREFIX . "purpletree_vendor_contact pvc JOIN ". DB_PREFIX ."purpletree_vendor_stores pvs ON(pvc.seller_id=pvs.seller_id)  WHERE pvc.seller_id='".(int)$seller_id. "' AND pvc.seen = '1' AND FIND_IN_SET('".$store_id."',pvs.multi_store_id)");
 			if($query->num_rows){
 				return $query->row['totalenquries'];
 				} else { 
@@ -114,7 +115,8 @@ class ModelExtensionPurpletreeMultivendorDashboard extends Model{
 			}
 		}	
 		public function getCountSeen($seller_id){
-			$query = $this->db->query("SELECT pvo.seen,pvo.order_status_id FROM " . DB_PREFIX . "purpletree_vendor_orders pvo JOIN ". DB_PREFIX ."purpletree_vendor_stores pvs ON(pvo.seller_id=pvs.seller_id) WHERE pvo.seller_id='".(int)$seller_id. "' AND pvo.seen = '1' AND pvo.order_status_id!=0 AND pvs.multi_store_id='".(int)$this->config->get('config_store_id') ."' GROUP BY pvo.order_id");
+			$store_id=(int)$this->config->get('config_store_id');
+			$query = $this->db->query("SELECT pvo.seen,pvo.order_status_id FROM " . DB_PREFIX . "purpletree_vendor_orders pvo JOIN ". DB_PREFIX ."purpletree_vendor_stores pvs ON(pvo.seller_id=pvs.seller_id) WHERE pvo.seller_id='".(int)$seller_id. "' AND pvo.seen = '1' AND pvo.order_status_id!=0 AND FIND_IN_SET('".$store_id."',pvs.multi_store_id) GROUP BY pvo.order_id");
 			
 			if($query->num_rows){
 				return $query->num_rows;
@@ -123,7 +125,8 @@ class ModelExtensionPurpletreeMultivendorDashboard extends Model{
 			}
 		}
 		public function getCountAdminMessageSeen($seller_id){
-			$query = $this->db->query("SELECT COUNT(seen) as totaladminemessages FROM " . DB_PREFIX . "purpletree_vendor_enquiries pve JOIN ". DB_PREFIX ."purpletree_vendor_stores pvs ON(pve.seller_id=pvs.seller_id)  WHERE pve.seller_id='".(int)$seller_id. "' AND pve.seen = '1' AND pve.contact_from = '1' AND pvs.multi_store_id='".(int)$this->config->get('config_store_id') ."'");
+			$store_id=(int)$this->config->get('config_store_id');
+			$query = $this->db->query("SELECT COUNT(seen) as totaladminemessages FROM " . DB_PREFIX . "purpletree_vendor_enquiries pve JOIN ". DB_PREFIX ."purpletree_vendor_stores pvs ON(pve.seller_id=pvs.seller_id)  WHERE pve.seller_id='".(int)$seller_id. "' AND pve.seen = '1' AND pve.contact_from = '1' AND FIND_IN_SET('".$store_id."',pvs.multi_store_id)");
 			if($query->num_rows){
 				return $query->row['totaladminemessages'];
 				} else { 

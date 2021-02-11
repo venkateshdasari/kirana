@@ -7,7 +7,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 				$this->session->data['error_warning'] = $this->language->get('error_license');	
 			}
 			$this->load->language('purpletree_multivendor/commissioninvoice');
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->model('extension/purpletree_multivendor/commissioninvoice');
 			
 			if (isset($this->request->get['filter_date_from'])) {
@@ -202,6 +202,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			}
 			}
 			public function payofflineedit(){
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (!$this->customer->validateSeller()) {
 			$this->load->language('purpletree_multivendor/ptsmultivendor');
 			$this->session->data['error_warning'] = $this->language->get('error_license');
@@ -316,10 +317,16 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			$curency = $this->config->get('config_currency');
 			$currency_detail = $this->model_extension_purpletree_multivendor_sellerpayment->getCurrencySymbol($curency);
 			$invoiceData =  $this->model_extension_purpletree_multivendor_commissioninvoice->getGenerateInvoiceData($invoice_id);
+			$seller_coupon_amount=0;
+			if(!empty($invoiceData['seller_coupon_amount'])){
+				$seller_coupon_amount = $invoiceData['seller_coupon_amount'];
+			}
+			$totalPayAmount=$invoiceData['total_pay_amount']+$seller_coupon_amount;
+			
 			$data['total_amount']=$this->currency->format($invoiceData['total_amount'], $currency_detail['code'], $currency_detail['value']);
 			$data['total_commission']=$this->currency->format($invoiceData['total_commission'], $currency_detail['code'], $currency_detail['value']);
-			$data['total_pay']=$this->currency->format($invoiceData['total_pay_amount'], $currency_detail['code'], $currency_detail['value']);
-			$data['total_pay_amount']=sprintf('%0.2f', $invoiceData['total_pay_amount']);
+			$data['total_pay']=$this->currency->format($totalPayAmount, $currency_detail['code'], $currency_detail['value']);
+			$data['total_pay_amount']=sprintf('%0.2f', $totalPayAmount);
 			
 			if(isset($this->request->get['seller_id'])){
 			$data['seller_id']=$this->request->get['seller_id'];	
@@ -338,6 +345,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			
 			}
 			public function payOfflineSave(){
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (!$this->customer->validateSeller()) {
 			$this->load->language('purpletree_multivendor/ptsmultivendor');
 			$this->session->data['error_warning'] = $this->language->get('error_license');
@@ -427,10 +435,19 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			$curency = $this->config->get('config_currency');
 			$currency_detail = $this->model_extension_purpletree_multivendor_sellerpayment->getCurrencySymbol($curency);
 			$invoiceData =  $this->model_extension_purpletree_multivendor_commissioninvoice->getGenerateInvoiceData($invoice_id);
+			
+			$seller_coupon_amount=0;
+			if(!empty($invoiceData['seller_coupon_amount'])){
+				$seller_coupon_amount = $invoiceData['seller_coupon_amount'];
+			}
+			$totalPayAmount=$invoiceData['total_pay_amount']+$seller_coupon_amount;
+			
+			
+			
 			$data['total_amount']=$this->currency->format($invoiceData['total_amount'], $currency_detail['code'], $currency_detail['value']);
 			$data['total_commission']=$this->currency->format($invoiceData['total_commission'], $currency_detail['code'], $currency_detail['value']);
-			$data['total_pay']=$this->currency->format($invoiceData['total_pay_amount'], $currency_detail['code'], $currency_detail['value']);
-			$data['total_pay_amount']=sprintf('%0.2f', $invoiceData['total_pay_amount']);
+			$data['total_pay']=$this->currency->format($totalPayAmount, $currency_detail['code'], $currency_detail['value']);
+			$data['total_pay_amount']=sprintf('%0.2f', $totalPayAmount);
 			$data['seller_id']=$this->request->get['seller_id'];
 			$data['paymentoffline']=$this->url->link('extension/purpletree_multivendor/commissioninvoice/paymentOfflineSave', 'user_token=' . $this->session->data['user_token'], true);
 			
@@ -550,10 +567,16 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			$curency = $this->config->get('config_currency');
 			$currency_detail = $this->model_extension_purpletree_multivendor_sellerpayment->getCurrencySymbol($curency);
 			$invoiceData =  $this->model_extension_purpletree_multivendor_commissioninvoice->getGenerateInvoiceData($invoice_id);
+
+				$seller_coupon_amount=0;
+			if(!empty($invoiceData['seller_coupon_amount'])){
+				$seller_coupon_amount = $invoiceData['seller_coupon_amount'];
+			}
+			$totalPayAmount=$invoiceData['total_pay_amount']+$seller_coupon_amount;
 			$data['total_amount']=$this->currency->format($invoiceData['total_amount'], $currency_detail['code'], $currency_detail['value']);
 			$data['total_commission']=$this->currency->format($invoiceData['total_commission'], $currency_detail['code'], $currency_detail['value']);
-			$data['total_pay']=$this->currency->format($invoiceData['total_pay_amount'], $currency_detail['code'], $currency_detail['value']);
-			$data['total_pay_amount']=sprintf('%0.2f', $invoiceData['total_pay_amount']);
+			$data['total_pay']=$this->currency->format($totalPayAmount, $currency_detail['code'], $currency_detail['value']);
+			$data['total_pay_amount']=sprintf('%0.2f', $totalPayAmount);
 			
 			
 			$data['paymentoffline']=$this->url->link('extension/purpletree_multivendor/commissioninvoice/paymentOfflineSave', 'user_token=' . $this->session->data['user_token'], true);
@@ -574,6 +597,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			
 			
 			public function commissionInvoice(){
+				$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (!$this->customer->validateSeller()) {
 			$this->load->language('purpletree_multivendor/ptsmultivendor');
 			$this->session->data['error_warning'] = $this->language->get('error_license');
@@ -628,6 +652,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			
 			//////////////////////
 			$commissions_invoice = $this->model_extension_purpletree_multivendor_commissioninvoice->getCommissionsInvoice($commisions_invoice_id);
+			
 			//////////////////////
 			
 			if(!empty($commioncreated_date)) {
@@ -815,12 +840,20 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			
 			if(!empty($commissions_invoice)) {
 			foreach($commissions_invoice as $commissions_invoicess) {
+			$seller_coupon_amt=0;
+			if(!empty($commissions_invoicess['seller_coupon_amount'])){
+			$seller_coupon_amt=$commissions_invoicess['seller_coupon_amount'];
+			}
+			
+			$total_pay_amount=$commissions_invoicess['total_pay_amount']+$seller_coupon_amt;
 			$commissions_invoicesss = array(
 			'id' 			=> $commissions_invoicess['id'],
 			'total_commission' 	=> $this->currency->format($commissions_invoicess['total_commission'], $currency_detail['code'], $currency_detail['value']),
 			
-			'total_pay_amount' 	=> $this->currency->format($commissions_invoicess['total_pay_amount'], $currency_detail['code'], $currency_detail['value']),				
-			'total_pay_amt' 	=> $commissions_invoicess['total_pay_amount'],
+			'total_pay_amount' 	=> $this->currency->format($total_pay_amount, $currency_detail['code'], $currency_detail['value']),				
+			'seller_coupon_amount_c_f' 	=> $this->currency->format($commissions_invoicess['seller_coupon_amount'], $currency_detail['code'], $currency_detail['value']),				
+			'seller_coupon_amount' 	=> $commissions_invoicess['seller_coupon_amount'],				
+			'total_pay_amt' 	=> $total_pay_amount,
 			'created_at' 	=>date('d/m/Y', strtotime($commissions_invoicess['created_at'])),
 			
 			);
@@ -831,6 +864,8 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			$data['total_commissionn'] = $commissions_invoicesss['total_commission'];
 			$data['total_pay_amountt'] = $commissions_invoicesss['total_pay_amount'];
 			$data['total_pay_amt'] = $commissions_invoicesss['total_pay_amt'];
+			$data['seller_coupon_amount'] = $commissions_invoicesss['seller_coupon_amount'];
+			$data['seller_coupon_amount_c_f'] = $commissions_invoicesss['seller_coupon_amount_c_f'];
 			
 			/////////////////////////////////////////////////////
 			$invoice_status_id = $this->model_extension_purpletree_multivendor_commissioninvoice->getInvoiceStatusID($commisions_invoice_id);
@@ -962,7 +997,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			//pay offline
 			$data['pay_offline']=$this->url->link('extension/purpletree_multivendor/commissioninvoice/payoffline', 'user_token=' . $this->session->data['user_token'].'&commision_view_id='.$this->request->get['commision_view_id'].'&seller_id='.$data['sellerdetails']['seller_id'], true);
 			}
-			
+
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
@@ -972,6 +1007,7 @@ class ControllerExtensionPurpletreeMultivendorCommissioninvoice extends Controll
 			
 			
 			public function view(){
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			if (!$this->customer->validateSeller()) {
 			$this->load->language('purpletree_multivendor/ptsmultivendor');
 			$this->session->data['error_warning'] = $this->language->get('error_license');

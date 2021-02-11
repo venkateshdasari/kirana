@@ -163,3 +163,6 @@ $_['entry_seller_areaheading'] = "Hyperlocal";
 $_['entry_header_popup'] = "Pamagat sa Popup para sa HyperLlocal";
 $_['entry_area_selection'] = "Mandatoryo sa Pagpili ng Lugar";
 $_['entry_seller_area_link'] = "Pumunta sa Seller Area";
+$_['text_multiple_store']="Gumamit ng mga tindahan ng matalino sa domain";
+$_['text_fix_commission']="Inayos ang Komisyon";
+$_['text_hyper_delivering'] = "Paghahatid sa";

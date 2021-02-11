@@ -21,7 +21,11 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerlogin extends Control
 						$this->response->redirect($this->url->link(	'extension/account/purpletree_multivendor/sellerstore/becomeseller', '', true));
 						} else {
 						if($store_detail['store_status']==1){
-							if($store_detail['multi_store_id']== $this->config->get('config_store_id')){
+							$stores=array();
+							if(isset($store_detail['multi_store_id'])){
+								$stores=explode(',',$store_detail['multi_store_id']);
+							}
+							if(in_array($this->config->get('config_store_id'),$stores)){
 								$this->response->redirect($this->url->link(	'extension/account/purpletree_multivendor/dashboardicons', '', true));
 								} else {
 								$this->response->redirect($this->url->link(	'account/account', '', true));
@@ -168,8 +172,12 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerlogin extends Control
 			$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
 			$this->load->model('extension/purpletree_multivendor/vendor');
 			if(!empty($customer_info['customer_id'])){
-				$store_detail = $this->model_extension_purpletree_multivendor_vendor->isSeller($customer_info['customer_id']);			 
-				if(isset($store_detail['store_status']) && ($store_detail['multi_store_id'] != $this->config->get('config_store_id'))){
+				$store_detail = $this->model_extension_purpletree_multivendor_vendor->isSeller($customer_info['customer_id']);	
+					$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}				
+				if(isset($store_detail['store_status']) && (!in_array($this->config->get('config_store_id'),$stores))){
 					
 					$this->error['warning'] = $this->language->get('error_seller_not_found');
 					

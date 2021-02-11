@@ -99,7 +99,7 @@ class ControllerExtensionPurpletreeMultivendorPlaninvoicestatus extends Controll
 		}	
 		
 		protected function getList() {	
-			
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			
 			if (isset($this->request->get['order'])) {
 				$order = $this->request->get['order'];

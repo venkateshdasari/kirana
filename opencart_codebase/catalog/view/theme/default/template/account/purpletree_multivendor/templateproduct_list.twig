@@ -65,7 +65,7 @@
 									{% endif %}
 								</select>
 							</div>
-							<button type="button" id="pts-button-filter" class="pts-btn pts-btn-primary pts-pull-right" style="margin-top: 25px;"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+							<button type="button" id="pts-button-filter" class="pts-btn pts-btn-primary pts-pull-right ptsc-temppro-filtermar"><i class="fa fa-filter"></i> {{ button_filter }}</button>
 						</div>
 					</div>
 				</div>
@@ -97,7 +97,7 @@
 								</tr>
 								{% endif %}
 								{% for value in values %}
-								<tr {% if value.statusid==1 %} style="background-color:#d8f9d7;" {% endif %} >
+								<tr {% if value.statusid==1 %} class="ptsc-temppro-bcolor" {% endif %} >
 									
 									<td class="pts-text-center">{% if value.image %}
 										<img src="{{ value.image }}" alt="{{ value.name }}" class="img-thumbnail" />

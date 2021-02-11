@@ -305,7 +305,16 @@ class ModelCheckoutOrder extends Model {
 						$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_orders SET order_id ='".(int)$order_id."', seller_id = '".(int)$seller_id['seller_id']."', product_id ='".(int)$product['product_id']."', shipping = '".(float)$seller_id['store_shipping_charge']."', quantity = '" . (int)$product['quantity'] . "', unit_price = '" . (float)$product['price'] . "', total_price = '" . (float)$product['total'] . "', created_at =NOW(), updated_at = NOW()");					
 						$vendor_or_teb_id = $this->db->getLastId();
 						$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_commissions SET order_id = '" . (int)$order_id . "', product_id ='".(int)$product['product_id']."', seller_id = '" . (int)$seller_id['seller_id'] . "',vendor_order_table_id = '" . (int)$vendor_or_teb_id . "',commission_shipping = '0', commission_fixed = '0', commission_percent = '0', commission = '0', status = 'Pending', created_at = NOW(), updated_at = NOW()");
-						
+						//
+		$proprice = $product['price'];
+		$prototal = $product['total'];
+		$this->load->model('extension/total/coupon');
+		$coupon_discount = $this->model_extension_total_coupon->getsellercounponTotal($product['product_id']);
+		if($coupon_discount) {
+			$proprice = $product['price'] - $coupon_discount;
+			$prototal = $product['total']-$coupon_discount;
+		}
+						//
 						if(!isset($seller_sub_total[$seller_id['seller_id']])){
 						$seller_sub_total[$seller_id['seller_id']] = $product['total'];
 						} else {
@@ -313,12 +322,12 @@ class ModelCheckoutOrder extends Model {
 						}
 						
 						if(!isset($seller_final_total[$seller_id['seller_id']])){
-							$seller_final_total[$seller_id['seller_id']] = $this->tax->calculate($product['price'], $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
+							$seller_final_total[$seller_id['seller_id']] = $this->tax->calculate($proprice, $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
 						} else {
-							$seller_final_total[$seller_id['seller_id']] += $this->tax->calculate($product['price'], $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
+							$seller_final_total[$seller_id['seller_id']] += $this->tax->calculate($proprice, $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
 						}
 						
-						$tax_rates = $this->tax->getRates($product['price'], $seller_id['tax_class_id']);
+						$tax_rates = $this->tax->getRates($proprice, $seller_id['tax_class_id']);
 			
 						foreach ($tax_rates as $tax_rate) {
 							if (!isset($seller_tax_data[$seller_id['seller_id']][$tax_rate['tax_rate_id']])) {
@@ -404,6 +413,15 @@ class ModelCheckoutOrder extends Model {
 			/**************************************** For seller tax*******************************/
 		if(! empty($seller_tax_data))
 		{
+		 $taxxx = 0;
+			if (isset($data['totals'])) {
+				foreach ($data['totals'] as $total) {
+					if($total['code']=='tax'){
+						$taxxx = $taxxx + $total['value'];
+					}
+				}
+			}
+			if($taxxx != 0) {
 			foreach($seller_tax_data as $key=>$value){
 				foreach ($value as $key1 => $value1) {
 					if ($value1 > 0) {
@@ -421,6 +439,7 @@ class ModelCheckoutOrder extends Model {
 					}
 				}
 			} 
+			}
 			}
 			/**************************************** For seller shipping*******************************/
 			$this->load->language('account/ptsregister');
@@ -521,9 +540,9 @@ class ModelCheckoutOrder extends Model {
 							$total_value = $query7->row['value'];
 						}
 						$coupon_amount = $total['value'];
-						if($total_value && $coupon_amount){
+						if(isset($total_value) && isset($coupon_amount)){
 							$total_after_apply_coupon = $total_value + ($coupon_amount);
-							$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET value = '" . (int)$total_after_apply_coupon . "' WHERE order_total_id='". (int)$order_total_id ."'");
+							$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET value = '" . (float)$total_after_apply_coupon . "' WHERE order_total_id='". (int)$order_total_id ."'");
 						}
 					}
 				}
@@ -582,7 +601,16 @@ class ModelCheckoutOrder extends Model {
 						$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_orders SET order_id ='".(int)$order_id."', seller_id = '".(int)$seller_id['seller_id']."', product_id ='".(int)$product['product_id']."', shipping = '".(float)$seller_id['store_shipping_charge']."', quantity = '" . (int)$product['quantity'] . "', unit_price = '" . (float)$product['price'] . "', total_price = '" . (float)$product['total'] . "', created_at =NOW(), updated_at = NOW()");					
 						$vendor_or_teb_id = $this->db->getLastId();
 						$this->db->query("INSERT INTO " . DB_PREFIX . "purpletree_vendor_commissions SET order_id = '" . (int)$order_id . "', product_id ='".(int)$product['product_id']."', seller_id = '" . (int)$seller_id['seller_id'] . "',vendor_order_table_id = '" . (int)$vendor_or_teb_id . "',commission_shipping = '0', commission_fixed = '0', commission_percent = '0', commission = '0', status = 'Pending', created_at = NOW(), updated_at = NOW()");
-						
+						//
+		$proprice = $product['price'];
+		$prototal = $product['total'];
+		$this->load->model('extension/total/coupon');
+		$coupon_discount = $this->model_extension_total_coupon->getsellercounponTotal($product['product_id']);
+		if($coupon_discount) {
+			$proprice = $product['price'] - $coupon_discount;
+			$prototal = $product['total']-$coupon_discount;
+		}
+						//
 						if(!isset($seller_sub_total[$seller_id['seller_id']])){
 						$seller_sub_total[$seller_id['seller_id']] = $product['total'];
 						} else {
@@ -590,12 +618,12 @@ class ModelCheckoutOrder extends Model {
 						}
 						
 						if(!isset($seller_final_total[$seller_id['seller_id']])){
-							$seller_final_total[$seller_id['seller_id']] = $this->tax->calculate($product['price'], $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
+							$seller_final_total[$seller_id['seller_id']] = $this->tax->calculate($proprice, $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
 						} else {
-							$seller_final_total[$seller_id['seller_id']] += $this->tax->calculate($product['price'], $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
+							$seller_final_total[$seller_id['seller_id']] += $this->tax->calculate($proprice, $seller_id['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
 						}
 						
-						$tax_rates = $this->tax->getRates($product['price'], $seller_id['tax_class_id']);
+						$tax_rates = $this->tax->getRates($proprice, $seller_id['tax_class_id']);
 			
 						foreach ($tax_rates as $tax_rate) {
 							if (!isset($seller_tax_data[$seller_id['seller_id']][$tax_rate['tax_rate_id']])) {
@@ -688,6 +716,15 @@ class ModelCheckoutOrder extends Model {
 			/**************************************** For seller tax*******************************/
 		if(! empty($seller_tax_data))
 		{
+		 $taxxx = 0;
+			if (isset($data['totals'])) {
+				foreach ($data['totals'] as $total) {
+					if($total['code']=='tax'){
+						$taxxx = $taxxx + $total['value'];
+					}
+				}
+			}
+			if($taxxx != 0) {
 			foreach($seller_tax_data as $key=>$value){
 				foreach ($value as $key1 => $value1) {
 					if ($value1 > 0) {
@@ -705,6 +742,7 @@ class ModelCheckoutOrder extends Model {
 					}
 				}
 			} 
+			}
 			}
 			/**************************************** For seller shipping*******************************/
 			$this->load->language('account/ptsregister');
@@ -806,9 +844,9 @@ class ModelCheckoutOrder extends Model {
 							$total_value = $query7->row['value'];
 						}
 						$coupon_amount = $total['value'];
-						if($total_value && $coupon_amount){
+						if(isset($total_value) && isset($coupon_amount)){
 							$total_after_apply_coupon = $total_value + ($coupon_amount);
-							$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET value = '" . (int)$total_after_apply_coupon . "' WHERE order_total_id='". (int)$order_total_id ."'");
+							$this->db->query("UPDATE `" . DB_PREFIX . "purpletree_order_total` SET value = '" . (float)$total_after_apply_coupon . "' WHERE order_total_id='". (int)$order_total_id ."'");
 						}
 					}
 				}
@@ -1141,13 +1179,22 @@ class ModelCheckoutOrder extends Model {
 						$commission1 = -1;
 						$comipercen = 0;
 						$comifixs = 0;
-						
+						/// Get fix global Commission /// 
+						$globalcomifixs = 0;
+						 if(($this->config->get('module_purpletree_multivendor_fix_commission')) && ($this->config->get('module_purpletree_multivendor_fix_commission') > 0)){
+							  $globalcomifixs = $this->config->get('module_purpletree_multivendor_fix_commission');
+								 }
+						//////end fix globle commission ////
 						if(!empty($commission_cat)) {
 						 foreach($commission_cat as $catts) {
 						 foreach($catts as $catt) {
 								$comifix = 0;
 							 if(isset($catt['commison_fixed']) && $catt['commison_fixed'] != '') {
 								$comifix = $catt['commison_fixed'];
+							 }else{
+							 if(($this->config->get('module_purpletree_multivendor_fix_commission')) && ($this->config->get('module_purpletree_multivendor_fix_commission') > 0)){
+							   $comifix =$this->config->get('module_purpletree_multivendor_fix_commission');
+								 }							  
 							 }
 								$comiper = 0;
 							 if(isset($catt['commission']) && $catt['commission'] != '') {
@@ -1187,10 +1234,12 @@ class ModelCheckoutOrder extends Model {
 						//category_commission
 						elseif(isset($seller_commission['store_commission']) && ($seller_commission['store_commission'] != NULL || $seller_commission['store_commission'] != '')){
 							$comipercen = $seller_commission['store_commission'];
-							$commission = (($sellerorder['total_price']*$seller_commission['store_commission'])/100)+$shippingcommision;
+							$commission = (($sellerorder['total_price']*$seller_commission['store_commission'])/100)+$shippingcommision+$globalcomifixs;
+							$comifixs = $globalcomifixs;
 						} else {
 							$comipercen = $this->config->get('module_purpletree_multivendor_commission');
-							$commission = (($sellerorder['total_price']*$this->config->get('module_purpletree_multivendor_commission'))/100)+$shippingcommision;
+							$commission = (($sellerorder['total_price']*$this->config->get('module_purpletree_multivendor_commission'))/100)+$shippingcommision+$globalcomifixs;
+							$comifixs = $globalcomifixs;
 						}
 						$this->db->query("UPDATE " . DB_PREFIX . "purpletree_vendor_commissions SET commission_shipping = '".$shippingcommision."', commission_fixed = '".$comifixs."', commission_percent = '".$comipercen."', commission = '" . (float)$commission . "', status = 'Complete', updated_at = NOW() WHERE order_id = '" . (int)$order_id . "' && product_id ='".(int)$sellerorder['product_id']."' && seller_id = '" . (int)$sellerorder['seller_id'] . "' && vendor_order_table_id = '" . (int)$sellerorder['id'] . "'");
 						} else {

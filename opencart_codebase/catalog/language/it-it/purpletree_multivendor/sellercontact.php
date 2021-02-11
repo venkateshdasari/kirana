@@ -26,3 +26,8 @@ $_['text_contact_message'] = 'Richiesta inviata dalla pagina';
 //button
 $_['button_view_all'] ='guarda tutto';
 $_['button_submit'] ='Sottoscrivi';
+
+$_['text_files'] ='File';
+$_['text_attach_file'] ='Allega file';
+$_['text_upload_file'] ='Caricare un file';
+$_['text_action'] ='Azione';

@@ -29,3 +29,4 @@ $_['text_delete_success'] 	=	"Pertanyaan telah berjaya dipadamkan.";
 //button	
 		
 $_['button_continue'] 	=	"Teruskan";
+$_['text_files'] ='Fail';

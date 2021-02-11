@@ -140,7 +140,7 @@ $_['error_storeseoempty'] 	=	"يجب أن يكون بين 3 و 150 حرفًا";
 $_['error_commission'] 	=	"يرجى إدخال عمولة صحيحة!";
 $_['error_storename']       = 'يجب أن يكون اسم المتجر بين 5 و 50 حرفًا!';
 $_['error_store_seo'] = 'لا تدخل الفضاء أو الأحرف الخاصة ل سيو رابط. الأحرف المسموح بها هي: a-z ، 0-9 ، واصلة (أي "-") وتسطير أسفل السطر (أي "_").';
-$_['module_purpletree_multivendor_commission_status_warning']			 = "تحذير: قد تكون العمليات الحسابية خاطئة يرجى ضبط حالة Commation من  متعدد البائعين Settings!";
+$_['module_purpletree_multivendor_commission_status_warning']			 = "تحذير: قد تكون العمليات الحسابية خاطئة يرجى ضبط حالة Commation من Multivendor Settings!";
 $_['error_exist_storename']       = 'اسم المتجر موجود بالفعل!';
 
 //Email
@@ -194,3 +194,6 @@ $_['entry_sellerarea']       = "مناطق البائع";
 $_['help_sellerarea']       = "(إكمال تلقائي)";
 $_['text_all_sellerarea']       = "الكل";
 $_['text_selected_sellerarea']       = "المحدد";
+
+$_['entry_multi_store']     = 'Opencart متاجر';
+$_['entry_assign_stores']    = 'Opencartتعيين متاجر';

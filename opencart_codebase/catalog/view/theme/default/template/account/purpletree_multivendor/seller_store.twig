@@ -196,12 +196,12 @@
 						</div>
 					</div>
 					
-					<div class="pts-form-group">
+					<!--<div class="pts-form-group">
 						<label class="pts-col-sm-2 pts-control-label" for="input-storephone">{{ entry_google }}</label>
 						<div class="pts-col-sm-10">
 							<input type="text" name="google_link" value="{{ google_link }}" placeholder="{{ entry_google }}" id="input-storephone" class="pts-form-control" />
 						</div>
-					</div>		
+					</div>-->		
 					<div class="pts-form-group">
 						<label class="pts-col-sm-2 pts-control-label" for="input-storephone">{{ entry_twitter }}</label>
 						<div class="pts-col-sm-10">
@@ -279,7 +279,7 @@
 					<div class="pts-form-group">
 						<label class="pts-col-sm-2 pts-control-label">{{ "Assigned category" }}</label>
 						<div class="pts-col-sm-10">
-							<div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
+							<div id="product-category" class="well well-sm ptsc-product-heigoflow">
 								{%	for key, product_category in allow_category %}
 								<div id="product-category{{ product_category }}">  <i class="glyphicon glyphicon-arrow-right"></i> {{ key }} 
 								</div>
@@ -369,7 +369,7 @@
 								    <input type="text" name="sellerarea" value="" disabled id="input-sellerarea" class="pts-form-control"/>
 								 {% endif %}
 								 
-								  <div id="seller-area" class="well well-sm" style="height: 150px; overflow: auto;"> 
+								  <div id="seller-area" class="well well-sm ptsc-product-heigoflow"> 
 								  {% for sellerarea in sellerareas %}
 									  <div id="seller-area{{ sellerarea.area_id }}"><i class="fa fa-minus-circle"></i> {{ sellerarea.name }}
 										<input type="hidden" name="seller_area[]" value="{{ sellerarea.area_id  }}"/>
@@ -497,7 +497,7 @@
 					<div class="pts-form-group">
 						<label class="pts-col-sm-2 pts-control-label" for="input-live_chat_code">{{ entry_live_chat_code }}</label>
 						<div class="pts-col-sm-10">
-							<input type="text" id="input-live_chat_code" name="store_live_chat_code" class="pts-form-control" value="{{ store_live_chat_code }}" />
+							<textarea id="input-live_chat_code" name="store_live_chat_code" class="pts-form-control" rows="5">{{ store_live_chat_code }}</textarea>
 						</div>
 					</div>
 					{% endif %}
@@ -523,7 +523,7 @@
 						</div>
 					</div>
 										<div class="pts-row">
-							<h4 style="margin-left: 15px;margin-top: 20px;">{{ text_store_opening }}</h4>
+							<h4 class="ptsc-store-marglt">{{ text_store_opening }}</h4>
 							</div>
 							<div class="pts-form-group pts-row {% if column_right %} pts-store-time-heading1 {% else %} pts-store-time-heading {% endif %}">
 							 <label class="pts-col-sm-3 pts-control-label pts-col-form-label" for="input-sunday1">{{ text_open }}</label>
@@ -594,7 +594,7 @@
 													
 						</div>
 						<div class="pts-row">
-							<h4 style="margin-left: 15px;margin-top: 20px;">{{ text_holiday }}</h4>
+							<h4 class="ptsc-store-marglt">{{ text_holiday }}</h4>
 							</div>
 							
 				<div class="pts-table-responsive">
@@ -631,7 +631,7 @@
 				  </div>
 					<div class="pts-form-group">
 						<label class="pts-col-sm-2 pts-control-label" for="input-storeshipping">{{ text_attachment }}</label>
-						<div class="pts-col-sm-10" style="padding-top:7px;">
+						<div class="pts-col-sm-10 ptsc-store-padd">
 							<input type="file" name="upload_file" value="" />
 							{% if upload_file_existing %} 
 							<input type="hidden" name="upload_file_exiting" value="{{ upload_file_existing }}" />
@@ -723,7 +723,7 @@ $('button[id^=\'button-custom-field\']').on('click', function() {
 	
 	$('#form-upload').remove();
 	
-	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" class="ptsc-productl-nodisplay "><input type="file" name="file" /></form>');
 	
 	$('#form-upload input[name=\'file\']').trigger('click');
 	

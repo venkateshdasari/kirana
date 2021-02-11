@@ -28,4 +28,9 @@ $_['text_contact_message'] = 'Ancheta trimisă de la pagina';
 $_['button_view_all'] = 'Vezi toate';
 $_['button_submit'] = 'Trimiteți';
 $_['text_home'] = "Acasă";
+
+$_['text_files'] ='Dosare';
+$_['text_attach_file'] ='Ataseaza fisier';
+$_['text_upload_file'] ='Incarca fisier';
+$_['text_action'] ='Acțiune';
 ?>

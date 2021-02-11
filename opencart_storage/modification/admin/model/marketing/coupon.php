@@ -66,7 +66,7 @@ $this->db->query("DELETE FROM " . DB_PREFIX . "purpletree_vendor_coupons WHERE c
 	public function getCoupon($coupon_id) {
 		
 		if($this->config->get('module_purpletree_multivendor_status')){			
-			$query = $this->db->query("SELECT c.*,CONCAT(cu.firstname, ' ', cu.lastname) AS seller_name, pvc.seller_id FROM " . DB_PREFIX . "coupon c LEFT JOIN " . DB_PREFIX . "purpletree_vendor_coupons pvc ON(c.coupon_id=pvc.coupon_id) LEFT JOIN " . DB_PREFIX . "customer cu ON(cu.customer_id=pvc.seller_id) WHERE c.coupon_id = '" . (int)$coupon_id . "'");
+			$query = $this->db->query("SELECT c.*, pvs.store_name, pvc.seller_id FROM " . DB_PREFIX . "coupon c LEFT JOIN " . DB_PREFIX . "purpletree_vendor_coupons pvc ON(c.coupon_id=pvc.coupon_id) LEFT JOIN " . DB_PREFIX . "purpletree_vendor_stores pvs ON(pvs.seller_id=pvc.seller_id) WHERE c.coupon_id = '" . (int)$coupon_id . "'");
 		}else{
 			$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "coupon WHERE coupon_id = '" . (int)$coupon_id . "'");
 		}

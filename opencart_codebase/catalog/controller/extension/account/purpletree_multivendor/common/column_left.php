@@ -20,8 +20,11 @@ class ControllerExtensionAccountPurpletreeMultivendorCommonColumnLeft extends Co
 			 //start left menu icons section //
 					
 			$data['text_becomeseller'] = $this->language->get('text_becomeseller');
-			
-			if(isset($store_detail['store_status']) && $store_detail['multi_store_id'] == $this->config->get('config_store_id')){		
+			$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+			if(isset($store_detail['store_status']) && in_array($this->config->get('config_store_id'),$stores)){		
 				$data['heading_title'] = $this->language->get('heading_title');
 				$data['module_purpletree_multivendor_status'] = $this->config->get('module_purpletree_multivendor_status');
 				//$data['module_purpletree_multivendor_become_seller'] = $this->config->get('module_purpletree_multivendor_become_seller');

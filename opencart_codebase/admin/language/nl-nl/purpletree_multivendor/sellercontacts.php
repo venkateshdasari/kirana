@@ -29,3 +29,4 @@ $_['text_delete_success'] = 'Vraag is succesvol verwijderd.';
 //button
 
 $_['button_continue'] = 'Doorgaan';
+$_['text_files'] ='Bestanden';

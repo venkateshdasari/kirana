@@ -119,6 +119,8 @@ class ControllerExtensionAccountPurpletreeMultivendorApiSellerproduct extends Co
 		}
 		public function delete() {
 			$this->checkPlugin();
+			$json['status'] = 'error';
+				$json['message'] = 'No Data';
 			$this->load->language('purpletree_multivendor/api');
 			if (!$this->customer->isMobileApiCall()) { 
 				$json['status'] = 'error';
@@ -159,7 +161,102 @@ class ControllerExtensionAccountPurpletreeMultivendorApiSellerproduct extends Co
 			$this->response->addHeader('Content-Type: application/json');
 			$this->response->setOutput(json_encode($json));
 		}
-		
+		public function deletes() {
+			$this->checkPlugin();
+			$json['status'] = 'error';
+				$json['message'] = 'No Data';
+			$this->load->language('purpletree_multivendor/api');
+			if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+			if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			} 
+			$this->load->language('purpletree_multivendor/sellerproduct');
+			$this->load->model('extension/purpletree_multivendor/sellerproduct');
+			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if (isset($this->request->post['selected']) && is_array($this->request->post['selected']) && !empty($this->request->post['selected'])) {
+				foreach($this->request->post['selected'] as $product_id) {
+				$this->model_extension_purpletree_multivendor_sellerproduct->deleteProduct($product_id);
+				}
+				//$this->session->data['success'] = $this->language->get('text_success_delete');
+				$json['status'] = 'success';
+				$json['message'] =  $this->language->get('text_success_delete');
+			}
+			}
+			//$this->index();
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		public function copy() {
+				$this->checkPlugin();
+					$json['status'] = 'error';
+			$json['message'] = $this->language->get('no_data');
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			
+			$this->load->language('purpletree_multivendor/sellerproduct');
+			$this->load->model('extension/purpletree_multivendor/sellerproduct');
+			$this->load->model('setting/store');
+			$this->load->model('catalog/product');
+			$this->load->model('extension/catalog/option');
+			if (isset($this->request->get['product_id']) ) {
+				$seller_id 	= $this->customer->getId();
+				$newproductid = $this->model_extension_purpletree_multivendor_sellerproduct->copyProduct($this->request->get['product_id'], $seller_id);
+				$this->session->data['success'] = $this->language->get('text_success');
+			    $json['product_id'] = $newproductid;
+			    $json['status'] = 'success';
+			    $json['message'] = $this->language->get('text_success');
+			}
+			//$json = $this->Productform();
+			$this->response->addHeader('Content-Type: application/json');
+			return $this->response->setOutput(json_encode($json));
+		}
 		public function add() {
 			$this->checkPlugin();
 			$this->load->language('purpletree_multivendor/api');
@@ -244,6 +341,10 @@ class ControllerExtensionAccountPurpletreeMultivendorApiSellerproduct extends Co
 					$languagesall[] = $languagg['language_id'];
 				}
 				foreach($languagesall as $langkey) {
+					$requestjson1['product_name'] = '';
+					if(isset($requestjson1['quick_order']) && $requestjson1['quick_order'] == 1) {
+					$requestjson1['product_name'] = $requestjson1['name'];
+					}
 					$requestjson1['product_description'][$langkey]['product_name'] = $requestjson1['name'];
 					$requestjson1['product_description'][$langkey]['name'] = $requestjson1['name'];
 					$requestjson1['product_description'][$langkey]['description'] = isset($requestjson1['description'])?$requestjson1['description']:'';
@@ -469,6 +570,10 @@ class ControllerExtensionAccountPurpletreeMultivendorApiSellerproduct extends Co
 					$languagesall[] = $languagg['language_id'];
 				}
 				foreach($languagesall as $langkey) {
+					$requestjson1['product_name'] ='';
+					if(isset($requestjson1['quickorderproduct']) && $requestjson1['quickorderproduct'] == 1) {
+					$requestjson1['product_name'] = $requestjson1['name'];
+					}
 					$requestjson1['product_description'][$langkey]['product_name'] = $requestjson1['name'];
 					$requestjson1['product_description'][$langkey]['name'] = $requestjson1['name'];
 					$requestjson1['product_description'][$langkey]['description'] = $requestjson1['description'];
@@ -1536,6 +1641,650 @@ class ControllerExtensionAccountPurpletreeMultivendorApiSellerproduct extends Co
 			
 			
 			return $json;
+		}
+		public function manufacturer() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			
+			
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name'])) {
+				$this->load->model('extension/purpletree_multivendor/sellerproduct');
+				
+				$filter_data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'start'       => 0,
+				'limit'       => 5
+				);
+				
+				$results = $this->model_extension_purpletree_multivendor_sellerproduct->getManufacturers($filter_data);
+				
+				foreach ($results as $result) {
+					$json[] = array(
+					'manufacturer_id' => $result['manufacturer_id'],
+					'name'            => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+					);
+				}
+			}
+			
+			$sort_order = array();
+			
+			foreach ($json as $key => $value) {
+				$sort_order[$key] = $value['name'];
+			}
+			
+			array_multisort($sort_order, SORT_ASC, $json);
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		
+		public function category() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name'])) {
+				$this->load->model('extension/purpletree_multivendor/sellerproduct');
+				$allowed=array();
+				if($this->config->get('module_purpletree_multivendor_allow_categorytype')) {
+					$this->load->model('catalog/category');
+					$results = $this->model_catalog_category->getCategories();
+					foreach ($results as $result) {
+						$allowed[] = $result['category_id'];
+					}
+					} else {
+					$allowed = $this->config->get('module_purpletree_multivendor_allow_category');
+				}
+				$allowddd = '';
+				if(!empty($allowed)) {
+					$allowddd = (implode(',',$allowed));
+				}
+				$filter_data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'sort'        => 'name',
+				'order'       => 'ASC',
+				'start'       => 0,
+				'limit'       => 5,
+				'category_type' => ($this->config->get('module_purpletree_multivendor_allow_categorytype')),
+				'category_allow' => $allowddd
+				);
+				
+				$results = $this->model_extension_purpletree_multivendor_sellerproduct->getCategories($filter_data);
+				
+				foreach ($results as $result) {
+					$json[] = array(
+					'category_id' => $result['category_id'],
+					'name'        => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+					);
+				}
+			}
+			
+			$sort_order = array();
+			
+			foreach ($json as $key => $value) {
+				$sort_order[$key] = $value['name'];
+			}
+			
+			array_multisort($sort_order, SORT_ASC, $json);
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		
+		public function filter() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name'])) {
+				$this->load->model('extension/purpletree_multivendor/sellerproduct');
+				
+				$filter_data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'start'       => 0,
+				'limit'       => 5
+				);
+				
+				$filters = $this->model_extension_purpletree_multivendor_sellerproduct->getFilters($filter_data);
+				
+				foreach ($filters as $filter) {
+					$json[] = array(
+					'filter_id' => $filter['filter_id'],
+					'name'      => strip_tags(html_entity_decode($filter['group'] . ' &gt; ' . $filter['name'], ENT_QUOTES, 'UTF-8'))
+					);
+				}
+			}
+			
+			$sort_order = array();
+			
+			foreach ($json as $key => $value) {
+				$sort_order[$key] = $value['name'];
+			}
+			
+			array_multisort($sort_order, SORT_ASC, $json);
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		
+		public function download() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name'])) {
+				$this->load->model('extension/purpletree_multivendor/sellerproduct');
+				
+				$filter_data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'start'       => 0,
+				'limit'       => 5,
+				'seller_id'		  => $this->customer->getId()
+				);
+				
+				$results = $this->model_extension_purpletree_multivendor_sellerproduct->getDownloads($filter_data);
+				
+				foreach ($results as $result) {
+					$json[] = array(
+					'download_id' => $result['download_id'],
+					'name'        => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+					);
+				}
+			}
+			
+			$sort_order = array();
+			
+			foreach ($json as $key => $value) {
+				$sort_order[$key] = $value['name'];
+			}
+			
+			array_multisort($sort_order, SORT_ASC, $json);
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		
+		public function product() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
+				$this->load->model('catalog/product');
+				$this->load->model('extension/catalog/option');
+				
+				if (isset($this->request->get['filter_name'])) {
+					$filter_name = $this->request->get['filter_name'];
+					} else {
+					$filter_name = '';
+				}
+				
+				if (isset($this->request->get['filter_model'])) {
+					$filter_model = $this->request->get['filter_model'];
+					} else {
+					$filter_model = '';
+				}
+				
+				if (isset($this->request->get['limit'])) {
+					$limit = $this->request->get['limit'];
+					} else {
+					$limit = 5;
+				}
+				
+				
+				$seller_id = $this->customer->getId();
+				
+				$filter_data = array(
+				'filter_name'  => $filter_name,
+				'filter_model' => $filter_model,
+				'start'        => 0,
+				'limit'        => $limit,
+				'seller_id'        => $seller_id
+				);
+				
+				$this->load->model('extension/purpletree_multivendor/sellerproduct');
+				$results = $this->model_extension_purpletree_multivendor_sellerproduct->getProducts($filter_data);
+				
+				foreach ($results as $result) {
+					$option_data = array();
+					
+					$product_options = $this->model_catalog_product->getProductOptions($result['product_id']);
+					
+					foreach ($product_options as $product_option) {
+						$option_info = $this->model_extension_catalog_option->getOption($product_option['option_id']);
+						
+						if ($option_info) {
+							$product_option_value_data = array();
+							
+							foreach ($product_option['product_option_value'] as $product_option_value) {
+								$option_value_info = $this->model_extension_catalog_option->getOptionValue($product_option_value['option_value_id']);
+								
+								if ($option_value_info) {
+									$product_option_value_data[] = array(
+									'product_option_value_id' => $product_option_value['product_option_value_id'],
+									'option_value_id'         => $product_option_value['option_value_id'],
+									'name'                    => $option_value_info['name'],
+									'price'                   => (float)$product_option_value['price'] ? $this->currency->format($product_option_value['price'], $this->session->data['currency']) : false,
+									'price_prefix'            => $product_option_value['price_prefix']
+									);
+								}
+							}
+							
+							$option_data[] = array(
+							'product_option_id'    => $product_option['product_option_id'],
+							'product_option_value' => $product_option_value_data,
+							'option_id'            => $product_option['option_id'],
+							'name'                 => $option_info['name'],
+							'type'                 => $option_info['type'],
+							'value'                => $product_option['value'],
+							'required'             => $product_option['required']
+							);
+						}
+					}
+					
+					$json[] = array(
+					'product_id' => $result['product_id'],
+					'name'       => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
+					'model'      => $result['model'],
+					'option'     => $option_data,
+					'price'      => $result['price']
+					);
+				}
+			}
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		
+		public function attribute() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name'])) {
+				$this->load->model('extension/purpletree_multivendor/sellerproduct');
+				
+				$filter_data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'start'       => 0,
+				'limit'       => 5
+				);
+				$this->load->model('extension/purpletree_multivendor/sellerattribute');
+				// attribute sets
+				$datag = $this->model_extension_purpletree_multivendor_sellerattribute->getOtherSellerAttributeGroups();
+				$attributearray =array();
+				if(!empty($datag)){
+					foreach($datag as $datagg){
+						$attributearray[] = $datagg['attribute_group_id'];
+					}
+				}
+				$stringgattrsets = '';
+				if(!empty($attributearray)) {
+					$stringgattrsets = implode(',',$attributearray);
+				}
+				// attribute sets
+				// attributes
+				$dataga = $this->model_extension_purpletree_multivendor_sellerattribute->getOtherSellerAttributes();
+				$attributearraya =array();
+				if(!empty($dataga)){
+					foreach($dataga as $datagga){
+						$attributearraya[] = $datagga['attribute_id'];
+					}
+				}
+				$stringgattrs = '';
+				if(!empty($attributearraya)) {
+					$stringgattrs = implode(',',$attributearraya);
+				}
+				// attributes
+				$results = $this->model_extension_purpletree_multivendor_sellerproduct->getAttributes($filter_data,$stringgattrsets,$stringgattrs);
+				
+				foreach ($results as $result) {
+					$json[] = array(
+					'attribute_id'    => $result['attribute_id'],
+					'name'            => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
+					'attribute_group' => $result['attribute_group']
+					);
+				}
+			}
+			
+			$sort_order = array();
+			
+			foreach ($json as $key => $value) {
+				$sort_order[$key] = $value['name'];
+			}
+			
+			array_multisort($sort_order, SORT_ASC, $json);
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
+		
+		public function option() {
+			$json = array();
+			$this->checkPlugin();
+			$this->load->language('purpletree_multivendor/api');
+			 if (!$this->customer->isMobileApiCall()) { 
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_permission');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			if (!$this->customer->isLogged()) {
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_logged');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}
+			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('seller_not_approved');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json)); 
+			}
+		 	if(!$this->customer->validateSeller()) {		
+				$json['status'] = 'error';
+				$json['message'] = $this->language->get('error_license');
+				$this->response->addHeader('Content-Type: application/json');
+				return $this->response->setOutput(json_encode($json));
+			}  
+			$this->load->model('extension/purpletree_multivendor/dashboard');
+			
+			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
+			
+			if (isset($this->request->get['filter_name'])) {
+				$this->load->language('catalog/option');
+				
+				$this->load->model('extension/catalog/option');
+				
+				$this->load->model('tool/image');
+				
+				$filter_data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'start'       => 0,
+				'limit'       => 5
+				);
+				// options
+				$this->load->model('extension/purpletree_multivendor/sellerattribute');
+				$datag = $this->model_extension_purpletree_multivendor_sellerattribute->getOtherSellerOptions();
+				$attributearray =array();
+				if(!empty($datag)){
+					foreach($datag as $datagg){
+						$attributearray[] = $datagg['option_id'];
+					}
+				}
+				$stringgattrsets = '';
+				if(!empty($attributearray)) {
+					$stringgattrsets = implode(',',$attributearray);
+				}
+				// attribute sets
+				$options = $this->model_extension_catalog_option->getOptions($filter_data,$stringgattrsets);
+				
+				foreach ($options as $option) {
+					$option_value_data = array();
+					
+					if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') {
+						$option_values = $this->model_extension_catalog_option->getOptionValues($option['option_id']);
+						
+						foreach ($option_values as $option_value) {
+							if (is_file(DIR_IMAGE . $option_value['image'])) {
+								$image = $this->model_tool_image->resize($option_value['image'], 50, 50);
+								} else {
+								$image = $this->model_tool_image->resize('no_image.png', 50, 50);
+							}
+							
+							$option_value_data[] = array(
+							'option_value_id' => $option_value['option_value_id'],
+							'name'            => strip_tags(html_entity_decode($option_value['name'], ENT_QUOTES, 'UTF-8')),
+							'image'           => $image
+							);
+						}
+						
+						$sort_order = array();
+						
+						foreach ($option_value_data as $key => $value) {
+							$sort_order[$key] = $value['name'];
+						}
+						
+						array_multisort($sort_order, SORT_ASC, $option_value_data);
+					}
+					
+					$type = '';
+					
+					if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox') {
+						$type = $this->language->get('text_choose');
+					}
+					
+					if ($option['type'] == 'text' || $option['type'] == 'textarea') {
+						$type = $this->language->get('text_input');
+					}
+					
+					if ($option['type'] == 'file') {
+						$type = $this->language->get('text_file');
+					}
+					
+					if ($option['type'] == 'date' || $option['type'] == 'datetime' || $option['type'] == 'time') {
+						$type = $this->language->get('text_date');
+					}
+					
+					$json[] = array(
+					'option_id'    => $option['option_id'],
+					'name'         => strip_tags(html_entity_decode($option['name'], ENT_QUOTES, 'UTF-8')),
+					'category'     => $type,
+					'type'         => $option['type'],
+					'option_value' => $option_value_data
+					);
+				}
+			}
+			
+			$sort_order = array();
+			
+			foreach ($json as $key => $value) {
+				$sort_order[$key] = $value['name'];
+			}
+			
+			array_multisort($sort_order, SORT_ASC, $json);
+			if(empty($json)) {
+					$json['status'] = 'error';
+					$json['message'] = $this->language->get('no_data');
+			}
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
 		}
 		private function checkPlugin() {
 			header('Access-Control-Allow-Origin:*');

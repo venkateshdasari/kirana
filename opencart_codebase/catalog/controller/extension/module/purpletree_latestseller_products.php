@@ -26,8 +26,20 @@ class ControllerExtensionModulePurpletreeLatestsellerProducts extends Controller
 			$this->load->model('extension/module/latestseller_products');
 			
 			
-			$products = $this->model_extension_module_latestseller_products->getLatest();
-			
+			$productss = $this->model_extension_module_latestseller_products->getLatest();
+			if ($this->config->get('module_purpletree_latestseller_products_limit')) {
+			$products = array_slice($productss,0, (int)$this->config->get('module_purpletree_latestseller_products_limit'));
+			}else{
+			$products = $productss;
+			}
+			$image_height = 200;
+			$image_width = 200;
+			if ($this->config->get('module_purpletree_latestseller_products_height')) {
+			  $image_height = $this->config->get('module_purpletree_latestseller_products_height');
+			}
+			if ($this->config->get('module_purpletree_latestseller_products_width')) {
+			$image_width = $this->config->get('module_purpletree_latestseller_products_width');
+		   }
 			/* get active skin */
 		    
 			if (strpos($this->config->get('config_template'), 'journal2') === 0){				
@@ -45,20 +57,20 @@ class ControllerExtensionModulePurpletreeLatestsellerProducts extends Controller
 			}
 			
 			if(!empty($products)) {
-				$count= 0;
+				//$count= 0;
 				foreach ($products as $product) {
-					if($count < 8) {
-						$count++;
+					//if($count < 8) {
+						//$count++;
 						$product_info = $this->model_catalog_product->getProduct($product['product_id']);
 						
 						if ($product_info) {
 							if ($product_info['image']) {
-								$image = $this->model_tool_image->resize($product_info['image'], '200' , '200');
+								$image = $this->model_tool_image->resize($product_info['image'], $image_width, $image_height);
 								if (!filter_var($image, FILTER_VALIDATE_URL)) {
-										$image = $this->model_tool_image->resize('placeholder.png', '200' , '200');
+										$image = $this->model_tool_image->resize('placeholder.png',  $image_width, $image_height);
 									} 
 								} else {
-								$image = $this->model_tool_image->resize('placeholder.png', '200' , '200');
+								$image = $this->model_tool_image->resize('placeholder.png', $image_width, $image_height);
 							}
 							
 							if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -148,7 +160,7 @@ class ControllerExtensionModulePurpletreeLatestsellerProducts extends Controller
 							'href'        => $this->url->link('product/product', 'product_id=' .      $product_info['product_id'])
 							);
 						}
-					}
+					//}
 				}
 			}
 			
@@ -170,7 +182,8 @@ class ControllerExtensionModulePurpletreeLatestsellerProducts extends Controller
 			}else{
 			$this->document->addStyle('catalog/view/javascript/purpletree/bootstrap/css/bootstrap.min.css'); 
 			$this->document->addStyle('catalog/view/theme/default/stylesheet/purpletree/custom.css'); 
-			}			
+			}
+			$this->document->addStyle('catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css');
 				return $this->load->view('extension/module/purpletree_latestseller_products', $data);
 			}
 		}

@@ -22,7 +22,7 @@
 					<table class="table">
 						<tbody>
 							<tr>
-								<td style="width: 1%;"><button data-toggle="tooltip" title="{{ text_store }}" class="btn btn-info btn-xs"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
+								<td class="ptsc-vendorlis-width"><button data-toggle="tooltip" title="{{ text_store }}" class="btn btn-info btn-xs"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
 								<td><a href="{{ store_url }}" target="_blank">{{ store_name }}</a></td>
 							</tr>
 							<tr>
@@ -50,7 +50,7 @@
 					</div>
 					<table class="table">
 						<tr>
-							<td style="width: 1%;"><button data-toggle="tooltip" title="{{ text_customer }}" class="btn btn-info btn-xs"><i class="fa fa-user fa-fw"></i></button></td>
+							<td class="ptsc-vendorlis-width"><button data-toggle="tooltip" title="{{ text_customer }}" class="btn btn-info btn-xs"><i class="fa fa-user fa-fw"></i></button></td>
 							<td>{% if customer %}
 								<a href="{{ customer }}" target="_blank">{{ firstname }} {{ lastname }}</a>
 								{% else %} 
@@ -81,9 +81,9 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<td style="width: 50%;" class="text-left">{{ text_payment_address }}</td>
+							<td class="text-left ptsc-subscrip-width">{{ text_payment_address }}</td>
 							{% if shipping_method %}
-							<td style="width: 50%;" class="text-left">{{ text_shipping_address }}</td>
+							<td class="text-left ptsc-subscrip-width">{{ text_shipping_address }}</td>
 							{% endif %}
 						</tr>
 					</thead>

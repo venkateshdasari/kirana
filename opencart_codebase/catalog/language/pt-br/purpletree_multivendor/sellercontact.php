@@ -24,3 +24,8 @@ $_['entry_enquiry']  = 'Inquérito';
 //button
 $_['button_view_all'] ='ver tudo';
 $_['button_submit'] ='Enviar';
+
+$_['text_files'] ='arquivos';
+$_['text_attach_file'] ='Anexar arquivo';
+$_['text_upload_file'] ='Subir arquivo';
+$_['text_action'] ='Açao';

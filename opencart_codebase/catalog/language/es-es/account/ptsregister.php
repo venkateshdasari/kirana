@@ -40,10 +40,10 @@ $_['text_seller_label_status'] = "Estado:";
 $_['button_deliver'] = "Entregar";
 $_['button_change_status'] = "Cambiar estado";
 $_['text_change_order_status'] = "Cambiar estado de la orden";
-$_['pts_text_customer'] = "<p> ¡Su pedido se ha procesado correctamente! </p> <p> Puede ver su historial de pedidos en <a href="%s"> mi cuenta </ ​​a > y haciendo clic en <a href="%s"> historial </a>. </p> <p> Si su compra tiene una descarga asociada, puede ir a la cuenta <a href = "% s" > descargas </a> para verlas. </p> <p> Dirija cualquier pregunta que tenga al ";
+$_['pts_text_customer'] = '<p> ¡Su pedido se ha procesado correctamente! </p> <p> Puede ver su historial de pedidos en <a href="%s"> mi cuenta </ ​​a > y haciendo clic en <a href="%s"> historial </a>. </p> <p> Si su compra tiene una descarga asociada, puede ir a la cuenta <a href = "% s" > descargas </a> para verlas. </p> <p> Dirija cualquier pregunta que tenga al ';
 $_['pts_text_guest'] = "<p> ¡Su pedido se ha procesado correctamente! </p> <p> Por favor, dirija cualquier pregunta que tenga al";
 $_['pts_text_thanks'] = "</p> <p> ¡Gracias por comprar con nosotros en línea! </p>";
-$_['pts_text_store_owner'] = "<a href="%s"> propietario de la tienda </a>.";
+$_['pts_text_store_owner'] = '<a href="%s"> propietario de la tienda </a>.';
 $_['column_delivery_address'] = "Dirección de entrega";
 //// end_quick_order ////
 

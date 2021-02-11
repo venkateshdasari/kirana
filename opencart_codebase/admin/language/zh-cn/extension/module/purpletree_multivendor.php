@@ -163,3 +163,6 @@ $_['entry_seller_areaheading'] ="Hyperlocal";
 $_['entry_header_popup'] ="HyperLlocal的弹出窗口标题";
 $_['entry_area_selection'] ="必须选择区域"；
 $_['entry_seller_area_link'] ="转到卖方区域";
+$_['text_multiple_store']="使用域明智的存儲"; 
+$_['text_fix_commission']="固定佣金";
+$_['text_hyper_delivering'] ="传送到";

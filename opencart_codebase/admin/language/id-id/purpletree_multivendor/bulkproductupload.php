@@ -39,3 +39,7 @@ $_['error_permission']      = "Peringatan: Anda tidak memiliki izin untuk memodi
 $_['text_invalidfile']      = "Jenis File Tidak Valid. Pilih .xls atau .xlsx";
 $_['text_nofile']      = "Pilih File untuk Diimpor";
 $_['admin_bulk_product_upload_sheet']    = "Unduh template";
+$_['text_bulk_product_import_add']    	 = 'Impor Produk Massal Produk Baru';
+$_['text_bulk_product_import_update']    = 'Perbarui Produk Massal Produk yang Ada';
+$_['text_update']            			 = 'Memperbarui';
+$_['text_bulk_product_status_heading'] = "Status Impor / Pembaruan Produk Massal";

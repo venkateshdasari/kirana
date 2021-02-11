@@ -3,6 +3,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		private $error = array();
 		
 		public function index(){
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				
@@ -17,7 +29,11 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 			if(!isset($store_detail['store_status'])){
 				$this->response->redirect($this->url->link('account/account', '', true));
 				}else{
-				if(isset($store_detail['store_status']) && $store_detail['multi_store_id'] != $this->config->get('config_store_id')){	
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
 					$this->response->redirect($this->url->link('account/account','', true));
 				}
 			}
@@ -33,6 +49,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		}	
 		
 		public function add() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
@@ -236,6 +264,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		}
 		
 		public function edit() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				
@@ -465,6 +505,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		}
 		
 		public function copy() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				
@@ -1705,6 +1757,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		}
 		
 		public function delete() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				
@@ -1778,7 +1842,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		}
 		
 		protected function getList(){
-			
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			$this->load->model('extension/purpletree_multivendor/dashboard');
 			
 			$this->model_extension_purpletree_multivendor_dashboard->checkSellerApproval();
@@ -3193,6 +3268,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		///////////////// End sub category /////////////////////
 		///// check product subscription plan ///////
 		public function check_featured_product_subscription_plan() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				
@@ -3249,7 +3336,19 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 			$this->response->addHeader('Content-Type: application/json');
 			$this->response->setOutput(json_encode($json));
 		}
-		public function add_featured_product_By_Popup(){		
+		public function add_featured_product_By_Popup(){	
+$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}		
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				
@@ -3334,6 +3433,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 		}
 		
 		public function check_category_featured_product_subscription_plan() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				$this->response->redirect($this->url->link('account/login', '', true));
@@ -3391,6 +3502,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 			$this->response->setOutput(json_encode($json));
 		}
 		public function remove_category_featured_product_subscription_plan() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				$this->response->redirect($this->url->link('account/login', '', true));
@@ -3425,6 +3548,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 			$this->response->setOutput(json_encode($json));
 		}
 		public function remove_featured_product_subscription_plan() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 			if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				$this->response->redirect($this->url->link('account/login', '', true));
@@ -3575,6 +3710,18 @@ class ControllerExtensionAccountPurpletreeMultivendorSellerproduct extends Contr
 			$this->response->setOutput(json_encode($json));
 		}
 		public function quickSave() {
+			$store_detail = $this->customer->isSeller();
+			if(!isset($store_detail['store_status'])){
+				$this->response->redirect($this->url->link('account/account', '', true));
+				}else{
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+				if(isset($store_detail['store_status']) && !in_array($this->config->get('config_store_id'),$stores)){	
+					$this->response->redirect($this->url->link('account/account','', true));
+				}
+			}
 		  if (!$this->customer->isLogged()) {
 				$this->session->data['redirect'] = $this->url->link('extension/account/purpletree_multivendor/sellerproduct', '', true);
 				

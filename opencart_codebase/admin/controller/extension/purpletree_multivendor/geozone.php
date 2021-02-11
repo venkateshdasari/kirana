@@ -113,6 +113,7 @@ class ControllerExtensionPurpletreeMultivendorGeozone extends Controller {
 			}
 			
 			protected function getList() {
+				$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 			$this->load->language('purpletree_multivendor/shipping');
 			
 			if (isset($this->request->get['sort'])) {
@@ -260,6 +261,7 @@ class ControllerExtensionPurpletreeMultivendorGeozone extends Controller {
 			}
 			
 			protected function getForm() {
+			$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');	
 			$data['text_form'] = !isset($this->request->get['geo_zone_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 			
 			if (isset($this->error['warning'])) {

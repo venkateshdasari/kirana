@@ -47,6 +47,7 @@ class ControllerExtensionPurpletreeMultivendorUpgradedatabase extends Controller
 			$data['error_warning'] = '';
 		}
 		$data['url'] = $this->url->link('extension/purpletree_multivendor/upgradedatabase/upgrade', 'user_token=' . $this->session->data['user_token'], true);
+		$this->document->addStyle('view/javascript/purpletreecss/commonstylesheet.css');
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

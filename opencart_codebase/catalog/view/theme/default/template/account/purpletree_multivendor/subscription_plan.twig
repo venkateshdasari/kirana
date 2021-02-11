@@ -21,8 +21,8 @@
 			<div class="pts-col-sm-12 pts-col-xs-12 ">
 				{% if not multiple_subscription_plan %}
 				{% if sellerplan %}
-				<div class="pts-col-sm-12 pts-col-xs-12  pts-welll" style="margin-top: 21px;">
-					<div class="pts-col-sm-12  pts-col-xs-12 pts-current-plan p-0" style="">
+				<div class="pts-col-sm-12 pts-col-xs-12  pts-welll ptsc-subscr-planmtop">
+					<div class="pts-col-sm-12  pts-col-xs-12 pts-current-plan p-0">
 						<h4>
 							<b> 
 								<label class="pts-text-blue">{{ heading_current_plan }}
@@ -166,12 +166,12 @@
 				{% for subscription in subscriptions %}
 				{% if subscription.status %}
 				<div class="subsgridd  pts-col-sm-6 pts-col-xs-12 pts-col-md-6 pts-col-lg-4" >
-					<div class=" pts-col-sm-12 plan deactive_plan plan1 pts-col-xs-12  {{ subscription.active_plan }} pts-text-left " style="overflow:hidden; position:relative;">
-						<div class="pts-col-sm-12  pts-col-xs-12 plan-name" style="text-transform:uppercase">
+					<div class=" pts-col-sm-12 plan deactive_plan plan1 pts-col-xs-12  {{ subscription.active_plan }} pts-text-left ptsc-subscr-plannamoverpos" >
+						<div class="pts-col-sm-12  pts-col-xs-12 plan-name ptsc-subscr-plannam">
 							<h4 class=" ribbon active-plan-text active-plans-text {% if subscription.active == 'Inactive' %} ribbondanger pts-btn-dangerrr text-inactive{% endif %}"> {{ subscription.active }}
 							</h4>
 							<h3 class = "pts-text-center">
-								<b style=" font-size: 20px !important;">  {{ subscription.plan_name }}
+								<b class="ptsc-subscr-plannamsiz">  {{ subscription.plan_name }}
 								</b>
 							</h3>                
 						</div>
@@ -208,7 +208,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="pts-col-sm-12" style="margin-top: 7px;">
+							<div class="pts-col-sm-12 ptsc-store-proh3">
 								<div class="pts-row">        
 									<div class="pts-col-sm-12">    
 										{% if subscription.active %}
@@ -264,11 +264,11 @@
 			{% for subscription in subscriptions %}
 			{% if subscription.status %}
 			<div class="pts-col-sm-12 deactive_plan  plan pts-col-xs-12 {{ subscription.active_plan }}">
-				<div class="pts-col-sm-12 plan1 pts-col-xs-12 pts-text-left ">
-					<div class="pts-col-sm-12  pts-col-xs-12 plan-name" style="text-transform:uppercase">
+				<div class="pts-col-sm-12 plan1 pts-col-xs-12 pts-text-left ptsc-subscr-actplantxt">
+					<div class="pts-col-sm-12  pts-col-xs-12 plan-name ptsc-subscr-plannam">
 						<h4>
 							<b>  {{ subscription.plan_name }}  
-								<label class="pts-pull-right active-plan-text   {% if subscription.active == 'Inactive' %} pts-btn-dangerrr {% endif %}" style="margin-top: 1%;">
+								<label class="pts-pull-right active-plan-text  ptsc-subscr-actplantxt {% if subscription.active == 'Inactive' %} pts-btn-dangerrr {% endif %}">
 									<strong>{{ subscription.active }}
 									</strong>
 								</label>
@@ -311,7 +311,7 @@
 					</div>
 					<form action="{{ subscribe }}" method="post" enctype="multipart/form-data" class="pts-form-horizontal">    
 						<div class="pts-col-sm-7 pts-col-xs-12 pts-text-left">
-							<p style="padding:10px 5px"> {{ subscription.plan_short_description }} 
+							<p class="ptsc-subscr-shdesc"> {{ subscription.plan_short_description }} 
 								<a href="#" class="viewmore" data-toggle="modal" data-target="#myModala1{{subscription.plan_id }}">{{ button_view_all }}
 								</a>
 								<p>

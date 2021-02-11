@@ -990,7 +990,10 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
      margin-top:-35px!important;
     }
 
-    .menu-icons{
-        padding-left: 27px!important;
-        margin-top: -19px!important;
-    }
+.menu-icons{
+	padding-left: 27px!important;
+	margin-top: -19px!important;
+}
+.ptssellertop #form-currency .currency-select, .ptssellertop #form-language .language-select {
+    text-align: left;
+}

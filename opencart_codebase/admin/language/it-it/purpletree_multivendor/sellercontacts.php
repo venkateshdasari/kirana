@@ -28,3 +28,4 @@ $_['text_delete_success'] = 'La richiesta è stata cancellata con successo.';
 
 //button
 $_['button_continue'] = 'Continua';
+$_['text_files'] ='File';

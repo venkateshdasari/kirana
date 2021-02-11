@@ -71,7 +71,7 @@ class ControllerExtensionExtensionModule extends Controller {
 							`google_map` text NOT NULL,
 							`google_map_link` text NOT NULL,
 							`store_timings` text NOT NULL,
-							`multi_store_id` int(11) NOT NULL,
+							`multi_store_id` varchar(100) NOT NULL,
 							`vacation` tinyint(1) NOT NULL,
 							`sort_order` int(11) NOT NULL,
   							PRIMARY KEY (`id`)  ) CHARACTER SET utf8 COLLATE utf8_unicode_ci
@@ -157,7 +157,7 @@ class ControllerExtensionExtensionModule extends Controller {
   							`order_id` int(11) NOT NULL,
   							`product_id` int(11) NOT NULL,
 							`vendor_order_table_id` int(11) NOT NULL,
-							`commission_fixed` int(50) NOT NULL DEFAULT '0',
+							`commission_fixed` double NOT NULL DEFAULT '0',
 							`commission_percent` decimal(4,2) NOT NULL DEFAULT '0.00',
 							`commission_shipping` float(8,2) NOT NULL DEFAULT '0.00',
 							`invoice_status` int(50) NOT NULL DEFAULT '0',
@@ -196,7 +196,7 @@ class ControllerExtensionExtensionModule extends Controller {
   							`id` int(11) NOT NULL AUTO_INCREMENT,
   							`category_id` int(11) NOT NULL,
   							`commission` decimal(4,2) NOT NULL,
-							`commison_fixed` double NOT NULL,
+							`commison_fixed` double NULL DEFAULT NULL,
   							`seller_group` int(50) NOT NULL DEFAULT '1',
   							PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 						");	
@@ -352,7 +352,7 @@ class ControllerExtensionExtensionModule extends Controller {
   							`order_id` int(50) NOT NULL,
   							`product_id` int(50) NOT NULL,
   							`seller_id` int(50) NOT NULL,
-  							`commission_fixed` int(50) NOT NULL DEFAULT '0',
+  							`commission_fixed` double NOT NULL DEFAULT '0',
   							`commission_percent` decimal(4,2) NOT NULL DEFAULT '0.00',
   							`commission_shipping` decimal(4,2) NOT NULL DEFAULT '0.00',
   							`total_commission` float(8,2) NOT NULL,
@@ -433,7 +433,7 @@ class ControllerExtensionExtensionModule extends Controller {
 							CHARACTER SET utf8 COLLATE utf8_unicode_ci
 						");
 						// End seller blog
-				$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_payment_settlement_history` (
+						$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_payment_settlement_history` (
   							`id` int(11) NOT NULL AUTO_INCREMENT,
   							`invoice_id` int(11) NOT NULL,
   							`status_id` int(11) NOT NULL,
@@ -565,14 +565,24 @@ class ControllerExtensionExtensionModule extends Controller {
 				PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
 			//// vacation mode  ////
+			
+			// cusotmer seller enquiries 
+			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_customer_vendor_enquiries` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`chat_id` int(11) NOT NULL,
+				`image_name` varchar(255) NOT NULL,
+				`image` varchar(255) NOT NULL,
+				PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
+			");
+			// cusotmer seller enquiries 
 			//// Seller area /////
 			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_area` (
-				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`area_id` int(11) NOT NULL AUTO_INCREMENT,
 				`language_id` int(11) NOT NULL,
 				`area_name` varchar(150) NOT NULL,				
 				`sort_order` int(11) NOT NULL,
 				`status` tinyint(1) NOT NULL,
-				PRIMARY KEY (`id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
+				PRIMARY KEY (`area_id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");	
 			
 			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "purpletree_vendor_area_discaription` (
@@ -583,7 +593,12 @@ class ControllerExtensionExtensionModule extends Controller {
 				PRIMARY KEY (`id`),FOREIGN KEY (`area_id`) REFERENCES " . DB_PREFIX . "purpletree_vendor_area(`area_id`)) CHARACTER SET utf8 COLLATE utf8_unicode_ci
 			");
 		//// Seller area /////
-		//// seller event /////
+		//// seller event ///// 
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "event WHERE  code = 'pts_getjournal3filterproducts'");
+			if($query->num_rows){} else {
+		        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` ( `code`, `trigger`, `action`, `status`) VALUES ('pts_getjournal3filterproducts', 'catalog/model/journal3/filter/getProducts/after', 'extension/account/purpletree_multivendor/events/getFilterProducts', 1)");
+		   }
+		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "event WHERE  code = 'pts_getfilterproducts'");
 			if($query->num_rows){} else {
 		        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` ( `code`, `trigger`, `action`, `status`) VALUES ('pts_getfilterproducts', 'catalog/model/catalog/product/getProducts/after', 'extension/account/purpletree_multivendor/events/getFilterProducts', 1)");
@@ -608,7 +623,7 @@ $this->load->model('extension/purpletree_multivendor/upgradedatabase');
 $this->model_extension_purpletree_multivendor_upgradedatabase->addtemplateinsert();
 //////-------------------End email template------------------------///////
 			}
-		}
+			}
 			
 
 			$this->load->model('user/user_group');
@@ -658,6 +673,7 @@ $this->model_extension_purpletree_multivendor_upgradedatabase->addtemplateinsert
 		        $this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_orders_history");
 		
 				$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_contact");
+				$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_customer_vendor_enquiries");
 					
 					//subscription plan_description
 				
@@ -699,10 +715,9 @@ $this->model_extension_purpletree_multivendor_upgradedatabase->addtemplateinsert
 					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_email");
 					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_customfield");			
 					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_quick_order_product");		$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_holiday");					
-					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_store_time");
-					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_area");	
+					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_store_time");						
 					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_area_discaription");
-					
+					$this->db->query("DROP TABLE IF EXISTS ". DB_PREFIX ."purpletree_vendor_area");
 				   //// seller event Delete /////					
 		            $this->db->query("DELETE FROM " . DB_PREFIX . "event WHERE  code = 'pts_getfilterproducts'");		   
 		           $this->db->query("DELETE FROM " . DB_PREFIX . "event WHERE  code = 'pts_getfiltertotalproducts'");			

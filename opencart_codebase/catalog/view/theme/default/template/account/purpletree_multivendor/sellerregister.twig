@@ -3,7 +3,7 @@
   <div class="container-fluid"><br>
     <br>
     <div class="row">
-				<div class="{{ setdivclass }} col-sm-offset-3 col-sm-6">
+				<div class="col-sm-offset-3 col-sm-6">
 				  {% if success %}
 	<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
 	{% endif %}
@@ -12,7 +12,7 @@
 	{% endif %} 
 			<form action="" method="post" name="sellerregForm" id="regForm" enctype="multipart/form-data" class="form-horizontal">
 						<h2 class="text-center">{{ text_seller_register_page }}</h2>
-						<hr style="width:226px;border:2px solid #2097c4;margin-top:5px;border-radius:50px;">
+						<hr class="ptsc-sregister-sellregtxt">
 						<div class="head_steps text-center">
 							<span class="step step-one ">
 								
@@ -34,23 +34,23 @@
 						<div class="pts-well seller-rgistration-form">
 							<div class="pts-col-md-12 p-0">
 								<div class=" pts-col-md-7 pts-pull-left-1 p-0">
-									<p class="new-seller-login-here"><span class="login-seller"><i class="fa fa-user-o fa-users"></i>   {{ text_new_customer_register }}  </span><a href="{{ sellerlogin }}" style="font-size:11px"> {{ text_seller_login1 }} </a><span></span></p>
+									<p class="new-seller-login-here"><span class="login-seller"><i class="fa fa-user-o fa-users"></i>   {{ text_new_customer_register }}  </span><a href="{{ sellerlogin }}" class="ptsc-sregister-sellog"> {{ text_seller_login1 }} </a><span></span></p>
 								</div>
 								<div class=" pts-col-md-5  pts-pull-right-1 p-0">
-									<div style="overflow:auto;">
-										<div style="float:right;">
+									<div class="ptsc-sregister-overflow">
+										<div class="ptsc-subpl-florig">
 											<button type="button" id="prevBtn" class="pts-btn pts-btn-sm pts-btn-default" onclick="nextPrev(-1)">{{ btn_prev }}</button>
 											<button type="button" id="nextBtn" class="pts-btn pts-btn-sm pts-btn-primary" onclick="nextPrev(1)">{{ btn_next }}</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<hr style="margin-top:16px;margin-bottom:5px;overflow: hidden;">
+							<hr class="ptsc-sregister-hr">
 							<!--personal data-->
 							<div class="tab">
 								{% if loggedcus=='' %}
-								<div class="pts-row " style="display:none">
-									<div class="pts-form-group required ptsradioinp" style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">
+								<div class="pts-row ptsc-productl-nodisplay">
+									<div class="pts-form-group required ptsradioinp {% if customer_groups|length > 1 %} ptsc-productl-blodisplay {% else %} ptsc-productl-nodisplay {% endif %}">
 										<label class="pts-col-sm-2 pts-control-label">{{ entry_customer_group }}</label>
 										<div class="pts-col-sm-10">{% for customer_group in customer_groups %}
 											{% if customer_group.customer_group_id == customer_group_id %}
@@ -117,11 +117,11 @@
 									<div class="text-danger">{{ error_telephone }}</div>
 									{% endif %}
 								</div>
-								<div class="pts-form-group pts-col-md-12 p-0">
+								<div class="pts-form-group p-0">
 									{% for custom_field in custom_fields %}
 									 {% if custom_field.type == 'select' %}
 									  {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 									 
 										  <select name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" id="input-custom-field{{ custom_field.custom_field_id }}" class="pts-form-control">
@@ -142,7 +142,7 @@
 									{% endif %}
 									  {% if custom_field.type == 'radio' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0 ptsradioinp">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0 ptsradioinp">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 										  <div> {% for custom_field_value in custom_field.custom_field_value %}
 											<div class="radio">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}
@@ -163,7 +163,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'checkbox' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 								   
 										  <div> {% for custom_field_value in custom_field.custom_field_value %}
@@ -185,7 +185,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'text' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" id="input-custom-field{{ custom_field.custom_field_id }}" class="pts-form-control" />
 										  {% if error_custom_field[custom_field.custom_field_id] %}
@@ -196,7 +196,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'textarea' %}
 									   {% if custom_field.step_location == 'one' %}
-									   <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group custom-field" data-sort="{{ custom_field.sort_order }}">
+									   <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group custom-field" data-sort="{{ custom_field.sort_order }}">
 									  <label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										<textarea name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" class="pts-form-control" rows="5" placeholder="{{ custom_field.name }}" id="input-custom-field{{ custom_field.custom_field_id }}">{{ store_address }}{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}</textarea>
 										</div>
@@ -204,7 +204,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'file' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 										  <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="pts-btn pts-btn-sm pts-btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
 										  <input type="hidden" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}  {{ register_custom_field[custom_field.custom_field_id] }} {% endif %}" />
@@ -216,7 +216,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'date' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <div class="input-group date">
 											<input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" data-date-format="YYYY-MM-DD" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -231,7 +231,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'time' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <div class="input-group time">
 											<input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" data-date-format="HH:mm" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -246,7 +246,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'time' %}
 									   {% if custom_field.step_location == 'one' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  form-group custom-field" data-sort="{{ custom_field.sort_order }}">
 										<label class="col-sm-2 control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										<div class="col-sm-10">
 										  <div class="input-group datetime">
@@ -269,7 +269,7 @@
 								<div class="required">
 									{{ text_agree }}
 									{% if agree %}			  
-									<input id="pts_agree" type="checkbox" name="agree" value="1" checked="checked" style="margin-right:5px;" />
+									<input id="pts_agree" type="checkbox" name="agree" value="1" checked="checked" class="ptsc-sregister-marig" />
 									{% else %}
 									<input  id="pts_agree" type="checkbox" name="agree" value="1" />		
 									{% endif %}	
@@ -282,7 +282,7 @@
 							
 							<!--seller data-->
 							<div class="tab">
-								<div class="pts-form-group pts-col-md-12 required p-0">				
+								<div class="pts-form-group required p-0">				
 									<label class="pts-control-label" for="store_name">{{ entry_storename }}</label>
 									<input type="text" name="store_name" value="{{ store_name }}" placeholder="{{ entry_storename }}" id="store_name" class="pts-form-control" />		 
 									{% if error_sellerstore %}
@@ -291,7 +291,7 @@
 									
 								</div>
 								
-								<div class="pts-form-group pts-col-md-12 p-0">
+								<div class="pts-form-group p-0">
 									<label class="pts-control-label" for="input-storephone">{{ entry_storephone }}</label>
 									<input type="text" name="store_phone" value="{{ store_phone }}" placeholder="{{ entry_storephone }}" id="input-storephone" class="pts-form-control" />		 
 								</div>
@@ -309,7 +309,7 @@
 									</div>
 								</div>
 							
-								<div class="pts-form-group pts-col-md-12 p-0">
+								<div class="pts-form-group p-0">
 									<label class="pts-control-label" for="input-storeaddress">{{ entry_storeaddress }}</label>
 									<textarea name="store_address" class="pts-form-control" rows="5" placeholder="{{ entry_storeaddress }}">{{ store_address }}</textarea>
 								</div>
@@ -353,7 +353,7 @@
 									</div>
 								</div>
 							<!-- seller area -->
-							<div class="pts-form-group">
+							<div class="pts-form-group pts-row">
 								<label class="pts-col-sm-2 pts-control-label" for="input-sellerarea"><span data-toggle="tooltip" title="{{ help_sellerarea }}">{{ entry_sellerarea }}</span></label>
 								<div class="pts-col-sm-10">
 								 <select name="seller_area_selection_type" class="pts-form-control">									
@@ -372,7 +372,7 @@
 								    <input type="text" name="sellerarea" value="" disabled id="input-sellerarea" class="pts-form-control"/>
 								 {% endif %}
 								 
-								  <div id="seller-area" class="well well-sm" style="height: 150px; overflow: auto;"> 
+								  <div id="seller-area" class="well well-sm ptsc-product-heigoflow"> 
 								  {% for sellerarea in sellerareas %}
 									  <div id="seller-area{{ sellerarea.area_id }}"><i class="fa fa-minus-circle"></i> {{ sellerarea.name }}
 										<input type="hidden" name="seller_area[]" value="{{ sellerarea.area_id  }}"/>
@@ -420,12 +420,12 @@
 										<input type="text" name="facebook_link" value="" placeholder="{{ entry_facebook }}" id="input-storeseo" class="pts-form-control" />
 									</div>
 								</div>
-								<div class="pts-row">
+								<!--<div class="pts-row">
 									<div class="pts-form-group pts-col-md-12">
 										<label class="pts-control-label" for="input-storeseo">{{ entry_google }}</label>	
 										<input type="text" name="google_link" value="" placeholder="{{ entry_google }}" id="input-storeseo" class="pts-form-control" />
 									</div>
-								</div>
+								</div>-->
 								<div class="pts-row">
 									<div class="pts-form-group pts-col-md-12">
 										<label class="pts-control-label" for="input-storeseo">{{ entry_twitter }}</label>	
@@ -457,11 +457,11 @@
 									</div>
 								</div>
 								<div class="pts-row">
-								<div class="pts-form-group pts-col-md-12">
+								<div class="pts-form-group">
 									{% for custom_field in custom_fields %}
 									 {% if custom_field.type == 'select' %}
 									  {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 									 
 										  <select name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" id="input-custom-field{{ custom_field.custom_field_id }}" class="pts-form-control">
@@ -482,7 +482,7 @@
 									{% endif %}
 									  {% if custom_field.type == 'radio' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0 ptsradioinp">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0 ptsradioinp">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 										  <div> {% for custom_field_value in custom_field.custom_field_value %}
 											<div class="radio">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}
@@ -503,7 +503,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'checkbox' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 								   
 										  <div> {% for custom_field_value in custom_field.custom_field_value %}
@@ -525,7 +525,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'text' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" id="input-custom-field{{ custom_field.custom_field_id }}" class="pts-form-control" />
 										  {% if error_custom_field[custom_field.custom_field_id] %}
@@ -536,7 +536,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'textarea' %}
 									   {% if custom_field.step_location == 'two' %}
-									   <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group custom-field" data-sort="{{ custom_field.sort_order }}">
+									   <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group custom-field" data-sort="{{ custom_field.sort_order }}">
 									  <label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										<textarea name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" class="pts-form-control" rows="5" placeholder="{{ custom_field.name  }}" id="input-custom-field{{ custom_field.custom_field_id }}">{{ store_address }}{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}</textarea>
 										</div>
@@ -544,7 +544,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'file' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 										  <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="pts-btn pts-btn-sm pts-btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
 										  <input type="hidden" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}  {{ register_custom_field[custom_field.custom_field_id] }} {% endif %}" />
@@ -556,7 +556,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'date' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <div class="input-group date">
 											<input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" data-date-format="YYYY-MM-DD" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -571,7 +571,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'time' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <div class="input-group time">
 											<input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" data-date-format="HH:mm" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -586,7 +586,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'time' %}
 									   {% if custom_field.step_location == 'two' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  form-group custom-field" data-sort="{{ custom_field.sort_order }}">
 										<label class="col-sm-2 control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										<div class="col-sm-10">
 										  <div class="input-group datetime">
@@ -614,7 +614,7 @@
 									</div>
 									<div class="pts-form-group pts-col-md-6">
 										<label class="pts-control-label" for="input-live_chat_code">{{ entry_live_chat_code }}</label>						
-										<input type="text" id="input-live_chat_code" name="store_live_chat_code" class="pts-form-control" value="{{ store_live_chat_code }}" />
+										<textarea id="input-live_chat_code" name="store_live_chat_code" class="pts-form-control" rows="5">{{ store_live_chat_code }}</textarea>
 									</div>
 								</div>
 								{% endif %}				
@@ -624,13 +624,13 @@
 							
 							<!--payment data-->
 							<div class="tab">
-								<div class="pts-form-group pts-col-md-12 p-0">
+								<div class="pts-form-group p-0">
 									<label class="pts-control-label" for="input-storebankdetail">{{ entry_storebankdetail }}</label>
 									<textarea name="store_bank_details" class="pts-form-control" rows="5" placeholder="{{ entry_storebankdetail1 }}">{{ store_bank_details }}</textarea>
 									
 								</div>
 								
-								<div class="pts-form-group pts-col-md-12 p-0">					
+								<div class="pts-form-group p-0">					
 									<label class="pts-control-label" for="input-storetin">{{ entry_storetin }}</label> <input type="text" name="store_tin" value="{{ store_tin }}" placeholder="{{ entry_storetin1 }}" id="input-storetin" class="pts-form-control" />
 									
 								</div>				
@@ -647,11 +647,11 @@
 									<!-- End paypal -->
 								</div>
 							<div class="pts-row">
-								<div class="pts-form-group pts-col-md-12">
+								<div class="pts-form-group">
 									{% for custom_field in custom_fields %}
 									 {% if custom_field.type == 'select' %}
 									  {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 									 
 										  <select name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" id="input-custom-field{{ custom_field.custom_field_id }}" class="pts-form-control">
@@ -672,7 +672,7 @@
 									{% endif %}
 									  {% if custom_field.type == 'radio' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="ptsradioinp pts-form-group pts-col-md-12 p-0">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  ptsradioinp pts-form-group pts-col-md-12 p-0">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 										  <div> {% for custom_field_value in custom_field.custom_field_value %}
 											<div class="radio">{% if register_custom_field[custom_field.custom_field_id] and custom_field_value.custom_field_value_id == register_custom_field[custom_field.custom_field_id] %}
@@ -693,7 +693,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'checkbox' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 								   
 										  <div> {% for custom_field_value in custom_field.custom_field_value %}
@@ -715,7 +715,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'text' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" id="input-custom-field{{ custom_field.custom_field_id }}" class="pts-form-control" />
 										  {% if error_custom_field[custom_field.custom_field_id] %}
@@ -726,7 +726,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'textarea' %}
 									   {% if custom_field.step_location == 'three' %}
-									   <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group custom-field" data-sort="{{ custom_field.sort_order }}">
+									   <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group custom-field" data-sort="{{ custom_field.sort_order }}">
 									  <label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										<textarea name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" class="pts-form-control" rows="5" placeholder="{{ custom_field.name  }}" id="input-custom-field{{ custom_field.custom_field_id }}">{{ store_address }}{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}</textarea>
 										</div>
@@ -734,7 +734,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'file' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label">{{ custom_field.name }}</label>
 										  <button type="button" id="button-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="pts-btn pts-btn-sm pts-btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>
 										  <input type="hidden" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}  {{ register_custom_field[custom_field.custom_field_id] }} {% endif %}" />
@@ -746,7 +746,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'date' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <div class="input-group date">
 											<input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" data-date-format="YYYY-MM-DD" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -761,7 +761,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'time' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  pts-form-group pts-col-md-12 p-0" data-sort="{{ custom_field.sort_order }}">
 										<label class="pts-control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										  <div class="input-group time">
 											<input type="text" name="custom_field[{{ custom_field.location }}][{{ custom_field.custom_field_id }}]" value="{% if register_custom_field[custom_field.custom_field_id] %}{{ register_custom_field[custom_field.custom_field_id] }}{% else %}{{ custom_field.value }}{% endif %}" placeholder="{{ custom_field.name }}" data-date-format="HH:mm" id="input-custom-field{{ custom_field.custom_field_id }}" class="form-control" />
@@ -776,7 +776,7 @@
 									  {% endif %}
 									  {% if custom_field.type == 'time' %}
 									   {% if custom_field.step_location == 'three' %}
-									  <div id="custom-field{{ custom_field.custom_field_id }}" class="form-group custom-field" data-sort="{{ custom_field.sort_order }}">
+									  <div {% if custom_field.required %} required {% endif %} id="custom-field{{ custom_field.custom_field_id }}" class="{% if custom_field.required %} required {% endif %}  form-group custom-field" data-sort="{{ custom_field.sort_order }}">
 										<label class="col-sm-2 control-label" for="input-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name }}</label>
 										<div class="col-sm-10">
 										  <div class="input-group datetime">
@@ -796,8 +796,8 @@
 							</div>
 							<!--end payment data-->			
 							<div class="pts-form-group pts-text-right">
-								<div style="overflow:auto;">
-									<div style="float:right;">
+								<div class="ptsc-sregister-overflow">
+									<div class="ptsc-subpl-florig">
 										<button type="button" id="prevBtn1" class="pts-btn pts-btn-sm pts-btn-default" onclick="nextPrev(-1)">{{ btn_prev }}</button>
 										<button type="button" id="nextBtn1" class="pts-btn pts-btn-sm pts-btn-primary" onclick="nextPrev(1)">{{ btn_next }}</button>
 									</div>
@@ -805,7 +805,7 @@
 							</div>				
 							<!-- Circles which indicates the steps of the form: -->
 						</div>
-				<div style="">
+				<div>
 					<span class="step"></span>
 					<span class="step"></span>
 					<span class="step"></span>
@@ -817,6 +817,7 @@
 	</div>
 </div>
 <!--seller registration form-->
+<link href="catalog/view/javascript/purpletree/css/stylesheet/commonstylesheet.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 
 	{% if loggedcus=='' %}
@@ -969,7 +970,7 @@
 			}else{
 				$("#agreediv").remove();
 				//$("input[name='agree']").after('<p id="agreediv" style="color: red;">{{ error_enter_agree }}</p>');
-				$("#pts_agree").after('<p id="agreediv" style="color: red;">{{ error_enter_agree }}</p>');
+				$("#pts_agree").after('<p id="agreediv" class="ptsc-sregister-wcolor">{{ error_enter_agree }}</p>');
 				valid = false;
 			}
 		{% endif %}	
@@ -988,7 +989,7 @@
 					console.log(returnvar);
 				if(returnvar == false) {
 				$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
-		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]:last').parent().after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" style="color: red;">Warning: This field is required!</p>');
+		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]:last').parent().after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" class="ptsc-sregister-wcolor">Warning: This field is required!</p>');
 				return false;
 				} else {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
@@ -996,7 +997,7 @@
 			{% else %}
 		if($('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').val() == '') {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
-		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" style="color: red;">Warning: This field is required!</p>');
+		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" class="ptsc-sregister-wcolor">Warning: This field is required!</p>');
 				return false;
 		} else {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
@@ -1020,7 +1021,7 @@
 					console.log(returnvar);
 				if(returnvar == false) {
 				$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
-		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]:last').parent().after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" style="color: red;">Warning: This field is required!</p>');
+		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]:last').parent().after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" class="ptsc-sregister-wcolor">Warning: This field is required!</p>');
 				return false;
 				} else {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
@@ -1028,7 +1029,7 @@
 			{% else %}
 		if($('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').val() == '') {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
-		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" style="color: red;">Warning: This field is required!</p>');
+		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" class="ptsc-sregister-wcolor">Warning: This field is required!</p>');
 				return false;
 		} else {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
@@ -1052,7 +1053,7 @@
 					console.log(returnvar);
 				if(returnvar == false) {
 				$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
-		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]:last').parent().after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" style="color: red;">Warning: This field is required!</p>');
+		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]:last').parent().after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" class="ptsc-sregister-wcolor">Warning: This field is required!</p>');
 				return false;
 				} else {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
@@ -1060,7 +1061,7 @@
 			{% else %}
 		if($('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').val() == '') {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
-		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" style="color: red;">Warning: This field is required!</p>');
+		$('[name="custom_field[{{requiredcustoma.location}}][{{requiredcustoma.custom_field_id}}]"]').after('<p id="requiredcustoma'+{{requiredcustoma.custom_field_id}}+'" class="ptsc-sregister-wcolor">Warning: This field is required!</p>');
 				return false;
 		} else {
 		$('#requiredcustoma'+{{requiredcustoma.custom_field_id}}).remove();
@@ -1168,10 +1169,10 @@
 			url: 'index.php?route=extension/account/purpletree_multivendor/sellerregister/customfield&customer_group_id=' + this.value,
 			dataType: 'json',
 			success: function(json) {
-				$('.custom-field').hide();
-				$('.custom-field').removeClass('required');
+				//$('.custom-field').hide();
+				//$('.custom-field').removeClass('required');
 				
-				for (i = 0; i < json.length; i++) {
+				/* for (i = 0; i < json.length; i++) {
 					custom_field = json[i];
 					
 					$('#custom-field' + custom_field['custom_field_id']).show();
@@ -1179,7 +1180,7 @@
 					if (custom_field['required']) {
 						$('#custom-field' + custom_field['custom_field_id']).addClass('required');
 					}
-				}
+				} */
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 				//alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -1212,7 +1213,7 @@
 		
 		$('#form-upload').remove();
 		
-		$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+		$('body').prepend('<form enctype="multipart/form-data" id="form-upload" class="ptsc-productl-nodisplay"><input type="file" name="file" /></form>');
 		
 		$('#form-upload input[name=\'file\']').trigger('click');
 		
@@ -1317,16 +1318,9 @@ $('.datetime').datetimepicker({
 	});
 //--></script> 
 <style>
-	.captapts fieldset {
-		display: inline;
-	}
-	.captapts .form-group {
-		float: left;
-	}
 	.pts-form-group.custom-field {
 		display:block !important;
 	}
-
 	#button-menu {
 		display: none;
 	}

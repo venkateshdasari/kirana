@@ -56,7 +56,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 		}
 	public function getSellerAreasName($area_id) {			
 			
-			$sql="SELECT pva.*,pvad.area_name FROM ". DB_PREFIX ."purpletree_vendor_area pva LEFT JOIN ". DB_PREFIX ."purpletree_vendor_area_discaription pvad ON (pva.area_id=pvad.area_id) WHERE pvad.language_id='".(int)$this->config->get('config_language_id') ."' AND pva.area_id='".(int)$area_id."'";			
+			$sql="SELECT pva.*,pvad.area_name FROM ". DB_PREFIX ."purpletree_vendor_area pva LEFT JOIN ". DB_PREFIX ."purpletree_vendor_area_discaription pvad ON (pva.area_id=pvad.area_id) WHERE pvad.language_id='".(int)$this->config->get('config_language_id') ."' AND pva.area_id='".(int)$area_id."' AND pva.status = 1";			
 			$query = $this->db->query($sql);
 			if ($query->num_rows) {
 				return $query->row['area_name'];
@@ -250,7 +250,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 		}
 		
 		public function getStore($store_id){
-			$query = $this->db->query("SELECT pvs.*,CONCAT(c.firstname, ' ', c.lastname) AS seller_name, (SELECT keyword FROM " . DB_PREFIX . "seo_url WHERE query = 'seller_store_id=" . (int)$store_id . "') AS store_seo FROM " . DB_PREFIX . "purpletree_vendor_stores pvs JOIN " . DB_PREFIX . "customer c ON(c.customer_id = pvs.seller_id) where pvs.id='".(int)$store_id."'");
+			$query = $this->db->query("SELECT pvs.*,CONCAT(c.firstname, ' ', c.lastname) AS seller_name, (SELECT DISTINCT keyword FROM " . DB_PREFIX . "seo_url WHERE query = 'seller_store_id=" . (int)$store_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "') AS store_seo FROM " . DB_PREFIX . "purpletree_vendor_stores pvs JOIN " . DB_PREFIX . "customer c ON(c.customer_id = pvs.seller_id) where pvs.id='".(int)$store_id."'");
 			return $query->row;
 		} 
 		
@@ -273,7 +273,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 				$store_live_chat_enable = ", store_live_chat_enable=". $data['store_live_chat_enable'];
 			}
 			if(isset($data['store_live_chat_code'])) {
-				$store_live_chat_code = ', store_live_chat_code="'. $data['store_live_chat_code'].'"';
+				$store_live_chat_code = ', store_live_chat_code="'. $this->db->escape($data['store_live_chat_code']).'"';
 			}
 			if(!isset($data['store_name'])) {
 				$data['store_name'] = '';
@@ -334,7 +334,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 			} 	
 			if(!isset($data['whatsapp_link'])) {
 				$data['whatsapp_link'] = '';
-			} 		
+				} 		
 			if(!isset($data['store_video'])) {
 				$data['store_video'] = '';
 			}
@@ -389,12 +389,13 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 				if($query->num_rows > 0){
 					$row = $query->row;
 					$this->db->query("UPDATE " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '0', keyword = '".$this->db->escape($data['store_seo']) . "' WHERE seo_url_id=".$row['seo_url_id']);
+					$this->db->query("UPDATE " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', keyword = '" . $this->db->escape($data['store_seo']) . "' WHERE store_id = '" . (int)$this->config->get('config_store_id') . "' AND seo_url_id=".$this->db->escape($row['seo_url_id']));
 					} else{
 					if(VERSION=='3.1.0.0_b'){
 						$push='route=extension/account/purpletree_multivendor/sellerstore/storeview&seller_store_id='.(int)$store_id;	
-						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '1', keyword = '" . $this->db->escape($data['store_seo']) . "', push='".$push."'");
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', store_id = '" . (int)$this->config->get('config_store_id') . "', keyword = '" . $this->db->escape($data['store_seo']) . "', push='".$push."'");
 						}else {
-						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '0', keyword = '" . $this->db->escape($data['store_seo']) . "'");
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET query = 'seller_store_id=" . (int)$store_id . "', language_id = '".(int)$this->config->get('config_language_id') ."', store_id = '" . (int)$this->config->get('config_store_id') . "', keyword = '" . $this->db->escape($data['store_seo']) . "'");
 					}
 				}
 				}else {
@@ -528,7 +529,7 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 			
 			return $templatefromdb;
 		}
-		public function ptsSendMail($reciver,$subject,$message){
+		public function ptsSendMail($reciver,$subject,$message,$attach_file=array()){
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
 			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
@@ -540,6 +541,11 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode($subject));
+			if(!empty($attach_file)){
+				foreach($attach_file as $file){
+					$mail->addAttachment($file);
+				}
+			}
 			$mail->setHtml(html_entity_decode($message));
 			$mail->send();
 		}
@@ -662,6 +668,150 @@ class ModelExtensionPurpletreeMultivendorVendor extends Model{
 		$query = $this->db->query("SELECT id FROM `" . DB_PREFIX . "purpletree_vendor_customfield` WHERE `custom_field_id`=".$custom_field_id);
 
 			return $query->num_rows;
+		}
+		
+		public function getAllSellerProducts($data=array()){
+			
+			$sql = "SELECT pd.*, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating,p.*,pvp.* ,CONCAT(c.firstname, ' ', c.lastname) AS seller_name FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) JOIN " . DB_PREFIX . "purpletree_vendor_products pvp ON(pvp.product_id=p.product_id) JOIN " .DB_PREFIX. "customer c ON(c.customer_id=pvp.seller_id) LEFT JOIN ".DB_PREFIX. "product_to_category ptc ON(ptc.product_id=p.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND p.date_available <= NOW()";
+			
+			if(!empty($data['seller_id'])){
+				
+				$sql .= " AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND pvp.seller_id ='".(int)$data['seller_id']."'";
+				} else {
+				$sql .= " AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+			}	
+			//
+		if(isset($data['product']) && $data['product']=='' && isset($data['template_product']) && $data['template_product'] && isset($data['p_url']) && $data['p_url']!='all' ){
+			$data['product']='9999999';	
+		}
+			if(isset($data['product'])){
+				if(!empty($data['product'])){
+					$sql.="AND pvp.product_id IN (".$data['product'].")";		
+				}	
+			}
+			
+			if(!empty($data['category_id']))
+			{
+				$sql .= " AND ptc.category_id = '" . (int)$data['category_id'] . "'";
+			}
+			
+			if (!empty($data['filter_name'])) {
+				$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			}
+			
+			if (!empty($data['filter_model'])) {
+				$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
+			}
+			
+			if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
+				$sql .= " AND p.price LIKE '" . $this->db->escape($data['filter_price']) . "%'";
+			}
+			
+			if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+				$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
+			}
+			
+			if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+				$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+			}
+			
+			if (isset($data['status']) && !is_null($data['status'])) {
+				$sql .= " AND p.status = '" . (int)$data['status'] . "'";
+			}
+			
+			if (isset($data['is_approved']) && !is_null($data['is_approved'])) {
+				$sql .= " AND pvp.is_approved = '" . (int)$data['is_approved'] . "'";
+			}
+			
+			$sql .= " GROUP BY p.product_id";
+			
+			$sort_data = array(
+			'pd.name',
+			'p.model',
+			'p.price',
+			'p.quantity',
+			'p.status',
+			'p.sort_order'
+			);
+			
+			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+				$sql .= " ORDER BY " . $data['sort'];
+				} else {
+				$sql .= " ORDER BY pd.name";
+			}
+			
+			if (isset($data['order']) && ($data['order'] == 'DESC')) {
+				$sql .= " DESC";
+				} else {
+				$sql .= " ASC";
+			}
+			
+			if (isset($data['start']) || isset($data['limit'])) {
+				if ($data['start'] < 0) {
+					$data['start'] = 0;
+				}
+				
+				if ($data['limit'] < 1) {
+					$data['limit'] = 5;
+				}
+				
+				$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+			}
+			//echo $sql;
+			//	die;
+			$query = $this->db->query($sql);
+			
+			return $query->rows;
+		}
+		public function getAllTotalSellerProducts($data = array()) {
+			$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) JOIN " . DB_PREFIX . "purpletree_vendor_products pvp ON(pvp.product_id=p.product_id) JOIN " .DB_PREFIX. "customer c ON(c.customer_id=pvp.seller_id) LEFT JOIN ".DB_PREFIX. "product_to_category ptc ON(ptc.product_id=p.product_id)";
+			
+			$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+			$sql .= " AND p.date_available <= NOW()";
+			if(!empty($data['seller_id'])){
+				$sql .= " AND pvp.seller_id ='".(int)$data['seller_id']."'";
+			}
+			if(isset($data['product'])){
+				if(!empty($data['product'])){
+					$sql.="AND pvp.product_id IN (".$data['product'].")";		
+				}	
+			}
+			if(!empty($data['category_id']))
+			{
+				$sql .= " AND ptc.category_id = '" . (int)$data['category_id'] . "'";
+			}
+			
+			if (!empty($data['filter_name'])) {
+				$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			}
+			
+			if (!empty($data['filter_model'])) {
+				$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
+			}
+			
+			if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
+				$sql .= " AND p.price LIKE '" . $this->db->escape($data['filter_price']) . "%'";
+			}
+			
+			if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+				$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
+			}
+			
+			if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+				$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+			}
+			
+			if (isset($data['status']) && !is_null($data['status'])) {
+				$sql .= " AND p.status = '" . (int)$data['status'] . "'";
+			}
+			
+			if (isset($data['is_approved']) && !is_null($data['is_approved'])) {
+				$sql .= " AND pvp.is_approved = '" . (int)$data['is_approved'] . "'";
+			}
+			
+			$query = $this->db->query($sql);
+			
+			return $query->row['total'];
 		}
 }
 ?>

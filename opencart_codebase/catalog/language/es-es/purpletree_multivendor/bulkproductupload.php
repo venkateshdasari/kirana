@@ -47,3 +47,7 @@ $_['error_subscription_plan']       = 'Por favor, seleccione el plan de suscripc
 $_['error_subscription_plan_limit']       = 'Límite de plan excede Por favor cambie de plan!';
 $_['error_subscription_plan_status']       = 'La suscripción al plan está deshabilitada. Habilite la suscripción al plan.';
 $_['seller_bulk_product_upload_sheet']    = "Descargar plantilla";
+$_['text_bulk_product_import_add']    	 = 'Importación de nuevos productos';
+$_['text_bulk_product_import_update']    = 'Actualización de productos existentes';
+$_['text_update']            			 = 'Actualizar';
+$_['text_bulk_product_status_heading'] = "Estado de actualización / importación de productos a granel";

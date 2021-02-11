@@ -42,10 +42,10 @@ $_['text_seller_label_status'] ="状态：";
 $_['button_deliver'] ="交付";
 $_['button_change_status'] ="更改状态";
 $_['text_change_order_status'] ="更改订单状态";
-$_['pts_text_customer'] =" <p>您的订单已成功处理！</p> <p>您可以通过转到<a href="%s">我的帐户</ a来查看您的订单历史记录</a>页面，然后点击<a href="%s">历史记录</a>。</ p> <p>如果您的购买内容具有相关的下载，则可以转到帐户<a href ="％s" >下载</a>页面以查看它们。</p> <p>请将任何疑问直接引至";
+$_['pts_text_customer'] =' <p>您的订单已成功处理！</p> <p>您可以通过转到<a href="%s">我的帐户</ a来查看您的订单历史记录</a>页面，然后点击<a href="%s">历史记录</a>。</ p> <p>如果您的购买内容具有相关的下载，则可以转到帐户<a href ="％s" >下载</a>页面以查看它们。</p> <p>请将任何疑问直接引至';
 $_['pts_text_guest'] =" <p>您的订单已成功处理！</p> <p>请将任何疑问直接发送给";
 $_['pts_text_thanks'] =" </ p> <p>感谢您与我们在线购物！</p>"
-$_['pts_text_store_owner'] =" <a href="%s">商店所有者</a>。";
+$_['pts_text_store_owner'] =' <a href="%s">商店所有者</a>。';
 $_['column_delivery_address'] ="送货地址";
 //// end_quick_order ////
 

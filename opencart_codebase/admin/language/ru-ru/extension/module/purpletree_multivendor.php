@@ -180,3 +180,6 @@ $_['entry_seller_areaheading'] = "Гиперлокальный";
 $_['entry_header_popup'] = "Заголовок во всплывающем окне для HyperLlocal";
 $_['entry_area_selection'] = "Выбор области обязателен";
 $_['entry_seller_area_link'] = "Перейти в зону продавца";
+$_['text_multiple_store']="Используйте магазины для доменов"; 
+$_['text_fix_commission']="Фиксированная комиссия";
+$_['text_hyper_delivering'] = "Доставка в";

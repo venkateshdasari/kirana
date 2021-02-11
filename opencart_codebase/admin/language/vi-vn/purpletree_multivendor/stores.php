@@ -204,3 +204,6 @@ $_['entry_sellerarea'] = "Khu vực người bán";
 $_['help_sellerarea'] = "(Tự động hoàn thành)";
 $_['text_all_sellerarea'] = "Tất cả";
 $_['text_selected_sellerarea'] = "Đã chọn";
+
+$_['entry_multi_store']     = 'Cửa hàng Opencart';
+$_['entry_assign_stores']    = 'Chỉ định các cửa hàng Opencart';
