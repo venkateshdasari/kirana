@@ -9,7 +9,11 @@ class ControllerAccountAccount extends Controller {
 				$data['purpletree_module_status'] =$this->config->get('module_purpletree_multivendor_status');
 				$store_detail = $this->customer->isSeller();		
 				if(isset($data['purpletree_module_status'])){
-					if(isset($store_detail['store_status']) && $store_detail['store_status'] == 1 && ($store_detail['multi_store_id'] == $this->config->get('config_store_id'))){	
+				$stores=array();
+						if(isset($store_detail['multi_store_id'])){
+							$stores=explode(',',$store_detail['multi_store_id']);
+						}
+					if(isset($store_detail['store_status']) && $store_detail['store_status'] == 1 && (in_array($this->config->get('config_store_id'),$stores))){	
 						$this->response->redirect($this->url->link('extension/account/purpletree_multivendor/dashboardicons','', true));
 				   }
 				 }
