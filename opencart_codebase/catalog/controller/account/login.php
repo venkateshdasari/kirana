@@ -53,6 +53,11 @@ class ControllerAccountLogin extends Controller {
 			// Unset guest
 			unset($this->session->data['guest']);
 
+			// change[662] giving old cart items of the customer the current session id
+            $this->cart->renew_session_id_old_items ($this->customer->getId());
+            // change[662] assigning the current guest cart items to the customer
+            $this->cart->transfer_items_to_new_customer ($this->customer->getId());
+
 			// Default Shipping Address
 			$this->load->model('account/address');
 
