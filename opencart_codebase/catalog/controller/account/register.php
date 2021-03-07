@@ -27,7 +27,8 @@ class ControllerAccountRegister extends Controller {
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
 
 			unset($this->session->data['guest']);
-
+            // change[662] assigning the current guest cart items to the customer
+            $this->cart->transfer_items_to_new_customer ($this->customer->getId());
 			$this->response->redirect($this->url->link('account/success'));
 		}
 
