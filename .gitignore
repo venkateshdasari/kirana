@@ -14,7 +14,6 @@ opencart_storage/cache/*
 opencart_storage/download/*
 opencart_storage/logs/*
 opencart_storage/session/*
-opencart_storage/modification/system/
 opencart_storage/upload/*
 ./storage/
 # vQmod log files
