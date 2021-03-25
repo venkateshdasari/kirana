@@ -81,7 +81,7 @@ class ControllerCheckoutCart extends Controller {
 				$data['error_warning'] = sprintf($this->language->get('error_maximum'), $product['name'], $this->config->get('module_purpletree_multivendor_product_limit'));
 			}
 			}
-			
+
 				if ($product['minimum'] > $product_total) {
 					$data['error_warning'] = sprintf($this->language->get('error_minimum'), $product['name'], $product['minimum']);
 				}
@@ -148,6 +148,7 @@ class ControllerCheckoutCart extends Controller {
 
 				$data['products'][] = array(
 					'cart_id'   => $product['cart_id'],
+					'seller_id'   => $product['seller_id'],
 					'thumb'     => $image,
 					'name'      => $product['name'],
 					'model'     => $product['model'],
@@ -162,7 +163,19 @@ class ControllerCheckoutCart extends Controller {
 				);
 			}
 
-			// Gift Voucher
+            $seller_ids = array_unique(array_values(array_column($products, 'seller_id')));
+            $this->load->model('extension/catalog/override');
+            $sellers_data = $this->model_extension_catalog_override->sellerMinOrderFreeShipping($seller_ids);
+            $this->load->language('account/ptsregister');
+            $data['text_seller_label'] = $this->language->get('text_seller_label');
+
+            foreach ($data['products'] as $product) {
+                $sellers_data[$product['seller_id']]['cart_price'] = $sellers_data[$product['seller_id']]['cart_price'] ?? 0;
+                $sellers_data[$product['seller_id']]['cart_price'] += preg_replace('/[^0-9-.]+/', '',$product['total']);
+            }
+
+            $data['sellers_data'] = $sellers_data;
+            // Gift Voucher
 			$data['vouchers'] = array();
 
 			if (!empty($this->session->data['vouchers'])) {
@@ -182,14 +195,14 @@ class ControllerCheckoutCart extends Controller {
 			$totals = array();
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
-			
-			// Because __call can not keep var references so we put them into an array. 			
+
+			// Because __call can not keep var references so we put them into an array.
 			$total_data = array(
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
 				'total'  => &$total
 			);
-			
+
 			// Display prices
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
 				$sort_order = array();
@@ -205,7 +218,7 @@ class ControllerCheckoutCart extends Controller {
 				foreach ($results as $result) {
 					if ($this->config->get('total_' . $result['code'] . '_status')) {
 						$this->load->model('extension/total/' . $result['code']);
-						
+
 						// We have to put the totals in an array so that they pass by reference.
 						$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 					}
@@ -236,13 +249,13 @@ class ControllerCheckoutCart extends Controller {
 			$this->load->model('setting/extension');
 
 			$data['modules'] = array();
-			
+
 			$files = glob(DIR_APPLICATION . '/controller/extension/total/*.php');
 
 			if ($files) {
 				foreach ($files as $file) {
 					$result = $this->load->controller('extension/total/' . basename($file, '.php'));
-					
+
 					if ($result) {
 						$data['modules'][] = $result;
 					}
@@ -259,7 +272,7 @@ class ControllerCheckoutCart extends Controller {
 			$this->response->setOutput($this->load->view('checkout/cart', $data));
 		} else {
 			$data['text_error'] = $this->language->get('text_empty');
-			
+
 			$data['continue'] = $this->url->link('common/home');
 
 			unset($this->session->data['success']);
@@ -299,7 +312,7 @@ class ControllerCheckoutCart extends Controller {
 					$json['error']['template'] = $this->language->get('error_recurring_required');
 				 }
 				}
-       }				
+       }
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
 		if ($product_info) {
@@ -344,7 +357,7 @@ class ControllerCheckoutCart extends Controller {
 			}
 
 			if (!$json) {
-$cart_id = 
+$cart_id =
 				$this->cart->add($this->request->post['product_id'], $quantity, $option, $recurring_id);
  	if($this->config->get('module_purpletree_multivendor_seller_product_template')){
 			if (isset($seller_id)) {
@@ -369,8 +382,8 @@ $cart_id =
 				$totals = array();
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
-		
-				// Because __call can not keep var references so we put them into an array. 			
+
+				// Because __call can not keep var references so we put them into an array.
 				$total_data = array(
 					'totals' => &$totals,
 					'taxes'  => &$taxes,
@@ -469,7 +482,7 @@ $cart_id =
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
-			// Because __call can not keep var references so we put them into an array. 			
+			// Because __call can not keep var references so we put them into an array.
 			$total_data = array(
 				'totals' => &$totals,
 				'taxes'  => &$taxes,

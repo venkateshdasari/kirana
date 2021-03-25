@@ -64,7 +64,7 @@ class Cart {
 		$product_data = array();
 
 
-		$cart_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart WHERE api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND session_id = '" . $this->db->escape($this->session->getId()) . "'");
+		$cart_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "cart cart LEFT JOIN " . DB_PREFIX . "purpletree_vendor_products pvp ON cart.product_id = pvp.product_id WHERE api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND session_id = '" . $this->db->escape($this->session->getId()) . "' ORDER BY pvp.seller_id");
 
 		foreach ($cart_query->rows as $cart) {
 			$stock = true;
@@ -277,9 +277,10 @@ class Cart {
 						}
 					}
 				}
-			
+
 				$product_data[] = array(
 					'cart_id'         => $cart['cart_id'],
+					'seller_id'       => $cart['seller_id'],
 					'product_id'      => $product_query->row['product_id'],
 					'name'            => $product_query->row['name'],
 					'model'           => $product_query->row['model'],

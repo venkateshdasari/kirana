@@ -47,8 +47,18 @@
               </tr>
             </thead>
             <tbody>
-            
+            {% set current_seller_id = 0 %}
             {% for product in products %}
+              {% if current_seller_id != product.seller_id %}
+                {% set current_seller_id = product.seller_id %}
+                <tr>
+                  <td colspan="6">
+                    {{ text_seller_label }}&nbsp; {{ sellers_data[product.seller_id]['store_name'] }}
+                    &nbsp;&nbsp;
+                    <small class="bg-{{ sellers_data[product.seller_id]['minimum_order_value'] <= sellers_data[product.seller_id]['cart_price'] ? 'success' : 'danger'  }}">Min. order {{ sellers_data[product.seller_id]['minimum_order_value'] }} for free shipping</small>
+                  </td>
+                </tr>
+              {% endif %}
             <tr>
               <td class="text-center">{% if product.thumb %} <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-thumbnail" /></a> {% endif %}</td>
               <td class="text-left"><a href="{{ product.href }}">{{ product.name }}</a> {% if not product.stock %} <span class="text-danger">***</span> {% endif %}
