@@ -36,6 +36,22 @@ class ControllerCheckoutCheckout extends Controller {
 			}
 		}
 
+        $seller_ids = array_unique(array_values(array_column($products, 'seller_id')));
+        $this->load->model('extension/catalog/override');
+        $sellers_data = $this->model_extension_catalog_override->sellerMinOrderFreeShipping($seller_ids);
+
+        foreach ($products as $product) {
+            $sellers_data[$product['seller_id']]['cart_price'] = $sellers_data[$product['seller_id']]['cart_price'] ?? 0;
+            $sellers_data[$product['seller_id']]['cart_price'] += $product['total'];
+        }
+        $flat_shipping_multiplier = 0;
+        foreach ($sellers_data as $seller_id => $seller_data) {
+            if ($seller_data['minimum_order_value'] > $seller_data['cart_price']) {
+                $flat_shipping_multiplier += 1;
+            }
+        }
+        $this->session->data['flat_shipping_multiplier'] = $flat_shipping_multiplier;
+
 		$this->load->language('checkout/checkout');
 
 		$this->document->setTitle($this->language->get('heading_title'));
