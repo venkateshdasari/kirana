@@ -1,0 +1,86 @@
+<footer>
+
+
+      <div class="foot-top"><div class="container">{{ ftop_full }}</div></div>
+
+  <div class="container">
+    <div class="row">
+    {{ footer_left }}
+  <div class="col-sm-6">
+    <div class="row">
+    <div class="middle-footer">
+      <div class="col-sm-4">
+          <h5>{{ text_extra }}
+            <button type="button" class="btn btn-primary toggle collapsed" data-toggle="collapse" data-target="#extra"></button>
+          </h5>
+          <div id="extra" class="collapse footer-collapse">
+          <ul class="list-unstyled">
+            <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
+            <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+            <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
+            <li><a href="{{ special }}">{{ text_special }}</a></li>
+            <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        {% if informations %}
+        <h5>{{ text_information }}
+          <button type="button" class="btn btn-primary toggle collapsed" data-toggle="collapse" data-target="#info"></button>
+        </h5>
+        <div id="info" class="collapse footer-collapse">
+        <ul class="list-unstyled">
+         {% for information in informations %}
+          <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+          {% endfor %}
+          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+        </ul>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-sm-4">
+        <h5>{{ text_account }}
+          <button type="button" class="btn btn-primary toggle collapsed" data-toggle="collapse" data-target="#account"></button>
+        </h5>
+        <div id="account" class="collapse footer-collapse">
+        <ul class="list-unstyled lastb">
+          <li><a href="{{ account }}">{{ text_account }}</a></li>
+          <li><a href="{{ order }}">{{ text_order }}</a></li>
+          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+          <li><a href="{{ return }}">{{ text_return }}</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+          {{ footer_right }}
+      </div>
+    </div>
+
+  <div class="container">
+    <div class="foot-bottom">
+      {{ fbottom_full }}
+    </div>
+  </div>
+   <div class="foot-power">
+        <div class="container">
+            <div class="copy text-center">{{ powered }}</div>
+        </div>
+    </div>
+</footer>
+<a href="" id="scroll" title="Scroll to Top" style="display: block;">
+   <i class="fa fa-angle-up"></i>
+</a>
+
+
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+</body></html>
