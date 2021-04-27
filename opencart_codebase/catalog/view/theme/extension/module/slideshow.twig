@@ -1,0 +1,32 @@
+<div class="container">
+<div class="row">
+  <div class="col-md-3 col-sm-4"></div>
+  <div class="col-md-6 col-sm-8 slide-padding">
+    <div class="homeslide">
+      <div id="slideshow{{ module }}" class="owl-carousel owl-theme">
+       {% for banner in banners %}
+          <div class="text-center">{% if banner.link %}<a href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" /></a>{% else %}<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />{% endif %}</div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 sliderightbanner hidden-sm hidden-xs"></div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#slideshow{{ module }}").owlCarousel({
+    itemsCustom : [
+    [0, 1]
+    ],
+      autoPlay: 2500,
+      animateIn: 'fadeIn',
+      animateOut: 'fadeOut',
+      loop: true,
+      navigationText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+      navigation : true,
+      pagination:false
+    });
+    });
+</script>

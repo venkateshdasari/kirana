@@ -1,0 +1,62 @@
+     <div class="container">
+    <div class="box blog_inspire pro-nepr pro-bg">
+    <div class="cmn-title wow bounce">
+        <h2>{{ heading_title }}</h2><hr>
+    </div>
+        <!-- <div class="blog-heading">{{ heading_title }}</div> -->
+        <div class="box-content">
+            <div class="box-product">
+            <div class="row thummargin">
+                <div id="blog" class="owl-carousel owl-theme">
+                {% for blog in blogs %}
+                    <div class="product-block col-xs-12">
+                        {% if blog.image %}
+                            <div class="blog-left">
+                                <div class="inspire-blog-image">
+                                    <img src="{{ blog.image }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-responsive" />
+                                    <div class="blog-post-image-hover"> </div>
+                                    <p class="inspire_post_hover">
+                                        <!-- <a class="icon zoom" title="Click to view Full Image " href="{{ blog.image }}" data-lightbox="example-set">jjj</a> -->
+                                        <a class="icon readmore_link" title="Click to view Read More " href="{{ blog.href }}">jjj</a>
+                                    </p>
+                                </div>
+                                <div class="inspire-post-author">
+                                    <span class="write-comment"> <a href="{{ blog.href }}">{{ blog.total_comments }} {{ entry_comment }}</a> </span>
+                                     <span>|</span><span class="date-time">{{ blog.date_added }}</span>
+                                </div> 
+                            </div>
+                        {% endif %}
+                        <div class="blog-right">
+                            <h4><a href="{{ blog.href }}">{{ blog.title }}</a> </h4>
+                            <div class="blog-desc">{{ blog.description }}</div>
+                            <a class="bread" href="{{ blog.href }}">{{ text_read_more }}</a>                         
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+                </div>
+            </div>
+        </div>
+       {#   <div class="buttons-see-all text-center">
+            <button type="button" onclick="location='{{ all_blogs }}';" class="btn btn-primary">{{ button_all_blogs }}</button>
+        </div> #}
+    </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#blog").owlCarousel({
+    itemsCustom : [
+    [0, 1],
+    [600, 2],
+    [768, 3],
+    [992, 3],
+    [1200, 4]
+    ],
+      // autoPlay: 1000,
+      navigationText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+      navigation : true,
+      pagination:false
+    });
+    });
+</script>
