@@ -29,21 +29,14 @@ class File {
 
 			flock($handle, LOCK_SH);
 
-//Adding file size check
-            $size = filesize($files[0]);
-
-            if ($size > 0) {
-                $data = fread($handle, $size);
-            } else {
-                $data = '';
-            }
+			$data = fread($handle, filesize($files[0]));
 
 			flock($handle, LOCK_UN);
+
 			fclose($handle);
 
 			return json_decode($data, true);
-
-            }
+		}
 
 		return false;
 	}
